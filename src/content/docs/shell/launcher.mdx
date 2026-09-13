@@ -1,0 +1,132 @@
+---
+title: The launcher
+description: One field in the island for applications, sums, windows, countdowns, the clipboard history and the shell's own places — chosen by the first character.
+sidebar:
+  order: 4
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Figure from '~/components/Figure.astro';
+import Gallery from '~/components/Gallery.astro';
+
+**The first character says what the field is for.** <kbd>SUPER</kbd>
+<kbd>Space</kbd> turns the island into a search field and a list under it.
+Plain text searches applications; a character in front switches mode, and the
+glyph at the start of the field says which one you are in. The Search button
+on the bar and the button at the start of [the dock](/shell/dock/) open it
+too.
+
+<Figure
+  name="launcher-and-dock"
+  alt="The launcher listing applications ranked by use, the clipboard history with an image drawn in its row, and the dock with the terminal's menu open over its windows"
+  caption="Applications by use, the clipboard history, and the dock."
+/>
+
+## Modes
+
+| Type | For | Enter |
+|---|---|---|
+| `kitty` | Applications, by name or keyword | Launches it |
+| `=12 * 34` | A sum: numbers, `+ - * /`, brackets and decimals | Copies the result |
+| `@firefox` | An open window, by title or class | Goes to it, on whatever workspace it is |
+| `!25m` | A countdown: `25m`, `90s`, `1h30`, `1:30` | Starts it; it runs beside the time on the island |
+| `'` | The clipboard history, newest first | Copies the entry back |
+| `>` | The shell's own places | Opens it |
+
+The characters are the defaults, and each can be changed under Settings →
+Launcher → **Sigils**: one character, not a letter, a digit or a space, and not
+one another mode uses. With only the character typed, the line under the field
+says what the mode takes.
+
+<Gallery columns={3} items={[
+  { name: 'launcher-apps', alt: "The launcher with te typed and a list of applications led by kitty, Zen Browser, VSCodium, Thunar and Vesktop.", caption: "Applications, ranked by use" },
+  { name: 'launcher-calc', alt: "The launcher with =(4+6)*12+7 typed and the answer, 127, as the one result.", caption: "= calculates" },
+  { name: 'launcher-windows', alt: "The launcher with @ typed and the open windows listed with their workspaces: four terminals (btop, cava, cbonsai and nvim) and Thunar.", caption: "@ finds an open window" },
+  { name: 'launcher-timer', alt: "The launcher with !25m typed and one result, Start a 25m timer.", caption: "! starts a countdown" },
+  { name: 'launcher-clipboard', alt: "The launcher with ' typed and the clipboard history: commands, a colour, a link and an image.", caption: "' is the clipboard history" },
+  { name: 'launcher-shell', alt: "The launcher with > typed and the shell's own places: system statistics, settings, the pet, the games, notes, the task board, the workspace overview and appearance.", caption: "> is the shell's own places" },
+]} />
+
+## Applications
+
+**Ranked by what you actually launch.** The list is every match, ordered by
+four things in turn:
+
+1. Names that start with what you typed come before names that only contain it.
+2. How often you launch it from here, with older launches counting for less —
+   half as much after thirty days. An application kept on the dock counts as
+   one launch more.
+3. Between two kept applications neither of which you have used, the dock's
+   order.
+4. The name.
+
+So with nothing typed, what you kept on the dock leads, until something else
+is used more; a kept application wears a small dock mark on its row. Only
+launches from the launcher count — what you open from the dock or a terminal
+does not move the list. The list of applications is read again every time the
+launcher opens, so anything installed since shows up at once.
+
+## `>` — the shell's own places
+
+**Every panel, every mode and every one-press action, by name.**
+
+- **Panels**: System statistics, Settings, Pet, Games, Notes, Task board,
+  Workspace overview, Appearance, Session menu, Keys, Packages.
+- **Modes**: Calculate, Windows, Timer and Clipboard, each with its character
+  on the row. Enter on one switches the field to it and keeps the launcher
+  open, so it teaches the character as well.
+- **Actions**: Capture, Annotate, Read text, Colour, Record and Clear
+  clipboard — the ones the machine can do.
+
+Typing matches the name and the line under it, so `photo` finds Capture and
+`wallpaper` finds Appearance. This list is never cut short; what does not fit
+is under the arrow keys.
+
+## The clipboard
+
+**Everything copied, in the launcher.** <kbd>SUPER</kbd> <kbd>V</kbd> opens the
+launcher already in clipboard mode, and pressing it again closes it. Entries
+are newest first: text shows how it starts, and a copied image is drawn as a
+thumbnail. Typing searches each entry's text — for a long one, its first 240
+characters.
+
+- <kbd>Enter</kbd> copies the entry back onto the clipboard; paste it yourself
+  with <kbd>CTRL</kbd> <kbd>V</kbd>.
+- <kbd>SHIFT</kbd> <kbd>Delete</kbd> forgets the selected entry. It cannot be
+  undone.
+- Copies that a password manager marks as secret are never stored.
+- The Clear clipboard tile in the control centre, or Clear clipboard under
+  `>`, empties it.
+
+## Keys
+
+| Key | Does |
+|---|---|
+| <kbd>Up</kbd> <kbd>Down</kbd> | Move through the list; it wraps at both ends |
+| <kbd>Enter</kbd> | Run what is lit |
+| <kbd>Escape</kbd> | Close the launcher |
+| <kbd>SHIFT</kbd> <kbd>Delete</kbd> | Forget the lit clipboard entry |
+
+Moving the pointer lights a row too, and a click runs it. Something is always
+lit, so Enter always does something.
+
+## Settings
+
+| Where | Setting | Does |
+|---|---|---|
+| Launcher → Results | Order | *By use*, as above, or *Alphabetical* |
+| | Results shown | How many rows the list holds, 4 to 14; nine by default |
+| | As tall as the answer | The island takes the height of what matched, instead of a fixed box |
+| Launcher → Sigils | | The character for each mode |
+| Launcher → Clipboard | Keep a history | Off stops watching the clipboard altogether |
+| | Entries kept | 20 to 500; 200 by default |
+| | Keep images | Pictures as well as text |
+| | Empty it on lock | Thrown away every time the screen locks |
+| Dock | What is kept on it | The kept applications, which lead the list |
+
+<Aside>
+There is no fuzzy matching: a typo finds nothing. Enter copies an entry rather
+than pasting it, only the regular clipboard is watched — not the selection the
+middle button pastes — and nothing is recorded while the shell is not running.
+See [limitations](/help/limitations/).
+</Aside>

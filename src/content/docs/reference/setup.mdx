@@ -1,0 +1,97 @@
+---
+title: The setup script
+description: Every verb and flag of ./setup — what each one does, what it touches and when to run it.
+sidebar:
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+**`setup` is one bash script with verbs and flags.** It is bash because it has
+to run before anything else is installed. One verb at a time; `./setup` on its
+own, or `./setup help`, prints the list.
+
+```bash
+./setup <verb> [flags]
+```
+
+## Installing
+
+| Verb | What it does | Touches |
+|---|---|---|
+| `install` | Everything, in order: `packages`, the user folders, oh-my-zsh, `sync`, `system`, `plugins`. | Packages, `$HOME`, `/`, hyprpm |
+| `update` | `git pull --autostash --ff-only` on the branch you are on (`main` holds the releases), then `install` from the `setup` just pulled, with the same flags. With no upstream branch, installs what is there. | The checkout, then as `install` |
+| `uninstall` | Removes every installed file not edited since, in `$HOME` and `/`, and puts back what the install moved aside. | `$HOME`, `/`, the backups |
+
+`install` ends by saying to log out and in again, or to run `hyprctl reload`.
+The shell and the wallpaper daemon only start with a new session.
+
+## Parts of the install
+
+| Verb | What it does | When to run it |
+|---|---|---|
+| `packages` | Installs what `packages/pacman.txt` lists and is missing, with `sudo pacman -S --needed`, then `packages/aur.txt` with yay or paru. Offers to build `yay-bin` (or the `--aur-helper` one) when neither is installed. | After a pull adds a package. |
+| `sync` | Copies `home/` into `$HOME`, and creates the greeting's scenes and the `impasto` icon theme if they are missing. | After editing the repository. |
+| `system` | Copies `system/` into `/` with sudo, and creates `/var/lib/impasto/faces`. | After a change to the login screen or the other system files. |
+| `plugins` | Builds and enables hypr-dynamic-cursors and hyprglass with hyprpm, then reloads them. Does nothing outside a running Hyprland. | Inside the session, when the plugins are missing. |
+
+A package counts as installed when something provides it, so `fnm-bin`
+satisfies `fnm`.
+
+## The windows that need one command
+
+These are never run by `install`. Each fails with a message if its program is
+missing, and the last two also fail if it is running.
+
+| Verb | What it does | Needs |
+|---|---|---|
+| `cursors` | Fetches the Bibata vector cursor into `~/.local/state/quickshell/cursor-src` and builds it in the chosen colour, so shake to find stays sharp. | `hyprcursor` |
+| `spotify` | Runs `spicetify apply`, which patches the palette into Spotify. Run it again after every Spotify update. | `spicetify`, and a writable `/opt/spotify` |
+| `vscodium` | Installs thirteen extensions from Open VSX and merges the editor's settings. The theme lands on the next window. | VSCodium, closed |
+| `thunar` | Applies Thunar's settings and its right-click entries, *Set as Wallpaper* among them. | Thunar, closed |
+
+VSCodium and Thunar both write their settings back as they exit, which is why
+they must be closed first. [Applications](/theming/apps/) covers each program.
+
+## Checking
+
+| Verb | What it does |
+|---|---|
+| `check` | The syntax checks CI runs: every Python, Lua, zsh, JSON and TOML file under `home/`, and `setup` itself. Needs `luac`, from the `lua` package. |
+| `help` | Prints the verbs and flags. `-h` and `--help` do the same. |
+
+## Flags
+
+| Flag | Verbs | Effect |
+|---|---|---|
+| `--skip-packages` | `install`, `update` | Leave the packages alone. |
+| `--skip-system` | `install`, `update` | Leave `/` alone. |
+| `--skip-plugins` | `install`, `update` | Do not build the plugins. |
+| `--aur-helper NAME` | `install`, `update`, `packages` | `yay` or `paru`. The one installed is used; when there is neither, this one is built from the AUR. `yay` if unset. Also written `--aur-helper=NAME`. |
+| `--noconfirm` | any | Answer every question with its default, pacman's and the AUR helper's included. |
+| `-n`, `--dry-run` | any | Say what would change, and change nothing. Opens with `dry run — nothing on this machine is changed`. |
+| `-w`, `--watch` | `sync` | Copy again every time a file under `home/` is saved. Needs `inotify-tools`. Stop it with <kbd>Ctrl</kbd> <kbd>C</kbd>. |
+
+## What it prints
+
+Every file `sync`, `system` and `update` handle gets one line:
+
+| Word | Meaning |
+|---|---|
+| `new` | Nothing was there; the file was written. |
+| `updated` | The installed file was unedited, and the repository's replaced it. |
+| `replaced` | A file or link that `setup` did not write was in the way; it is in the backups. |
+| `kept` | You edited the installed file; the repository's is beside it as `.new`. |
+| `removed` | The file left the repository and was unedited, so it was deleted. |
+| `left` | The file left the repository, but you edited it, so it stays. |
+| `unlinked` | A symlink into the repository was removed, so a copy could take its place. |
+| `nothing to do` | Everything already matches. |
+
+`uninstall` prints `restored` for each file it puts back. It also reports how
+many could not go back because their path is taken.
+
+<Aside type="note">
+The policy behind these words, and what uninstalling leaves behind, is in
+[Updating](/start/updating/). Where everything lands is in
+[Files](/reference/files/).
+</Aside>

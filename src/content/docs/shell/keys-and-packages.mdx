@@ -1,0 +1,105 @@
+---
+title: Keys and packages
+description: The key sheet on SUPER + H, read from the compositor, and the packages panel on SUPER + I — pacman and the AUR, changed in a terminal.
+sidebar:
+  order: 10
+---
+
+import Figure from '~/components/Figure.astro';
+
+## The key sheet
+
+**<kbd>SUPER</kbd> <kbd>H</kbd> puts every key on one sheet in the island.** It
+is the compositor's own list, read each time the sheet opens, so a key changed
+in the settings is on it the next time. The sheet is read, never pressed:
+nothing on it opens or runs.
+
+<Figure name="keys" alt="A sheet of every key binding in four groups, shell, applications, windows and workspaces, with session, utilities and media." caption="The key sheet, on SUPER + H." />
+
+- **Grouped** in the order you look for them — Shell, Applications, Windows,
+  Workspaces, Session, Utilities, Media — in three columns, with no group split
+  across two.
+- **Folded** where the list repeats itself: the twenty workspace keys are two
+  rows, drawn <kbd>1</kbd>…<kbd>0</kbd>, the four arrows are one row, and so are
+  the volume keys.
+- **Drawn as keys**, with the modifiers spelled out — Super, Ctrl, Alt, Shift.
+
+The sheet has no search field. To find a key by name, or to change one, open
+Settings → Keys.
+
+### Changing a key
+
+**Every key belongs to the profile in use**, and switching profile switches them
+all. Settings → Keys has two parts, **The shell's own** and **The compositor's**,
+each with the same search field, and changes the keys of either.
+
+- Applying a change reloads Hyprland, so anything you had set by hand with
+  `hyprctl` goes with it.
+- The mouse's binds are shown and cannot be changed there.
+- Five captures ship with no key — a region, a window, the whole screen, a
+  region to annotate, a region read as text — for anybody who wants to give
+  them one.
+
+Every key that ships is in the [key table](/reference/keybindings/).
+
+## The packages
+
+**<kbd>SUPER</kbd> <kbd>I</kbd> is three lists under one field**: Updates,
+Installed and Find, chosen on the right of the field or with <kbd>Tab</kbd>. The
+field filters the first two and searches the third, and the panel reopens on
+the list you left.
+
+<Figure name="packages" alt="The packages panel searching for hyprland, with results from the repositories and the AUR, two of them marked installed." caption="Find, with repository and AUR results." />
+
+### Find
+
+Type a name and the repositories and the AUR answer together: exact matches
+first, then names that start with it, then names that contain it, with the
+repositories before the AUR at each step. Search is by name only, from two
+letters, a quarter of a second after you stop typing. A term the AUR finds too
+much for lists the first twenty AUR names that start with it, and the line
+along the bottom says so; offline, the AUR part is missing and the line says
+that too.
+
+**<kbd>Enter</kbd> installs the lit row**, and only in Find. A row shows the
+version, where it comes from — the repository, or AUR — "out of date" when the
+AUR flags it, and an AUR package's votes.
+
+### Installed
+
+What you installed yourself (`pacman -Qe`), with **All** and **AUR** beside
+**By you** along the bottom. Typing looks through every installed package,
+whatever the filter. **Remove** appears under the pointer and only a click
+presses it: <kbd>Enter</kbd> never removes anything.
+
+### Updates
+
+Each pending update says what it was and what it will be — the repositories
+through `checkupdates`, every AUR package against the AUR. **Check** asks again
+and **Update everything** runs the full upgrade. A row has no button of its
+own, because Arch does not support upgrading one package on its own.
+
+The Updates chip on the bar opens the panel on this list.
+
+### In a terminal
+
+**Nothing is installed or removed inside the island.** Install, Remove and
+Update everything open a kitty window running the command, and the island
+closes behind it, so pacman's questions and your password are answered there.
+The window stays open with how it ended — "Done", or the status it stopped
+with — until you press <kbd>Enter</kbd>, and when it closes all three lists are
+read again.
+
+| Action | Runs |
+|---|---|
+| Install | `yay -S <name>` or `paru -S <name>`; `sudo pacman -S <name>` without a helper |
+| Remove | `sudo pacman -Rns <name>` |
+| Update everything | `yay -Syu` or `paru -Syu`; `sudo pacman -Syu` without a helper |
+
+`-Rns` also removes the dependencies nothing else needs, and pacman refuses,
+with its reason, while something still depends on the package. Without yay or
+paru an AUR package cannot be installed from here.
+
+Packages and Keys are both doors the control centre's top row can carry —
+Settings → Control Centre — and both are listed in the
+[launcher](/shell/launcher/)'s `>`.

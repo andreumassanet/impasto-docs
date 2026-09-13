@@ -1,0 +1,802 @@
+[
+ {
+  "id": "bengal-cat-audi",
+  "file": "bengal-cat-audi.webp",
+  "name": "Bengal Cat Audi",
+  "palette": {
+   "background": "#171619",
+   "surface": "#252427",
+   "surfaceHover": "#353439",
+   "border": "#45444d",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#9C6023",
+   "accentHover": "#c27d37",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "black-porsche-palms",
+  "file": "black-porsche-palms.webp",
+  "name": "Black Porsche Palms",
+  "palette": {
+   "background": "#18181a",
+   "surface": "#262628",
+   "surfaceHover": "#36363a",
+   "border": "#46464e",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#C48035",
+   "accentHover": "#f0a24b",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "boat-wake-aerial",
+  "file": "boat-wake-aerial.webp",
+  "name": "Boat Wake Aerial",
+  "palette": {
+   "background": "#11171f",
+   "surface": "#1f252d",
+   "surfaceHover": "#2f353f",
+   "border": "#3f4553",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#116A92",
+   "accentHover": "#2288b6",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "capri-faraglioni",
+  "file": "capri-faraglioni.webp",
+  "name": "Capri Faraglioni",
+  "palette": {
+   "background": "#111822",
+   "surface": "#1f2630",
+   "surfaceHover": "#2f3642",
+   "border": "#3f4656",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#128DC9",
+   "accentHover": "#23b1f6",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "cat-billiards",
+  "file": "cat-billiards.webp",
+  "name": "Cat Billiards",
+  "palette": {
+   "background": "#12191f",
+   "surface": "#20272d",
+   "surfaceHover": "#30373f",
+   "border": "#404753",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#25A792",
+   "accentHover": "#39cfb6",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "coastal-house-cypress",
+  "file": "coastal-house-cypress.webp",
+  "name": "Coastal House Cypress",
+  "palette": {
+   "background": "#111621",
+   "surface": "#1f242f",
+   "surfaceHover": "#2f3441",
+   "border": "#3f4455",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#0957C7",
+   "accentHover": "#1973f3",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "crimson-savanna",
+  "file": "crimson-savanna.webp",
+  "name": "Crimson Savanna",
+  "palette": {
+   "background": "#1a1618",
+   "surface": "#282426",
+   "surfaceHover": "#383438",
+   "border": "#48444c",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#EB4B09",
+   "accentHover": "#ff6519",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "cypress-road-mercedes",
+  "file": "cypress-road-mercedes.webp",
+  "name": "Cypress Road Mercedes",
+  "palette": {
+   "background": "#171819",
+   "surface": "#252627",
+   "surfaceHover": "#353639",
+   "border": "#45464d",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#AC8C1F",
+   "accentHover": "#d4b032",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "cypress-rocky-coast",
+  "file": "cypress-rocky-coast.webp",
+  "name": "Cypress Rocky Coast",
+  "palette": {
+   "background": "#111722",
+   "surface": "#1f2530",
+   "surfaceHover": "#2f3542",
+   "border": "#3f4556",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#0F71D3",
+   "accentHover": "#2090ff",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "emerald-cliffs",
+  "file": "emerald-cliffs.webp",
+  "name": "Emerald Cliffs",
+  "palette": {
+   "background": "#171819",
+   "surface": "#252627",
+   "surfaceHover": "#353639",
+   "border": "#45464d",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#9C9521",
+   "accentHover": "#c2ba34",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "footballers-pitch",
+  "file": "footballers-pitch.webp",
+  "name": "Footballers Pitch",
+  "palette": {
+   "background": "#151819",
+   "surface": "#232627",
+   "surfaceHover": "#333639",
+   "border": "#43464d",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#768616",
+   "accentHover": "#96a928",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "golden-leopard-statue",
+  "file": "golden-leopard-statue.webp",
+  "name": "Golden Leopard Statue",
+  "palette": {
+   "background": "#191718",
+   "surface": "#272526",
+   "surfaceHover": "#373538",
+   "border": "#47454c",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#CE7710",
+   "accentHover": "#fb9721",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "golf-course-aerial",
+  "file": "golf-course-aerial.webp",
+  "name": "Golf Course Aerial",
+  "palette": {
+   "background": "#161818",
+   "surface": "#242626",
+   "surfaceHover": "#343638",
+   "border": "#44464c",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#858612",
+   "accentHover": "#a7a923",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "green-porsche-forest-road",
+  "file": "green-porsche-forest-road.webp",
+  "name": "Green Porsche Forest Road",
+  "palette": {
+   "background": "#17181a",
+   "surface": "#252628",
+   "surfaceHover": "#35363a",
+   "border": "#45464e",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#A98B2F",
+   "accentHover": "#d1ae45",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "green-porsche-golf-course",
+  "file": "green-porsche-golf-course.webp",
+  "name": "Green Porsche Golf Course",
+  "palette": {
+   "background": "#171819",
+   "surface": "#252627",
+   "surfaceHover": "#353639",
+   "border": "#45464d",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#9C9422",
+   "accentHover": "#c2b936",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "heather-pond-moon",
+  "file": "heather-pond-moon.webp",
+  "name": "Heather Pond Moon",
+  "palette": {
+   "background": "#16161a",
+   "surface": "#242428",
+   "surfaceHover": "#34343a",
+   "border": "#44444e",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#935B2A",
+   "accentHover": "#b8773f",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "japanese-castle-full-moon",
+  "file": "japanese-castle-full-moon.webp",
+  "name": "Japanese Castle Full Moon",
+  "palette": {
+   "background": "#19181a",
+   "surface": "#272628",
+   "surfaceHover": "#37363a",
+   "border": "#47464e",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#CE8E36",
+   "accentHover": "#fbb24d",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "jungle-mountains",
+  "file": "jungle-mountains.webp",
+  "name": "Jungle Mountains",
+  "palette": {
+   "background": "#16181a",
+   "surface": "#242628",
+   "surfaceHover": "#34363a",
+   "border": "#44464e",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#928F31",
+   "accentHover": "#b6b347",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "marble-statue-back",
+  "file": "marble-statue-back.webp",
+  "name": "Marble Statue Back",
+  "palette": {
+   "background": "#14161a",
+   "surface": "#222428",
+   "surfaceHover": "#32343a",
+   "border": "#42444e",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#634F2E",
+   "accentHover": "#806943",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "orange-tree-coast",
+  "file": "orange-tree-coast.webp",
+  "name": "Orange Tree Coast",
+  "palette": {
+   "background": "#1a1618",
+   "surface": "#282426",
+   "surfaceHover": "#383438",
+   "border": "#48444c",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#E6620C",
+   "accentHover": "#ff7f1c",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "pagoda-fuji-blossom",
+  "file": "pagoda-fuji-blossom.webp",
+  "name": "Pagoda Fuji Blossom",
+  "palette": {
+   "background": "#12161f",
+   "surface": "#20242d",
+   "surfaceHover": "#30343f",
+   "border": "#404453",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#2E509E",
+   "accentHover": "#436bc4",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "panther-dollar-bills",
+  "file": "panther-dollar-bills.webp",
+  "name": "Panther Dollar Bills",
+  "palette": {
+   "background": "#161619",
+   "surface": "#242427",
+   "surfaceHover": "#343439",
+   "border": "#44444d",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#8B5A1C",
+   "accentHover": "#ae762f",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "panther-stained-glass",
+  "file": "panther-stained-glass.webp",
+  "name": "Panther Stained Glass",
+  "palette": {
+   "background": "#18151a",
+   "surface": "#262328",
+   "surfaceHover": "#36333a",
+   "border": "#46434e",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#C5492E",
+   "accentHover": "#f16243",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "polo-players",
+  "file": "polo-players.webp",
+  "name": "Polo Players",
+  "palette": {
+   "background": "#151619",
+   "surface": "#232427",
+   "surfaceHover": "#333439",
+   "border": "#43444d",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#6C6118",
+   "accentHover": "#8b7e2a",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "pool-swimmer-aerial",
+  "file": "pool-swimmer-aerial.webp",
+  "name": "Pool Swimmer Aerial",
+  "palette": {
+   "background": "#121920",
+   "surface": "#20272e",
+   "surfaceHover": "#303740",
+   "border": "#404754",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#3099A9",
+   "accentHover": "#46bed1",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "positano-market",
+  "file": "positano-market.webp",
+  "name": "Positano Market",
+  "palette": {
+   "background": "#191719",
+   "surface": "#272527",
+   "surfaceHover": "#373539",
+   "border": "#47454d",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#DC6416",
+   "accentHover": "#ff8228",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "private-jet",
+  "file": "private-jet.webp",
+  "name": "Private Jet",
+  "palette": {
+   "background": "#151922",
+   "surface": "#232730",
+   "surfaceHover": "#333742",
+   "border": "#434756",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#799EC9",
+   "accentHover": "#9ac4f6",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "red-frame-tree",
+  "file": "red-frame-tree.webp",
+  "name": "Red Frame Tree",
+  "palette": {
+   "background": "#111723",
+   "surface": "#1f2531",
+   "surfaceHover": "#2f3543",
+   "border": "#3f4557",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#086FE6",
+   "accentHover": "#188eff",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "red-lamborghini-urus-rain",
+  "file": "red-lamborghini-urus-rain.webp",
+  "name": "Red Lamborghini Urus Rain",
+  "palette": {
+   "background": "#19181a",
+   "surface": "#272628",
+   "surfaceHover": "#37363a",
+   "border": "#47464e",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#DF8E29",
+   "accentHover": "#ffb23e",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "riva-boat-lake-dive",
+  "file": "riva-boat-lake-dive.webp",
+  "name": "Riva Boat Lake Dive",
+  "palette": {
+   "background": "#17161a",
+   "surface": "#252428",
+   "surfaceHover": "#35343a",
+   "border": "#45444e",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#975A28",
+   "accentHover": "#bc763d",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "roman-legion",
+  "file": "roman-legion.webp",
+  "name": "Roman Legion",
+  "palette": {
+   "background": "#17161a",
+   "surface": "#252428",
+   "surfaceHover": "#35343a",
+   "border": "#45444e",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#966034",
+   "accentHover": "#bb7d4a",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "spartan-helmet-shore",
+  "file": "spartan-helmet-shore.webp",
+  "name": "Spartan Helmet Shore",
+  "palette": {
+   "background": "#12181f",
+   "surface": "#20262d",
+   "surfaceHover": "#30363f",
+   "border": "#404653",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#2B8B97",
+   "accentHover": "#40aebc",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "tiger-jungle-ruins",
+  "file": "tiger-jungle-ruins.webp",
+  "name": "Tiger Jungle Ruins",
+  "palette": {
+   "background": "#17181a",
+   "surface": "#252628",
+   "surfaceHover": "#35363a",
+   "border": "#45464e",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#9C9328",
+   "accentHover": "#c2b83d",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "tiger-snow",
+  "file": "tiger-snow.webp",
+  "name": "Tiger Snow",
+  "palette": {
+   "background": "#16161a",
+   "surface": "#242428",
+   "surfaceHover": "#34343a",
+   "border": "#44444e",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#8F5E2B",
+   "accentHover": "#b37b40",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "tropical-bay-night",
+  "file": "tropical-bay-night.webp",
+  "name": "Tropical Bay Night",
+  "palette": {
+   "background": "#12191f",
+   "surface": "#20272d",
+   "surfaceHover": "#30373f",
+   "border": "#404753",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#279998",
+   "accentHover": "#3bbebd",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "tropical-bay",
+  "file": "tropical-bay.webp",
+  "name": "Tropical Bay",
+  "palette": {
+   "background": "#11151f",
+   "surface": "#1f232d",
+   "surfaceHover": "#2f333f",
+   "border": "#3f4353",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#0E4997",
+   "accentHover": "#1f62bc",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "turquoise-sea-headland",
+  "file": "turquoise-sea-headland.webp",
+  "name": "Turquoise Sea Headland",
+  "palette": {
+   "background": "#111922",
+   "surface": "#1f2730",
+   "surfaceHover": "#2f3742",
+   "border": "#3f4756",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#10ABD5",
+   "accentHover": "#21d3ff",
+   "accentText": "#11111b",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "warrior-blue-mist",
+  "file": "warrior-blue-mist.webp",
+  "name": "Warrior Blue Mist",
+  "palette": {
+   "background": "#121821",
+   "surface": "#20262f",
+   "surfaceHover": "#303641",
+   "border": "#404655",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#1982B9",
+   "accentHover": "#2ba4e3",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "white-countach-meadow",
+  "file": "white-countach-meadow.webp",
+  "name": "White Countach Meadow",
+  "palette": {
+   "background": "#161719",
+   "surface": "#242527",
+   "surfaceHover": "#343539",
+   "border": "#44454d",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#8A7515",
+   "accentHover": "#ad9527",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
+  "id": "white-porsche-front",
+  "file": "white-porsche-front.webp",
+  "name": "White Porsche Front",
+  "palette": {
+   "background": "#111318",
+   "surface": "#1f2126",
+   "surfaceHover": "#2f3138",
+   "border": "#3f414c",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#06090C",
+   "accentHover": "#15191c",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ }
+]

@@ -1,0 +1,105 @@
+---
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │   P A C K A G E S                                                        │
+// │   every package the desk runs · read from packages/ at build time        │
+// │                                                                          │
+// │   github.com/andreumassanet/impasto-docs                                 │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+import pacman from '../snapshot/pacman.txt?raw';
+import aur from '../snapshot/aur.txt?raw';
+
+type Entry = { name: string; note: string; aur: boolean };
+type Section = { title: string; entries: Entry[] };
+
+const words: Record<string, string> = { qt: 'Qt', hyprland: 'Hyprland' };
+const title = (heading: string) => {
+	const text = heading.toLowerCase().replace(/\b[a-z]+\b/g, (word) => words[word] ?? word);
+	return text.charAt(0).toUpperCase() + text.slice(1);
+};
+
+const sections = new Map<string, Section>();
+function read(text: string, isAur: boolean) {
+	let current: Section | undefined;
+	let last: Entry | undefined;
+	for (const line of text.split('\n')) {
+		const heading = line.match(/^#\s*──\s*(.+?)\s*─+\s*$/);
+		if (heading) {
+			const name = title(heading[1]);
+			current = sections.get(name) ?? { title: name, entries: [] };
+			sections.set(name, current);
+			last = undefined;
+			continue;
+		}
+		const entry = line.match(/^([a-z0-9@._+-]+)\s*(?:#\s*(.*))?$/i);
+		if (current && entry) {
+			last = { name: entry[1], note: (entry[2] ?? '').trim(), aur: isAur };
+			current.entries.push(last);
+			continue;
+		}
+		// A note carried onto the next line, aligned under the first.
+		const more = line.match(/^\s{8,}#\s*(.+)$/);
+		if (last && more) last.note += ` ${more[1].trim()}`;
+		else if (!line.trim()) last = undefined;
+	}
+}
+read(pacman, false);
+read(aur, true);
+
+const link = (entry: Entry) =>
+	entry.aur
+		? `https://aur.archlinux.org/packages/${entry.name}`
+		: `https://archlinux.org/packages/?q=${encodeURIComponent(entry.name)}`;
+---
+
+{
+	[...sections.values()]
+		.filter((section) => section.entries.length)
+		.map((section) => (
+			<>
+				<h2 id={section.title.toLowerCase().replace(/\s+/g, '-')}>{section.title}</h2>
+				<table class="packages">
+					<thead>
+						<tr>
+							<th>Package</th>
+							<th>For</th>
+						</tr>
+					</thead>
+					<tbody>
+						{section.entries.map((entry) => (
+							<tr>
+								<td>
+									<a href={link(entry)}>
+										<code>{entry.name}</code>
+									</a>
+									{entry.aur && <span class="aur">AUR</span>}
+								</td>
+								<td>{entry.note}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</>
+		))
+}
+
+<style>
+	.packages td:first-child {
+		white-space: nowrap;
+		width: 1%;
+	}
+	.packages a {
+		text-decoration: none;
+	}
+	.aur {
+		margin-inline-start: 0.5rem;
+		padding: 0.05rem 0.45rem;
+		border-radius: 999px;
+		font-size: var(--sl-text-2xs);
+		font-weight: 600;
+		color: var(--sl-color-gray-2);
+		border: 1px solid var(--sl-color-hairline-light);
+	}
+</style>

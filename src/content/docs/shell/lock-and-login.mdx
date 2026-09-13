@@ -1,0 +1,131 @@
+---
+title: Lock and login
+description: The lock screen the shell draws itself, locking when you leave, and the SDDM login screen that is the same screen before the desk.
+sidebar:
+  order: 11
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Figure from '~/components/Figure.astro';
+
+<Figure
+  name="lock-and-login"
+  alt="Left, the lock screen over the blurred desk: the time and date in the middle, a round picture with the name under it, and the password field. Right, the login screen over a painting of thick brush strokes, with the same time, picture and name, and a prompt to type the password"
+  caption="The lock, and the login screen: one screen at two moments."
+/>
+
+## The lock screen
+
+**<kbd>SUPER</kbd> <kbd>L</kbd> locks the session, and the shell draws the lock
+itself** through the compositor's session lock, so a shell that crashes leaves
+the machine held rather than open.
+
+- The desk stays behind it, blurred enough that text on it cannot be read.
+- The time and the date are in the middle, and the battery ring in the top
+  right corner.
+- Your picture and name are over the field.
+- "Type your password to unlock" stands where the field is; the field appears
+  when you start typing.
+- Restart and shut down are in the bottom-left corner, each armed by the first
+  click and run by the second.
+
+The password goes through PAM's `login` configuration, so hyprlock is not
+needed. A wrong one shakes the field and says why under it; <kbd>Escape</kbd>
+clears the field.
+
+Settings → Session → Lock screen holds the **Blur**, 8 to 64 px, previewed over
+the wallpaper, and **You**: a name and a picture for the lock screen — click
+the picture, or drop an image on the card. Left empty, both come from your
+account, as on the login screen.
+
+### When you leave it alone
+
+**The shell is its own idle daemon.** Settings → Session → When you leave has
+three waits:
+
+| Slider | What happens |
+|---|---|
+| Lock after | The session locks |
+| Screen off after | The screen switches off |
+| Suspend after | The session locks, then the machine suspends |
+
+Each is in minutes, from 0 to 60, and 0 reads **Never**. All three are off
+until you set them. A video player, or a browser playing full screen, asks the
+compositor not to count as idle, and nothing happens while it plays. Suspend
+always locks first, and is skipped if the lock does not come up.
+
+The screen comes back with the next key or movement, and
+<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>D</kbd> switches it off and on by hand.
+
+<Aside type="tip">
+Set the screen to go off after the lock, not before. The lock takes its picture
+of the desk as it goes up, and a screen that is already dark gives it a plain
+ground instead. The slider says "before the lock" when it is set that way.
+</Aside>
+
+## The login screen
+
+**The login screen is the lock with the desk taken away**: an SDDM theme with
+the same clock in the same place, the same face and the same field, over a
+painting of brush strokes. It does not follow the palette, because it comes
+before there is a user to have chosen one.
+
+- **The face is the account picker.** With more than one account, pressing the
+  picture turns it into the list.
+- The session is chosen in the bottom-right corner.
+- Restart and shut down are in the bottom-left corner, armed by the first click
+  and run by the second. There is no suspend.
+- The battery ring sits in the top right, read straight from the battery.
+- The line under the field says when Caps Lock is on.
+
+The account and session lists take the pointer only; the keyboard stays in the
+field.
+
+### Switching to it
+
+`./setup install` copies the theme into `/usr/share/sddm/themes/impasto/`
+(unless `--skip-system`) and does not make it the one that runs. Try it first:
+test mode reads the repository directly, so nothing has to be installed. From
+the repository's root:
+
+```bash
+sddm-greeter-qt6 --test-mode --theme system/usr/share/sddm/themes/impasto
+```
+
+The power buttons are not drawn in test mode, because SDDM reports them
+unavailable there. A theme that fails to load says why in red on SDDM's own
+fallback screen, not in the terminal.
+
+Then make it the theme, in a file of your own under `/etc/sddm.conf.d/`:
+
+```ini
+[Theme]
+Current=impasto
+```
+
+Leave `10-impasto.conf` as it is: `setup` owns it, and it only says where faces
+are kept. A file that sorts after it wins on any key both set.
+
+<Aside>
+SDDM has to be the display manager your machine starts at boot:
+`sudo systemctl enable sddm`, once any other one is disabled.
+</Aside>
+
+### Your picture
+
+**The face on both screens is `/var/lib/impasto/faces/<username>.face.icon`**,
+yours to put there. `setup` makes the folder and never removes it. It is kept
+outside your home because SDDM reads as its own user and cannot see into it.
+
+```bash
+sudo install -m 644 ~/picture.png /var/lib/impasto/faces/$USER.face.icon
+```
+
+The lock screen looks there first, then at `~/.face`, `~/.face.icon` and
+AccountsService. The name under the picture is your account's full name, which
+`chfn` sets, or the login name when there is none. The lock screen can take
+another name and picture from Settings → Session; the login screen always reads
+the system's.
+
+What the two screens do not do is listed under
+[Limitations](/help/limitations/).

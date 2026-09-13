@@ -1,0 +1,118 @@
+---
+title: Questions
+description: Where the wallpapers are, which distributions it runs on, how much of it you can take, monitors, languages, uninstalling and reporting bugs.
+sidebar:
+  order: 2
+---
+
+The questions people ask most, answered from the repository.
+
+## Where is the wallpaper in the screenshots?
+
+**All forty wallpapers are in the repository**, in
+[`home/.local/share/wallpapers/`](https://github.com/andreumassanet/impasto/tree/main/home/.local/share/wallpapers),
+and `setup` copies them to `~/.local/share/wallpapers/`.
+
+| Wallpaper | File |
+|---|---|
+| The pagoda in front of Mount Fuji | `pagoda-fuji-blossom.jpeg` |
+| The green valley and its cliffs | `emerald-cliffs.jpeg` |
+| The castle under a full moon, in the *Moon castle* profile | `japanese-castle-full-moon.jpeg` |
+| The bay at night, in the *Night bay* profile | `tropical-bay-night.jpeg` |
+
+## Who made the wallpapers?
+
+**They are AI-generated images**, made in the impasto style the project is named
+after: paint laid on thick enough to keep the mark of the brush. Nobody painted
+them by hand.
+
+## Does it work on Manjaro, EndeavourOS or another distribution?
+
+**It is built and tested on Arch Linux.** `setup` installs with pacman and an AUR
+helper, so an Arch-based distribution may work, but none has been tested. What
+it cannot do without is Hyprland 0.56 or newer, configured in Lua (tested on
+0.56.2): a distribution that ships an older Hyprland cannot read the
+configuration. `setup` checks neither the distribution nor the Hyprland
+version, so check both before you run it.
+
+## Is there an ISO?
+
+**No.** Install on a working Arch system with Hyprland, from a terminal inside
+the Hyprland session, and look at what it would do first:
+
+```bash
+./setup install --dry-run    # say what would happen, and do none of it
+./setup install
+```
+
+See [Installation](/start/install/).
+
+## Can I use only the shell, or only some of it?
+
+**`setup` installs the whole desk**: there is no option to leave out one
+program's configuration. What you can leave out is a step: `--skip-packages`,
+`--skip-system` (the login screen) and `--skip-plugins` (shake to find and the
+glass).
+
+Taking part of it by hand is possible, since `home/` is laid out exactly as your
+home directory and `home/.config/quickshell/` is the shell. But only the whole
+desk is tested, and the shell expects the Hyprland configuration beside it: its
+keys are bound there, and Settings → Keys changes them through it.
+
+## Can I keep my own Hyprland config?
+
+**Yours is moved aside, not lost.** `./setup install` copies the desk's
+Hyprland configuration to `~/.config/hypr/`; a file of yours already at one of
+its paths is moved to `~/.local/state/impasto/backups/` first, and
+`./setup uninstall` puts it back.
+
+To change the desk's configuration, edit the copies under
+`~/.config/hypr/modules/`. `setup` keeps an edited file and writes its own new
+version beside it as `<name>.new`, so `./setup update` never overwrites your
+change. Most of what people edit by hand is in Settings already: keys under
+**Keys**, screens under **Displays**, gaps and rounding under
+**Appearance → Windows**.
+
+## Does it work with more than one monitor?
+
+**Yes.** The island, the widgets and the deck of notes are on the primary
+screen, which you choose under **Settings → Displays**; every other screen gets
+the two ends of the bar without the island, and the dock is on every screen.
+Drag the screens into place on the Displays page and the arrangement is kept for
+that set of screens, and comes back on its own when you plug them in again. See
+[Displays](/shell/displays/), and [what it does not do](/help/limitations/#displays).
+
+## Does it work on a HiDPI screen?
+
+**Each screen has its own scale**, set under **Settings → Displays** with a
+slider from 1× to 3× in steps of 0.05.
+
+## What languages does it speak?
+
+**English and Spanish.** **Settings → System → Language** switches the settings
+window, and the trays and cards used to arrange the desktop and the control
+centre; most of what the island shows stays in English. It is the shell's
+language only: it does not change the system's locale or rename your folders.
+
+## How do I uninstall it?
+
+```bash
+./setup uninstall
+```
+
+**It removes every file it installed that nobody has edited since**, lists the
+edited ones and leaves them, and puts back what it moved aside at install. It
+does not remove packages, oh-my-zsh, the Hyprland plugins, or the themes the
+shell wrote into `~/.config`. See [setup](/reference/setup/).
+
+## How do I update?
+
+**`./setup update` pulls the repository and installs again**, with the same
+options. See [Updating](/start/updating/).
+
+## Where do I report a bug?
+
+**Open an issue on [GitHub](https://github.com/andreumassanet/impasto/issues)**
+with what you did, what happened, and your Hyprland version (`hyprctl version`).
+Pull requests go to the same repository; `./setup check` runs the checks CI
+runs, and is worth running before you open one.

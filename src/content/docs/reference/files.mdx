@@ -1,0 +1,142 @@
+---
+title: Files
+description: Where everything lives on an installed machine — the copied configuration, the shell's state, setup's manifests and backups, and the files the palette writes.
+sidebar:
+  order: 3
+---
+
+import { FileTree, Aside } from '@astrojs/starlight/components';
+
+**Four kinds of file, in four places.** What `setup` copies from the
+repository, what the shell writes as you use it, what `setup` keeps to remember
+its copies, and what the palette writes into other programs.
+
+## Copied from the repository
+
+Each tree in the repository is its destination as it is: `home/` is `$HOME` and
+`system/` is `/`. `home/.config/kitty/kitty.conf` lands at
+`~/.config/kitty/kitty.conf`.
+
+<FileTree>
+- ~/
+  - .zshrc
+  - .config/
+    - hypr/ hyprland.lua, and modules/ for the rest
+    - quickshell/ the shell
+    - kitty/
+    - nvim/
+    - fastfetch/
+    - btop/
+    - cava/
+    - yazi/
+    - gtk-3.0/ settings.ini
+    - gtk-4.0/ settings.ini
+    - starship.toml
+  - .local/share/
+    - wallpapers/ the forty wallpapers
+    - impasto/
+      - palette-board.json
+      - palette-board.png
+      - profiles/ Moon castle, Fuji and Night bay
+</FileTree>
+
+<FileTree>
+- /
+  - etc/
+    - sddm.conf.d/10-impasto.conf where faces are kept, and the battery ring's permission
+    - systemd/logind.conf.d/10-impasto.conf the power button goes to the shell
+  - usr/share/sddm/themes/impasto/ the login screen
+  - var/lib/impasto/faces/ your picture, created empty
+</FileTree>
+
+These copies are yours to edit. See [Updating](/start/updating/) for what
+happens to an edited one.
+
+## The shell's state
+
+Everything the shell writes lives in `~/.local/state/quickshell/`, or under
+`$XDG_STATE_HOME` if that is set. None of it comes from the repository, and
+`setup` never touches it.
+
+<FileTree>
+- ~/.local/state/quickshell/
+  - **settings.json** every preference of the profile in use
+  - profiles.json the other profiles
+  - keys.tsv the profile's keys, handed to Hyprland
+  - notes.json
+  - tasks.json
+  - clipboard.json the clipboard history
+  - clipboard/ long entries and images
+  - pet.json
+  - games.json one best score per game
+  - launcher-history.json what the launcher ranks by
+  - state.json the wallpaper and the palette in use
+  - current-wallpaper a link to the wallpaper in use
+  - dynamic-colors.json
+  - kitty-palette.conf
+  - kitty-font.conf
+  - nvim/colors/impasto.lua
+  - greeting the scene `fa` plays
+  - greeting-….gif one per scene
+  - greeting.gif
+  - claude-usage.json
+  - cursor-src/ the cursor's source, from ./setup cursors
+</FileTree>
+
+`settings.json` is the profile in use; the others wait in `profiles.json`. Your
+notes, tasks, clipboard, pet and scores are in no profile, so switching profile
+never changes them. To keep a profile somewhere else, export it from Settings →
+System → Profiles. `profiles.json` alone is not a backup of the one in use.
+
+## setup's own state
+
+<FileTree>
+- ~/.local/state/impasto/
+  - home.manifest the hash of every file copied into $HOME
+  - system.manifest the same for /
+  - backups/
+    - 20260913-101500/ one directory per run that moved something
+      - home/ files that were in the way in $HOME
+      - system/ files that were in the way in /
+</FileTree>
+
+`uninstall` puts the backups back and deletes the directories it empties.
+
+## What the palette writes
+
+Every wallpaper or palette change rewrites these. They live where each program
+reads its theme, so several are in `~/.config` beside the copied files.
+
+| Program | File |
+|---|---|
+| kitty | `~/.local/state/quickshell/kitty-palette.conf`, included by `kitty.conf` |
+| neovim | `~/.local/state/quickshell/nvim/colors/impasto.lua` |
+| The greeting | `~/.local/state/quickshell/greeting-….gif` |
+| btop | `~/.config/btop/themes/impasto.theme` |
+| cava | `~/.config/cava/themes/impasto` |
+| yazi | `~/.config/yazi/flavors/impasto.yazi/` |
+| imv | `~/.config/imv/config`, the whole file |
+| GTK | `~/.config/gtk-3.0/gtk.css`, `~/.config/gtk-4.0/gtk.css` |
+| Qt | `~/.config/qt6ct/qt6ct.conf`, `~/.config/qt6ct/colors/impasto.conf` |
+| KDE | `~/.config/kdeglobals`, merged rather than replaced |
+| Folder icons | `~/.local/share/icons/impasto/`, which inherits Papirus |
+| Vesktop | `~/.config/vesktop/themes/impasto.css` |
+| Spotify | `~/.config/spicetify/Themes/impasto/color.ini`, applied by `./setup spotify` |
+| VSCodium | `~/.vscode-oss/extensions/impasto/` |
+| Zen | `userChrome.css` and `user.js` in the Zen profile under `~/.config/zen/` |
+
+Two verbs write settings that are not colours: `./setup vscodium` merges
+`~/.config/VSCodium/User/settings.json`, and `./setup thunar` writes Thunar's
+xfconf settings and `~/.config/Thunar/uca.xml`. The vector cursor is built into
+`~/.local/share/icons/impasto-cursor…`. More in [Applications](/theming/apps/).
+
+## Elsewhere
+
+| What | Where |
+|---|---|
+| The face on the lock and login screens | `/var/lib/impasto/faces/<username>.face.icon`, then `~/.face` |
+| Screenshots | `XDG_SCREENSHOTS_DIR` in `~/.config/user-dirs.dirs`, else `Screenshots` in your pictures folder |
+| Recordings | `XDG_SCREENCASTS_DIR`, else `Screencasts` in your videos folder |
+| Wallpapers you add | `~/.local/share/wallpapers`, JPEG, PNG or WebP |
+| oh-my-zsh | `~/.oh-my-zsh`, with its two plugins under `custom/plugins` |
+| Hyprland plugins | `/var/cache/hyprpm/<username>/`, built by hyprpm |

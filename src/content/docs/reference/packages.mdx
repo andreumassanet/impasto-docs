@@ -1,0 +1,17 @@
+---
+title: Packages
+description: Every package the desk runs, grouped by what it is for, read from the package lists in the repository.
+sidebar:
+  order: 4
+tableOfContents: false
+---
+
+import Packages from '~/components/Packages.astro';
+
+**`./setup packages` installs whatever on this page is missing.** The official
+packages go through `pacman -S --needed`, the AUR ones through yay or paru. The
+desktop and the terminal are required; every later group is a feature that
+takes its own control away when its packages are missing, rather than
+failing.
+
+<Packages />

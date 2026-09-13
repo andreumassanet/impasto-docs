@@ -1,0 +1,135 @@
+---
+title: Settings
+description: The settings window — how to open it, what each page holds, profiles that keep whole desks under a name, and the window's language.
+sidebar:
+  order: 13
+---
+
+import Figure from '~/components/Figure.astro';
+import Gallery from '~/components/Gallery.astro';
+
+**Settings is the one panel that is not the island** — an ordinary window,
+moved and closed like any other, where an option that is a shape is drawn as
+the thing it changes.
+
+<Figure
+  name="settings"
+  alt="Two pages of the settings window: Bar & Island on its bar part, with the chip's shape and figure drawn as tiles of real chips and the bar drawn below; and Appearance on its theme part, with the wallpaper transitions and the greeting scenes drawn as tiles"
+  caption="The bar, arranged on a picture of it; the transitions and the greeting scenes."
+/>
+
+## Opening it
+
+- <kbd>SUPER</kbd> <kbd>,</kbd>
+- The right button on the wallpaper → **Settings**
+- The **Settings** door on the [control centre](/shell/control-centre/)'s top row
+- `>` in the [launcher](/shell/launcher/), which lists the shell's own places
+
+Opening it closes whatever the island had open. **Search settings**, at the top
+of the sidebar, finds a page by its name, its parts or what is on it, in
+English or in Spanish, and the arrows at the top go back and forward through
+the pages you visited.
+
+## The pages
+
+Eleven pages in three groups — **The shell**, **The desk** and **The session**.
+A long page is split into parts, drawn as a strip under its title.
+
+| Page | Parts | What it holds |
+|---|---|---|
+| [Bar & Island](/shell/bar/) | The island, The bar, Workspaces, Notifications | The bar's style and the island at rest, the time and what runs beside it, what the bar carries and how each piece reads, the workspaces, notifications and Do not disturb |
+| [Desktop](/shell/desktop/) | Module settings, The widgets | The weather's location, whose GitHub contributions, how a note is written; the way into arranging, and the look every widget follows |
+| [Control Centre](/shell/control-centre/) | — | The way into arranging the control centre, and the doors on its top row |
+| [Dock](/shell/dock/) | — | The edge, the alignment, the size, how it behaves, and the applications kept on it |
+| [Launcher](/shell/launcher/) | Results, Sigils, Clipboard | How results are ordered and how many, the first character for each mode, the clipboard history |
+| Appearance | Theme, Windows, Type, Motion | The theme and wallpaper, the transition, the greeting scene; window rounding, gaps, opacity, blur, glass and shadow; the interface and monospace fonts; the pace of the animations |
+| [Displays](/shell/displays/) | Arrangement, The screen, The lid, Night light | The screens, the laptop lid and the night light |
+| Input | Keyboard, Pointer | Keyboard layouts and key repeat; sensitivity, the cursor's colour and size, shake to find |
+| [Keys](/shell/keys-and-packages/#changing-a-key) | The shell's own, The compositor's | Every key, for the profile in use |
+| [Session](/shell/lock-and-login/) | Lock screen, When you leave | Your name and picture, the lock's blur, the idle waits |
+| System | Profiles, This machine | Profiles and Reset; the language, and the machine with the version installed |
+
+The wallpaper and the palette themselves are chosen in the island: Appearance →
+Theme opens them there ([Palettes](/theming/palettes/)).
+
+- **A setting made meaningless by another stays on the page, dimmed**, and says
+  which setting is responsible. What the machine lacks is dimmed the same way:
+  the glass and shake to find say to run `./setup plugins`, the night light
+  that hyprsunset is not installed.
+- **A slider's number is a field**: click it, type, <kbd>Enter</kbd>.
+- **Everything that reaches Hyprland is kept by the shell** and applied again
+  after every reload. The Lua files in `~/.config/hypr/` are the fallback, and
+  the window never writes them.
+
+<Gallery columns={3} items={[
+  { name: 'settings-bar-and-island', alt: "The settings window on the Bar & Island page, with the sidebar on the left; the page shows the bar's three styles, grouped, spread and one island, and whether the island floats or cuts into the top edge.", caption: "Bar & Island" },
+  { name: 'settings-desktop', alt: "The settings window on the Desktop page, with the sidebar on the left; the page shows the weather location, the GitHub username and how a note is written.", caption: "Desktop" },
+  { name: 'settings-control-centre', alt: "The settings window on the Control Centre page, with the sidebar on the left; the page shows the button to arrange the panel and the buttons of its top row, each with a switch.", caption: "Control Centre" },
+  { name: 'settings-dock', alt: "The settings window on the Dock page, with the sidebar on the left; the page shows whether the dock shows, the edge it sits on, its alignment and its size.", caption: "Dock" },
+  { name: 'settings-launcher', alt: "The settings window on the Launcher page, with the sidebar on the left; the page shows the order of results, how many are shown and a preview of the list.", caption: "Launcher" },
+  { name: 'settings-appearance', alt: "The settings window on the Appearance page, with the sidebar on the left; the page shows the theme and wallpaper, the wallpaper transition and the greeting scene.", caption: "Appearance" },
+  { name: 'settings-displays', alt: "The settings window on the Displays page, with the sidebar on the left; the page shows the night light, off, and its colour temperature.", caption: "Displays" },
+  { name: 'settings-input', alt: "The settings window on the Input page, with the sidebar on the left; the page shows the keyboard layouts, how to switch between them and the key repeat rate.", caption: "Input" },
+  { name: 'settings-keys', alt: "The settings window on the Keys page, with the sidebar on the left; the page shows the shell's own key bindings, each one editable, with a search field.", caption: "Keys" },
+  { name: 'settings-session', alt: "The settings window on the Session page, with the sidebar on the left; the page shows when to lock, turn the screen off and suspend after the machine is left alone, all set to never.", caption: "Session" },
+  { name: 'settings-system', alt: "The settings window on the System page, with the sidebar on the left; the page shows the four profiles, Default, Fuji in use, Night bay and Moon castle, and the reset.", caption: "System" },
+]} />
+
+## Profiles
+
+**A profile keeps a whole desk under a name**, and the one in use takes every
+change as you make it: there is no save button. System → Profiles lists them,
+the one in use outlined, each with its wallpaper and a line for its bar, its
+dock and how many widgets it has.
+
+| In a profile | Kept by the machine, whatever the profile | In no profile |
+|---|---|---|
+| The bar, the widgets, the dock, the launcher, the control centre, the look, **every key**, the wallpaper and its palette | The screens and the lid, your name and picture, the language, the keyboard layouts, the weather's location, the GitHub user, Do not disturb, the night light | Notes, tasks, the clipboard, the pets, the game bests |
+
+### The three that ship
+
+| Profile | Bar | Widgets | Wallpaper |
+|---|---|---|---|
+| Moon castle | One island | Analogue | `japanese-castle-full-moon.jpeg` |
+| Fuji | Grouped bar | Modern | `pagoda-fuji-blossom.jpeg` |
+| Night bay | Spread bar | Modern | `tropical-bay-night.jpeg` |
+
+A fresh install starts on **Moon castle**. Each of the three carries every key,
+the same set in all three, and each is laid out for a 1920 × 1200 screen. Each
+is added to the list once: one you delete stays deleted, and one an update
+brings is added.
+
+<Gallery columns={3} items={[
+  { name: 'profile-moon-castle', alt: "The whole desk on the Moon castle profile: a painted castle under a full moon, the bar as one island, and Analogue widgets down both sides.", caption: "Moon castle" },
+  { name: 'profile-fuji', alt: "The whole desk on the Fuji profile: a pagoda and Mount Fuji in blossom, the grouped bar, a column of widgets on the right, a terminal with the greeting on the left and the dock at the bottom.", caption: "Fuji" },
+  { name: 'profile-night-bay', alt: "The whole desk on the Night bay profile: a tropical bay at night, the spread bar, a row of widgets across the top and a terminal with the greeting below them.", caption: "Night bay" },
+]} />
+
+### Working with them
+
+- **Switch**, on a card, makes it the profile in use. Switching reloads
+  Hyprland, so anything set by hand with `hyprctl` goes with it. Profiles are
+  switched here and nowhere else.
+- **New profile** adds one and opens its name for typing; it is not switched
+  to.
+- The **⋯** menu on a card: **Rename**, **Duplicate**, **Export to a file…**,
+  and **Delete** — not on the one in use, and confirmed on the card, because
+  there is no undo.
+- **Import…** adds a profile from a file, without switching to it. A file that
+  does not parse, or is not a profile, is refused whole.
+- **Reset this profile**, under the list, puts every setting in the profile in
+  use back to its default and reloads Hyprland. The machine's settings are
+  kept, and there is no undo.
+
+An export is plain JSON: the name, the wallpaper's path, the palette and the
+settings. It carries the path and not the picture, so on a machine without that
+painting the wallpaper already there stays up.
+
+The profile in use is `~/.local/state/quickshell/settings.json`, and the others
+wait in `profiles.json` beside it. An export is the backup.
+
+## Language
+
+**System → This machine → Language: English or Español.** It is the language of
+the settings window: it never changes the system's language or renames a
+folder in your home, and anything without a translation stays in English.

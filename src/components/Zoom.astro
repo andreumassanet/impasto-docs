@@ -1,0 +1,58 @@
+---
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │   Z O O M                                                                │
+// │   a picture by name that opens full size · for pages outside Starlight   │
+// │                                                                          │
+// │   github.com/andreumassanet/impasto-docs                                 │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+import { Image, getImage } from 'astro:assets';
+import { findShot } from '~/data/shots';
+
+interface Props {
+	name: string;
+	alt: string;
+	sizes: string;
+}
+
+const { name, alt, sizes } = Astro.props;
+const { image, animated } = findShot(name);
+const widths = [800, 1400, 2400].filter((width) => width <= image.width);
+const full = animated
+	? image.src
+	: (await getImage({ src: image, width: Math.min(image.width, 2800), format: 'webp', quality: 82 })).src;
+---
+
+<button type="button" class="zoom" data-full={full} aria-label={`Enlarge: ${alt}`}>
+	{
+		animated ? (
+			<img src={image.src} width={image.width} height={image.height} alt={alt} loading="lazy" decoding="async" />
+		) : (
+			<Image src={image} alt={alt} widths={widths.length ? widths : [image.width]} sizes={sizes} />
+		)
+	}
+</button>
+
+<script>
+	import '~/scripts/lightbox';
+</script>
+
+<style>
+	.zoom {
+		display: block;
+		width: 100%;
+		padding: 0;
+		border: 0;
+		background: none;
+		cursor: zoom-in;
+	}
+	.zoom :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: var(--radius-desk);
+		background: var(--island);
+	}
+</style>

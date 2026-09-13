@@ -1,0 +1,87 @@
+---
+title: The dock
+description: The shelf on the edge of the screen — what you kept, then whatever else is open, with each application's windows a right-click away.
+sidebar:
+  order: 5
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Figure from '~/components/Figure.astro';
+import Gallery from '~/components/Gallery.astro';
+
+**The dock holds what you kept, then whatever else is open.** A thin line
+separates the two, and a kept application that is running is one icon in its
+kept place, not a second one beside it. The same kept applications come first
+in [the launcher](/shell/launcher/). With nothing kept, nothing open and no
+launcher button, it is not drawn at all.
+
+<Figure name="dock" alt="A black dock at the bottom of the screen with six applications: kitty, Zen, Thunar, VSCodium, Vesktop and Spotify, with marks under the ones that are running." caption="Kept applications, then what is running, with a dot under each open one." />
+
+## Using it
+
+| Do | And |
+|---|---|
+| Click | Opens it if it is not running, raises it if it is, and steps to its next window if it is already in front |
+| Middle-click | Opens a new window of it |
+| Right-click | Opens its menu |
+| Drag a kept icon | Moves it along the kept ones |
+| Point at an icon | Shows its name over it |
+
+The button at the start of the dock opens the launcher.
+
+## The menu
+
+**Right-click an icon for its windows by name.** Each window is a row with its
+title and its workspace, and a dot marks the one in front; a click goes to it.
+Under the windows:
+
+- **Open**, or **New window** while it is running.
+- **Keep in the dock**, or **Remove from the dock**.
+- **Close**, or **Close all windows** when there are several. It turns red
+  under the pointer and asks nothing.
+
+A click anywhere else, or the right button again, closes the menu. A window the
+dock cannot match to an application is still shown, under its own name, with
+only its windows in the menu.
+
+<Gallery columns={2} items={[
+  { name: 'dock-hover', alt: "The dock with the pointer over Thunar and its name shown above the icon.", caption: "The name of the icon under the pointer." },
+  { name: 'dock-menu', alt: "The dock's menu on the terminal, listing its four windows (btop, cava, cbonsai and nvim) above New window, Remove from the dock and Close all windows.", caption: "A right-click lists the application's windows by name." },
+]} />
+
+## Keeping applications
+
+Keep one from its right-click menu, or under Settings → Dock → *What is kept on
+it*, where **Add an application** picks one from a search. The list stays
+editable with the dock off, since the launcher ranks by it too. Order is set
+by dragging on the dock itself.
+
+## Settings
+
+Under Settings → Dock:
+
+| Setting | Does |
+|---|---|
+| Show the dock | The dock on or off; also the Dock tile in the control centre |
+| Edge | Bottom, Left or Right — the top is the bar's |
+| Alignment | Start, Middle or End of that edge |
+| Icon size | 28 to 72 px; everything on the dock scales with it |
+| Background | How solid the capsule behind the icons is; lower lets the blurred wallpaper through |
+| Launcher button | The button at the start that opens the launcher |
+| Open applications | Running applications that are not kept, after the line |
+| Reserve its space | Windows tile around the dock instead of passing under it |
+| Hide until pointed at | The dock slides off its edge, and pointing at the edge brings it back |
+
+Reserving does nothing while the dock hides, so that row is locked then.
+
+## Full screen
+
+**The dock leaves under a full-screen window** on the workspace you are on, and
+comes back when it goes. A maximised window, <kbd>SUPER</kbd> <kbd>ALT</kbd>
+<kbd>F</kbd>, keeps it.
+
+<Aside>
+Every screen gets the same dock, with the same icons. Floating, it draws over
+any desktop widget on the bottom row of the grid; reserving its space keeps
+the grid clear of it. See [limitations](/help/limitations/).
+</Aside>

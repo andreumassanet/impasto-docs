@@ -1,0 +1,161 @@
+---
+title: The bar
+description: The three bar styles, arranging pieces on a picture of the bar, how each piece reads, and every module that can go on it.
+sidebar:
+  order: 2
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+import Figure from '~/components/Figure.astro';
+
+**Three styles, one layout.** Pieces are dragged out of a catalogue onto a
+picture of the bar, then drawn grouped round the island, spread to the edges,
+or all inside one capsule. Changing the style keeps what is on the bar.
+
+<Figure
+  name="bar-styles"
+  alt="The same bar in its three styles: grouped round the island, spread to the two edges, and everything inside one capsule"
+  caption="Grouped, spread and one island — the same layout each time."
+/>
+
+## Styles
+
+Chosen under Settings → Bar & Island → The island → **Style**.
+
+| Style | How it is drawn |
+|---|---|
+| Grouped | The workspaces, the island and the modules together in the middle. The default. A detail opening pushes the sides out. |
+| Spread | The workspaces at one edge, the modules at the other, the island between them. The sides hold still. |
+| One island | Everything inside a single capsule. Whatever the island becomes, the whole band changes shape into it. |
+
+In One island, **Span the whole screen** runs the band the full width of the
+bar instead of fitting what is on it. **Island** sets whether the island floats
+below the top edge or is cut into it as a notch, in every style.
+
+## What goes on it
+
+- **Modules** — each a piece that shows a reading and opens a detail in the
+  island when clicked. The same click closes it.
+- **The workspace strip** — a dot per workspace; a click goes there.
+- **Buttons** — Search, Overview, Control centre and Session, each opening
+  that panel. The button stays lit while its panel is open.
+- **Split** — ends one capsule and starts the next.
+
+Neighbouring modules share a capsule; the workspace strip is always a capsule
+of its own. A capsule holding one piece takes that piece's shape: a ring is a
+circle, a button a circle, a symbol and its figure a pill.
+
+Out of the box the left side holds the workspaces, and the right holds
+Notifications, Network, Bluetooth, Volume and Battery.
+
+A module the machine cannot show — no battery, no backlight, no Bluetooth
+adapter, no screen recorder — is not drawn, even when placed. Nothing on the
+bar moves by itself: a piece is where you put it.
+
+## Arranging
+
+<Steps>
+
+1. Open Settings (<kbd>SUPER</kbd> <kbd>,</kbd>) → Bar & Island → **The bar**.
+   Under *What the bar carries* is a picture of the bar in its style, with the
+   real time in the island, and the catalogue under it.
+
+2. Drag a piece from the catalogue onto the picture. Let go over the left half
+   and it goes left of the island; over the right half, right of it.
+
+3. Drag a piece along the bar to move it, or off the bar to take it off.
+
+4. Click a piece to pick it. A card under the bar has **Remove**, and the look
+   of that piece alone.
+
+</Steps>
+
+The catalogue always holds every piece, and taking from it copies, so a piece
+can be on the bar twice. There is no on or off switch anywhere: on the bar is
+on.
+
+## How a piece reads
+
+Two settings for the whole bar, under The bar → *How a chip reads*:
+
+| Setting | Choices |
+|---|---|
+| Shape | **Icon** — the module's symbol, small (the default). **Ring** — its gauge as a circle round the symbol: charge, volume, a countdown. |
+| Figure | **No** — the symbol alone. **On hover** — the figure opens under the pointer. **Always** — always beside it (the default). |
+
+A module with nothing to measure — Calendar, Notifications — is its symbol in
+either shape.
+
+<Figure name="bar-modules" alt="The same bar four times: the symbols alone, the symbols with their figures, the rings, and the rings with their figures" caption="Icon or ring, with its figure or without, for the whole bar." />
+
+**Any piece can have a look of its own.** Pick it on the picture, and its card
+offers Shape and Figure, each with *Like the bar* to follow the whole bar.
+Media, Timer and Recorder also have **When**: *Always*, or *While it runs*, to
+be on the bar only while something is playing, counting or recording.
+
+Every module has a figure, so Always means all of them. Where there is nothing
+to count it is a word: *Off*, *No devices*, *Muted*, *0:00*, *REC*, *Egg*,
+*Nothing playing*.
+
+Warnings do not follow the palette. Off the charger, the battery turns yellow
+at 20% and red at 10%, and the System piece steps to the same hues at 70% and
+90% processor load.
+
+## The module catalogue
+
+| Module | On the bar | Its detail in the island | Needs |
+|---|---|---|---|
+| Media | The track's title, or *Nothing playing* | The player: artwork, title, artist, progress, previous, play or pause, next | A media player on the session bus (MPRIS) |
+| Timer | A ring that drains, and the time left | Idle, set a countdown; running, hold, restart or stop it | — |
+| Claude | Claude's mark, and the session's percentage — or its tokens, until the percentage is known | Tokens and messages for the five-hour session and the week, the account's own percentages, and when the session resets | Claude Code (below) |
+| Battery | The charge | The charge, charging or the time left, the power going in or out, and the energy stored | A battery |
+| Volume | The level, or *Muted* | A slider, and mute buttons for the output and the microphone | — |
+| Brightness | The level | A slider | A backlight |
+| Network | The network's name, or *Off* | The Wi-Fi list, the same as the control centre's | — |
+| Bluetooth | The connected device, a count, *No devices* or *Off* | The device list | A Bluetooth adapter |
+| Notifications | A bell and how many are kept; crossed out in do not disturb | The history, with Clear | — |
+| Weather | The conditions and the temperature | The place, feels-like, the reading's age and the next hours | A network connection (below) |
+| System | The processor load | Processor and memory, with their recent history | — |
+| Updates | How many updates are waiting | What is waiting, when it was checked, and Open for the packages panel | pacman-contrib for a fresh count |
+| Pet | The pet that is out, and its level or *Egg* | Feed, play, and the shelf of the whole family | — |
+| Recorder | A muted camera and *REC*; a red dot and the time while recording | Record, the shape and the sound; while recording, what is taken, the sound, the file's size, and stop | wl-screenrec or wf-recorder |
+| Calendar | Its symbol and the day | The month, with a dot under each day that has tasks; such a day opens its list | — |
+
+- **Claude** appears once Claude Code has written its transcripts under
+  `~/.claude/projects`; the token and message counts are read from them. The
+  percentages are the account's own, the ones `/usage` shows: while the piece
+  is on screen, every ten minutes the shell sends the smallest possible
+  request to the API, signed in with Claude Code's own credentials, and reads
+  the answer's headers. The token is never stored or printed.
+- **Weather** comes from wttr.in, which guesses the place from your connection
+  when none is set. Set it under Settings → Desktop → Module settings →
+  **Location**: a city, a postcode or an airport code.
+- **Updates** counts the repositories and the AUR, and never installs: Open
+  goes to [the packages panel](/shell/keys-and-packages/), which runs the
+  upgrade in a terminal. Without pacman-contrib the count is from the last
+  sync.
+- **Recorder** — see [capture](/shell/capture/#recording).
+- **System** — the full panel, with cores, disks and temperatures, is
+  <kbd>SUPER</kbd> <kbd>U</kbd>.
+
+**Not on the bar:** Notes, Tasks, Games and GitHub are desktop widgets and
+panels of their own — see [the desktop](/shell/desktop/),
+[notes and tasks](/shell/notes-and-tasks/) and
+[games and pets](/shell/games-and-pets/). GitHub needs a username under
+Settings → Desktop → Module settings → **GitHub username**. The clock is the
+island itself.
+
+## Size and workspaces
+
+Under Settings → Bar & Island → The island → *Scale*: **Bar height** (24–48 px),
+**Top margin** (0–32 px) and **Side margin** (0–48 px). Everything on the bar
+scales with its height; as a notch, the island ignores the top margin.
+
+Under Settings → Bar & Island → **Workspaces**: *Workspaces shown* are always
+drawn on the strip (five by default); the rest, up to *Workspaces available*
+(ten by default), appear only while they have windows.
+
+<Aside>
+On a second screen the bar is the two sides and nothing between them, spread
+whatever the style. See [the island](/shell/island/#on-a-second-screen).
+</Aside>

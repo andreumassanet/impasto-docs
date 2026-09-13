@@ -1,0 +1,236 @@
+---
+title: Troubleshooting
+description: Common problems on an impasto desk and how to fix them — the installer, the plugins, the shell, the login screen and the themed windows.
+sidebar:
+  order: 1
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+**Most problems here have a one-line fix.** Find the symptom, then run what is
+under it. If a command below changes a file `setup` installed, see
+[Updating](/start/updating/) for what that means for the next update.
+
+## Installing
+
+### setup says the plugins need a running Hyprland
+
+The plugins are built against the compositor that is running, so `setup` skips
+them outside the session. Open a terminal inside Hyprland and run:
+
+```bash
+./setup plugins
+```
+
+### hyprpm fails with "Failed to run a superuser cmd"
+
+hyprpm keeps its plugins in a store that belongs to root, and asks for your
+password to write there. Run `./setup plugins` from a terminal where sudo can
+ask.
+
+### The AUR packages were skipped
+
+You declined to build an AUR helper, so only the pacman half was installed.
+Install yay or paru, or let `setup` build one, then run:
+
+```bash
+./setup packages
+```
+
+### A file ending in .new appeared
+
+You edited a file `setup` installed, and the repository has a newer version of
+it. Yours is untouched; the repository's is beside it. Compare the two, then
+keep one:
+
+```bash
+diff ~/.config/kitty/kitty.conf ~/.config/kitty/kitty.conf.new
+```
+
+Move the `.new` over yours to take the repository's version, or delete the
+`.new` to keep yours.
+
+## The shell
+
+### The bar does not appear
+
+The shell starts with the session. If it is not running, or it stopped, restart
+it with <kbd>SUPER</kbd> <kbd>CTRL</kbd> <kbd>R</kbd>. From a terminal, start it
+and read its log:
+
+```bash
+qs -d      # start the shell in the background
+qs log     # print its log
+```
+
+### The bar takes twice the space
+
+Two shells are running, and each reserves room for its own bar. List them and
+stop the extra one by its process ID:
+
+```bash
+qs list
+qs kill --pid <pid>
+```
+
+### A change to the repository did nothing
+
+The desk reads the copy in your home, not the repository. Copy it across:
+
+```bash
+./setup sync
+```
+
+Changes under `system/` need `./setup system` instead.
+
+### A control is dimmed, or missing
+
+Most features depend on an optional package. A missing one takes its own
+control away: the control is dimmed, or left out entirely.
+
+| Missing | What goes |
+|---|---|
+| `hyprsunset` | The night light |
+| `hyprpicker` | Picking a colour off the screen |
+| `satty` | Annotating a capture |
+| `tesseract` | Reading a region as text |
+| `wf-recorder` and `wl-screenrec` | The recorder, from the bar |
+| `pacman-contrib` | A live count of updates |
+
+Every package is in `packages/pacman.txt` and `packages/aur.txt`. See
+[Packages](/reference/packages/).
+
+## Hyprland
+
+### Something in the Hyprland config does not apply
+
+An error in one module does not stop the others, and `hyprctl reload` reports
+success anyway. Ask for the errors:
+
+```bash
+hyprctl configerrors
+```
+
+The config Hyprland reads is the copy in `~/.config/hypr/`.
+
+### The glass or shake to find stopped working after a Hyprland update
+
+Plugins are built against one version of Hyprland, and an update leaves them
+behind. Settings dims both switches until they are rebuilt:
+
+```bash
+hyprpm update
+hyprpm reload
+```
+
+### The pointer is blurry when it grows
+
+The pointer is a small bitmap until the vector cursor has been built. Run:
+
+```bash
+./setup cursors
+```
+
+An application that draws its own cursor, like an Electron window, still shows
+its own when magnified.
+
+### The power button does nothing
+
+The shell handles the power button, so nothing happens while the shell is not
+running, or at the login screen. Some machines never report a short press at
+all. <kbd>SUPER</kbd> <kbd>X</kbd> and <kbd>CTRL</kbd> <kbd>ALT</kbd>
+<kbd>Delete</kbd> open the same session menu. Holding the button still forces a
+power-off.
+
+## The login screen
+
+### The theme does not load
+
+SDDM falls back to its own theme and prints the reason in red on that screen,
+not in a terminal. Test the theme from the repository before switching to it:
+
+```bash
+sddm-greeter-qt6 --test-mode --theme system/usr/share/sddm/themes/impasto
+```
+
+The restart and shut-down buttons are hidden in test mode. That is expected.
+
+### An on-screen keyboard covers the login screen
+
+Another file in `/etc/sddm.conf.d/` still sets `InputMethod=qtvirtualkeyboard`.
+Files there are read in name order, and a setting another theme left behind
+applies to this one too. Remove that line.
+
+### The battery ring on the login screen is empty
+
+A file in `/etc/sddm.conf.d/` that sorts after `10-impasto.conf` sets its own
+`GreeterEnvironment`, replacing the one that lets the theme read the battery.
+Add `QML_XHR_ALLOW_FILE_READ=1` to that line. The ring also stays empty if the
+battery is not `BAT0`, `BAT1` or `BAT2`.
+
+## The terminal
+
+### fa greets with no picture
+
+The greeting's scenes are drawn with ImageMagick. Install `imagemagick`, then
+run `./setup sync`, which draws them if they are missing. The next palette
+change redraws them too.
+
+## Other windows
+
+### Spotify lost its colours after an update
+
+A Spotify update replaces the files the palette was patched into. Put it back:
+
+```bash
+./setup spotify
+```
+
+The same command is how Spotify takes a new palette at all: it never follows a
+wallpaper change on its own. If it stops with `/opt/spotify is not writable`,
+it prints the command that makes it writable.
+
+### VSCodium keeps the old colours
+
+VSCodium never repaints a window that is already open. Run **Developer: Reload
+Window** from the command palette, or open a new window. `./setup vscodium`
+selects the theme; without it, choose **Impasto** once from the colour theme
+picker (<kbd>Ctrl</kbd> <kbd>K</kbd> <kbd>Ctrl</kbd> <kbd>T</kbd>).
+
+### Vesktop is not themed
+
+The theme is written, but Vesktop wears it only once it is ticked. Open Vesktop
+→ Settings → Themes and enable `impasto.css`. After that it repaints while
+open.
+
+### GTK windows come up light
+
+Whether GTK applications are dark is a machine setting. Run:
+
+```bash
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+```
+
+### Thunar's folders stay blue
+
+The folder colours are an icon theme, and dconf decides which one GTK uses:
+
+```bash
+gsettings set org.gnome.desktop.interface icon-theme impasto
+```
+
+Papirus must be installed. Like every GTK colour, the change reaches the next
+window opened.
+
+### Qt windows are light grey
+
+`qt6ct` is not installed, so the Qt half of the palette is never written.
+Install it, change the wallpaper or the palette once so the colours are
+written, and open the window again. KDE applications read `kdeglobals`
+instead, and get their colours either way.
+
+<Aside type="note">
+btop, yazi, GTK, Qt, Zen and VSCodium read their theme when a window opens. A
+palette change reaches the next window, never one already open. The full list
+of what the desk does not do is in [Limitations](/help/limitations/).
+</Aside>

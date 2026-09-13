@@ -1,0 +1,439 @@
+/*
+   ╭──────────────────────────────────────────────────────────────────────────╮
+   │                                                                          │
+   │   T H E M E                                                              │
+   │   the site's colours · a wallpaper's palette, and the black island       │
+   │                                                                          │
+   │   github.com/andreumassanet/impasto-docs                                 │
+   │                                                                          │
+   ╰──────────────────────────────────────────────────────────────────────────╯
+*/
+
+
+/* ── PALETTE ─────────────────────────────────────────────────────────────── */
+
+/* · the shell's tokens, defaulting to the Fuji wallpaper's; the picker
+   · rewrites them on the root, and registering them lets them cross-fade */
+@property --p-bg { syntax: '<color>'; inherits: true; initial-value: #12161f; }
+@property --p-surface { syntax: '<color>'; inherits: true; initial-value: #20242d; }
+@property --p-surface-hover { syntax: '<color>'; inherits: true; initial-value: #30343f; }
+@property --p-border { syntax: '<color>'; inherits: true; initial-value: #404453; }
+@property --p-text { syntax: '<color>'; inherits: true; initial-value: #eef2f7; }
+@property --p-muted { syntax: '<color>'; inherits: true; initial-value: #94a1b2; }
+@property --p-accent { syntax: '<color>'; inherits: true; initial-value: #2e509e; }
+@property --p-accent-hover { syntax: '<color>'; inherits: true; initial-value: #436bc4; }
+@property --p-accent-text { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+@property --p-red { syntax: '<color>'; inherits: true; initial-value: #f38ba8; }
+@property --p-green { syntax: '<color>'; inherits: true; initial-value: #a6e3a1; }
+@property --p-yellow { syntax: '<color>'; inherits: true; initial-value: #f9e2af; }
+@property --p-blue { syntax: '<color>'; inherits: true; initial-value: #89b4fa; }
+/* · the dark and the light end of the palette, whichever way round it is */
+@property --p-ink { syntax: '<color>'; inherits: true; initial-value: #12161f; }
+@property --p-light { syntax: '<color>'; inherits: true; initial-value: #eef2f7; }
+
+:root {
+	/* · fixed in every palette: the island is the shell's identity */
+	--island: #000000;
+	--island-surface: #141414;
+	--island-surface-hover: #1f1f1f;
+	--island-border: #262626;
+
+	--radius-small: 8px;
+	--radius-medium: 12px;
+	--radius-large: 18px;
+	--radius-desk: 22px;
+
+	--sl-font: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+	--sl-font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+	--im-hand: 'Grape Nuts', 'Segoe Print', cursive;
+
+	--sl-nav-height: 4.25rem;
+	--sl-content-width: 46rem;
+	--sl-line-height: 1.7;
+
+	--im-fade: 0.6s ease;
+	transition:
+		--p-bg var(--im-fade), --p-surface var(--im-fade), --p-surface-hover var(--im-fade),
+		--p-border var(--im-fade), --p-text var(--im-fade), --p-muted var(--im-fade),
+		--p-accent var(--im-fade), --p-accent-hover var(--im-fade), --p-accent-text var(--im-fade),
+		--p-ink var(--im-fade), --p-light var(--im-fade);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:root {
+		transition: none;
+	}
+}
+
+
+/* ── DARK ────────────────────────────────────────────────────────────────── */
+
+/* · the palette as the desk draws it; every mix leans towards the palette's
+   · own text, so a light palette stays readable here too */
+:root {
+	--sl-color-black: var(--p-bg);
+	--sl-color-gray-6: var(--p-surface);
+	--sl-color-gray-5: var(--p-border);
+	--sl-color-gray-4: color-mix(in oklab, var(--p-muted) 50%, var(--p-border));
+	--sl-color-gray-3: var(--p-muted);
+	--sl-color-gray-2: color-mix(in oklab, var(--p-text) 82%, var(--p-muted));
+	--sl-color-gray-1: color-mix(in oklab, var(--p-text) 93%, var(--p-muted));
+	--sl-color-white: var(--p-text);
+
+	--sl-color-accent-low: color-mix(in oklab, var(--p-accent) 30%, var(--p-bg));
+	--sl-color-accent: var(--p-accent-hover);
+	--sl-color-accent-high: color-mix(in oklab, var(--p-accent-hover) 42%, var(--p-text));
+	--sl-color-text-accent: var(--sl-color-accent-high);
+	--sl-color-text-invert: var(--p-accent-text);
+
+	--sl-color-bg-nav: var(--p-bg);
+	--sl-color-bg-sidebar: var(--p-bg);
+	--sl-color-bg-inline-code: color-mix(in oklab, var(--p-surface) 85%, var(--p-bg));
+	--sl-color-hairline: color-mix(in oklab, var(--p-border) 55%, var(--p-bg));
+	--sl-color-hairline-light: var(--p-border);
+	--sl-color-hairline-shade: var(--p-bg);
+	--sl-color-backdrop-overlay: color-mix(in oklab, var(--p-bg) 72%, transparent);
+
+	--sl-color-blue-low: color-mix(in oklab, var(--p-blue) 14%, var(--p-bg));
+	--sl-color-blue: var(--p-blue);
+	--sl-color-blue-high: color-mix(in oklab, var(--p-blue) 55%, var(--p-text));
+	--sl-color-green-low: color-mix(in oklab, var(--p-green) 14%, var(--p-bg));
+	--sl-color-green: var(--p-green);
+	--sl-color-green-high: color-mix(in oklab, var(--p-green) 55%, var(--p-text));
+	--sl-color-orange-low: color-mix(in oklab, var(--p-yellow) 14%, var(--p-bg));
+	--sl-color-orange: var(--p-yellow);
+	--sl-color-orange-high: color-mix(in oklab, var(--p-yellow) 55%, var(--p-text));
+	--sl-color-red-low: color-mix(in oklab, var(--p-red) 14%, var(--p-bg));
+	--sl-color-red: var(--p-red);
+	--sl-color-red-high: color-mix(in oklab, var(--p-red) 55%, var(--p-text));
+	--sl-color-purple-low: var(--sl-color-accent-low);
+	--sl-color-purple: var(--sl-color-accent);
+	--sl-color-purple-high: var(--sl-color-accent-high);
+
+	/* · code sits on the palette's dark end, like the terminal does */
+	--im-code-bg: color-mix(in oklab, var(--p-ink) 70%, black);
+	--im-code-bar: color-mix(in oklab, var(--p-ink) 85%, black);
+	--im-code-border: var(--sl-color-hairline);
+}
+
+
+/* ── LIGHT ───────────────────────────────────────────────────────────────── */
+
+/* · paper tinted by the palette's light end, ink from its dark end */
+:root[data-theme='light'] {
+	--im-paper: color-mix(in oklab, #ffffff 92%, var(--p-light));
+	--im-ink: var(--p-ink);
+
+	--sl-color-black: var(--im-paper);
+	--sl-color-gray-7: color-mix(in oklab, var(--im-ink) 4%, var(--im-paper));
+	--sl-color-gray-6: color-mix(in oklab, var(--im-ink) 8%, var(--im-paper));
+	--sl-color-gray-5: color-mix(in oklab, var(--im-ink) 20%, var(--im-paper));
+	--sl-color-gray-4: color-mix(in oklab, var(--im-ink) 42%, var(--im-paper));
+	--sl-color-gray-3: color-mix(in oklab, var(--im-ink) 62%, var(--im-paper));
+	--sl-color-gray-2: color-mix(in oklab, var(--im-ink) 84%, var(--im-paper));
+	--sl-color-gray-1: color-mix(in oklab, var(--im-ink) 93%, var(--im-paper));
+	--sl-color-white: var(--im-ink);
+
+	--sl-color-accent-low: color-mix(in oklab, var(--p-accent) 14%, var(--im-paper));
+	--sl-color-accent: var(--p-accent);
+	--sl-color-accent-high: color-mix(in oklab, var(--p-accent) 72%, var(--im-ink));
+	--sl-color-text-accent: var(--sl-color-accent-high);
+
+	--sl-color-bg-nav: var(--im-paper);
+	--sl-color-bg-sidebar: var(--im-paper);
+	--sl-color-bg-inline-code: var(--sl-color-gray-6);
+	--sl-color-hairline: var(--sl-color-gray-6);
+	--sl-color-hairline-light: var(--sl-color-gray-5);
+	--sl-color-hairline-shade: var(--sl-color-gray-5);
+	--sl-color-backdrop-overlay: color-mix(in oklab, var(--im-paper) 72%, transparent);
+
+	--sl-color-blue-low: color-mix(in oklab, var(--p-blue) 16%, var(--im-paper));
+	--sl-color-blue-high: color-mix(in oklab, var(--p-blue) 55%, var(--im-ink));
+	--sl-color-green-low: color-mix(in oklab, var(--p-green) 16%, var(--im-paper));
+	--sl-color-green-high: color-mix(in oklab, var(--p-green) 50%, var(--im-ink));
+	--sl-color-orange-low: color-mix(in oklab, var(--p-yellow) 20%, var(--im-paper));
+	--sl-color-orange-high: color-mix(in oklab, var(--p-yellow) 45%, var(--im-ink));
+	--sl-color-red-low: color-mix(in oklab, var(--p-red) 16%, var(--im-paper));
+	--sl-color-red-high: color-mix(in oklab, var(--p-red) 55%, var(--im-ink));
+
+	--im-code-bg: var(--sl-color-gray-7);
+	--im-code-bar: var(--sl-color-gray-6);
+}
+
+
+/* ── ISLAND ──────────────────────────────────────────────────────────────── */
+
+/* · black in both themes and every palette; Starlight's own pieces inside
+   · a capsule (search, theme, icons) take this scale instead of the page's */
+.im-island {
+	--sl-color-black: var(--island);
+	--sl-color-gray-7: var(--island-surface);
+	--sl-color-gray-6: var(--island-surface);
+	--sl-color-gray-5: var(--island-border);
+	--sl-color-gray-4: #5c5c5c;
+	--sl-color-gray-3: #8e8e8e;
+	--sl-color-gray-2: #c9c9c9;
+	--sl-color-gray-1: #ededed;
+	--sl-color-white: #ffffff;
+	--sl-color-text: #c9c9c9;
+	--sl-color-text-accent: #ffffff;
+	--sl-color-bg-nav: var(--island);
+	--sl-color-bg-inline-code: var(--island-surface);
+	--sl-color-hairline: var(--island-border);
+	--sl-color-hairline-light: var(--island-border);
+	--sl-color-hairline-shade: var(--island);
+	--sl-color-accent-low: color-mix(in oklab, var(--p-accent) 35%, black);
+	--sl-color-accent: var(--p-accent-hover);
+	--sl-color-accent-high: color-mix(in oklab, var(--p-accent-hover) 40%, white);
+	--sl-color-backdrop-overlay: rgb(0 0 0 / 0.55);
+	background: var(--island);
+	color: #ffffff;
+}
+
+
+/* ── HEADER ──────────────────────────────────────────────────────────────── */
+
+header.header {
+	background: color-mix(in oklab, var(--sl-color-bg) 78%, transparent);
+	-webkit-backdrop-filter: blur(16px) saturate(1.2);
+	backdrop-filter: blur(16px) saturate(1.2);
+	border-bottom: 1px solid color-mix(in oklab, var(--sl-color-hairline) 70%, transparent);
+}
+
+.header .capsule {
+	display: flex;
+	align-items: center;
+	height: 2.75rem;
+	border-radius: 999px;
+	border: 1px solid var(--island-border);
+}
+
+.header .brand {
+	padding-inline: 0.5rem 1.1rem;
+}
+
+.site-title {
+	gap: 0.5rem;
+}
+.site-title img {
+	height: 1.9rem;
+	width: auto;
+}
+.site-title span {
+	font-family: var(--im-hand);
+	font-size: 1.65rem;
+	font-weight: 400;
+	line-height: 1;
+	color: #ffffff;
+	transform: translateY(0.1em);
+}
+
+.header .search .capsule {
+	width: 100%;
+	max-width: 24rem;
+	margin-inline: auto;
+}
+.header .search button[data-open-modal] {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	border-radius: 999px;
+	background: transparent;
+	padding-inline: 1rem 0.5rem;
+	color: #9a9a9a;
+}
+.header .search button[data-open-modal]:hover {
+	color: #ffffff;
+}
+@media (max-width: 49.99rem) {
+	.header .search .capsule {
+		width: 2.75rem;
+		justify-content: center;
+	}
+	.header .search button[data-open-modal] {
+		padding: 0;
+		justify-content: center;
+	}
+}
+
+.sl-menu-button {
+	background: var(--island);
+	color: #ffffff;
+	border: 1px solid var(--island-border);
+	border-radius: 999px;
+	box-shadow: none;
+}
+
+site-search dialog {
+	border-radius: var(--radius-desk);
+	border: 1px solid var(--island-border);
+}
+
+
+/* ── SIDEBAR ─────────────────────────────────────────────────────────────── */
+
+.sidebar-pane {
+	border-inline-end: 1px solid var(--sl-color-hairline);
+}
+.sidebar-content .top-level > li > details > summary .group-label .large {
+	font-size: var(--sl-text-sm);
+	font-weight: 650;
+	color: var(--sl-color-white);
+}
+.sidebar-content a {
+	border-radius: 999px;
+	padding-inline: 0.8rem;
+	color: var(--sl-color-gray-2);
+}
+.sidebar-content a:hover {
+	color: var(--sl-color-white);
+	background: color-mix(in oklab, var(--sl-color-gray-6) 70%, transparent);
+}
+.sidebar-content a[aria-current='page'],
+.sidebar-content a[aria-current='page']:hover,
+.sidebar-content a[aria-current='page']:focus {
+	background: var(--p-accent);
+	color: var(--p-accent-text);
+	font-weight: 600;
+}
+
+
+/* ── CONTENT ─────────────────────────────────────────────────────────────── */
+
+h1#_top {
+	font-size: clamp(2rem, 1.5rem + 2vw, 2.85rem);
+	font-weight: 720;
+	letter-spacing: -0.03em;
+	line-height: 1.08;
+}
+
+.sl-markdown-content :is(h2, h3, h4) {
+	color: var(--sl-color-white);
+	letter-spacing: -0.02em;
+	font-weight: 680;
+}
+.sl-markdown-content h2 {
+	font-size: 1.6rem;
+	margin-top: 2.75rem;
+}
+.sl-markdown-content h3 {
+	font-size: 1.2rem;
+	margin-top: 2rem;
+}
+.sl-markdown-content strong {
+	color: var(--sl-color-white);
+	font-weight: 650;
+}
+.sl-markdown-content a:not(:where(.not-content *)) {
+	color: var(--sl-color-text-accent);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.22em;
+}
+.sl-markdown-content a:not(:where(.not-content *)):hover {
+	text-decoration-thickness: 2px;
+}
+.sl-markdown-content code:not(:where(.not-content *, pre *)) {
+	border-radius: 6px;
+	padding: 0.1em 0.35em;
+	font-size: 0.88em;
+}
+
+.sl-markdown-content table:not(:where(.not-content *)) {
+	font-size: var(--sl-text-sm);
+}
+.sl-markdown-content :is(th, td):not(:where(.not-content *)) {
+	border-bottom-color: var(--sl-color-hairline);
+	padding-block: 0.6rem;
+}
+.sl-markdown-content th:not(:where(.not-content *)) {
+	border-bottom-color: var(--sl-color-hairline-light);
+	font-weight: 650;
+}
+
+/* · a key is a small island; inline, so it never makes its line taller */
+.sl-markdown-content kbd {
+	padding: 0.14em 0.45em;
+	border: 1px solid var(--island-border);
+	border-radius: 6px;
+	background: var(--island);
+	box-shadow: inset 0 -2px 0 rgb(255 255 255 / 0.1);
+	color: #f2f2f2;
+	font-family: var(--sl-font-mono);
+	font-size: 0.78em;
+	font-weight: 500;
+	white-space: nowrap;
+}
+
+.starlight-aside {
+	border-radius: var(--radius-medium);
+	border-inline-start-width: 3px;
+}
+.starlight-aside--note {
+	--sl-color-asides-text-accent: var(--sl-color-accent-high);
+	--sl-color-asides-border: var(--sl-color-accent);
+	background-color: var(--sl-color-accent-low);
+}
+
+.sl-markdown-content :is(.card, .sl-link-card) {
+	border-radius: var(--radius-large);
+}
+
+.pagination-links a {
+	border-radius: var(--radius-large);
+	box-shadow: none;
+	border-color: var(--sl-color-hairline-light);
+}
+.pagination-links a:hover {
+	border-color: var(--sl-color-accent);
+}
+
+.expressive-code .frame {
+	box-shadow: none;
+}
+
+/* · a picture opened full size */
+.im-lightbox {
+	position: fixed;
+	inset: 0;
+	width: fit-content;
+	height: fit-content;
+	max-width: 96vw;
+	max-height: 96vh;
+	margin: auto;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	overflow: visible;
+	cursor: zoom-out;
+}
+.im-lightbox::backdrop {
+	background: rgb(0 0 0 / 0.86);
+	-webkit-backdrop-filter: blur(6px);
+	backdrop-filter: blur(6px);
+}
+.im-lightbox img {
+	display: block;
+	width: auto;
+	height: auto;
+	max-width: 96vw;
+	max-height: 88vh;
+	border-radius: var(--radius-large);
+}
+.im-lightbox p {
+	margin: 0.75rem 0 0;
+	font-size: var(--sl-text-sm);
+	text-align: center;
+	color: #d8d8d8;
+}
+.im-lightbox p:empty {
+	display: none;
+}
+
+::selection {
+	background: color-mix(in oklab, var(--p-accent) 55%, transparent);
+	color: var(--p-accent-text);
+}
+
+:focus-visible {
+	outline-color: var(--p-accent-hover);
+}

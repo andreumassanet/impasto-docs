@@ -1,0 +1,199 @@
+---
+title: The island
+description: The black capsule in the middle of the bar, at rest on the time, and every shape it takes — panels, details, notifications, readings and the overview.
+sidebar:
+  order: 1
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Figure from '~/components/Figure.astro';
+import Gallery from '~/components/Gallery.astro';
+
+**The island is one object that changes shape.** A black capsule in the middle
+of the bar rests on the time and becomes everything else: a glance under the
+pointer, the control centre, the launcher, the overview, a notification, a
+game. Each shape is the size of what is in it, with no title and no close
+button.
+
+<Figure
+  name="island"
+  alt="The island at rest, opening a glance under the pointer, becoming the control centre, then the launcher doing a sum and listing the shell's places, then a notification arriving"
+  caption="At rest, the glance, the control centre, the launcher, a notification."
+/>
+
+## At rest
+
+**The island rests on the time.** Under the pointer it lights, and a click
+opens the [control centre](/shell/control-centre/).
+
+**What is running sits either side of the time**: a recording, a countdown, a
+track — in that order, two at most. One running thing splits across both
+sides, its mark on the left and its figure on the right; two take a side each.
+
+- A recording is a red dot and the minutes. A click on the dot stops it; under
+  the pointer it squares off to say so.
+- A countdown is a ring that drains and the time left. A click opens its
+  detail.
+- A track is its artwork and a spectrum that follows the sound. A click opens
+  the player.
+
+## The glance
+
+**Rest the pointer on the time and a glance opens at once**; it closes a moment
+after the pointer leaves. It holds the time large, the weekday and the date,
+what is playing, and a line of readings: the battery, the volume, how many
+notifications are kept, a recording, a countdown. The weather is on it when the
+weather is already on the bar or on the desktop.
+
+<Figure name="glance" alt="The island opened into a glance under the pointer: the time and the date, the track playing, and the battery, the volume and a running countdown." caption="The glance: the time, what is playing, and a line of readings." />
+
+Nothing on it is pressed: a click anywhere opens the control centre. It does
+not open while a notification or a reading holds the island, or over a running
+thing's mark. Turn it off with **A glance on hover** (see [Settings](#settings)).
+
+## What it becomes
+
+| Shape | Opens with |
+|---|---|
+| [The control centre](/shell/control-centre/) | <kbd>SUPER</kbd> <kbd>A</kbd>, or a click on the island |
+| [The launcher](/shell/launcher/) | <kbd>SUPER</kbd> <kbd>Space</kbd> |
+| The clipboard history | <kbd>SUPER</kbd> <kbd>V</kbd> — the launcher in its clipboard mode |
+| [The overview](#the-overview) | <kbd>SUPER</kbd> <kbd>TAB</kbd> |
+| [Wallpapers](/theming/palettes/) | <kbd>SUPER</kbd> <kbd>T</kbd> |
+| [Palettes](/theming/palettes/) | <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>T</kbd> |
+| System statistics | <kbd>SUPER</kbd> <kbd>U</kbd> |
+| The session menu | <kbd>SUPER</kbd> <kbd>X</kbd>, <kbd>CTRL</kbd> <kbd>ALT</kbd> <kbd>Delete</kbd>, or the power button |
+| [The games](/shell/games-and-pets/) | <kbd>SUPER</kbd> <kbd>G</kbd> |
+| [The pet](/shell/games-and-pets/) | <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>P</kbd> |
+| [The notes](/shell/notes-and-tasks/) | <kbd>SUPER</kbd> <kbd>S</kbd> |
+| [The task board](/shell/notes-and-tasks/) | <kbd>SUPER</kbd> <kbd>K</kbd> |
+| [Every key](/shell/keys-and-packages/) | <kbd>SUPER</kbd> <kbd>H</kbd> |
+| [Packages](/shell/keys-and-packages/) | <kbd>SUPER</kbd> <kbd>I</kbd> |
+| A module's detail | a click on its piece on [the bar](/shell/bar/) |
+| The Wi-Fi and Bluetooth lists | their pieces on the bar, or the arrow on their control-centre tiles |
+
+These are the default keys. Every key belongs to a profile and can be changed
+in Settings → Keys; the full list is in [the keybindings](/reference/keybindings/).
+[Settings](/shell/settings/) itself, <kbd>SUPER</kbd> <kbd>,</kbd>, is the one
+panel that is not the island: it opens as a window.
+
+The session menu is five tiles — Lock, Suspend, Log out, Restart, Shut down —
+moved through with the arrows or the pointer. Lock and Suspend run at once;
+the other three turn red and read Confirm on the first press, and run on the
+second.
+
+<Gallery columns={2} items={[
+  { name: 'session', alt: "The session menu: Lock, Suspend, Log out, Restart and Shut down, as five large buttons.", caption: "The session menu." },
+  { name: 'appearance', alt: "A strip of painted wallpapers with Pagoda Fuji Blossom in the middle, marked as in use.", caption: "Appearance, on SUPER + T." },
+  { name: 'stats', alt: "The statistics panel with graphs for processor, memory, temperature and network, and bars for free storage.", caption: "System statistics, on SUPER + U." },
+  { name: 'pet', alt: "The pet panel: Pip, a blue creature at level 17, with Fed and Play buttons, and four more pets and an unhatched egg below.", caption: "The pet, on SUPER + SHIFT + P." },
+]} />
+
+<Figure name="and-the-rest" alt="The overview with ten workspaces, the capture surface cutting a box out of a photograph of the screen, the dock's menu on the terminal with its windows by name, system statistics, and the pet with its family" caption="The overview, the capture surface, the dock's menu, system statistics and the pet." />
+
+## Opening and closing
+
+**What opened a shape closes it**: the same key, the same click, Escape, or a
+click anywhere off the island. Opening another shape replaces it. While a
+panel or a detail is open it holds the keyboard, and the pointer can cross the
+windows without taking it back.
+
+<Figure
+  name="island-details"
+  alt="Module details in the island: the player, the battery, Claude Code's usage, the processor and memory, the recorder, the Wi-Fi list, the weather, the pet, the volume, the month with task dots, the tasks, a countdown and the GitHub wall"
+  caption="Every module on the bar opens into the island."
+/>
+
+**Every piece on the bar opens into the island** rather than into a popup of
+its own, one at a time. A click on the same piece closes it; a click on
+another swaps it. What each one shows is in
+[the module catalogue](/shell/bar/#the-module-catalogue).
+
+**When several things want the island at once**, a panel you opened comes
+first, then a notification, then a passing reading, then the glance. A reading
+that arrives while a panel is open is dropped rather than shown late, and
+opening a panel sends a notification on screen away — it stays in the list.
+
+## Notifications
+
+**The shell is the notification daemon**, and a notification arrives in the
+island: its picture or a bell, the summary, the application's name, the first
+line of the body, and a close mark.
+
+<Figure name="notification" alt="The island opened into a notification from Vesktop: Laura asks whether the market at nine is still on." caption="A notification, in the island." />
+
+- A notification with no timeout of its own stays five seconds; one that asks
+  for longer is held to fifteen. A critical one stays until you close it, and
+  a newer ordinary one does not replace it.
+- The close mark closes it and tells the application. A click anywhere else on
+  it opens the control centre.
+- Every notification is kept, newest first, up to fifty: in the bell's detail
+  on the bar and in the control centre's notification block. Under the pointer
+  a row shows a close mark that removes it, and **Clear** empties the list.
+- The list is kept in memory, so restarting the shell empties it. Actions and
+  inline replies are not shown.
+
+**Do not disturb** keeps notifications off the island and still keeps them in
+the list; a critical one comes through anyway. The bell is crossed out while
+it is on, and it stays on across a restart. Switch it with the **Focus** tile
+in the control centre, or in Settings → Bar & Island → Notifications.
+
+<Aside>
+If another notification daemon is running — mako, dunst, swaync — it holds the
+name first, and the island shows nothing. Stop it, and the shell takes over by
+itself.
+</Aside>
+
+## Passing readings
+
+**What you change shows as one passing capsule**: the volume, the brightness,
+and the charger plugged in or out, each as a symbol, a level bar and the
+reading. Holding a key gives one smooth reading rather than a flicker of
+them, and it falls away after under two seconds. With the volume or brightness
+detail open, its own slider shows the change instead.
+
+<Figure name="osd" alt="The island as a narrow bar with a speaker symbol, a volume slider and 72%." caption="The volume, passing." />
+
+The same capsule carries messages with no level: what a capture did, the
+colour picked, a recording starting and stopping, a new best in a game, a new
+egg for the pet, a profile switched.
+
+## The overview
+
+**<kbd>SUPER</kbd> <kbd>TAB</kbd> shows every workspace at once**, five to a
+row, up to the number set under Settings → Bar & Island → Workspaces →
+Workspaces available. Each cell is a scale model of the screen: every window is
+drawn live, at its own place and size. The workspace you are on has a thin
+outline, and the one Enter goes to a thick one.
+
+| Do | And |
+|---|---|
+| Arrow keys, or move the pointer | move the outline; it wraps at the edges |
+| <kbd>Enter</kbd>, or click a cell | go to that workspace |
+| <kbd>Escape</kbd> | close the overview |
+| Click a window | focus it |
+| Right-click a window | close it |
+| Middle-click a window | float or tile it |
+| Drag a window onto another cell | move it to that workspace; you stay where you are |
+| Drag a window within its own cell | a floating window is put where it lands; a tiled one swaps with the tiled window under it |
+
+## Settings
+
+Under Settings → Bar & Island → The island:
+
+| Setting | What it does |
+|---|---|
+| Style | Grouped, Spread or One island — see [the bar](/shell/bar/#styles) |
+| Island | Floating below the top edge, or Notch, cut into it |
+| Span the whole screen | One island only: the band runs the width of the bar |
+| A glance on hover | Off, only a click opens anything |
+| Clock format | 24-hour or 12-hour |
+| Show the date, Show seconds | What the time carries |
+| Beside the time | Media, Timer and Recorder, each on the island while it runs or only where its piece is put |
+
+## On a second screen
+
+**The island is on one screen.** Every other screen gets a bar with its two
+sides and nothing between them, and a detail asked for there opens in the
+island on the main screen. Which screen is the main one is set in
+[Displays](/shell/displays/).

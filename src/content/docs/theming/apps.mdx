@@ -1,0 +1,237 @@
+---
+title: Applications
+description: How GTK, Qt and KDE windows, Thunar, Zen, Vesktop, Spotify, VSCodium and imv take the palette, and which of them need a command.
+sidebar:
+  order: 3
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+import Figure from '~/components/Figure.astro';
+
+**Every window on the desk wears the palette, not only the shell's.** Most take
+it on their own the next time they open a window; a few need one command, run
+once; Spotify needs one every time.
+
+| Application | Follows on its own | Needs | Takes a new palette |
+|---|---|---|---|
+| GTK windows: satty, file-roller, pavucontrol, gimp | yes | the dark `gsettings` command, once | the next window |
+| Qt and KDE windows | yes | qt6ct, in the package list | the next window |
+| Thunar | colours and folders | `./setup thunar` and the icon `gsettings` command, once | the next window |
+| Zen | yes | nothing | the next window |
+| Vesktop | yes | ticking the theme, once | at once |
+| VSCodium | the colour theme | `./setup vscodium`, once, with the editor closed | the next window |
+| Spotify | no | `./setup spotify`, after every palette change | when the command runs |
+| imv | yes | nothing | the next picture opened |
+| The Open dialog, the screen-share picker | yes | nothing | the next dialog |
+
+<Figure name="windows" alt="VSCodium and Thunar side by side in a green-gold palette, Thunar showing the wallpapers folder, under the bar" caption="VSCodium and Thunar, in the same palette as the bar above them." />
+
+## Making the rest of the machine agree
+
+**What opens a file, whether GTK windows are dark and which icons they draw are
+the machine's settings**, not files the desk carries. Run these once:
+
+```bash
+xdg-mime default imv.desktop image/jpeg image/png image/gif image/webp image/svg+xml
+xdg-mime default nvim.desktop text/plain application/json
+xdg-mime default thunar.desktop inode/directory
+xdg-mime default zen.desktop application/pdf text/html     # or whichever browser you use
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+gsettings set org.gnome.desktop.interface icon-theme impasto
+```
+
+Without the first `gsettings`, GTK windows come up light with the palette's
+colours on them. Without the second, Thunar's folders stay in the default icon
+theme, whatever `settings.ini` says.
+
+## GTK
+
+**Every palette change writes `gtk.css` into `~/.config/gtk-3.0/` and
+`~/.config/gtk-4.0/`.** The ground is the palette's background tinted with the
+accent; header bars, cards, popovers and sidebars sit on the raised surface; the
+accent fills selections and colours links. Only colours change: the theme stays
+Adwaita, and every widget keeps Adwaita's shape.
+
+- GTK reads the sheet when an application starts, so a window already open
+  keeps its old colours.
+- The type is Adwaita Sans 11, from the `settings.ini` the desk carries. The
+  shell's font setting does not reach GTK.
+- satty, the annotator the [capture](/shell/capture/) hands a picture to, is one
+  of these windows, and so is every Open and Save dialog.
+
+<Aside type="caution">
+The `gtk.css` in those two folders belongs to the palette push and is rewritten
+on every palette change. Rules of your own in it are lost.
+</Aside>
+
+## Qt and KDE
+
+**Qt windows take the palette through qt6ct, in Qt's Fusion style.** The session
+names qt6ct as the platform theme, and every palette change writes its colour
+scheme to `~/.config/qt6ct/colors/impasto.conf`. KDE applications, such as
+gwenview, spectacle and the polkit password dialog, read `~/.config/kdeglobals`
+instead, so the push merges its colours into that file too and leaves everything
+else in it alone.
+
+- A window already open keeps its colours; the next one comes up in the new
+  palette.
+- **Leave qt6ct's own window alone**: what you save there is replaced at the
+  next palette change.
+- Without qt6ct installed, plain Qt windows come up in Breeze's light grey. KDE
+  applications still follow.
+- Qt 5 applications, VLC among them, are not themed.
+- Merging into `kdeglobals` drops any comments in it.
+
+## Thunar
+
+**<kbd>SUPER</kbd> <kbd>E</kbd> opens Thunar**, a GTK window that takes its
+colours from the same `gtk.css` as the rest.
+
+**The folders are the wallpaper's colour.** Every palette change writes an icon
+theme, `impasto`, in `~/.local/share/icons/`: Papirus-Dark's icons, with the
+folders pointed at whichever of Papirus's twenty-five folder colours is nearest
+the accent. A folder is a drawing, so it lands on the nearest swatch rather than
+on the accent exactly. It needs the icon `gsettings` command above, once, and
+reaches every GTK application started afterwards.
+
+**`./setup thunar` sets everything that is not a colour.** Close Thunar first —
+the verb refuses while it runs, because Thunar writes its settings back as it
+exits. It sets:
+
+- one bar instead of two, with the menu behind a button;
+- thumbnails for local files, folders before files, sorting that ignores case;
+- dates as `2026-09-13 18:30`, and sizes in binary units;
+- the image preview inside the side pane;
+- double click to open;
+- a Delete that skips the bin, beside Move to Trash, with the confirmation kept;
+- a shell script opened rather than run on a double click.
+
+And five entries on the right-click menu:
+
+| Entry | Does | On |
+|---|---|---|
+| Open Terminal Here | kitty, in that folder | folders |
+| Open yazi Here | yazi in kitty, in that folder | folders |
+| Open in the Editor | VSCodium | folders, text and other files |
+| Set as Wallpaper | that picture as the wallpaper, and the palette from it | pictures |
+| Copy Path | the full path, to the clipboard | everything |
+
+A setting you change later in Thunar's own preferences stays until you run the
+verb again. The row with the path in it stays on the window's plain background:
+it is the one part of Thunar the stylesheet cannot reach.
+
+## Zen
+
+**Zen needs nothing.** Every palette change writes `userChrome.css` into the
+profile Zen opens, under `~/.config/zen/`, and a `user.js` with the one
+preference that makes Zen read it. The toolbar sits on the raised surface, the
+sidebar on the background, and the accent is Zen's primary colour; the frame is
+dark under every palette.
+
+- `userChrome.css` is read when a window opens and `user.js` when Zen starts, so
+  the first time needs Zen restarted. After that, each new window takes the
+  palette.
+- The page area of an empty tab is Firefox's own dark grey, not the palette's.
+
+<Aside title="Zen's own theme picker">
+While the palette is on it, choosing a workspace theme in Zen appears to do
+nothing: the palette's colour on the sidebar wins over the gradient the picker
+sets. To have the picker back, delete the `#zen-browser-background` and
+`#zen-toolbar-background` rules from `build_zen_css` in
+`~/.config/quickshell/scripts/theme_manager.py`; the sidebar goes back to Zen's
+own at the next palette change. `setup` keeps an edited file and writes its own
+version beside it as `theme_manager.py.new`.
+</Aside>
+
+## Vesktop
+
+**Tick the theme once and Vesktop follows from then on.** Every palette change
+writes `~/.config/vesktop/themes/impasto.css`, and Vencord repaints a running
+Vesktop the moment the file changes. Nothing wears it until it is ticked: open
+Vesktop's settings, go to **Themes**, and enable `impasto.css`.
+
+- Your Quick CSS is left alone.
+- Nitro's purple stays Discord's.
+- The theme sets Discord's own colour variables and names no class. A Discord
+  update that renames those variables leaves the theme loading without error
+  and changing less.
+
+## Spotify
+
+**Spotify is the one program the palette cannot reach on its own.** spicetify
+does not theme Spotify, it patches it: the colours are compiled into
+`/opt/spotify`, and nothing is read while it runs. So every palette change
+writes `~/.config/spicetify/Themes/impasto/color.ini` and stops there, and
+`./setup spotify` is what applies it. Applying restarts Spotify, which is why a
+wallpaper change never does it for you.
+
+Once, before the first time:
+
+<Steps>
+
+1. Install the `spotify` package from the AUR, not `spotify-launcher`, which
+   updates itself on every start and takes the patch with it. `spotify` and
+   `spicetify-cli` are both in the package list.
+
+2. Let your user write to Spotify's folder:
+
+   ```bash
+   sudo chmod a+wr -R /opt/spotify
+   ```
+
+3. Point spicetify at the theme:
+
+   ```bash
+   spicetify config current_theme impasto color_scheme base
+   ```
+
+</Steps>
+
+Then, whenever you want Spotify to match the desk:
+
+```bash
+./setup spotify
+```
+
+Run it again after every Spotify update as well: the update rewrites
+`/opt/spotify` and takes the patch with it.
+
+## VSCodium
+
+**The colour theme is written as an extension**, in
+`~/.vscode-oss/extensions/impasto/`, on every palette change, with nothing to
+install. A window already open keeps its colours; **Developer: Reload Window**,
+or a new window, takes the new ones.
+
+**`./setup vscodium` does the rest**, once, with VSCodium closed; it refuses
+while the editor is open, because VSCodium rewrites its settings as it exits. It
+installs thirteen extensions from Open VSX and merges into your `settings.json`:
+the Impasto theme selected, the shell's monospace font with ligatures at 14, the
+activity bar along the top, and no minimap, breadcrumbs or command centre.
+Everything else in the file stays; comments in it do not survive the merge.
+
+- The font is read from the shell's monospace setting, so run the verb again
+  after changing it.
+- Without the verb, pick the theme yourself: <kbd>CTRL</kbd> <kbd>K</kbd>, then
+  <kbd>CTRL</kbd> <kbd>T</kbd>, then **Impasto**.
+- Error Lens and indent-rainbow draw nothing in a folder until you trust it.
+
+The extensions are Material Icon Theme, Fluent Icons, Error Lens,
+indent-rainbow, Color Highlight, Git Graph, Prettier, Path Intellisense, Code
+Spell Checker, the Java extension pack, Python, Ruff and Continue.
+
+## imv
+
+**The whole of imv's configuration is written by the palette push**: the picture
+sits on the terminal's tinted background, and the overlay, shown with
+<kbd>d</kbd>, is in the palette. A picture already open keeps its colours.
+Because the push owns `~/.config/imv/config`, anything else you write there is
+replaced at the next palette change.
+
+## The portals
+
+**When an application asks for a file or for the screen, the dialog that answers
+already wears the palette.** The Open and Save dialogs come from
+`xdg-desktop-portal-gtk` and are GTK windows; the screen-share picker comes from
+`xdg-desktop-portal-hyprland` and is a Qt window. Both are in the package list
+and need no configuration.

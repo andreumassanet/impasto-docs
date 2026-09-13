@@ -1,0 +1,97 @@
+---
+title: Displays
+description: The screens plugged in, the arrangement kept for each set of them, resolution, refresh rate, scale, the laptop lid and the night light.
+sidebar:
+  order: 12
+---
+
+**Settings → Displays arranges the screens, and keeps the arrangement for the
+set that is plugged in.** Plug the same monitors in again, in any port, and it
+comes back by itself. The page has four parts: Arrangement, The screen, The lid
+and Night light.
+
+## Arrangement
+
+The canvas draws the screens to scale. Drag one to move it: it snaps to the
+edges of the others when you let go, and applies then, with no Apply button and
+no countdown. Click one to pick it for The screen.
+
+| Row | |
+|---|---|
+| Arrangement | **Extend** across every screen, or **Mirror**: every screen shows the primary's |
+| The island is on | The primary screen — the one that carries the island, the widgets and the notes on the edges |
+| Forget it | Hands this set of screens back to Hyprland's own placement |
+
+Arrangement and The island is on appear with more than one screen, and Forget
+it once the set has an arrangement. A screen that is off has no place on the
+canvas; it gets a line under it, "off, and still plugged in", which is how it is
+selected and switched back on.
+
+### One arrangement per set of screens
+
+**An arrangement is kept for a set of screens.** A screen is known by its make,
+model and serial rather than by its port, so a cable moved to another socket
+changes nothing. A laptop on its own and the same laptop at a desk are two
+sets, each with its own arrangement; the lid shut is the same set with one
+screen off.
+
+A set nobody arranged is left to Hyprland's `auto`, so a fresh install pushes
+nothing. The shell never writes `~/.config/hypr/modules/monitors.lua`: that
+file is the fallback, and what you arrange is applied over it at login, after
+every reload and after every hotplug.
+
+When a screen goes away, the workspaces that were on it move to the primary
+screen. If nothing plugged in would be lit, every screen present is switched
+on.
+
+## The screen
+
+The screen picked on the canvas — or under **Editing**, with more than one:
+
+| Row | |
+|---|---|
+| On | Switches it off or on; the last lit screen cannot be switched off |
+| Resolution | The modes the monitor reports, largest first; choosing one takes its fastest refresh rate |
+| Refresh rate | The rates that resolution offers |
+| Scale | 1× to 3×, in steps of 0.05 |
+| Rotation | None, 90°, 180° or 270° |
+| Variable refresh | On or off |
+
+The On row tells a screen that is **off** — out of the layout, its workspaces
+moved away — from one that is **dark**: asleep, with its workspaces still on
+it, as it is once the idle timer has switched it off.
+
+## The lid
+
+**What closing the lid does while another screen is plugged in**:
+
+| Tile | |
+|---|---|
+| Switch it off | The laptop's screen goes off, and its workspaces move to the other screen |
+| Leave it on | It stays lit behind the lid |
+| The system decides | The shell has no opinion, and logind does what it is set to |
+
+With nothing else plugged in, the lid is left to logind, which suspends.
+Opening the lid lights the laptop's screen again, where it was. Under **Right
+now**, the page says which panel is the laptop's and what else is connected.
+
+## Night light
+
+**Warm the screen** turns a warmer colour temperature on through hyprsunset, and
+**Colour temperature** sets how warm. It works on the gamma ramp, so
+screenshots keep their true colours. There is no schedule: it stays on until
+you turn it off. The same switch is a tile in the
+[control centre](/shell/control-centre/).
+
+## The other screens
+
+**The island is on one screen.** Every other screen gets the two ends of the
+bar and nothing between them — no island and no panels — and a detail asked
+for there opens in the island on the primary. The dock is on every screen, and
+the widgets and the notes on the edges stay on the primary
+([Widgets on the desktop](/shell/desktop/#screens-and-sizes)). A screen
+plugged in later gets the wallpaper too.
+
+Bit depth is not offered, mirroring copies the primary to every other screen,
+and the page does not notice a change made from outside while it is open. The
+rest is under [Limitations](/help/limitations/).

@@ -1,0 +1,230 @@
+---
+title: Limitations
+description: What the desk does not do, area by area, and the way round it where there is one.
+sidebar:
+  order: 3
+---
+
+**What the desk does not do, and what to do instead.** Grouped by area; where
+there is a way round, it is given.
+
+## Theming
+
+- **Most programs take a new palette only in their next window**: btop, yazi,
+  imv, GTK and Qt windows, Thunar and its folders, Zen and VSCodium. Restart the
+  program, or in VSCodium run **Developer: Reload Window**.
+- **Spotify changes only when you run `./setup spotify`**, and loses the palette
+  at every Spotify update until you run it again. Your user has to be able to
+  write to `/opt/spotify`. See [Applications](/theming/apps/#spotify).
+- **The login screen does not follow the palette.**
+- **Vesktop wears nothing until the theme is ticked** once under **Themes**. A
+  Discord update that renames its colour variables leaves parts of the window
+  unthemed, with no error.
+- **VSCodium's font and chrome change only when `./setup vscodium` runs**, not
+  when the wallpaper does. Error Lens and indent-rainbow draw nothing until the
+  folder is trusted.
+- **Zen's own theme picker does nothing** while the palette is on it, and an
+  empty tab is Firefox's grey. The way back is under
+  [Applications](/theming/apps/#zen).
+- **GTK windows come up light** until you run
+  `gsettings set org.gnome.desktop.interface color-scheme prefer-dark`, and the
+  shell's font setting does not reach them.
+- **Without qt6ct, Qt windows come up light grey.** Qt 5 applications, VLC among
+  them, are not themed.
+- **Thunar's path row cannot be painted.** The folders land on the nearest of
+  Papirus's twenty-five colours rather than on the accent, and without Papirus
+  there are no coloured folders. Thunar's settings are applied only by
+  `./setup thunar`.
+- **yazi's file icons keep their own colours**: a Python file is Python's blue
+  and yellow under every palette.
+- **The selected row in btop and yazi is low-contrast in a few palettes**, and
+  neovim's comments are dim on purpose.
+
+## The terminal
+
+- **Magenta, bright magenta and bright black keep kitty's own colours**: a
+  palette has no source for them.
+- **The greeting's scenes play only in kitty**, need ImageMagick, and are drawn
+  for a 9 × 20 pixel cell; at another font size their edges go soft. For a few
+  seconds after a palette change, `fa` can show the old colours.
+- **btop forgets what you change inside it** when you quit.
+- **A language without a treesitter parser gets fewer colours in neovim.** More
+  parsers are compiled when the `tree-sitter` CLI is installed; it is in the
+  package list. There is no format-on-save, debugger or test runner.
+- **`matrix` needs a font with half-width katakana**, or its rain is empty boxes.
+
+## The island and the bar
+
+- **One bar layout for every style and every screen.**
+- **A second screen's bar has no island and no panels.** Its workspace strip
+  shows the same workspaces as the primary's, and a detail asked for there opens
+  on the primary.
+- **The glance does not open while a notification or an OSD holds the island.**
+- **The island shows two running things beside the time at most**; a third is
+  only in the glance.
+- **Closing a panel by clicking on a browser or Vesktop window** can blank the
+  pointer for a moment.
+- **One timer at a time**, and the timer's own steppers cannot set seconds; the
+  launcher's countdown can (`!`, then `90s`).
+- **The updates module counts and never installs.** The packages panel's Update
+  opens a terminal for that.
+- **In the overview, two windows of one application with the same title share a
+  thumbnail**, and a window with nothing to draw looks like an empty cell.
+- **The Claude module reads Claude Code's own login** and sends one small request
+  every ten minutes to read the account's usage. Without that login it shows
+  counts only.
+
+## Notifications
+
+- No action buttons and no inline reply.
+- The history is lost when the shell restarts.
+
+## Network and Bluetooth
+
+- **Wi-Fi cannot forget a network from the shell.** Use
+  `nmcli connection delete "<name>"`.
+- **Bluetooth connects but cannot pair.** Pair a new device with `bluetoothctl`.
+- **A Wi-Fi password is passed to nmcli on the command line**, where other
+  programs running as you can read it for the seconds a connection takes.
+
+## Displays
+
+- **No bit depth setting.**
+- **Mirroring is every screen copying the primary**, not one chosen screen
+  copying another.
+- **The Displays page does not see changes made elsewhere** while it is open.
+  Close it and open it again.
+- **A set of screens nobody has arranged is left to Hyprland's automatic
+  layout.**
+- **After a screen is unplugged and plugged back in, its workspaces come back to
+  the primary screen**, not to the screen they were on.
+- **A lid already shut when the session starts is not known to the shell.**
+
+## The desktop
+
+- **Widgets live on the primary screen only.**
+- **No stacking and no auto-arrange**: the grid fills from the top left, and what
+  you place stays where it is.
+- **Arranging has no key.** Right-click the wallpaper or a widget, or start it
+  from Settings.
+- **A floating dock draws over the bottom row of widgets**, unless it reserves
+  its space.
+
+## Notes and tasks
+
+- **Notes have no search, no export, no pictures and no links**, and no undo
+  beyond the archive. Delete asks nothing.
+- **One deck per screen edge, and none along the top**, which is the bar's. Past
+  a screen's worth of tabs, the rest are off the end.
+- **Tasks have no recurrence, no time of day and no reminder**, one board, and
+  three fixed lanes.
+- **Days are read in English and Spanish only.**
+- **Nothing syncs**: the tasks are a file on this machine.
+
+## The launcher and the clipboard
+
+- **No fuzzy matching.**
+- **The ranking counts only what you launch from the launcher**, so a program
+  you always open from the dock or a terminal never rises.
+- **Enter copies from the clipboard history and does not paste.** Paste with
+  <kbd>CTRL</kbd> <kbd>V</kbd>.
+- **Only the regular clipboard is kept**, never the middle-click selection, and
+  nothing is kept while the shell is not running.
+
+## Captures and recordings
+
+- **One screen, and the compositor picks which.**
+- **No delay, no pointer in the picture, no scrolling capture**, and nothing kept
+  of what was taken: no gallery, no undo.
+- **Window mode offers only the windows on the workspace in view.**
+- **No keyboard way to draw a region**; <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd>
+  change the shape and <kbd>Enter</kbd> takes what needs no dragging.
+- **Saving and copying always happen together.**
+- **Without satty there is no annotating, and without tesseract no reading
+  text.**
+- **Captures land in `XDG_SCREENSHOTS_DIR`** when `user-dirs.dirs` names one, and
+  in a `Screenshots` folder inside your pictures folder when it does not.
+  Recordings the same, with `XDG_SCREENCASTS_DIR` and `Screencasts`.
+- **The recorder is one take at a time**, with no pause, no countdown and no
+  trimming. Sound is the machine's output or nothing, never the microphone. It
+  writes mp4 only, with no GIF, and without wf-recorder or wl-screenrec it is
+  not on the bar.
+
+## The dock
+
+- **The same items on every screen.**
+- **Its menu has no keyboard.** A click elsewhere closes it.
+- **Closing an application closes its windows one by one**, without asking.
+- **Two windows of one program can show as two icons** if they report different
+  classes.
+
+## The control centre
+
+- **Tiles are ordered only on the settings page**, not by dragging them.
+- **The colour picker needs `hyprpicker`**, copies a hex and only a hex, and
+  keeps no history.
+
+## The night light and leaving it alone
+
+- **The night light needs `hyprsunset`** and is a switch: no schedule, one
+  temperature for every screen. It gives way if another program already holds
+  the screen's colour.
+- **Three waits: lock, screen off, sleep**, in whole minutes up to sixty. No
+  dimming before them, and nothing different on battery.
+
+## Games
+
+- **No gamepad.**
+- **A game pauses only when the panel closes**, not when the pointer leaves.
+- **Solitaire has no drag, no undo and no draw-three.**
+
+## Keys, settings and profiles
+
+- **Changing a key, Reset and switching profile all reload Hyprland**, so
+  anything you set by hand with `hyprctl` is lost.
+- **The mouse's drag, resize and wheel cannot be changed** on the Keys page.
+- **No key has a default to go back to**; Reset puts back everything.
+- **The layout picker cannot set a variant.**
+- **Changing the bar's height re-tiles every window.**
+- **The power button works only while the shell runs**, and does nothing at the
+  login screen. Some laptops never report a short press; use
+  <kbd>SUPER</kbd> <kbd>X</kbd> or <kbd>CTRL</kbd> <kbd>ALT</kbd> <kbd>Delete</kbd>.
+- **The key sheet lists only keys with a description.**
+- **Profiles switch only from Settings → System.** An export carries the
+  wallpaper's path, not the picture. The profiles that ship are laid out for a
+  1920 × 1200 screen, and a smaller one fits fewer widgets.
+- **To back up the profile in use, export it**: the list of profiles holds an
+  old copy of it until you switch away.
+
+## The plugins and the pointer
+
+- **Shake to find and the glass are Hyprland plugins** built for the Hyprland
+  that is running. After a Hyprland update they are gone until you run
+  `hyprpm update`, or `./setup plugins`.
+- **The glass shows only through translucent windows**, which in practice means
+  the terminal.
+- **Until `./setup cursors` has run, the pointer is a small picture** that
+  pixelates when it grows.
+- **Applications that draw their own pointer**, Electron and XWayland ones, show
+  their own, uncoloured and unmagnified.
+
+## The login screen
+
+- **One screen**: the primary.
+- **The battery ring reads only `BAT0`, `BAT1` or `BAT2`.**
+- **The account and session lists work with the pointer only.**
+- **No on-screen keyboard and no accessibility aids.**
+
+## The packages panel
+
+- **Search is by name only.**
+- **Updates are all or nothing**, as Arch expects.
+- **AUR packages need yay or paru.**
+- **Installs and removals open in kitty**, and a package installed elsewhere
+  while the panel is open shows when it is opened again.
+
+## The appearance panel
+
+- **No search and no jump by letter** through the wallpapers:
+  <kbd>Home</kbd>, <kbd>End</kbd> and the page keys are what there is.
+- **The transition tiles are close to awww's effects**, not exact copies.

@@ -1,0 +1,104 @@
+---
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │   K E Y B I N D I N G S                                                  │
+// │   every default bind · read from keybinds.lua at build time              │
+// │                                                                          │
+// │   github.com/andreumassanet/impasto-docs                                 │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+// The descriptions are the keys the shell and the profiles use, so the table
+// is grouped by the part before " · " and says the rest.
+
+import lua from '../snapshot/keybinds.lua?raw';
+
+const names: Record<string, string> = {
+	left: '←', right: '→', up: '↑', down: '↓', comma: ',', TAB: 'Tab',
+	'mouse:272': 'Left button', 'mouse:273': 'Right button',
+	mouse_down: 'Scroll down', mouse_up: 'Scroll up',
+	XF86AudioRaiseVolume: 'Volume up', XF86AudioLowerVolume: 'Volume down',
+	XF86AudioMute: 'Mute', XF86AudioMicMute: 'Microphone mute',
+	XF86MonBrightnessUp: 'Brightness up', XF86MonBrightnessDown: 'Brightness down',
+	XF86AudioPlay: 'Play', XF86AudioPause: 'Pause', XF86AudioNext: 'Next track',
+	XF86AudioPrev: 'Previous track', XF86PowerOff: 'Power button', XF86Launch6: 'Launch6',
+};
+
+type Row = { keys: string[]; action: string };
+const groups = new Map<string, Row[]>();
+const lines = lua.split('\n');
+
+for (let i = 0; i < lines.length; i++) {
+	if (!/^\s*bind\(/.test(lines[i])) continue;
+	let statement = lines[i];
+	for (let j = i + 1; !/description\s*=/.test(statement) && j < Math.min(lines.length, i + 4); j++) {
+		statement += ' ' + lines[j].trim();
+	}
+	const described = statement.match(/description\s*=\s*"([^"]*)"/);
+	if (!described) continue;
+
+	const [group, ...rest] = described[1].split(' · ');
+	let action = rest.join(' · ').trim();
+	const withMod = statement.match(/bind\(\s*mainMod\s*\.\.\s*"([^"]*)"/);
+	const literal = statement.match(/bind\(\s*"([^"]*)"/);
+	let combination = withMod ? `SUPER${withMod[1]}` : literal ? literal[1] : '';
+	if (/\.\.\s*key\b/.test(statement)) {
+		combination = `${combination.replace(/\s*\+\s*$/, '')} + 1 … 0`;
+		action = `${action} 1 to 10`;
+	}
+	const keys = combination
+		.split('+')
+		.map((key) => key.trim())
+		.filter(Boolean)
+		.map((key) => names[key] ?? (key.length === 1 ? key.toUpperCase() : key));
+
+	if (!groups.has(group)) groups.set(group, []);
+	groups.get(group)!.push({ keys, action });
+}
+---
+
+{
+	[...groups].map(([group, rows]) => (
+		<>
+			<h2 id={group.toLowerCase()}>{group}</h2>
+			<table class="keys">
+				<thead>
+					<tr>
+						<th>Keys</th>
+						<th>Does</th>
+					</tr>
+				</thead>
+				<tbody>
+					{rows.map((row) => (
+						<tr>
+							<td>
+								{row.keys.length ? (
+									row.keys.map((key, index) => (
+										<>
+											{index > 0 && ' '}
+											<kbd>{key}</kbd>
+										</>
+									))
+								) : (
+									<span class="unbound">unbound</span>
+								)}
+							</td>
+							<td>{row.action}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</>
+	))
+}
+
+<style>
+	.keys td:first-child {
+		white-space: nowrap;
+		width: 1%;
+	}
+	.unbound {
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+	}
+</style>

@@ -1,0 +1,158 @@
+---
+title: Wallpapers and palettes
+description: How a wallpaper becomes the palette every program on the desk wears, how to change it, and the nine fixed palettes.
+sidebar:
+  order: 1
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import Figure from '~/components/Figure.astro';
+import PaletteDemo from '~/components/PaletteDemo.astro';
+
+**The palette comes out of the wallpaper.** Pick a wallpaper and the shell takes
+one accent colour from it, builds a palette around that accent, and hands it to
+every program it reaches: the island and the widgets, the terminal and what runs
+in it, both editors, the GTK, Qt and KDE windows, Thunar, Zen and Vesktop. Pick
+one of the nine fixed palettes instead and the wallpaper stops deciding.
+
+Try it here: pick a wallpaper or a palette and this site takes the same
+colours the desk would.
+
+<PaletteDemo />
+
+<Figure name="repaint" alt="The wallpaper changing three times, and the bar, the widgets, the terminal and the system monitor repainting with each one" caption="Three wallpapers, and the desk repainted after each one." />
+
+## Changing the wallpaper
+
+**<kbd>SUPER</kbd> <kbd>T</kbd> opens appearance on the island.** The wallpapers
+are a strip with the one in the middle drawn large: <kbd>Left</kbd> and
+<kbd>Right</kbd> slide it, <kbd>Enter</kbd> applies the one in the middle, and
+the panel stays open so you can try the next. The folder is read again every
+time the panel opens.
+
+<Figure name="appearance" alt="A strip of painted wallpapers with Pagoda Fuji Blossom in the middle, marked as in use." caption="The wallpapers, on SUPER + T." />
+
+<Figure name="appearance-palettes" alt="The same strip turned to palettes, with Adaptive (Wallpaper) in use beside Catppuccin Mocha and Catppuccin Latte." caption="The palettes, on SUPER + SHIFT + T." />
+
+The same panel, or the same result, from elsewhere:
+
+| From | How |
+|---|---|
+| The island | <kbd>SUPER</kbd> <kbd>T</kbd> |
+| The launcher | type `>` and pick **Appearance** |
+| The control centre | click the **Appearance** block, which shows the wallpaper in use |
+| Settings | **Appearance → Theme → Theme and wallpaper → Open** |
+| Thunar | right-click a picture → **Set as Wallpaper**, once `./setup thunar` has run |
+| A terminal | `qs ipc call wallpaper set /path/to/picture.jpg` |
+
+Thunar and the terminal take any picture on the disk, not only the ones in the
+wallpapers folder, and go through the shell the way the island does: the same
+transition, the same repaint.
+
+A profile carries a wallpaper and a palette, so switching profile under
+**Settings → System** changes both. See [Settings](/shell/settings/).
+
+## Transitions
+
+**The next wallpaper arrives over the last one with an effect**, chosen under
+**Settings → Appearance → Theme → Transition**: Fade, Wipe, Wave, Circle, Outer,
+None or Random. Each tile plays its effect in miniature over two of your
+wallpapers. Wipe is the default, and Random picks one of the others, never None,
+every time a wallpaper is applied. The wallpaper is drawn by awww, and a
+transition takes one second.
+
+## Adding your own
+
+**Put the picture in `~/.local/share/wallpapers/`** and open the appearance panel
+again. JPEG, PNG and WebP files are read (`.jpg`, `.jpeg`, `.png`, `.webp`);
+subfolders and hidden files are not. The name under the tile is the file name,
+with dashes and underscores turned into spaces.
+
+`setup` never touches a file it did not put there, so your pictures stay through
+`./setup update` and `./setup uninstall`.
+
+The forty that come with the desk are AI-generated images in an impasto style.
+The [questions page](/help/faq/) says which file is which.
+
+<Figure name="wallpapers" alt="The forty wallpapers that come with the desk, in a grid" caption="The forty that come with it." />
+
+## How a palette is made
+
+**One accent, and a palette built around it.** The picture is shrunk and reduced
+to 24 colours with ImageMagick, and the accent is the most saturated mid-tone
+among them. A picture with nothing in the middle range gets its most colourful
+swatch instead, and one with no colour at all gets a neutral blue.
+
+| Tokens | Where they come from |
+|---|---|
+| `accent` | the wallpaper |
+| `accentHover` | the accent, lighter |
+| `accentText` | black or white, whichever reads on the accent |
+| `background`, `surface`, `surfaceHover`, `border` | near-black, tinted with a few per cent of the accent |
+| `text`, `textMuted` | fixed greys |
+| `red`, `green`, `yellow`, `blue` | fixed, so a status colour means the same under every wallpaper |
+
+Each program then takes what it needs, and a colour that carries text is made
+lighter or darker until it reads on that program's own background, keeping its
+hue. The terminal, for one, sits on the accent at 22 % under every palette, so
+it stays dark even under Catppuccin Latte.
+
+### What does not follow
+
+- **The island is pure black under every palette.** It is the shell's identity,
+  not a themed surface; the wallpaper shows in the accent on its rings and
+  highlights.
+- **Warnings keep fixed colours.** The battery ring and the timer ring step
+  through the same hues whatever the wallpaper, so a colour always means the
+  same reading.
+- **The login screen** does not follow the palette: it runs before anybody has
+  chosen one.
+- **Spotify** takes the palette only when `./setup spotify` runs. See
+  [Applications](/theming/apps/#spotify).
+
+## The nine palettes
+
+**<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>T</kbd> opens the palettes**, the page
+under the wallpapers in the same panel; <kbd>Down</kbd> and <kbd>Up</kbd> switch
+between the two. The first tile, **Adaptive (Wallpaper)**, is the palette taken
+from the wallpaper, and it is the default. Any other tile keeps its palette
+whatever wallpaper you pick afterwards, until you go back to Adaptive.
+
+| Palette | Label | Accent | By |
+|---|---|---|---|
+| Catppuccin Mocha | Dark Pastel | `#89b4fa` | Catppuccin |
+| Catppuccin Latte | Light Clean | `#1e66f5` | Catppuccin — the one light palette |
+| Tokyo Night | Cyber City | `#7aa2f7` | Tokyo Night |
+| Gruvbox Dark | Warm Retro | `#d79921` | Gruvbox |
+| Nord | Arctic Frost | `#88c0d0` | Nord |
+| Rosé Pine | Soho Dusk | `#ebbcba` | Rosé Pine |
+| Cyberpunk | Neon Synth | `#ff007f` | impasto |
+| Bauhaus | Modernist | `#e52521` | impasto |
+| Crimson Moon | Vampiric | `#e63946` | impasto |
+
+Six are other people's work, carried as they are; the last three are the
+shell's own. [Credits](/help/credits/) links each project.
+
+## What the push reaches
+
+**Every palette change is pushed to the programs around the shell.** Some
+repaint where they stand; others take it the next time they open a window.
+
+| Program | Takes the new palette |
+|---|---|
+| The island, the bar, the widgets, the dock, the notes, the pets | at once |
+| The pointer, when its colour is **Palette** (Settings → Input) | at once, after `./setup cursors` has run once |
+| kitty and the prompt | every open terminal, at once |
+| The greeting's scenes | redrawn in the background, a few seconds later |
+| cava, neovim | running ones repaint |
+| btop, yazi, imv | the next one started |
+| GTK windows, Thunar and its folders, Qt and KDE windows | the next window started |
+| Zen, VSCodium | the next window |
+| Vesktop | at once, once its theme is ticked |
+| Spotify | when `./setup spotify` runs |
+| The login screen | never |
+
+<CardGrid>
+  <LinkCard title="The terminal" description="kitty, the prompt, the greeting, and btop, cava, yazi and neovim inside it." href="/theming/terminal/" />
+  <LinkCard title="Applications" description="GTK, Qt and KDE, Thunar, Zen, Vesktop, Spotify, VSCodium and imv." href="/theming/apps/" />
+</CardGrid>

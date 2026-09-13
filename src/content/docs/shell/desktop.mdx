@@ -1,0 +1,274 @@
+---
+title: Widgets on the desktop
+description: The grid of widgets under the windows — the four shapes, arranging them, each widget's own look, the two themes and the note decks on the edges.
+sidebar:
+  order: 7
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Figure from '~/components/Figure.astro';
+import Gallery from '~/components/Gallery.astro';
+
+**Any module can live on the wallpaper.** Widgets sit on a grid under the
+windows, and each one is a module the bar and the island already know — the
+same player, the same battery, the same weather. The desktop and the bar do not
+consult each other, so a module can be on one, on both or on neither, and the
+same module can be on the grid twice: a clock as a band and another as a dial.
+
+<Figure
+  name="desktop-themes"
+  alt="The same wall of widgets split down the middle: on the left, Modern widgets with large figures and captions; on the right, Analogue widgets drawn as objects — a thermometer, a wall calendar, a battery cell, a knob, gauges, a parcel and a joystick"
+  caption="The same widgets in Modern, left, and Analogue, right."
+/>
+
+## The grid
+
+**Everything sits on a grid, and nothing overlaps.** A widget's place is a
+column and a row, and the gap between two widgets is the gap between two
+windows. The grid starts under the bar and stops short of the dock when the
+dock reserves its space; a floating dock draws over the bottom row.
+
+A widget dropped on an occupied square goes to the nearest free one, or back
+where it came from if the board has no room. The widgets already there never
+move aside.
+
+| Shape | Cells |
+|---|---|
+| Square | 2 × 2 |
+| Card | 4 × 2 |
+| Large square | 4 × 4 |
+| Band | 8 × 2 |
+
+The shapes are not one design at four sizes: each says a different amount, so
+a module offers only the shapes it has something to put in. Every module has a
+card.
+
+<Tabs syncKey="face">
+<TabItem label="Modern">
+<Figure name="shapes-modern" alt="The Weather widget in its four shapes, in Modern: a square, a card, a large square and a band" caption="One module, four shapes." />
+</TabItem>
+<TabItem label="Analogue">
+<Figure name="shapes-analogue" alt="The Weather widget in its four shapes, in Analogue: the rain cloud and thermometer drawn to each room" caption="The same four, drawn as objects." />
+</TabItem>
+</Tabs>
+
+## Arranging
+
+**Right-click the wallpaper and choose Arrange widgets.** The desktop lifts
+above the windows, the grid is drawn, and a tray of every module slides up
+along the bottom, each tile a live miniature of its square.
+
+<Figure name="arrange" alt="The desk in arranging mode: widgets on a faint grid, the weather widget selected with a card beside it for its shape, face, style and opacity, and a tray of every module along the bottom." caption="Arranging: the tray along the bottom, and one widget's card open." />
+
+- **Add** — drag a tile from the tray onto the grid; the squares it will land
+  on are lit before you let go. A click on a tile puts it on the first free
+  square instead.
+- **Move** — drag the widget.
+- **Change its shape** — pull the handle in its bottom-right corner. The shape
+  changes as the pointer crosses from one footprint to the next, never
+  stretching in between. The mouse wheel over a widget steps through its
+  shapes too.
+- **Remove** — the ⊖ badge in its top-left corner, or drop the widget on the
+  tray.
+- **Give it a look of its own** — click it (below).
+
+The badge and the handle appear under the pointer and on the selected widget.
+**Done** on the tray, or the right button anywhere, ends arranging. The same
+mode opens from Settings → Desktop → The widgets → Edit, which closes the
+settings window meanwhile. Arranging never takes the keyboard.
+
+### The right button
+
+At rest, the right button opens a menu where it was pressed:
+
+| On | The menu |
+|---|---|
+| The wallpaper | Arrange widgets, New note, Wallpaper, Palette, Settings |
+| A widget | Edit — arranging, opened on that widget's card — and Remove |
+| A note | Open, Edit and Remove |
+
+Wallpaper and Palette open the island's pickers ([Palettes](/theming/palettes/)).
+The left button on the wallpaper does nothing but close a menu, and the menu
+has no keyboard: a click elsewhere closes it.
+
+## Each widget's own look
+
+**Click a widget while arranging and a card opens beside it** — to its right,
+its left or under it, wherever there is room.
+
+| On the card | |
+|---|---|
+| Shape | The shapes the module offers, drawn as footprints — the same choice as the corner handle |
+| Face | Modern or Analogue |
+| Style | Capsule, Accent, Outline or No capsule |
+| The slider | How solid the capsule is, 20 to 100 %, with a button that puts it back |
+| Remove | Takes the widget off |
+
+<Figure name="desktop-styles" alt="The same five widgets in four styles over a coastal wallpaper: Capsule, Accent, Outline and no capsule" caption="Capsule, Accent, Outline and no capsule, on the same five widgets." />
+
+The first tile under Face and under Style is **Default**, marked with a dot: it
+follows the desktop's own setting, and a widget keeps following it until you
+pick something else. The line under the styles says what the widget is wearing.
+The card closes on a click on the wallpaper, and when a drag starts.
+
+Settings → Desktop → The widgets holds what every widget follows by default:
+**Face**, **Style** and **Background**, the opacity.
+
+| Style | What it draws |
+|---|---|
+| Capsule | The island's black ground with a hairline edge |
+| Accent | The colours turned inside out, with the accent as the ground |
+| Outline | The edge alone, over the wallpaper |
+| No capsule | The contents straight on the wallpaper |
+
+Outline and No capsule shadow the type so it reads on the picture. With the
+background lowered, the wallpaper shows through blurred.
+
+**The ground is the island's black and everything else is the palette**, so
+every widget repaints with the wallpaper. Warnings keep their fixed colours — a
+battery in the red is red in every palette — and the GitHub wall keeps GitHub's
+grey to green. There is no palette per widget.
+
+## Two themes
+
+**Modern is a figure with a caption; Analogue draws each module as an object**,
+read by where something is rather than by a number. Either one is a choice per
+widget.
+
+Modern lays every widget out on the same grid — the mark top left, the name top
+right, the reading along the bottom — so a wall of them reads as a set, and a
+bigger shape is the same widget saying more: a card fills in the right, a large
+square the middle. The player's sleeve, the month and the GitHub wall are drawn
+whole rather than as a reading. Analogue keeps the figure small under the object
+on a square and puts the words beside it on a card.
+
+| Module | Shapes | Analogue draws |
+|---|---|---|
+| Clock | square, card, band | a dial, which is also offered as a large square |
+| Calendar | square, card, large | a leaf off a wall calendar |
+| Weather | all four | the sky, with a thermometer beside it |
+| Media | square, card, large | a record that turns while it plays |
+| System | square, card, large | a gauge with a needle |
+| Claude | square, card, large | a fuel gauge from E to F, without the large square |
+| Battery | square, card | a cell that fills |
+| Timer | square, card | an hourglass |
+| Volume | square, card | a knob |
+| Brightness | square, card | a fader |
+| Network | square, card | arcs |
+| Bluetooth | square, card | the Bluetooth rune |
+| Updates | square, card | a parcel with the count on its label |
+| Tasks | square, card, large | a clipboard |
+| Pet | square, card | the pet on a line of ground |
+| Games | square, card | a joystick |
+| GitHub | square, card, band | the wall of contribution squares, in both themes |
+| Notes | all four | paper, in both themes |
+
+A widget switched to a theme with no face for its shape shrinks to the largest
+shape that fits inside the old one, so nothing grows into a neighbour.
+
+**Every widget is always drawn.** With nothing to report it says so — "Nothing
+playing", "No battery", "No forecast" — and keeps its square; the only way for
+a widget to leave is Remove. The weather's location, whose contributions the
+GitHub wall draws and how a note is written are in Settings → Desktop → Module
+settings, and the bar's chips read the same settings.
+
+On the calendar, a day with a dot has tasks due. Press it and the widget turns
+into that day's tasks; it comes back when the pointer leaves it, or from the
+arrow. See [Notes and tasks](/shell/notes-and-tasks/).
+
+### Every widget in both themes
+
+<Tabs syncKey="face">
+<TabItem label="Modern">
+<Gallery columns={4} items={[
+  { name: 'widget-modern-battery', alt: "The Battery widget in Modern: 68 % and 3 h 7 min left, inside a charge ring", caption: 'Battery' },
+  { name: 'widget-modern-bluetooth', alt: "The Bluetooth widget in Modern: no devices connected", caption: 'Bluetooth' },
+  { name: 'widget-modern-brightness', alt: "The Brightness widget in Modern: 25 %, inside a ring", caption: 'Brightness' },
+  { name: 'widget-modern-calendar', alt: "The Calendar widget in Modern: Sunday the 13th, with 2 tasks to do", caption: 'Calendar' },
+  { name: 'widget-modern-claude', alt: "The Claude widget in Modern: 42 % of the session block used", caption: 'Claude' },
+  { name: 'widget-modern-clock', alt: "The Clock widget in Modern: 12:05 on 13 September", caption: 'Clock' },
+  { name: 'widget-modern-games', alt: "The Games widget in Modern: 41, the best at Whack-a-Mole", caption: 'Games' },
+  { name: 'widget-modern-github', alt: "The GitHub widget in Modern: weeks of contributions as green squares", caption: 'GitHub' },
+  { name: 'widget-modern-media', alt: "The Media widget in Modern: a track playing, with its cover", caption: 'Media' },
+  { name: 'widget-modern-network', alt: "The Network widget in Modern: the Wi-Fi network, online", caption: 'Network' },
+  { name: 'widget-modern-notes', alt: "The Notes widget in Modern: a grocery list on paper, in handwriting", caption: 'Notes' },
+  { name: 'widget-modern-pet', alt: "The Pet widget in Modern: Pip at level 17, beaming", caption: 'Pet' },
+  { name: 'widget-modern-stats', alt: "The System widget in Modern: 25 % processor and 55 % memory", caption: 'System' },
+  { name: 'widget-modern-tasks', alt: "The Tasks widget in Modern: 7 tasks, 2 due today", caption: 'Tasks' },
+  { name: 'widget-modern-timer', alt: "The Timer widget in Modern: 18:05 left on a timer called Tea", caption: 'Timer' },
+  { name: 'widget-modern-updates', alt: "The Updates widget in Modern: 447 packages pending", caption: 'Updates' },
+  { name: 'widget-modern-volume', alt: "The Volume widget in Modern: 64 %, inside a ring", caption: 'Volume' },
+  { name: 'widget-modern-weather', alt: "The Weather widget in Modern: 25° in Kyoto, patchy rain nearby", caption: 'Weather' },
+  { name: 'widget-modern-recorder', alt: "The Recorder widget in Modern: not recording, with the region, window and screen choices and a Record button", caption: 'Recorder' },
+]} />
+</TabItem>
+<TabItem label="Analogue">
+<Gallery columns={4} items={[
+  { name: 'widget-analogue-battery', alt: "The Battery widget in Analogue: a battery cell two-thirds full", caption: 'Battery' },
+  { name: 'widget-analogue-bluetooth', alt: "The Bluetooth widget in Analogue: the Bluetooth symbol in rings, no devices", caption: 'Bluetooth' },
+  { name: 'widget-analogue-brightness', alt: "The Brightness widget in Analogue: a fader at 25 %", caption: 'Brightness' },
+  { name: 'widget-analogue-calendar', alt: "The Calendar widget in Analogue: a tear-off page for Sunday the 13th", caption: 'Calendar' },
+  { name: 'widget-analogue-claude', alt: "The Claude widget in Analogue: a fuel gauge at 42 % of the block", caption: 'Claude' },
+  { name: 'widget-analogue-clock', alt: "The Clock widget in Analogue: a clock face with hands", caption: 'Clock' },
+  { name: 'widget-analogue-games', alt: "The Games widget in Analogue: a joystick, with the best at Whack-a-Mole", caption: 'Games' },
+  { name: 'widget-analogue-github', alt: "The GitHub widget in Analogue: the same wall of green squares", caption: 'GitHub' },
+  { name: 'widget-analogue-media', alt: "The Media widget in Analogue: a record turning on a turntable", caption: 'Media' },
+  { name: 'widget-analogue-network', alt: "The Network widget in Analogue: Wi-Fi arcs over the network's name", caption: 'Network' },
+  { name: 'widget-analogue-pet', alt: "The Pet widget in Analogue: Pip's face over a level bar", caption: 'Pet' },
+  { name: 'widget-analogue-stats', alt: "The System widget in Analogue: a speedometer at 23 % processor", caption: 'System' },
+  { name: 'widget-analogue-tasks', alt: "The Tasks widget in Analogue: a clipboard with three tasks", caption: 'Tasks' },
+  { name: 'widget-analogue-timer', alt: "The Timer widget in Analogue: an hourglass running", caption: 'Timer' },
+  { name: 'widget-analogue-updates', alt: "The Updates widget in Analogue: a parcel marked 447", caption: 'Updates' },
+  { name: 'widget-analogue-volume', alt: "The Volume widget in Analogue: a knob at 64 %", caption: 'Volume' },
+  { name: 'widget-analogue-weather', alt: "The Weather widget in Analogue: a rain cloud, 25° in Kyoto", caption: 'Weather' },
+]} />
+</TabItem>
+</Tabs>
+
+## Notes on the edges
+
+**A deck is notes stacked along the left, right or bottom edge**, as tabs that
+peek out. At rest each note is a sliver of its colour; the pointer arriving
+brings the tabs out with their titles, and the tab under it slides the whole
+note out beside it. A click opens the note in the island, and the right button
+offers Open and Edit.
+
+<Gallery columns={2} items={[
+  { name: 'deck-rest', alt: "The left edge of the wallpaper with three thin coloured slivers, notes tucked against the edge.", caption: "A deck at rest." },
+  { name: 'deck-peek', alt: "The same edge with the tabs pulled out and one note, Sunday, shown beside its tab.", caption: "The tab under the pointer slides its note out." },
+]} />
+
+While arranging:
+
+- drag the Notes tile from the tray against an edge, and the newest note starts
+  a deck there;
+- drag a tab along its edge to reorder it, to another edge to move it, onto the
+  grid to make it a square of its own, or onto the tray to take it off;
+- drag a note widget against an edge and it joins the deck there;
+- drag the round grip before the first tab to slide the whole deck along;
+- click a tab for the deck's card: **Where** (left, right or bottom), **Along
+  the edge** (Start, Middle or End) and **Which notes**, ticked on or off.
+
+There is one deck per edge at most, and none on the top, which is the bar's. A
+note is in one place at a time: putting it on an edge takes it off its square.
+A notes widget on a square shows one note — the newest, or the one picked under
+**Which note** on its card — and a click opens it in the island.
+
+Decks hide under a full-screen window. Settings → Desktop → Module settings →
+**Edges only on an empty workspace** hides them whenever a window is open on
+the workspace, and brings them back when the last one closes.
+
+## Screens and sizes
+
+**The widgets and the decks are on one screen**: the one that carries the
+island, chosen in Settings → Displays → Arrangement → The island is on (see
+[Displays](/shell/displays/)). A widget is filed by its square and nothing
+else, so a second screen would draw the same widgets twice. Other screens get
+the dock and the bar without the island.
+
+A square is the same size on every screen, so a smaller screen has fewer of
+them. A layout made on a bigger screen is pulled in to fit when it is drawn,
+and the saved places are left as they were, so it comes back whole on the
+bigger screen. The three profiles that ship are laid out for 1920 × 1200.
+
+What the desktop does not do is listed under [Limitations](/help/limitations/).

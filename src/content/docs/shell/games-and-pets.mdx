@@ -1,0 +1,136 @@
+---
+title: Games and pets
+description: Eleven small games played in the island, and a family of five creatures that live on the bar, earn levels and never die.
+sidebar:
+  order: 9
+---
+
+import Figure from '~/components/Figure.astro';
+import Gallery from '~/components/Gallery.astro';
+
+<Figure
+  name="games-and-pets"
+  alt="Three views: Tetris played in the island with its score and best along the top; Flood Colors, a grid of coloured squares with six colour buttons under it; and the pet panel with Pip out, a level bar, Fed and Play, and the rest of the family listed with their levels and Bring out"
+  caption="Two of the eleven games, and the pets."
+/>
+
+## The arcade
+
+**<kbd>SUPER</kbd> <kbd>G</kbd> opens a shelf of eleven games, and the island
+becomes the board.** The arrows slide the shelf, <kbd>Home</kbd> and
+<kbd>End</kbd> go to either end, and <kbd>Enter</kbd> or <kbd>Space</kbd> plays
+the game in the middle; a click on a side tile brings it to the middle. The
+shelf reopens on the game played last, and the line under it is that game's
+best, or "Not played yet".
+
+While a game is on, the strip over the board carries the score — or the moves —
+and the best, and nothing else.
+
+| Key | |
+|---|---|
+| <kbd>Escape</kbd> | Back to the shelf; from the shelf, closes the island |
+| <kbd>R</kbd> | Starts the round again, at any moment |
+| <kbd>Enter</kbd> or <kbd>Space</kbd> | Plays again once the round is over |
+
+A finished round is washed over with "Game over" — "Solved" for the puzzles —
+and **Play again**; a click on the wash does the same. Closing the island
+leaves the game, and the round with it.
+
+The arcade is also on the wallpaper, as the Games widget, and in the
+[control centre](/shell/control-centre/), as a block: both show the latest
+bests and open the shelf.
+
+### The eleven
+
+Where the arrows steer, <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> do
+the same, except in Lights Out.
+
+<Figure name="games-shelf" alt="The games shelf with Whack-a-Mole in the middle and Snake Sprint and Flood Colors beside it." caption="The shelf, on SUPER + G." />
+
+<Gallery columns={4} items={[
+  { name: 'game-whack', alt: "Whack-a-Mole in the island, mid-game: a three by three field of holes with one mole up and a time bar across the top.", caption: "Whack-a-Mole" },
+  { name: 'game-snake', alt: "Snake Sprint in the island, mid-game: a short green snake moving toward a pink dot.", caption: "Snake Sprint" },
+  { name: 'game-flood', alt: "Flood Colors in the island, mid-game: a grid of coloured squares with six colour buttons under it.", caption: "Flood Colors" },
+  { name: 'game-mini2048', alt: "2048 Mini in the island, mid-game: a four by four board with tiles 16, 4, 4, 2 and 2.", caption: "2048 Mini" },
+  { name: 'game-lights', alt: "Lights Out in the island, mid-game: a five by five grid of round lights, most of them lit.", caption: "Lights Out" },
+  { name: 'game-hextris', alt: "Hextris in the island, mid-game: a hexagon with coloured slabs sliding in toward its centre.", caption: "Hextris" },
+  { name: 'game-bots', alt: "Bot Bash in the island, mid-game: five lanes with two pink robots coming down them.", caption: "Bot Bash" },
+  { name: 'game-target', alt: "Target Smash in the island, mid-game: an empty board with one round pink target.", caption: "Target Smash" },
+  { name: 'game-space', alt: "Space Blaster in the island, mid-game: rows of little invaders above a triangular ship firing at them.", caption: "Space Blaster" },
+  { name: 'game-tetris', alt: "Tetris in the island, mid-game: a well half filled with pieces, a falling piece and the next piece beside it.", caption: "Tetris" },
+  { name: 'game-solitaire', alt: "Solitaire in the island, mid-game: a game of Klondike solitaire with the tableau laid out and the foundations empty.", caption: "Solitaire" },
+]} />
+
+| Game | What it is | Controls |
+|---|---|---|
+| Whack-a-Mole | Nine holes laid out like a phone keypad, in 45-second rounds; a miss costs two seconds | <kbd>1</kbd>…<kbd>9</kbd>, or click |
+| Snake Sprint | Ten points an apple, and a little faster with each one | Arrows |
+| Flood Colors | Flood the board from the top-left corner in as few moves as you can | <kbd>1</kbd>…<kbd>6</kbd>, or click a colour |
+| 2048 Mini | 2048 on a 4 × 4 board, until nothing can merge | Arrows |
+| Lights Out | A press flips a light and its four neighbours; turn all 25 off in as few presses as you can | Arrows and <kbd>Space</kbd>, or click |
+| Hextris | Slabs fall onto the sides of a hexagon; three of a colour touching clear, and a stack nine deep ends the round | <kbd>←</kbd> <kbd>→</kbd> rotate, <kbd>↓</kbd> or <kbd>Space</kbd> drops; click the outer thirds to rotate, the middle to drop |
+| Bot Bash | Robots march down five lanes; three reaching the floor end the round, and a bash on an empty lane costs a life | <kbd>1</kbd>…<kbd>5</kbd>, or click a lane |
+| Target Smash | One shrinking target at a time — three for the bullseye, two for the middle ring, one for the outer — and three lives | The pointer only |
+| Space Blaster | A formation of twenty invaders that speeds up as it thins; three lives | <kbd>←</kbd> <kbd>→</kbd> move, <kbd>Space</kbd> fires |
+| Tetris | A 10 × 20 well, falling faster every ten lines | <kbd>←</kbd> <kbd>→</kbd> move, <kbd>↑</kbd> rotates, <kbd>↓</kbd> soft drop, <kbd>Space</kbd> hard drop |
+| Solitaire | Klondike, dealt one card at a time; click a card to pick it up and click where it goes | The pointer; <kbd>Space</kbd> turns the stock |
+
+The games follow the palette like everything else: each one's colours are the
+wallpaper's.
+
+### Bests
+
+**One best per game**, kept in `~/.local/state/quickshell/games.json`: the
+highest score, or the fewest moves for Flood Colors, Lights Out and Solitaire.
+A round that scored nothing is not recorded. A beaten best says so over the
+board and, when it was not the first, on the island. There is one number per
+game and nothing else — no history, no names.
+
+## The pets
+
+**A family of five small creatures lives on the bar**: one out at a time, the
+rest asleep on a shelf. Each one hatches from an egg, earns levels from being
+fed and played with, and never dies. The five are Dot, Sprout, Ember, Sol and
+Drift, each in one of the palette's colours, and each can be given a name of
+its own.
+
+### Looking after one
+
+<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>P</kbd> opens the pet's panel: the one
+that is out, its mood, how far it is to the next level, and **Feed** and
+**Play**. Its name is edited in place. The Pet chip on the bar has the same
+Feed and Play in its detail.
+
+<Figure name="pet" alt="The pet panel: Pip, a blue creature at level 17, with Fed and Play buttons, and four more pets and an unhatched egg below." caption="Feed, Play, and the family on its shelf." />
+
+| | Experience |
+|---|---|
+| Feed | 25, once every 90 minutes |
+| Play | 12, once every five minutes, plus three for every hour since the last game, up to 18 more |
+| Being out | 1 every five minutes, while the pet is on the bar and awake and the screen is unlocked |
+
+An egg hatches at its first meal or its first game, and never on its own. Each
+level takes a little more than the one before; ears arrive at level 5 and a
+star at level 15.
+
+The mood is read off when it was last fed and played with: **Beaming**,
+**Content**, **Peckish** — a snack is owed — **Lonely** — nobody has played
+today — or **Fast asleep**. None of them costs anything.
+
+### The family
+
+Under the pet that is out is the family, each with its level and **Bring out**.
+**Only the pet that is out earns anything**; the others sleep on the shelf, and
+the time asleep does not count against them.
+
+<Figure name="pets" alt="The five species as an egg, hatched, at level five and at level fifteen, and the moods a pet shows: beaming, content, peckish, lonely and asleep" caption="Five species, four stages each, and five moods." />
+
+Another egg is laid when the family's levels added together reach 6, then 16,
+30 and 50, and it hatches into one of the species the family does not have yet
+— so the five are found by taking turns rather than by playing harder with one.
+With all five found, a star waits at level fifteen for each.
+
+**Nothing dies, and a week away costs nothing.** A neglected pet is hungry,
+lonely or asleep, and nothing is ever reset. The family is kept in
+`~/.local/state/quickshell/pet.json` and is the same in every profile. The
+games earn it nothing.

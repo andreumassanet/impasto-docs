@@ -1,0 +1,122 @@
+---
+title: Updating
+description: Update with ./setup update, edit your copy or the repository, how setup keeps its copies, and what uninstalling removes and restores.
+sidebar:
+  order: 4
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+**`./setup update` pulls the repository and installs again.**
+
+```bash
+./setup update
+```
+
+It runs `git pull --autostash --ff-only`, then everything `install` does, with
+the same flags: `./setup update --skip-packages` skips the packages on the way
+through. The install runs from the `setup` just pulled, so a release that
+changes the installer takes effect on the same update. A checkout with no
+upstream branch skips the pull and installs what is there.
+
+## Releases and branches
+
+**`main` only moves when a version is released.** A clone made from the README
+is on `main`, so `./setup update` brings the latest release and nothing in
+between. Work in progress lives on `dev`: `git switch dev` in your clone
+follows it, half-finished work included, and `git switch main` goes back.
+Every release is a tag, `v0.1.0` and on, with its notes under
+[Releases](https://github.com/andreumassanet/impasto/releases).
+
+**The version you have is under Settings → System → This machine**, beside
+the processor, the memory and the uptime: the release, such as `v0.2.0`, with
+the branch under it. On `dev` the line under it adds the commits since that
+release and a short hash.
+
+## Two copies: yours and the repository's
+
+Every configuration file exists twice, once in the repository and once where it
+is used. The desk reads the copy, never the repository.
+
+**Edit your copy** — `~/.config/hypr/modules/look.lua`, say — and the change
+applies at once. `setup` notices it has been edited and leaves it alone. When the
+repository later changes that file, the repository's version is written beside
+yours as `<name>.new` and yours stays in place.
+
+To settle a `.new` file, compare the two and keep one:
+
+```bash
+diff ~/.config/hypr/modules/look.lua ~/.config/hypr/modules/look.lua.new
+mv ~/.config/hypr/modules/look.lua.new ~/.config/hypr/modules/look.lua   # take the repository's
+rm ~/.config/hypr/modules/look.lua.new                                   # or keep yours
+```
+
+Either choice is permanent. If you take the repository's version, the file is
+unedited again and updates normally. If you keep yours, no `.new` appears again
+until the repository changes that file again.
+
+**Edit the repository** and nothing happens until you copy it:
+
+```bash
+./setup sync            # copy home/ into $HOME once
+./setup sync --watch    # copy again on every save, until Ctrl+C
+```
+
+`--watch` needs `inotify-tools`.
+
+<Aside type="note">
+`sync` only covers `home/`. A change under `system/`, such as the login
+screen's theme, needs `./setup system`, which asks for a password.
+</Aside>
+
+## How setup copies
+
+Each copy is written atomically, next to its destination and then renamed, so
+the shell never reads half a file. The hash of every file is kept in a manifest,
+`~/.local/state/impasto/home.manifest` (and `system.manifest` for `/`). On every
+run it decides file by file:
+
+| What it finds | What it does |
+|---|---|
+| Nothing at the path | Writes the file. |
+| A different file, the first time | Moves it to `~/.local/state/impasto/backups/<timestamp>/`, then writes. A link in the way is moved there too. |
+| The file it wrote, unedited | Replaces it with the repository's version. |
+| The file it wrote, edited since | Keeps yours, and writes the repository's beside it as `<name>.new`. |
+| A file gone from the repository | Deletes it if unedited. If you edited it, it stays, and `setup` says so. |
+| A file it never wrote | Never touches it. |
+
+The last row matters. The palette writes themes into `~/.config/btop`, `cava`,
+`yazi`, `gtk-3.0` and elsewhere, and the shell keeps its settings in
+`~/.local/state/quickshell/`. None of those were written by `setup`, so none of
+them are ever overwritten, deleted or backed up.
+
+Under `/`, what was in the way is copied to the backups rather than moved,
+because the backups directory belongs to you.
+
+## Uninstalling
+
+```bash
+./setup uninstall
+```
+
+It removes every file it installed that has not been edited since, from both
+`$HOME` and `/`. An edited file is left in place and named. Then it puts back
+what the install moved aside, oldest backup first, wherever the path is free
+again. Anything that cannot go back because the path is taken stays in
+`~/.local/state/impasto/backups/`, and `setup` says how many.
+
+What stays behind:
+
+- the packages, oh-my-zsh and the Hyprland plugins;
+- the shell's settings, notes, tasks and the rest of `~/.local/state/quickshell/`;
+- the themes the palette wrote, and the `impasto` icon theme;
+- `/var/lib/impasto/faces`, because what is in it is somebody's photograph;
+- the login screen setting, if you changed `Current=` by hand.
+
+<Aside type="caution">
+The login screen's theme is removed with the rest. If you set
+`Current=impasto`, point it back at another theme before uninstalling.
+</Aside>
+
+Add `--dry-run` to see the list first. Every verb is in
+[The setup script](/reference/setup/).

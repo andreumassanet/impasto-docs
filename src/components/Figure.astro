@@ -1,0 +1,74 @@
+---
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │   F I G U R E                                                            │
+// │   one picture by name · resized for the page, full size on a click       │
+// │                                                                          │
+// │   github.com/andreumassanet/impasto-docs                                 │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+import { Image, getImage } from 'astro:assets';
+import { findShot } from '~/data/shots';
+
+interface Props {
+	name: string;
+	alt: string;
+	caption?: string;
+	/** Drawn at its own size rather than the column's, for small pictures. */
+	narrow?: boolean;
+}
+
+const { name, alt, caption, narrow } = Astro.props;
+const { image, animated } = findShot(name);
+const full = animated
+	? image.src
+	: (await getImage({ src: image, width: Math.min(image.width, 2800), format: 'webp', quality: 82 })).src;
+---
+
+<figure class:list={['im-figure', 'not-content', { narrow }]}>
+	<button type="button" class="zoom" data-full={full} data-caption={caption} aria-label={`Enlarge: ${alt}`}>
+		{
+			animated ? (
+				<img src={image.src} width={image.width} height={image.height} alt={alt} loading="lazy" decoding="async" />
+			) : (
+				<Image src={image} alt={alt} widths={[800, 1200, 1600, 2400]} sizes="(min-width: 72rem) 46rem, 100vw" />
+			)
+		}
+	</button>
+	{caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<script>
+	import '~/scripts/lightbox';
+</script>
+
+<style>
+	.im-figure {
+		margin-block: 1.75rem;
+	}
+	.narrow {
+		max-width: min(100%, 26rem);
+	}
+	.zoom {
+		display: block;
+		width: 100%;
+		padding: 0;
+		border: 0;
+		background: none;
+		cursor: zoom-in;
+	}
+	.zoom :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: var(--radius-large);
+		background: var(--island);
+	}
+	figcaption {
+		margin-top: 0.65rem;
+		font-size: var(--sl-text-sm);
+		line-height: 1.5;
+		color: var(--sl-color-gray-3);
+	}
+</style>

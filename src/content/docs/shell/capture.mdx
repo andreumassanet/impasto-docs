@@ -1,0 +1,111 @@
+---
+title: Capture
+description: Screenshots and screen recordings from one surface — a region, a window or the screen, saved, copied, annotated, read as text, or recorded.
+sidebar:
+  order: 6
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+**One key opens a thing you can look at.** <kbd>SUPER</kbd> <kbd>SHIFT</kbd>
+<kbd>S</kbd> photographs the whole screen and shows that photograph, with a bar
+at its foot saying what is about to happen. You draw on the photograph, and the
+crop is cut from the same pixels — so nothing has to be frozen, and a menu that
+closes when the pointer moves is already in the picture.
+
+## Keys
+
+| Key | Does |
+|---|---|
+| <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>S</kbd>, or <kbd>Print</kbd> | Opens the capture surface |
+| <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>R</kbd> | Starts or stops a recording |
+| <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>C</kbd> | Picks a colour off the screen |
+
+The Capture, Annotate, Read text, Colour and Record tiles in
+[the control centre](/shell/control-centre/) do the same, and so do the rows of
+the same names under `>` in [the launcher](/shell/launcher/).
+
+## The surface
+
+The bar at the foot has three groups:
+
+| Group | Choices |
+|---|---|
+| Shape | **Region**, **Window**, **Screen** |
+| Kind | **Photo**, **Video** |
+| Then | For a photo: **Save**, **Copy**, **Annotate**, **Text**. For a video: **No sound**, **Sound**. |
+
+- **Region** — drag a box. Everything outside it is washed back, and its size
+  rides above it. Letting go takes it.
+- **Window** — the window under the pointer is outlined; a click takes it.
+- **Screen** — a click takes the whole screen.
+
+| Key | Does |
+|---|---|
+| <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> | Region, Window, Screen |
+| <kbd>Enter</kbd> or <kbd>Space</kbd> | Takes the screen, or the window under the pointer |
+| <kbd>Escape</kbd>, or the right button | Cancels, and nothing is kept |
+
+It opens on the shape and kind you used last. Where a photo goes always starts
+back at Save: annotating or reading text is chosen each time.
+
+## What happens to a photo
+
+| Choice | What happens |
+|---|---|
+| Save | Saved to the captures folder **and** copied to the clipboard; the island shows the file's name |
+| Copy | Copied to the clipboard only |
+| Annotate | Opens in satty. What you save from it goes to the captures folder, and its copy button puts it on the clipboard. |
+| Text | Read with tesseract and copied as text; the island says how many characters |
+
+Annotate is only offered with satty installed, and Text with tesseract. Text
+reads English, and Spanish too when its language pack (`tesseract-data-spa`)
+is installed.
+
+**The captures folder** is `XDG_SCREENSHOTS_DIR` when your `user-dirs.dirs`
+names one, and otherwise a `Screenshots` folder inside your pictures folder.
+Files are named by the moment they were taken, as
+`2026-09-13-101500_impasto.png`.
+
+## Recording
+
+**<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>R</kbd> starts a recording, and the
+same key stops it.** What it records is set on the Recorder's card on the bar:
+**Screen** starts at once; **Region** and **Window** open the capture surface
+in Video, and the take starts once you have drawn the box or clicked the
+window. Choosing Video on the surface yourself does the same.
+
+- While it runs, a red dot and the minutes sit beside the time on
+  [the island](/shell/island/). A click on the dot stops it; so do the key,
+  the Recorder's card and the Record tile.
+- **Sound** records what the machine plays, not the microphone. The choice is
+  only there when there is an output to record from.
+- The take is written with wl-screenrec, or wf-recorder without it, as an mp4
+  named like `2026-09-13-101500_impasto.mp4` — in `XDG_SCREENCASTS_DIR`, or a
+  `Screencasts` folder inside your videos folder.
+- The island says *Recording* when it starts and *Recorded* with the length
+  when it stops. A recording keeps going if the shell is restarted, and the
+  shell picks it back up.
+
+The recording is of the live screen: the box is where it records, not the
+photograph it was drawn on.
+
+## Colour
+
+<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>C</kbd> freezes the screen with
+hyprpicker; click a pixel and its hex code goes onto the clipboard, and the
+island shows it.
+
+## Keys for one shape
+
+Five more captures are registered and bound to nothing: **Capture a region**,
+**Capture a window**, **Capture the screen**, **Capture and annotate** and
+**Read a region**. Each opens the surface already set to that shape and
+destination. Give any of them a key under Settings → Keys → *The shell's own*.
+
+<Aside>
+The surface covers one screen, and there is no timer, no pointer in the
+picture and no scrolling capture. Window mode only sees windows on the
+workspace you are on. A recording has no pause and records one take at a time.
+See [limitations](/help/limitations/).
+</Aside>

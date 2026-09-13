@@ -1,0 +1,81 @@
+---
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │   H E A D E R                                                            │
+// │   the bar · title, search and tools in black capsules                    │
+// │                                                                          │
+// │   github.com/andreumassanet/impasto-docs                                 │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+// Starlight's own header, regrouped the way the shell's bar groups its
+// pieces: the search sits where the island does.
+
+import Search from '@astrojs/starlight/components/Search.astro';
+import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
+import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+---
+
+<div class="header">
+	<div class="title-wrapper sl-flex">
+		<div class="im-island capsule brand"><SiteTitle /></div>
+	</div>
+	<div class="sl-flex print:hidden search">
+		<div class="im-island capsule"><Search /></div>
+	</div>
+	<div class="sl-hidden md:sl-flex print:hidden right-group">
+		<div class="im-island capsule tools">
+			<SocialIcons />
+			<ThemeSelect />
+		</div>
+	</div>
+</div>
+
+<style>
+	.header {
+		display: flex;
+		gap: var(--sl-nav-gap);
+		justify-content: space-between;
+		align-items: center;
+		height: 100%;
+	}
+	.title-wrapper {
+		overflow: clip;
+		padding: 0.25rem;
+		margin: -0.25rem;
+		min-width: 0;
+	}
+	.right-group {
+		align-items: center;
+	}
+	.tools {
+		gap: 0.85rem;
+		padding-inline: 1rem;
+	}
+
+	@media (min-width: 50rem) {
+		:global(:root[data-has-sidebar]) {
+			--__sidebar-pad: calc(2 * var(--sl-nav-pad-x));
+		}
+		:global(:root:not([data-has-toc])) {
+			--__toc-width: 0rem;
+		}
+		.header {
+			--__sidebar-width: max(0rem, var(--sl-content-inline-start, 0rem) - var(--sl-nav-pad-x));
+			--__main-column-fr: calc(
+				(
+						100% + var(--__sidebar-pad, 0rem) - var(--__toc-width, var(--sl-sidebar-width)) -
+							(2 * var(--__toc-width, var(--sl-nav-pad-x))) - var(--sl-content-inline-start, 0rem) -
+							var(--sl-content-width)
+					) / 2
+			);
+			display: grid;
+			grid-template-columns:
+				minmax(calc(var(--__sidebar-width) + max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))), auto)
+				1fr
+				auto;
+			align-content: center;
+		}
+	}
+</style>

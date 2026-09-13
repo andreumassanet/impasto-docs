@@ -1,0 +1,374 @@
+---
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │   I N D E X                                                              │
+// │   the front page · the desk, then one room at a time                     │
+// │                                                                          │
+// │   github.com/andreumassanet/impasto-docs                                 │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+import { getCollection } from 'astro:content';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '@fontsource/grape-nuts';
+import '~/styles/theme.css';
+import '~/styles/landing.css';
+import mark from '~/assets/mark.png';
+import PaletteDemo from '~/components/PaletteDemo.astro';
+import Zoom from '~/components/Zoom.astro';
+import { loadPaint, DEFAULT_WALLPAPER } from '~/data/paint';
+import { paintRoot, restore } from '~/lib/restore.mjs';
+import version from '~/snapshot/version.txt?raw';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const href = (path: string) => `${base}${path}`;
+const repository = 'https://github.com/andreumassanet/impasto';
+
+const wide = '(min-width: 76rem) 70rem, 100vw';
+const beside = '(min-width: 64rem) 46rem, 100vw';
+
+const { wallpapers } = await loadPaint();
+const first = wallpapers.find((wall) => wall.id === DEFAULT_WALLPAPER)!;
+const dock = [first, ...wallpapers.filter((wall) => wall !== first)];
+
+const sections = [
+	{ dir: 'start', label: 'Start here' },
+	{ dir: 'shell', label: 'The shell' },
+	{ dir: 'theming', label: 'Colour' },
+	{ dir: 'reference', label: 'Reference' },
+	{ dir: 'help', label: 'Help' },
+];
+const docs = await getCollection('docs');
+const map = sections.map((section) => ({
+	...section,
+	pages: docs
+		.filter((page) => page.id.startsWith(`${section.dir}/`))
+		.sort((a, b) => (a.data.sidebar?.order ?? 99) - (b.data.sidebar?.order ?? 99)),
+}));
+
+const clone = `git clone ${repository}.git ~/impasto`;
+const oneLine = `${clone} && cd ~/impasto && ./setup install`;
+const threeLines = `${clone}\ncd ~/impasto\n./setup install`;
+const description =
+	'A Hyprland shell whose colours come from a painting. One black island that changes shape, a desk of widgets under the windows, and every program around it repainted by whatever wallpaper is up.';
+const followers = [
+	'the island', 'the widgets', 'kitty', 'the prompt', 'btop', 'cava', 'yazi', 'neovim', 'VSCodium',
+	'GTK', 'Qt and KDE', 'Thunar', 'Vesktop', 'Zen', 'Spotify', 'the login screen',
+];
+const wallCss = `:root{--im-wall:url("${first.medium}")}@media (min-width:75rem) and (min-resolution:1.5dppx),(min-width:112rem){:root{--im-wall:url("${first.large}")}}`;
+---
+
+<!doctype html>
+<html lang="en" data-paint-tone="dark">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>impasto — a Hyprland shell whose colours come from a painting</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={new URL(href('/'), Astro.site)} />
+		<link rel="icon" href={href('/favicon.png')} type="image/png" />
+		<link rel="apple-touch-icon" href={href('/apple-touch-icon.png')} />
+		<meta name="theme-color" content="#000000" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="impasto" />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL(href('/og.jpg'), Astro.site)} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<link rel="preload" as="image" href={first.medium} type="image/webp" />
+		<style is:inline set:html={wallCss}></style>
+		<script is:inline set:html={`${paintRoot.toString()}\n(${restore.toString()})();`}></script>
+	</head>
+	<body>
+		<a class="skip" href="#main">Skip to the content</a>
+
+		<header class="hero">
+			<div class="wall" aria-hidden="true"></div>
+			<div class="wall wall-leaving" aria-hidden="true"></div>
+			<div class="scrim" aria-hidden="true"></div>
+
+			<nav class="bar" aria-label="Site">
+				<a class="capsule brand" href={href('/')}>
+					<img src={mark.src} alt="" width="31" height="31" />
+					<span class="wordmark">impasto</span>
+				</a>
+				<div class="capsule island" aria-hidden="true"><time data-clock></time></div>
+				<div class="capsule links">
+					<a href={href('/start/introduction/')}>Docs</a>
+					<a class="optional" href={href('/start/install/')}>Install</a>
+					<a class="optional" href={href('/reference/keybindings/')}>Keys</a>
+					<a href={repository} aria-label="impasto on GitHub">
+						<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+							<path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3" />
+						</svg>
+					</a>
+				</div>
+			</nav>
+
+			<div class="hero-copy">
+				<h1>A Hyprland shell whose colours come from a painting.</h1>
+				<p>
+					One black island that changes shape, a desk of widgets under the windows, and every program around it
+					repainted by whatever wallpaper is up.
+				</p>
+				<div class="actions">
+					<a class="button primary" href={href('/start/introduction/')}>Read the documentation</a>
+					<div class="capsule command">
+						<code>{oneLine}</code>
+						<button type="button" class="copy" data-copy={oneLine} aria-label="Copy the install command">
+							<svg class="idle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+								<rect x="9" y="9" width="12" height="12" rx="2.5"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path>
+							</svg>
+							<svg class="done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+								<path d="M4 12.5l5 5L20 6.5"></path>
+							</svg>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="dock-wrap">
+				<p class="dock-hint" id="dock-hint">Pick a wallpaper and the page takes its colours, the way the desk does.</p>
+				<div class="capsule dock" role="group" aria-labelledby="dock-hint">
+					{
+						dock.map((wall) => (
+							<button type="button" data-paint={`wallpaper:${wall.id}`} aria-label={wall.name} title={wall.name}>
+								<img src={wall.thumb} alt="" width="68" height="42" loading="lazy" decoding="async" />
+							</button>
+						))
+					}
+				</div>
+			</div>
+		</header>
+
+		<main id="main">
+			<section class="room side" id="island">
+				<div class="text">
+					<h2>The island is one object that changes shape.</h2>
+					<p>
+						A black capsule in the middle of the bar rests on the time and turns into everything else: the glance
+						under the pointer, the control centre, the launcher, the overview, a notification, a game. Each is the
+						size of what is in it, with no title and no close button.
+					</p>
+					<a class="more" href={href('/shell/island/')}>How the island works</a>
+				</div>
+				<figure class="media">
+					<Zoom name="island" alt="The island at rest, opening a glance under the pointer, becoming the control centre, then the launcher doing a sum, then a notification arriving" sizes={beside} />
+				</figure>
+			</section>
+
+			<section class="room wide" id="modules">
+				<div class="text">
+					<h2>Every module on the bar opens into the island.</h2>
+					<div>
+						<p>
+							What is running sits either side of the time: the player, the battery, the processor, the recorder,
+							the weather, the month with its tasks. Click one and the island becomes its detail, rather than a popup
+							of its own.
+						</p>
+						<a class="more" href={href('/shell/bar/#the-module-catalogue')}>Every module</a>
+					</div>
+				</div>
+				<figure class="media">
+					<Zoom name="island-details" alt="Module details in the island: the player, the battery, Claude Code's usage, the processor and memory, the recorder, the Wi-Fi list, the weather, the pet, the volume, the month, the tasks, a countdown and the GitHub wall" sizes={wide} />
+				</figure>
+			</section>
+
+			<section class="room wide" id="bar">
+				<div class="text">
+					<h2>Three styles, one layout.</h2>
+					<div>
+						<p>
+							Pieces are dragged out of a catalogue onto a picture of the bar, then drawn grouped round the island,
+							spread to the edges, or all inside one capsule. Any piece can have a look of its own.
+						</p>
+						<a class="more" href={href('/shell/bar/')}>Arranging the bar</a>
+					</div>
+				</div>
+				<figure class="media">
+					<Zoom name="bar-styles" alt="The same bar in its three styles: grouped round the island, spread to the two edges, and everything inside one capsule" sizes={wide} />
+				</figure>
+			</section>
+
+			<section class="room side" id="palette">
+				<div class="text">
+					<h2>The palette comes out of the painting.</h2>
+					<p>
+						Pick a wallpaper and its colours reach everything at once. Or pick one of nine palettes instead, and the
+						wallpaper stays where it is. This page does the same with the forty wallpapers the desk comes with.
+					</p>
+					<a class="more" href={href('/theming/palettes/')}>Where the colours go</a>
+					<ul class="followers" aria-label="What follows the palette">
+						{followers.map((name) => <li>{name}</li>)}
+					</ul>
+				</div>
+				<div>
+					<figure class="media">
+						<Zoom name="repaint" alt="The wallpaper changing three times, and the bar, the widgets, the terminal and the system monitor repainting with each one" sizes={beside} />
+					</figure>
+					<PaletteDemo />
+				</div>
+			</section>
+
+			<section class="room side" id="desktop">
+				<div class="text">
+					<h2>Any module can live on the wallpaper.</h2>
+					<p>
+						On a grid, in four shapes: a square, a card, a large square and a band. Right-click the wallpaper to
+						arrange. <em>Modern</em> draws each module as a figure with a caption, <em>Analogue</em> as an object, and
+						either is a choice per widget.
+					</p>
+					<a class="more" href={href('/shell/desktop/')}>Widgets on the desktop</a>
+				</div>
+				<figure class="media">
+					<Zoom name="desktop-themes" alt="The same wall of widgets split down the middle: Modern on the left, figures with captions; Analogue on the right, a thermometer, a wall calendar, a battery cell, a knob, gauges" sizes={beside} />
+				</figure>
+			</section>
+
+			<section class="room wide" id="launcher">
+				<div class="text">
+					<h2>The first character says what the field is for.</h2>
+					<div>
+						<p>
+							Plain text searches applications, <code>=</code> calculates, <code>@</code> finds an open window,
+							<code>!</code> starts a countdown, <code>'</code> is the clipboard history and <code>&gt;</code> is the
+							shell itself. The dock holds what you pinned, then whatever else is open.
+						</p>
+						<a class="more" href={href('/shell/launcher/')}>The launcher</a>
+					</div>
+				</div>
+				<figure class="media">
+					<Zoom name="launcher-and-dock" alt="The launcher listing applications ranked by use, the clipboard history with an image drawn in its row, and the dock with the terminal's menu open over its windows" sizes={wide} />
+				</figure>
+			</section>
+
+			<section class="room side" id="notes">
+				<div class="text">
+					<h2>A note is paper, and a task has a lane.</h2>
+					<p>
+						<code>SUPER + S</code> opens a deck of pastel notes in handwriting, which can also sit on the wallpaper or
+						stack along an edge. <code>SUPER + K</code> is a board of to do, doing and done, and a task's day shows as a
+						dot under the month.
+					</p>
+					<a class="more" href={href('/shell/notes-and-tasks/')}>Notes and tasks</a>
+				</div>
+				<figure class="media">
+					<Zoom name="notes-and-tasks" alt="The deck of pastel notes in handwriting, one note open with the island become yellow paper, the kanban board with three lanes, and a task open with its day and lane" sizes={beside} />
+				</figure>
+			</section>
+
+			<section class="room wide" id="games">
+				<div class="text">
+					<h2>Eleven small games, played in the island.</h2>
+					<div>
+						<p>
+							<code>SUPER + G</code> opens a shelf and the island becomes the board. A family of five small creatures
+							lives on the bar, one out at a time, earning levels from being fed and played with. Nothing dies.
+						</p>
+						<a class="more" href={href('/shell/games-and-pets/')}>Games and pets</a>
+					</div>
+				</div>
+				<figure class="media">
+					<Zoom name="games-and-pets" alt="Tetris and Flood Colors played in the island, and the pets' page with Pip out and the rest of the family waiting" sizes={wide} />
+				</figure>
+			</section>
+
+			<section class="room wide" id="lock">
+				<div class="text">
+					<h2>The login screen is the lock with the desk taken away.</h2>
+					<div>
+						<p>
+							The shell locks the session itself, over the blurred desk. The SDDM theme draws the same clock, the same
+							face and the same field before anybody has logged in.
+						</p>
+						<a class="more" href={href('/shell/lock-and-login/')}>Lock and login</a>
+					</div>
+				</div>
+				<figure class="media">
+					<Zoom name="lock-and-login" alt="The lock screen over the blurred desk, and the SDDM login screen over a painting of brush strokes, with the same clock, face and field" sizes={wide} />
+				</figure>
+			</section>
+
+			<section class="room wide" id="settings">
+				<div class="text">
+					<h2>Settings is the one panel that is not the island.</h2>
+					<div>
+						<p>
+							An ordinary window where each option is drawn as the thing it changes. Profiles keep whole desks under a
+							name, keys included: <em>Moon castle</em>, <em>Fuji</em> and <em>Night bay</em> come with it.
+						</p>
+						<a class="more" href={href('/shell/settings/')}>Settings and profiles</a>
+					</div>
+				</div>
+				<figure class="media">
+					<Zoom name="settings" alt="Two pages of the settings window: the bar arranged on a picture of it, and the appearance with the wallpaper transitions and the greeting scenes" sizes={wide} />
+				</figure>
+			</section>
+
+			<section class="room install" id="install">
+				<div class="text">
+					<h2>One script installs all of it.</h2>
+					<p>
+						Arch Linux, and Hyprland 0.56 or newer configured in Lua. Run it from a terminal inside the Hyprland
+						session: the plugins are built against the compositor that is running.
+					</p>
+					<p>
+						Nothing is linked: <code>setup</code> copies, and remembers what it wrote. A file of yours in the way is
+						moved aside first, and a file you edit afterwards is left alone.
+					</p>
+					<a class="more" href={href('/start/install/')}>Installing, and every flag</a>
+				</div>
+				<div class="terminal">
+					<pre><code><span class="prompt">$ </span>{clone}
+<span class="prompt">$ </span>cd ~/impasto
+<span class="prompt">$ </span>./setup install</code></pre>
+					<button type="button" class="copy" data-copy={threeLines} aria-label="Copy the three commands">
+						<svg class="idle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+							<rect x="9" y="9" width="12" height="12" rx="2.5"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path>
+						</svg>
+						<svg class="done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+							<path d="M4 12.5l5 5L20 6.5"></path>
+						</svg>
+					</button>
+				</div>
+			</section>
+
+			<section class="room map" aria-labelledby="map-title">
+				<h2 id="map-title">Everything else is in the documentation.</h2>
+				<div class="map-grid">
+					{
+						map.map((section) => (
+							<nav aria-label={section.label}>
+								<h3>{section.label}</h3>
+								<ul>
+									{section.pages.map((page) => (
+										<li>
+											<a href={href(`/${page.id}/`)}>{page.data.sidebar?.label ?? page.data.title}</a>
+										</li>
+									))}
+								</ul>
+							</nav>
+						))
+					}
+				</div>
+			</section>
+		</main>
+
+		<footer class="foot">
+			<a class="brand" href={href('/')}>
+				<img src={mark.src} alt="" width="28" height="28" />
+				<span class="wordmark">impasto</span>
+			</a>
+			<p>impasto {version.trim()} · © 2026 Andreu Massanet · <a href={`${repository}/blob/main/LICENSE`}>GPL-3.0</a></p>
+			<nav aria-label="Elsewhere">
+				<a href={repository}>GitHub</a>
+				<a href={href('/help/credits/')}>Credits</a>
+			</nav>
+		</footer>
+
+		<script>
+			import '~/scripts/paint';
+			import '~/scripts/landing';
+		</script>
+	</body>
+</html>

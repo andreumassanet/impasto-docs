@@ -1,0 +1,202 @@
+---
+title: The terminal
+description: kitty, zsh, the prompt and the greeting, and what runs in the terminal — btop, cava, yazi and neovim — all following the palette.
+sidebar:
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Figure from '~/components/Figure.astro';
+import Gallery from '~/components/Gallery.astro';
+
+**Four programs, one object on screen.** kitty is the window, zsh runs in it,
+starship is the prompt, and fastfetch greets you on `fa`. All four follow the
+palette, and so does most of what you run inside them: every open terminal
+repaints the moment the wallpaper changes.
+
+## kitty
+
+**<kbd>SUPER</kbd> <kbd>Return</kbd> opens one.** The window is translucent over
+the blurred wallpaper, and its background is the accent at 22 %, so it is tinted
+by the wallpaper and dark under every palette, the light one included.
+
+- **Every palette change repaints every open kitty window.** It sets red, green,
+  yellow and blue with their bright halves, the two text greys, and the accent
+  on cyan, the selection and the active tab. Magenta and bright black have no
+  source in a palette and keep kitty's own values. The cursor stays white.
+- **Cyan carries the accent**, so whatever a program draws in cyan follows the
+  wallpaper: `ls` paints symbolic links in it, and the prompt its path.
+- **The font is the shell's monospace setting**, JetBrainsMono Nerd Font Mono
+  unless you change it under **Settings → Appearance → Type → Monospace**. kitty
+  follows the change. It has to be a Nerd Font, or the icons in the prompt and on
+  the bar come out as empty boxes.
+- <kbd>CTRL</kbd> <kbd>SHIFT</kbd> <kbd>H</kbd> opens the scrollback in `less`.
+
+<Aside>
+The shell reaches open terminals through kitty's remote-control sockets in
+`$XDG_RUNTIME_DIR`, with `allow_remote_control socket-only`. Any program running
+as you can use those sockets too.
+</Aside>
+
+## zsh
+
+**zsh with oh-my-zsh**, which `./setup install` clones along with two plugins:
+zsh-autosuggestions and zsh-syntax-highlighting. Every tool `.zshrc` reaches for
+is checked for first, so a missing one prints nothing.
+
+| Type | What it does |
+|---|---|
+| `y` | yazi, leaving the shell in the folder yazi was closed in |
+| `fa` | the greeting: fastfetch beside the scene chosen in the settings |
+| `fa koi` | the greeting with a given scene |
+| `z`, `zi` | zoxide's jump to a folder you have been in, when zoxide is installed |
+| <kbd>CTRL</kbd> <kbd>R</kbd> | fzf through the history |
+| <kbd>CTRL</kbd> <kbd>T</kbd> | fzf for a file, pasted into the line |
+| <kbd>ALT</kbd> <kbd>C</kbd> | fzf for a folder to change into |
+| `matrix`, `bonsai`, `clock` | unimatrix, cbonsai and tty-clock, in the accent |
+| `cls` | clear |
+
+- `EDITOR` and `VISUAL` are neovim, or vim when there is no neovim.
+- fnm switches the Node version as you change directory, when it is installed.
+- The history keeps one copy of each command, the most recent.
+- `~/.local/bin` comes first in the `PATH`.
+- **`~/.zshrc.local` is read last and is not in the repository.** Put your own
+  lines there, and `.zshrc` stays a copy `setup` can keep up to date.
+
+## The prompt
+
+**starship, laid out like the bar**: what is always there on the left, what is
+happening now on the right. On the left, your user and host, the path in the
+accent, and a `❯` that turns red when the last command failed. On the right,
+only when there is something to say: the failed command's exit code, how long
+the last command took if it took more than two seconds, the git branch and its
+state, and the Node or Python version in a project that uses one. It is text
+only, in the terminal's own colours, so it follows the palette with nothing
+generated for it.
+
+## The greeting
+
+**`fa` runs fastfetch beside an animated pixel-art scene**, drawn in the
+terminal's own colours. Choose the scene under **Settings → Appearance → Theme →
+Greeting**, where each tile plays it.
+
+| Scene | Name for `fa` |
+|---|---|
+| Lava lamp | `lava` |
+| Critters | `critters` |
+| Koi | `koi` |
+| Invaders | `invaders` |
+| Random | a different scene every time `fa` runs |
+
+<Gallery columns={4} items={[
+  { name: 'greeting-lava', alt: 'A pixel-art lava lamp, its wax rising and falling', caption: 'Lava lamp' },
+  { name: 'greeting-critters', alt: 'Pixel-art critters under a night sky: a ghost, a crab, a slime and a creature in a hood', caption: 'Critters' },
+  { name: 'greeting-koi', alt: 'Pixel-art koi circling a round pond with lily pads', caption: 'Koi' },
+  { name: 'greeting-invaders', alt: 'Pixel-art invaders in rows over a small cannon', caption: 'Invaders' },
+]} />
+
+- `fa invaders` plays that scene whatever the setting says.
+- All four are redrawn on every palette change, which takes a few seconds in the
+  background, so just after a change `fa` can still show the old colours.
+- The scenes play in kitty only. They are drawn for a 9 × 20 pixel cell, and at
+  another font size kitty rescales them and the pixel edges go soft.
+- Random is `fa`'s own: `fastfetch` run by its name shows a single scene.
+- The five dots on the last line are the paint the scenes use: accent, green,
+  yellow, red, blue.
+- The scenes need ImageMagick, which `./setup packages` installs. Until the shell
+  has run once, they are painted in Catppuccin Mocha.
+
+## Programs that follow the palette
+
+| Program | What follows | When |
+|---|---|---|
+| btop | every colour, on the terminal's own background; a bar that fills runs green to red, free memory the other way | the next btop started |
+| cava | a gradient climbing from the accent | a running cava repaints |
+| yazi | the interface, and the syntax colours in the preview pane | the next yazi started |
+| neovim | the whole colourscheme | every running neovim repaints |
+| unimatrix (`matrix`), cbonsai (`bonsai`), tty-clock (`clock`), asciiquarium | they draw in the terminal's own colours | with the terminal |
+
+<Figure name="terminal" alt="yazi browsing the wallpapers with a preview, cbonsai growing a tree, and neovim editing the island's source, all in the palette of a golden wallpaper" caption="yazi, cbonsai and neovim, in the palette of a golden wallpaper." />
+
+- **btop keeps nothing you change inside it.** It is told not to save its
+  settings on exit, so a preset picked in a running btop lasts until you quit.
+- unimatrix, cbonsai and tty-clock come from the AUR and asciiquarium from
+  pacman; `./setup packages` installs all four.
+
+## yazi
+
+**`y` opens yazi**, and leaves the shell wherever you closed it. What
+<kbd>Enter</kbd> opens:
+
+| File | Opens in |
+|---|---|
+| A picture | imv, on the terminal's tinted background; <kbd>d</kbd> shows or hides its overlay |
+| A video or a song | mpv, with a window to pause or close it even for audio |
+| Text | `$EDITOR`, which is neovim |
+| A web page | your default browser, through `xdg-open` |
+| An archive | yazi unpacks it where it is |
+| A PDF, and anything else | `xdg-open`: whatever the machine says opens it |
+
+- The viewers are detached, so closing yazi leaves the picture or the video open.
+- <kbd>c</kbd> <kbd>y</kbd> copies the selection as files rather than as paths,
+  ready to paste into a file manager or a chat.
+- There is no PDF reader on the desk, so a PDF goes to the browser unless the
+  machine says otherwise. Outside yazi, what opens a file is the machine's own
+  setting, and the commands that set it are under
+  [Applications](/theming/apps/#making-the-rest-of-the-machine-agree).
+
+## neovim
+
+**neovim with seven plugins and no distribution**, managed by lazy.nvim, which
+clones itself and the plugins the first time neovim starts. <kbd>Space</kbd> is
+the leader. Plugins update with `:Lazy update`; nothing checks on startup.
+
+| Plugin | For |
+|---|---|
+| nvim-treesitter | syntax highlighting, with parsers compiled by the tree-sitter CLI |
+| nvim-lspconfig | language servers, each started only when it is installed |
+| blink.cmp | completion |
+| fzf-lua | finding files, text, buffers and symbols, with the fzf the shell already uses |
+| gitsigns.nvim | changes in the gutter |
+| lualine.nvim | the status line, coloured from the colourscheme |
+| nvim-tree.lua | the file tree, with a git column |
+
+The language servers it looks for are lua-language-server, basedpyright or
+pyright, ruff, bash-language-server and Qt's qmlls. All but basedpyright are in
+the package list.
+
+### Keys worth knowing
+
+| Keys | |
+|---|---|
+| <kbd>Space</kbd> <kbd>f</kbd> | find a file |
+| <kbd>Space</kbd> <kbd>g</kbd> | search the text of every file |
+| <kbd>Space</kbd> <kbd>b</kbd> | the open buffers |
+| <kbd>Space</kbd> <kbd>h</kbd> | help |
+| <kbd>Space</kbd> <kbd>s</kbd> | the symbols in this file |
+| <kbd>Space</kbd> <kbd>e</kbd> | show or hide the tree |
+| <kbd>Space</kbd> <kbd>E</kbd> | this file, in the tree |
+| <kbd>]</kbd> <kbd>c</kbd> · <kbd>[</kbd> <kbd>c</kbd> | the next and the previous change |
+| <kbd>Space</kbd> <kbd>h</kbd> <kbd>p</kbd> | preview a change |
+| <kbd>Space</kbd> <kbd>h</kbd> <kbd>b</kbd> | who last changed this line |
+| <kbd>Space</kbd> <kbd>d</kbd> | every diagnostic, in a list |
+| <kbd>CTRL</kbd> <kbd>h</kbd> · <kbd>j</kbd> · <kbd>k</kbd> · <kbd>l</kbd> | move between windows |
+| <kbd>Esc</kbd> | clear the search highlight |
+
+neovim's own language-server keys work as they come: `grn` renames, `gra` offers
+code actions, `grr` lists references, `gri` goes to the implementation, `grt` to
+the type, `gO` lists symbols, `K` shows the documentation, and `]d` and `[d` move
+between diagnostics.
+
+### The colourscheme
+
+**`impasto` is written on every palette change**, into the shell's state
+directory rather than into `~/.config/nvim`, and every running neovim repaints at
+once, without leaving insert mode. Backgrounds are left clear, so the terminal's
+tint shows through. The colours agree with yazi's preview and with VSCodium:
+keywords in the accent, strings green, functions blue, numbers yellow, types in
+the lighter accent. Comments are deliberately quieter than the rest.
+
+Before the shell's first palette change there is no `impasto` yet, and neovim
+starts in its own default colours. A language with no treesitter parser falls
+back to neovim's older highlighting and gets fewer of the colours.

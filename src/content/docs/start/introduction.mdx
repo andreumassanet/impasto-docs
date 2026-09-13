@@ -1,0 +1,77 @@
+---
+title: Introduction
+description: What impasto is — a Quickshell shell for Hyprland and the desk around it — what comes with it, and what it needs.
+sidebar:
+  order: 1
+---
+
+import { LinkCard, CardGrid, Card } from '@astrojs/starlight/components';
+import Figure from '~/components/Figure.astro';
+
+**impasto is a desktop shell for Hyprland, with the rest of the desk around it.**
+The shell is written in [Quickshell](https://quickshell.org) and is most of the
+code. The rest is the terminal, the prompt, two editors, two file managers, a
+browser, a chat client and the login screen, all configured to match. One
+script, `setup`, installs all of it on Arch Linux.
+
+<Figure name="hero" alt="The desk: the island at the top with a track playing, widgets down the right, a deck of notes on the left edge, a terminal with the lava lamp greeting, and the dock at the bottom" caption="The island, the widgets, a note deck on the edge, the terminal and the dock." />
+
+The name is the painting technique the wallpapers imitate: paint laid on thick
+enough to keep the mark of the brush. The desk comes with forty AI-generated
+images in that style.
+
+## Three ideas
+
+<CardGrid>
+  <Card title="One black island">
+    A capsule in the middle of the bar rests on the time and changes shape into
+    everything else: the glance, the control centre, the launcher, the
+    overview, a notification, a game. Every module on the bar opens into it,
+    and nothing has a title or a close button.
+  </Card>
+  <Card title="A desk under the windows">
+    Any module can sit on the wallpaper as a widget, on a grid, in four shapes.
+    Right-click the wallpaper to arrange them. Two themes draw the same
+    modules: Modern as a figure with a caption, Analogue as an object.
+  </Card>
+  <Card title="Colours from the painting">
+    Pick a wallpaper and its palette reaches the island, the widgets, the
+    terminal, btop, cava, yazi, neovim, VSCodium, the GTK, Qt and KDE windows,
+    Thunar's folders, Vesktop, Zen and Spotify. Or pick one of nine fixed
+    palettes instead.
+  </Card>
+</CardGrid>
+
+<Figure name="repaint" alt="The wallpaper changing three times, and the bar, the widgets, the terminal and the system monitor repainting with each one" caption="Each new wallpaper repaints everything around it." />
+
+## What comes with it
+
+| Part | What it is | Read more |
+|---|---|---|
+| The island and the bar | The bar in three styles, the island at its centre, notifications, the overview | [The island](/shell/island/), [The bar](/shell/bar/) |
+| The control centre | Quick controls and the doors to every other panel, on <kbd>SUPER</kbd> <kbd>A</kbd> | [Control centre](/shell/control-centre/) |
+| The launcher and the dock | Applications ranked by use, a calculator, windows, a countdown, the clipboard history; the pinned applications | [Launcher](/shell/launcher/), [Dock](/shell/dock/) |
+| The desktop | Widgets on a grid, two themes, notes stacked along the edges | [Desktop](/shell/desktop/) |
+| Capture | Screenshots, annotation, text from a region, screen recording | [Capture](/shell/capture/) |
+| Notes and tasks | A deck of paper notes and a three-lane board | [Notes and tasks](/shell/notes-and-tasks/) |
+| Games and pets | Eleven games played in the island, and five creatures on the bar | [Games and pets](/shell/games-and-pets/) |
+| Keys and packages | Every key on one sheet; pacman and the AUR in one panel | [Keys and packages](/shell/keys-and-packages/) |
+| Lock and login | The shell's own lock screen, and an SDDM theme that matches it | [Lock and login](/shell/lock-and-login/) |
+| Settings | The one ordinary window, with profiles that keep whole desks under names | [Settings](/shell/settings/) |
+| The terminal | kitty, zsh with oh-my-zsh, starship, fastfetch, and the programs run in it | [Terminal](/theming/terminal/) |
+| Other windows | GTK, Qt and KDE applications, Thunar, Zen, Vesktop, Spotify, VSCodium, imv | [Applications](/theming/apps/) |
+
+## What it needs
+
+- **Arch Linux.** Every package is named in `packages/pacman.txt` and
+  `packages/aur.txt`, and `setup` installs them with pacman and yay or paru.
+- **Hyprland 0.56 or newer, configured in Lua.** It is tested on 0.56.2.
+- **Quickshell 0.3**, installed with the rest.
+- **A terminal inside the Hyprland session** to run the installer from, and
+  your password for sudo.
+
+Most features rely on packages that are optional. A missing one takes its own
+control away rather than failing.
+
+<LinkCard title="Installation" description="Clone the repository and run ./setup install." href="/start/install/" />
+<LinkCard title="First steps" description="The first ten minutes on the desk." href="/start/first-steps/" />

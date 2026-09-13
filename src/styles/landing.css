@@ -1,0 +1,609 @@
+/*
+   ╭──────────────────────────────────────────────────────────────────────────╮
+   │                                                                          │
+   │   L A N D I N G                                                          │
+   │   the front page · the desk as the hero, then one room at a time         │
+   │                                                                          │
+   │   github.com/andreumassanet/impasto-docs                                 │
+   │                                                                          │
+   ╰──────────────────────────────────────────────────────────────────────────╯
+*/
+
+
+/* ── PAGE ────────────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	color-scheme: dark;
+	background: var(--p-bg);
+}
+html[data-paint-tone='light'] {
+	color-scheme: light;
+}
+
+body {
+	margin: 0;
+	font-family: var(--sl-font);
+	font-size: 1rem;
+	line-height: 1.6;
+	color: var(--p-text);
+	background: var(--p-bg);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	color: inherit;
+}
+
+:focus-visible {
+	outline: 2px solid var(--p-accent-hover);
+	outline-offset: 3px;
+}
+
+.skip {
+	position: absolute;
+	left: -100vw;
+}
+.skip:focus {
+	left: 1rem;
+	top: 1rem;
+	z-index: 10;
+	padding: 0.6rem 1rem;
+	border-radius: 999px;
+	background: var(--island);
+	color: #fff;
+}
+
+.capsule {
+	background: var(--island);
+	color: #fff;
+	border: 1px solid rgb(255 255 255 / 0.08);
+	border-radius: 999px;
+}
+
+
+/* ── HERO ────────────────────────────────────────────────────────────────── */
+
+.hero {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	grid-template-rows: auto 1fr auto;
+	min-height: max(100svh, 42rem);
+	padding: 0.9rem clamp(1rem, 3vw, 2rem) 1.1rem;
+	color: #fff;
+}
+
+.wall {
+	position: absolute;
+	inset: 0;
+	z-index: -3;
+	background: var(--island) var(--im-wall) center / cover no-repeat;
+}
+.wall-leaving {
+	z-index: -2;
+	background-image: none;
+	clip-path: inset(0 0 0 100%);
+}
+
+.scrim {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background:
+		linear-gradient(to bottom, rgb(0 0 0 / 0.5), transparent 7rem),
+		linear-gradient(to top, rgb(0 0 0 / 0.88) 0%, rgb(0 0 0 / 0.55) 30%, transparent 62%),
+		linear-gradient(to right, rgb(0 0 0 / 0.35), transparent 60%);
+}
+
+
+/* · the bar: the brand, the island on the time, the links */
+.bar {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.brand {
+	justify-self: start;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	height: 2.75rem;
+	padding: 0 1.1rem 0 0.5rem;
+	text-decoration: none;
+}
+.brand img {
+	width: 1.95rem;
+	height: 1.95rem;
+}
+.wordmark {
+	font-family: var(--im-hand);
+	font-size: 1.7rem;
+	line-height: 1;
+	transform: translateY(0.1em);
+}
+
+.island {
+	display: grid;
+	place-items: center;
+	min-width: 8.5rem;
+	height: 2.75rem;
+	padding-inline: 1.5rem;
+	font-weight: 650;
+	font-size: 1rem;
+	font-variant-numeric: tabular-nums;
+	letter-spacing: 0.02em;
+}
+
+.links {
+	justify-self: end;
+	display: flex;
+	align-items: center;
+	gap: 0.15rem;
+	height: 2.75rem;
+	padding-inline: 0.35rem;
+}
+.links a {
+	display: inline-flex;
+	align-items: center;
+	height: 2.1rem;
+	padding-inline: 0.85rem;
+	border-radius: 999px;
+	font-size: 0.95rem;
+	font-weight: 550;
+	color: #d4d4d4;
+	text-decoration: none;
+}
+.links a:hover {
+	background: var(--island-surface-hover);
+	color: #fff;
+}
+.links svg {
+	width: 1.15rem;
+	height: 1.15rem;
+}
+
+@media (max-width: 44rem) {
+	.bar {
+		grid-template-columns: auto 1fr;
+	}
+	.island,
+	.links .optional {
+		display: none;
+	}
+}
+
+
+/* · the headline, over the wallpaper's lower left */
+.hero-copy {
+	align-self: end;
+	min-width: 0;
+	padding-block: 3rem 1.75rem;
+}
+.hero-copy h1 {
+	max-width: 15ch;
+	margin: 0 0 1.1rem;
+	font-size: clamp(2.3rem, 1.1rem + 4.4vw, 4.6rem);
+	font-weight: 740;
+	line-height: 1;
+	letter-spacing: -0.04em;
+	text-wrap: balance;
+	text-shadow: 0 2px 30px rgb(0 0 0 / 0.35);
+}
+.hero-copy p {
+	max-width: 35rem;
+	margin: 0 0 1.75rem;
+	font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+	line-height: 1.5;
+	color: rgb(255 255 255 / 0.86);
+	text-wrap: pretty;
+}
+
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.button {
+	display: inline-flex;
+	align-items: center;
+	height: 3rem;
+	padding-inline: 1.4rem;
+	border-radius: 999px;
+	font-weight: 620;
+	text-decoration: none;
+	transition: background-color 0.2s ease;
+}
+.button.primary {
+	background: var(--p-accent);
+	color: var(--p-accent-text);
+}
+.button.primary:hover {
+	background: var(--p-accent-hover);
+}
+
+.command {
+	display: flex;
+	align-items: center;
+	min-width: 0;
+	max-width: min(100%, 33rem);
+	height: 3rem;
+	padding-left: 1.15rem;
+}
+.command code {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-family: var(--sl-font-mono);
+	font-size: 0.84rem;
+	color: #dcdcdc;
+}
+.command code::before {
+	content: '$ ';
+	color: #767676;
+}
+
+.copy {
+	position: relative;
+	flex: none;
+	display: grid;
+	place-items: center;
+	width: 3rem;
+	height: 3rem;
+	border: 0;
+	border-radius: 999px;
+	background: transparent;
+	color: #b5b5b5;
+	cursor: pointer;
+}
+.copy:hover {
+	color: #fff;
+}
+.copy svg {
+	width: 1.1rem;
+	height: 1.1rem;
+}
+.copy .done,
+.copy[data-copied] .idle {
+	display: none;
+}
+.copy[data-copied] .done {
+	display: block;
+	color: #32d74b;
+}
+
+
+/* · the dock: the wallpapers, the running dot under the one that is up */
+.dock-wrap {
+	justify-self: center;
+	display: grid;
+	justify-items: center;
+	gap: 0.55rem;
+	width: min(100%, 62rem);
+}
+.dock-hint {
+	margin: 0;
+	font-size: 0.9rem;
+	color: rgb(255 255 255 / 0.78);
+	text-align: center;
+	text-wrap: balance;
+}
+.dock {
+	display: flex;
+	gap: 0.4rem;
+	max-width: 100%;
+	padding: 0.45rem 0.45rem 0.7rem;
+	overflow-x: auto;
+	border-radius: var(--radius-desk);
+	scroll-snap-type: x proximity;
+	scrollbar-width: none;
+}
+.dock::-webkit-scrollbar {
+	display: none;
+}
+.dock button {
+	position: relative;
+	flex: none;
+	width: 4.25rem;
+	height: 2.65rem;
+	padding: 0;
+	border: 0;
+	border-radius: 0.65rem;
+	background: var(--island-surface);
+	cursor: pointer;
+	scroll-snap-align: center;
+	transition: transform 0.18s ease;
+}
+.dock button img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 0.65rem;
+}
+.dock button:hover {
+	transform: translateY(-3px);
+}
+.dock button[aria-pressed='true'] img {
+	box-shadow: 0 0 0 2px var(--island), 0 0 0 3.5px #fff;
+}
+.dock button[aria-pressed='true']::after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	bottom: -0.5rem;
+	width: 0.3rem;
+	height: 0.3rem;
+	border-radius: 50%;
+	background: #fff;
+	transform: translateX(-50%);
+}
+.dock button[aria-busy='true'] {
+	opacity: 0.6;
+}
+
+@media (max-width: 44rem) {
+	.dock button {
+		width: 3.6rem;
+		height: 2.25rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.dock button,
+	.button {
+		transition: none;
+	}
+}
+
+
+/* ── ROOMS ───────────────────────────────────────────────────────────────── */
+
+main {
+	padding-inline: clamp(1rem, 4vw, 3rem);
+}
+
+.room {
+	max-width: 76rem;
+	margin-inline: auto;
+	padding-block: clamp(3.5rem, 8vw, 7rem);
+	border-top: 1px solid color-mix(in oklab, var(--p-border) 50%, transparent);
+}
+main > .room:first-child {
+	border-top: 0;
+}
+
+.room h2 {
+	margin: 0 0 1rem;
+	font-size: clamp(1.8rem, 1.15rem + 2.2vw, 2.9rem);
+	font-weight: 720;
+	line-height: 1.06;
+	letter-spacing: -0.035em;
+	color: var(--p-text);
+	text-wrap: balance;
+}
+.room p {
+	max-width: 38rem;
+	margin: 0 0 1.1rem;
+	font-size: 1.08rem;
+	color: color-mix(in oklab, var(--p-text) 78%, var(--p-muted));
+	text-wrap: pretty;
+}
+.room p code,
+.room li code {
+	padding: 0.1em 0.35em;
+	border-radius: 6px;
+	font-family: var(--sl-font-mono);
+	font-size: 0.86em;
+	background: color-mix(in oklab, var(--p-surface) 85%, var(--p-bg));
+}
+.more {
+	font-weight: 620;
+	color: color-mix(in oklab, var(--p-accent-hover) 45%, var(--p-text));
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.25em;
+}
+.more:hover {
+	text-decoration-thickness: 2px;
+}
+
+.media {
+	margin: 0;
+	min-width: 0;
+}
+.media img {
+	width: 100%;
+	border-radius: var(--radius-desk);
+	background: var(--island);
+}
+.media + .media {
+	margin-top: 1.25rem;
+}
+
+/* · a tall picture: the words stay beside it while it scrolls */
+.side {
+	display: grid;
+	gap: clamp(1.5rem, 4vw, 4rem);
+}
+@media (min-width: 64rem) {
+	.side {
+		grid-template-columns: minmax(18rem, 24rem) 1fr;
+		align-items: start;
+	}
+	.side > .text {
+		position: sticky;
+		top: 2rem;
+	}
+}
+
+/* · a wide picture: the words above it, in two columns */
+.wide > .text {
+	display: grid;
+	gap: 0.5rem 3rem;
+	margin-bottom: 2rem;
+}
+@media (min-width: 56rem) {
+	.wide > .text {
+		grid-template-columns: 1fr 1fr;
+		align-items: end;
+	}
+	.wide > .text h2 {
+		margin: 0;
+	}
+	.wide > .text p:last-of-type {
+		margin-bottom: 0.6rem;
+	}
+}
+
+/* · the palette room: what follows, drawn in the colours it gets */
+.followers {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin: 1.5rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+.followers li {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	padding: 0.3rem 0.8rem 0.3rem 0.6rem;
+	border-radius: 999px;
+	font-size: 0.88rem;
+	font-weight: 550;
+	color: var(--p-text);
+	background: color-mix(in oklab, var(--p-surface) 80%, transparent);
+	border: 1px solid color-mix(in oklab, var(--p-border) 70%, transparent);
+}
+.followers li::before {
+	content: '';
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	background: var(--p-accent-hover);
+}
+
+
+/* · installing */
+.install {
+	display: grid;
+	gap: 2rem;
+}
+@media (min-width: 64rem) {
+	.install {
+		grid-template-columns: minmax(18rem, 26rem) 1fr;
+		align-items: center;
+	}
+}
+.terminal {
+	position: relative;
+	min-width: 0;
+	padding: 1.4rem 3.5rem 1.4rem 1.5rem;
+	border: 1px solid var(--island-border);
+	border-radius: var(--radius-desk);
+	background: var(--island);
+	color: #e8e8e8;
+}
+.terminal pre {
+	margin: 0;
+	overflow-x: auto;
+	font-family: var(--sl-font-mono);
+	font-size: 0.92rem;
+	line-height: 2;
+}
+.terminal .prompt {
+	color: #6f6f6f;
+	user-select: none;
+}
+.terminal .copy {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+}
+
+
+/* · the documentation, all of it */
+.map-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr));
+	gap: 2rem 1.5rem;
+	margin-top: 2.25rem;
+}
+.map h3 {
+	margin: 0 0 0.8rem;
+	font-size: 1rem;
+	font-weight: 680;
+	color: var(--p-text);
+}
+.map ul {
+	display: grid;
+	gap: 0.45rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.map li a {
+	font-size: 0.95rem;
+	color: color-mix(in oklab, var(--p-text) 72%, var(--p-muted));
+	text-decoration: none;
+}
+.map li a:hover {
+	color: var(--p-text);
+	text-decoration: underline;
+	text-underline-offset: 0.22em;
+}
+
+
+/* ── FOOT ────────────────────────────────────────────────────────────────── */
+
+.foot {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem 2rem;
+	max-width: 76rem;
+	margin-inline: auto;
+	padding: 2.25rem clamp(1rem, 4vw, 3rem) 3rem;
+	border-top: 1px solid color-mix(in oklab, var(--p-border) 50%, transparent);
+	font-size: 0.9rem;
+	color: var(--p-muted);
+}
+.foot .brand {
+	color: var(--p-text);
+	padding: 0;
+	height: auto;
+}
+.foot p {
+	margin: 0;
+}
+.foot nav {
+	display: flex;
+	gap: 1.25rem;
+}
+.foot a:not(.brand) {
+	color: var(--p-muted);
+	text-underline-offset: 0.22em;
+}
+.foot a:not(.brand):hover {
+	color: var(--p-text);
+}

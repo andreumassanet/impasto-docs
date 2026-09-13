@@ -1,0 +1,151 @@
+---
+title: Installation
+description: Install impasto on Arch Linux with ./setup install, what it does in order, its flags, and the few things left to do by hand.
+sidebar:
+  order: 2
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+import Figure from '~/components/Figure.astro';
+
+**One script installs everything: `setup`.** It installs the packages, copies
+`home/` into your home and `system/` into `/`, and builds two Hyprland plugins.
+Nothing is linked. Every file is a copy, and `setup` remembers what it wrote.
+
+## Requirements
+
+- Arch Linux, with `git` to clone the repository.
+- Hyprland 0.56 or newer (tested on 0.56.2), configured in Lua.
+- A terminal **inside the Hyprland session**. The plugins are built against the
+  compositor that is running, so `setup` cannot build them from a TTY or from
+  another desktop.
+- Your password, for sudo.
+
+## Install
+
+<Steps>
+
+1. Clone the repository and run the installer from a terminal in Hyprland:
+
+   ```bash
+   git clone https://github.com/andreumassanet/impasto.git ~/impasto
+   cd ~/impasto
+   ./setup install
+   ```
+
+2. Answer pacman's questions and give your password when sudo asks for it.
+
+3. Log out and back in. The shell, the wallpaper daemon and the plugins start
+   with the session.
+
+</Steps>
+
+To see what would happen first, add `--dry-run`. It prints every package it
+would install and every file it would write, and changes nothing.
+
+```bash
+./setup install --dry-run
+```
+
+## What it does, in order
+
+| Step | What happens |
+|---|---|
+| Packages | Installs whatever `packages/pacman.txt` lists and is missing, with `sudo pacman -S --needed`. Then the AUR half, `packages/aur.txt`, through yay or paru. If you have neither, it offers to build `yay-bin` from the AUR. |
+| User folders | Runs `xdg-user-dirs-update`, which creates the folders captures and recordings land in. Existing folders are never renamed. |
+| oh-my-zsh | Clones oh-my-zsh into `~/.oh-my-zsh`, with the zsh-autosuggestions and zsh-syntax-highlighting plugins. It is cloned rather than installed with its own script, because that script replaces `~/.zshrc`. |
+| `home/` | Copies every file into `$HOME`. The first time, it also renders the terminal greeting's scenes (if ImageMagick is installed) and a minimal `impasto` icon theme. |
+| `system/` | Copies the login screen's theme and two configuration fragments into `/`, with sudo, and creates `/var/lib/impasto/faces`. |
+| Plugins | Builds and enables hypr-dynamic-cursors (shake to find) and hyprglass (glass on the windows) with hyprpm. |
+
+A file of yours that is already in the way is moved to
+`~/.local/state/impasto/backups/` before anything is written. See
+[Updating](/start/updating/) for how the copies are kept after that.
+
+## Flags
+
+| Flag | Effect |
+|---|---|
+| `--skip-packages` | Install nothing; copy and build only. |
+| `--skip-system` | Leave `/` alone: no login screen, and no password for it. |
+| `--skip-plugins` | Do not build the plugins: no shake to find, no glass. |
+| `--aur-helper yay` or `paru` | Which helper installs the AUR half. The one you have is used; if you have neither, this one is built from the AUR (yay if unset). |
+| `--noconfirm` | Take the default answer at every question, pacman's and the helper's included. |
+| `-n`, `--dry-run` | Say what would happen, and do none of it. |
+
+## What it asks for
+
+- **sudo for pacman**, to install the packages.
+- **sudo for the copy into `/`**, once, before the system files are written.
+- **sudo for hyprpm**, whose plugin store is root's, under
+  `/var/cache/hyprpm/`. This is why the plugins need a terminal that can ask for
+  a password.
+- **Whether to build yay**, only when neither yay nor paru is installed.
+
+<Aside type="note" title="The power button">
+`system/` tells logind to ignore a short press of the power button, from the
+next boot. The shell opens its session menu instead. With the shell not
+running, or at the login screen, a short press does nothing. Holding the button
+is still the firmware's forced power-off.
+</Aside>
+
+## The windows that need one command
+
+Some programs keep their settings where the palette cannot reach them, so each
+has a verb of its own. Run each once, with that program closed:
+`./setup vscodium`, `./setup thunar` and `./setup spotify`.
+[Applications](/theming/apps/) explains each one.
+
+Shake to find magnifies the pointer, and the pointer only stays sharp at that
+size if it is a vector cursor. This command fetches the vector cursor and
+builds it in the chosen colour:
+
+```bash
+./setup cursors
+```
+
+## The login screen
+
+`install` copies the SDDM theme into `/usr/share/sddm/themes/impasto/` but
+never switches to it. Try it first, from the repository:
+
+```bash
+sddm-greeter-qt6 --test-mode --theme system/usr/share/sddm/themes/impasto
+```
+
+A theme that fails to load says nothing in the terminal. SDDM falls back to its
+own theme and prints the reason in red on that screen, so look at the window.
+When it loads, set `Current=impasto` under `[Theme]` in a file in
+`/etc/sddm.conf.d/`.
+
+<Figure name="lock-and-login" alt="The lock screen over the blurred desk, and the SDDM login screen over a painting of brush strokes, with the same clock, the same face and the same field" caption="The lock screen and the login screen: the same clock, face and field." />
+
+### The face
+
+The picture on the lock and login screens is
+`/var/lib/impasto/faces/<username>.face.icon`. The directory belongs to root,
+so copy it in with sudo:
+
+```bash
+sudo install -m 644 ~/picture.png /var/lib/impasto/faces/$USER.face.icon
+```
+
+`setup` creates the directory and never removes it, not even on uninstall.
+
+## Making the rest of the machine agree
+
+What opens a file, and whether GTK applications come up dark, are settings of
+the machine rather than files. Run these once:
+
+```bash
+xdg-mime default imv.desktop image/jpeg image/png image/gif image/webp image/svg+xml
+xdg-mime default nvim.desktop text/plain application/json
+xdg-mime default thunar.desktop inode/directory
+xdg-mime default zen.desktop application/pdf text/html     # or whichever browser you use
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+gsettings set org.gnome.desktop.interface icon-theme impasto
+```
+
+The last line is what makes Thunar's folders take the wallpaper's colour.
+
+Next: [First steps](/start/first-steps/).

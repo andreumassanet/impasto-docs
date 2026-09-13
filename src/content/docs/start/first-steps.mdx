@@ -1,0 +1,112 @@
+---
+title: First steps
+description: The first ten minutes on the desk — the keys to know, changing the wallpaper, Settings, the bar, the widgets and profiles.
+sidebar:
+  order: 3
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+import Figure from '~/components/Figure.astro';
+
+**The first login starts on a finished desk.** A machine with no settings yet
+opens on the *Moon castle* profile: the whole bar in one capsule, Analogue
+widgets on the wallpaper and the dock at the bottom. Everything below changes
+it.
+
+## The keys to know
+
+| Keys | What they do |
+|---|---|
+| <kbd>SUPER</kbd> <kbd>Return</kbd> | Open a terminal |
+| <kbd>SUPER</kbd> <kbd>Space</kbd> | The launcher |
+| <kbd>SUPER</kbd> <kbd>Q</kbd> | Close the focused window |
+| <kbd>SUPER</kbd> <kbd>1</kbd> … <kbd>0</kbd> | Go to a workspace; add <kbd>SHIFT</kbd> to move the window there |
+| <kbd>SUPER</kbd> <kbd>TAB</kbd> | Every workspace at once |
+| <kbd>SUPER</kbd> <kbd>A</kbd> | The control centre |
+| <kbd>SUPER</kbd> <kbd>X</kbd> | The session menu |
+| <kbd>SUPER</kbd> <kbd>L</kbd> | Lock the screen |
+| <kbd>SUPER</kbd> <kbd>H</kbd> | Every other key |
+
+A panel closes with the key that opened it, a click anywhere else, or
+<kbd>Escape</kbd>. The full list is in [Keybindings](/reference/keybindings/).
+
+## Change the wallpaper
+
+<Steps>
+
+1. Press <kbd>SUPER</kbd> <kbd>T</kbd>. The island becomes a strip of the
+   wallpapers.
+
+2. Slide the strip with <kbd>Left</kbd> and <kbd>Right</kbd>, or with the
+   pointer, and press <kbd>Enter</kbd> on the one in the middle.
+
+3. Press <kbd>Down</kbd> for the palettes under it, or open them directly with
+   <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>T</kbd>. The adaptive palette takes
+   its colours from the wallpaper; the others are fixed.
+
+</Steps>
+
+The same panel is under **Wallpaper** and **Palette** when you right-click the
+wallpaper, and in Settings → Appearance → Theme. To add your own pictures, put
+them in `~/.local/share/wallpapers` (JPEG, PNG or WebP). They appear the next
+time the strip opens. More in [Wallpapers and palettes](/theming/palettes/).
+
+## Open Settings
+
+Press <kbd>SUPER</kbd> <kbd>,</kbd>, or right-click the wallpaper and choose
+**Settings**. It is an ordinary window with a search field over the sidebar,
+and the sidebar is in three groups: the shell, the desk and the session.
+
+<Figure name="settings" alt="Two pages of the settings window: the bar arranged on a picture of it, and the appearance page with the wallpaper transitions and the greeting scenes" caption="The bar page and the appearance page." />
+
+## Arrange the bar
+
+Open Settings → Bar & Island → **The bar**. The bar is drawn as a picture, with
+a catalogue of every piece under it. Drag a piece onto the left or right half
+of the bar; drag one off the bar to remove it. Click a piece for a look of its
+own. **Style**, on the same page, draws the same layout grouped around the
+island, spread to the edges, or inside one capsule. See [The bar](/shell/bar/).
+
+## Arrange the desk
+
+<Steps>
+
+1. Right-click the wallpaper and choose **Arrange widgets**. The widgets come in
+   front of the windows, and a tray of every module slides up.
+
+2. Drag a tile from the tray onto the grid. Pull a widget's corner to change its
+   shape, and click it for its own look.
+
+3. Take a widget off with the badge in its corner, or by dropping it back on the
+   tray.
+
+4. Press **Done** on the tray, or right-click anywhere, to finish.
+
+</Steps>
+
+Settings → Desktop → The widgets → **Edit** opens the same mode. See
+[Desktop](/shell/desktop/).
+
+## Switch profile
+
+A profile keeps a whole desk under a name: the bar, the widgets, the dock, the
+look, the keys, the wallpaper and its palette. Three come with impasto:
+*Moon castle*, *Fuji* and *Night bay*. Open Settings → System → **Profiles** and
+press **Switch** on one.
+
+<Aside type="caution">
+Switching re-reads the Hyprland configuration, so anything you changed by hand
+with `hyprctl` goes with it.
+</Aside>
+
+Your screens, your name and picture, the language, the weather location and the
+GitHub user stay with the machine. Notes, tasks and the clipboard are shared by
+every profile. See [Settings](/shell/settings/).
+
+## Find every other key
+
+<kbd>SUPER</kbd> <kbd>H</kbd> shows every key on one sheet in the island,
+read from the compositor, so a key you changed is on it the next time it opens.
+To change one, go to Settings → Keys: **The shell's own** and **The
+compositor's**. Every key belongs to the profile in use. See
+[Keys and packages](/shell/keys-and-packages/).
