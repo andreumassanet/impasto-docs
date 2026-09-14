@@ -37,6 +37,20 @@ Install yay or paru, or let `setup` build one, then run:
 ./setup packages
 ```
 
+### install skipped a program
+
+`install` sets up Thunar, VSCodium, Vesktop and Spotify once, and skips one it
+cannot set up yet, with the reason: Thunar or Vesktop open, Spotify open or
+never started, no network. Close the program — for Spotify, open it once first
+and close it — then run:
+
+```bash
+./setup update
+```
+
+Each also has a verb of its own, such as `./setup vesktop`, which stops with
+the reason instead of skipping.
+
 ### A file ending in .new appeared
 
 You edited a file `setup` installed, and the repository has a newer version of
@@ -83,6 +97,14 @@ The desk reads the copy in your home, not the repository. Copy it across:
 
 Changes under `system/` need `./setup system` instead.
 
+### Night bay's widgets are out of place
+
+A desk installed before 0.2.1 keeps the shipped profiles as they first
+arrived, laid out for 18 columns, and a 1920 × 1200 screen holds 17: Night
+bay's clock drops below the rest. Take the shipped file again from **System →
+Profiles → Import…**, which opens on the shipped profiles: pick
+`3-night-bay.json`, switch to the new copy and delete the old one.
+
 ### A control is dimmed, or missing
 
 Most features depend on an optional package. A missing one takes its own
@@ -125,7 +147,8 @@ hyprpm reload
 
 ### The pointer is blurry when it grows
 
-The pointer is a small bitmap until the vector cursor has been built. Run:
+The pointer is a small bitmap until the vector cursor has been built, which
+`install` does when it can reach the network. Run:
 
 ```bash
 ./setup cursors
@@ -144,10 +167,23 @@ power-off.
 
 ## The login screen
 
+### The login screen is another one
+
+`install` enables sddm only where no display manager is enabled, so a machine
+that already starts another one keeps it. Disable that one, then enable sddm:
+
+```bash
+sudo systemctl disable gdm      # or whichever one starts now
+sudo systemctl enable sddm
+```
+
+With sddm running, a theme named in a file of `/etc/sddm.conf.d/` that sorts
+after `10-impasto.conf`, or in `/etc/sddm.conf`, wins over this one.
+
 ### The theme does not load
 
 SDDM falls back to its own theme and prints the reason in red on that screen,
-not in a terminal. Test the theme from the repository before switching to it:
+not in a terminal. Test the theme from the repository:
 
 ```bash
 sddm-greeter-qt6 --test-mode --theme system/usr/share/sddm/themes/impasto
@@ -178,17 +214,21 @@ change redraws them too.
 
 ## Other windows
 
+### Spotify keeps the old colours
+
+The palette is written into the patched client and read when Spotify starts,
+so a Spotify that is open keeps the colours it started with. Restart it.
+
 ### Spotify lost its colours after an update
 
-A Spotify update replaces the files the palette was patched into. Put it back:
+A Spotify update replaces the files the palette was patched into. The next
+`./setup update` patches it again, with the player closed, or do it now:
 
 ```bash
 ./setup spotify
 ```
 
-The same command is how Spotify takes a new palette at all: it never follows a
-wallpaper change on its own. If it stops with `/opt/spotify is not writable`,
-it prints the command that makes it writable.
+It asks to make `/opt/spotify` writable when it is not.
 
 ### VSCodium keeps the old colours
 
@@ -199,21 +239,29 @@ picker (<kbd>Ctrl</kbd> <kbd>K</kbd> <kbd>Ctrl</kbd> <kbd>T</kbd>).
 
 ### Vesktop is not themed
 
-The theme is written, but Vesktop wears it only once it is ticked. Open Vesktop
-→ Settings → Themes and enable `impasto.css`. After that it repaints while
-open.
+The theme is written, but Vesktop wears it only once it is ticked, and
+`install` ticks it only while Vesktop is closed. Close Vesktop and run:
+
+```bash
+./setup vesktop
+```
+
+Or tick `impasto.css` under Vesktop → Settings → Themes. After that it
+repaints while open.
 
 ### GTK windows come up light
 
-Whether GTK applications are dark is a machine setting. Run:
+Whether GTK applications are dark is a machine setting, and it holds only when
+set from inside the session. From a terminal in Hyprland, run:
 
 ```bash
-gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+./setup defaults
 ```
 
 ### Thunar's folders stay blue
 
-The folder colours are an icon theme, and dconf decides which one GTK uses:
+The folder colours are an icon theme, and dconf decides which one GTK uses.
+`./setup defaults` sets it, or set it alone:
 
 ```bash
 gsettings set org.gnome.desktop.interface icon-theme impasto

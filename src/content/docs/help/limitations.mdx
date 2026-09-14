@@ -13,28 +13,28 @@ there is a way round, it is given.
 - **Most programs take a new palette only in their next window**: btop, yazi,
   imv, GTK and Qt windows, Thunar and its folders, Zen and VSCodium. Restart the
   program, or in VSCodium run **Developer: Reload Window**.
-- **Spotify changes only when you run `./setup spotify`**, and loses the palette
-  at every Spotify update until you run it again. Your user has to be able to
-  write to `/opt/spotify`. See [Applications](/theming/apps/#spotify).
+- **Spotify takes a new palette at its next start**, not while it plays. A
+  Spotify update takes the patch away until the next `./setup update`, and your
+  user has to be able to write to `/opt/spotify`. See
+  [Applications](/theming/apps/#spotify).
 - **The login screen does not follow the palette.**
-- **Vesktop wears nothing until the theme is ticked** once under **Themes**. A
-  Discord update that renames its colour variables leaves parts of the window
-  unthemed, with no error.
-- **VSCodium's font and chrome change only when `./setup vscodium` runs**, not
-  when the wallpaper does. Error Lens and indent-rainbow draw nothing until the
-  folder is trusted.
+- **A Discord update that renames its colour variables** leaves parts of
+  Vesktop unthemed, with no error.
+- **VSCodium's settings are merged once**, by the install. After that only the
+  font and the extensions' colours in them follow, and a key you delete stays
+  deleted. Error Lens and indent-rainbow draw nothing until the folder is
+  trusted.
 - **Zen's own theme picker does nothing** while the palette is on it, and an
   empty tab is Firefox's grey. The way back is under
   [Applications](/theming/apps/#zen).
-- **GTK windows come up light** until you run
-  `gsettings set org.gnome.desktop.interface color-scheme prefer-dark`, and the
-  shell's font setting does not reach them.
+- **GTK's dark setting holds only when set inside the session**: an install run
+  from a TTY leaves GTK windows light until `./setup defaults` runs in
+  Hyprland. The shell's font setting does not reach them.
 - **Without qt6ct, Qt windows come up light grey.** Qt 5 applications, VLC among
   them, are not themed.
 - **Thunar's path row cannot be painted.** The folders land on the nearest of
   Papirus's twenty-five colours rather than on the accent, and without Papirus
-  there are no coloured folders. Thunar's settings are applied only by
-  `./setup thunar`.
+  there are no coloured folders.
 - **yazi's file icons keep their own colours**: a Python file is Python's blue
   and yellow under every palette.
 - **The selected row in btop and yazi is low-contrast in a few palettes**, and
@@ -109,6 +109,9 @@ there is a way round, it is given.
   from Settings.
 - **A floating dock draws over the bottom row of widgets**, unless it reserves
   its space.
+- **A photo holds one picture, as a path**: no album, nothing dropped on it
+  from a file manager, and a picture moved on disk leaves it empty. Its picker
+  has no typed path and no search, and lists PNG, JPEG, WebP and BMP only.
 
 ## Notes and tasks
 
@@ -203,14 +206,17 @@ there is a way round, it is given.
   `hyprpm update`, or `./setup plugins`.
 - **The glass shows only through translucent windows**, which in practice means
   the terminal.
-- **Until `./setup cursors` has run, the pointer is a small picture** that
-  pixelates when it grows.
+- **Until the vector cursor is built, the pointer is a small picture** that
+  pixelates when it grows. `install` builds it; without the network, run
+  `./setup cursors` later.
 - **Applications that draw their own pointer**, Electron and XWayland ones, show
   their own, uncoloured and unmagnified.
 
 ## The login screen
 
 - **One screen**: the primary.
+- **sddm is enabled only where no display manager was**, and only from the
+  next boot: a machine that starts another one keeps it.
 - **The battery ring reads only `BAT0`, `BAT1` or `BAT2`.**
 - **The account and session lists work with the pointer only.**
 - **No on-screen keyboard and no accessibility aids.**

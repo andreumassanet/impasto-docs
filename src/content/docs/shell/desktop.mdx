@@ -1,6 +1,6 @@
 ---
 title: Widgets on the desktop
-description: The grid of widgets under the windows — the four shapes, arranging them, each widget's own look, the two themes and the note decks on the edges.
+description: The grid of widgets under the windows — the four shapes, arranging them, each widget's own look, the two themes, photos and the note decks on the edges.
 sidebar:
   order: 7
 ---
@@ -25,8 +25,9 @@ same module can be on the grid twice: a clock as a band and another as a dial.
 
 **Everything sits on a grid, and nothing overlaps.** A widget's place is a
 column and a row, and the gap between two widgets is the gap between two
-windows. The grid starts under the bar and stops short of the dock when the
-dock reserves its space; a floating dock draws over the bottom row.
+windows. The grid fills the space under the bar with the same margin on all
+four sides, and stops short of the dock when the dock reserves its space; a
+floating dock draws over the bottom row.
 
 A widget dropped on an occupied square goes to the nearest free one, or back
 where it came from if the board has no room. The widgets already there never
@@ -54,28 +55,38 @@ card.
 
 ## Arranging
 
-**Right-click the wallpaper and choose Arrange widgets.** The desktop lifts
-above the windows, the grid is drawn, and a tray of every module slides up
-along the bottom, each tile a live miniature of its square.
+**Right-click the wallpaper and choose Arrange widgets.** The desktop comes in
+front of the windows over a clear view of the wallpaper, the grid is drawn, and
+a card of every module opens at the bottom, each drawn as its real face at the
+smallest shape it offers.
 
-<Figure name="arrange" alt="The desk in arranging mode: widgets on a faint grid, the weather widget selected with a card beside it for its shape, face, style and opacity, and a tray of every module along the bottom." caption="Arranging: the tray along the bottom, and one widget's card open." />
+<Figure name="arrange" alt="The desk in arranging mode: widgets on a faint grid over the bare wallpaper, one widget selected with a card beside it for its shape, face, style and opacity, and a card holding every module's face at the bottom." caption="Arranging: the card of every module, and one widget's own card open." />
 
-- **Add** — drag a tile from the tray onto the grid; the squares it will land
-  on are lit before you let go. A click on a tile puts it on the first free
-  square instead.
+- **Add** — drag a piece from the card onto the grid; the squares it will land
+  on are lit before you let go. A click on a piece puts it on the first free
+  square instead. It lands at its smallest shape.
 - **Move** — drag the widget.
 - **Change its shape** — pull the handle in its bottom-right corner. The shape
   changes as the pointer crosses from one footprint to the next, never
   stretching in between. The mouse wheel over a widget steps through its
   shapes too.
 - **Remove** — the ⊖ badge in its top-left corner, or drop the widget on the
-  tray.
+  card.
 - **Give it a look of its own** — click it (below).
 
 The badge and the handle appear under the pointer and on the selected widget.
-**Done** on the tray, or the right button anywhere, ends arranging. The same
-mode opens from Settings → Desktop → The widgets → Edit, which closes the
-settings window meanwhile. Arranging never takes the keyboard.
+
+**The card moves and grows.** Drag it by any part that is not a piece, or by
+the circle on its top-left corner. The circle on the opposite corner resizes it
+in whole columns and rows, and the pieces flow into the new width; what does
+not fit scrolls, with the wheel or the bar in its right margin. Where you moved
+it lasts until arranging ends, and its size for the session.
+
+**<kbd>Escape</kbd> ends arranging**, and so do a right-click on the grid and a
+click on the bar or on any other surface. It also ends by itself when the
+screen changes under it: another workspace, the special workspace, a window
+opening or one going full screen. The same mode opens from Settings → Desktop →
+The widgets → **Edit**, which closes the settings window meanwhile.
 
 ### The right button
 
@@ -88,8 +99,9 @@ At rest, the right button opens a menu where it was pressed:
 | A note | Open, Edit and Remove |
 
 Wallpaper and Palette open the island's pickers ([Palettes](/theming/palettes/)).
-The left button on the wallpaper does nothing but close a menu, and the menu
-has no keyboard: a click elsewhere closes it.
+The menu opens over the windows without lifting the widgets above them. The
+left button on the wallpaper does nothing but close a menu, and the menu has no
+keyboard: a click elsewhere closes it.
 
 ## Each widget's own look
 
@@ -103,6 +115,10 @@ its left or under it, wherever there is room.
 | Style | Capsule, Accent, Outline or No capsule |
 | The slider | How solid the capsule is, 20 to 100 %, with a button that puts it back |
 | Remove | Takes the widget off |
+
+A note and a photo draw their own paper and picture, so neither has a Style or
+a slider, and a note has no Face. A photo's card holds its **Picture** instead,
+and a print's its **Caption** too ([Photos](#photos)).
 
 <Figure name="desktop-styles" alt="The same five widgets in four styles over a coastal wallpaper: Capsule, Accent, Outline and no capsule" caption="Capsule, Accent, Outline and no capsule, on the same five widgets." />
 
@@ -138,9 +154,9 @@ widget.
 Modern lays every widget out on the same grid — the mark top left, the name top
 right, the reading along the bottom — so a wall of them reads as a set, and a
 bigger shape is the same widget saying more: a card fills in the right, a large
-square the middle. The player's sleeve, the month and the GitHub wall are drawn
-whole rather than as a reading. Analogue keeps the figure small under the object
-on a square and puts the words beside it on a card.
+square the middle. The player's sleeve, the month, the GitHub wall and a photo
+are drawn whole rather than as a reading. Analogue keeps the figure small under
+the object on a square and puts the words beside it on a card.
 
 | Module | Shapes | Analogue draws |
 |---|---|---|
@@ -162,6 +178,7 @@ on a square and puts the words beside it on a card.
 | Games | square, card | a joystick |
 | GitHub | square, card, band | the wall of contribution squares, in both themes |
 | Notes | all four | paper, in both themes |
+| Photo | all four | an instant print, or a strip of film on the band |
 
 A widget switched to a theme with no face for its shape shrinks to the largest
 shape that fits inside the old one, so nothing grows into a neighbour.
@@ -225,6 +242,46 @@ arrow. See [Notes and tasks](/shell/notes-and-tasks/).
 </TabItem>
 </Tabs>
 
+## Photos
+
+**A photo widget holds a picture of your own**, in any of the four shapes. In
+Modern the picture fills the widget edge to edge, with the widget's own
+corners and no capsule. In Analogue it is an instant print — a paper border, a
+strip of tape along the top and a caption handwritten in its chin — leaning a
+little, each photo its own way; on the band it is a strip of film, the one
+picture running under three frames. Photo is a desktop widget only.
+
+<Tabs syncKey="face">
+<TabItem label="Modern">
+<Figure name="photo-modern" alt="A photo widget in Modern: a painting of the Faraglioni off Capri, filling a large square edge to edge" caption="Edge to edge, with the widget's own corners." />
+</TabItem>
+<TabItem label="Analogue">
+<Figure name="photo-analogue" alt="The same photo in Analogue: an instant print with a strip of tape along the top and “Capri, in June” handwritten in its chin" caption="An instant print, captioned in its chin." />
+</TabItem>
+</Tabs>
+
+**The picture is chosen while arranging**, on the photo's own card: **Choose…**
+opens a picker in the card's place, drawn on the desk. Down its side are your
+pictures folder, the wallpapers, your downloads, your desktop and your home; a
+click on a folder goes into it, the arrow goes back up, and a click on a
+picture is the choice. It opens on the folder of the picture the widget already
+holds. It works with the pointer only, so there is no path to type and no
+search, and it lists PNG, JPEG, WebP and BMP files. The cross beside
+**Choose…** empties the widget.
+
+<Figure name="photo-picker" alt="Arranging: the photo widget beside the picker, open on the wallpapers folder, a grid of thumbnails with Pictures, Wallpapers, Downloads, Desktop and Home down its side" caption="The picker, in the card's place." />
+
+**The caption is typed on the card**, under **Caption**, and written in the
+print's chin as you type, forty characters at most. The field holds the
+keyboard while you type, and <kbd>Enter</kbd>, <kbd>Escape</kbd> or a click
+elsewhere lets it go. Only a print has a chin: a Modern photo and the film band
+carry no caption.
+
+At rest, **a click on a photo opens the picture in imv**, floating over the
+windows. The picture is kept as a path, so it travels with the profile; a
+picture moved or deleted leaves the widget saying *Picture not found* until you
+choose another, and an empty one says *No picture*.
+
 ## Notes on the edges
 
 **A deck is notes stacked along the left, right or bottom edge**, as tabs that
@@ -240,10 +297,10 @@ offers Open and Edit.
 
 While arranging:
 
-- drag the Notes tile from the tray against an edge, and the newest note starts
-  a deck there;
+- drag the Notes piece from the card against an edge, and the newest note
+  starts a deck there;
 - drag a tab along its edge to reorder it, to another edge to move it, onto the
-  grid to make it a square of its own, or onto the tray to take it off;
+  grid to make it a square of its own, or onto the card to take it off;
 - drag a note widget against an edge and it joins the deck there;
 - drag the round grip before the first tab to slide the whole deck along;
 - click a tab for the deck's card: **Where** (left, right or bottom), **Along
@@ -266,9 +323,11 @@ island, chosen in Settings → Displays → Arrangement → The island is on (se
 else, so a second screen would draw the same widgets twice. Other screens get
 the dock and the bar without the island.
 
-A square is the same size on every screen, so a smaller screen has fewer of
-them. A layout made on a bigger screen is pulled in to fit when it is drawn,
-and the saved places are left as they were, so it comes back whole on the
-bigger screen. The three profiles that ship are laid out for 1920 × 1200.
+The squares are sized to fill the screen evenly, never smaller than a set
+minimum, so a smaller screen has fewer of them. A layout made on a bigger
+screen is pulled in to fit when it is drawn, the rightmost widgets placed first
+so the order holds, and the saved places are left as they were, so it comes
+back whole on the bigger screen. The three profiles that ship are laid out for
+1920 × 1200.
 
 What the desktop does not do is listed under [Limitations](/help/limitations/).

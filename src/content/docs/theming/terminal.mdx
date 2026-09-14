@@ -130,7 +130,7 @@ Greeting**, where each tile plays it.
 
 | File | Opens in |
 |---|---|
-| A picture | imv, on the terminal's tinted background; <kbd>d</kbd> shows or hides its overlay |
+| A picture | imv, floating over the windows on the terminal's tinted background; <kbd>d</kbd> shows or hides its overlay |
 | A video or a song | mpv, with a window to pause or close it even for audio |
 | Text | `$EDITOR`, which is neovim |
 | A web page | your default browser, through `xdg-open` |
@@ -140,9 +140,9 @@ Greeting**, where each tile plays it.
 - The viewers are detached, so closing yazi leaves the picture or the video open.
 - <kbd>c</kbd> <kbd>y</kbd> copies the selection as files rather than as paths,
   ready to paste into a file manager or a chat.
-- There is no PDF reader on the desk, so a PDF goes to the browser unless the
-  machine says otherwise. Outside yazi, what opens a file is the machine's own
-  setting, and the commands that set it are under
+- There is no PDF reader on the desk: a PDF goes to whatever the machine
+  names, which `install` sets to Zen unless you had chosen one. Outside yazi,
+  what opens a file is that same setting; see
   [Applications](/theming/apps/#making-the-rest-of-the-machine-agree).
 
 ## neovim

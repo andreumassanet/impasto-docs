@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: Install impasto on Arch Linux with ./setup install, what it does in order, its flags, and the few things left to do by hand.
+description: Install impasto on Arch Linux with ./setup install, what it does in order, its flags, and what it sets up once.
 sidebar:
   order: 2
 ---
@@ -9,8 +9,9 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 import Figure from '~/components/Figure.astro';
 
 **One script installs everything: `setup`.** It installs the packages, copies
-`home/` into your home and `system/` into `/`, and builds two Hyprland plugins.
-Nothing is linked. Every file is a copy, and `setup` remembers what it wrote.
+`home/` into your home and `system/` into `/`, builds two Hyprland plugins, and
+sets up once what a copied file cannot hold. Nothing is linked. Every file is
+a copy, and `setup` remembers what it wrote.
 
 ## Requirements
 
@@ -36,7 +37,7 @@ Nothing is linked. Every file is a copy, and `setup` remembers what it wrote.
 2. Answer pacman's questions and give your password when sudo asks for it.
 
 3. Log out and back in. The shell, the wallpaper daemon and the plugins start
-   with the session.
+   with the session, and the login screen with the next boot.
 
 </Steps>
 
@@ -55,8 +56,9 @@ would install and every file it would write, and changes nothing.
 | User folders | Runs `xdg-user-dirs-update`, which creates the folders captures and recordings land in. Existing folders are never renamed. |
 | oh-my-zsh | Clones oh-my-zsh into `~/.oh-my-zsh`, with the zsh-autosuggestions and zsh-syntax-highlighting plugins. It is cloned rather than installed with its own script, because that script replaces `~/.zshrc`. |
 | `home/` | Copies every file into `$HOME`. The first time, it also renders the terminal greeting's scenes (if ImageMagick is installed) and a minimal `impasto` icon theme. |
-| `system/` | Copies the login screen's theme and two configuration fragments into `/`, with sudo, and creates `/var/lib/impasto/faces`. |
+| `system/` | Copies the login screen's theme and two configuration fragments into `/`, with sudo, and creates `/var/lib/impasto/faces`. Where no display manager is enabled yet, it enables sddm for the next boot. |
 | Plugins | Builds and enables hypr-dynamic-cursors (shake to find) and hyprglass (glass on the windows) with hyprpm. |
+| Extras | Sets up what a copied file cannot hold: what opens which file, dark GTK windows, the vector cursor, Thunar, VSCodium, Vesktop and Spotify. |
 
 A file of yours that is already in the way is moved to
 `~/.local/state/impasto/backups/` before anything is written. See
@@ -76,11 +78,14 @@ A file of yours that is already in the way is moved to
 ## What it asks for
 
 - **sudo for pacman**, to install the packages.
-- **sudo for the copy into `/`**, once, before the system files are written.
+- **sudo for the copy into `/`**, once, before the system files are written
+  and sddm is enabled.
 - **sudo for hyprpm**, whose plugin store is root's, under
   `/var/cache/hyprpm/`. This is why the plugins need a terminal that can ask for
   a password.
 - **Whether to build yay**, only when neither yay nor paru is installed.
+- **Whether spicetify may patch Spotify**, which makes `/opt/spotify` writable
+  with sudo.
 
 <Aside type="note" title="The power button">
 `system/` tells logind to ignore a short press of the power button, from the
@@ -89,63 +94,46 @@ running, or at the login screen, a short press does nothing. Holding the button
 is still the firmware's forced power-off.
 </Aside>
 
-## The windows that need one command
+## What it sets up once
 
-Some programs keep their settings where the palette cannot reach them, so each
-has a verb of its own. Run each once, with that program closed:
-`./setup vscodium`, `./setup thunar` and `./setup spotify`.
-[Applications](/theming/apps/) explains each one.
+**The extras run once per machine.** Each has a verb of its own —
+`./setup defaults`, `cursors`, `thunar`, `vscodium`, `vesktop` and `spotify` —
+and after the first time `install` and `update` leave them alone, so what you
+change in those programs stays.
 
-Shake to find magnifies the pointer, and the pointer only stays sharp at that
-size if it is a vector cursor. This command fetches the vector cursor and
-builds it in the chosen colour:
+One that cannot run yet is skipped with the reason, and the next `install` or
+`update` tries again:
 
-```bash
-./setup cursors
-```
+- **A program that is open**: Thunar and Vesktop write their settings back
+  while they run, and patching Spotify restarts it. Close it and update.
+- **A Spotify never started**: spicetify needs the settings Spotify writes on
+  its first start. Open it once, close it, and update.
+- **No network**, for the cursor and VSCodium's extensions.
+
+Spotify is also patched again whenever a Spotify update has taken the patch
+away. Every extra is in [The setup script](/reference/setup/#the-extras), and
+what each program takes from the palette is in [Applications](/theming/apps/).
 
 ## The login screen
 
-`install` copies the SDDM theme into `/usr/share/sddm/themes/impasto/` but
-never switches to it. Try it first, from the repository:
-
-```bash
-sddm-greeter-qt6 --test-mode --theme system/usr/share/sddm/themes/impasto
-```
-
-A theme that fails to load says nothing in the terminal. SDDM falls back to its
-own theme and prints the reason in red on that screen, so look at the window.
-When it loads, set `Current=impasto` under `[Theme]` in a file in
-`/etc/sddm.conf.d/`.
+`install` copies the SDDM theme into `/usr/share/sddm/themes/impasto/` and names
+it in `/etc/sddm.conf.d/10-impasto.conf`. Where no display manager is enabled,
+it enables sddm, which comes up at the next boot; a machine that already starts
+another one keeps it. [Lock and login](/shell/lock-and-login/#how-it-starts)
+has the rest.
 
 <Figure name="lock-and-login" alt="The lock screen over the blurred desk, and the SDDM login screen over a painting of brush strokes, with the same clock, the same face and the same field" caption="The lock screen and the login screen: the same clock, face and field." />
 
 ### The face
 
 The picture on the lock and login screens is
-`/var/lib/impasto/faces/<username>.face.icon`. The directory belongs to root,
-so copy it in with sudo:
+`/var/lib/impasto/faces/<username>.face.icon`; without one, both show your
+initials. The directory belongs to root, so copy it in with sudo:
 
 ```bash
 sudo install -m 644 ~/picture.png /var/lib/impasto/faces/$USER.face.icon
 ```
 
 `setup` creates the directory and never removes it, not even on uninstall.
-
-## Making the rest of the machine agree
-
-What opens a file, and whether GTK applications come up dark, are settings of
-the machine rather than files. Run these once:
-
-```bash
-xdg-mime default imv.desktop image/jpeg image/png image/gif image/webp image/svg+xml
-xdg-mime default nvim.desktop text/plain application/json
-xdg-mime default thunar.desktop inode/directory
-xdg-mime default zen.desktop application/pdf text/html     # or whichever browser you use
-gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-gsettings set org.gnome.desktop.interface icon-theme impasto
-```
-
-The last line is what makes Thunar's folders take the wallpaper's colour.
 
 Next: [First steps](/start/first-steps/).

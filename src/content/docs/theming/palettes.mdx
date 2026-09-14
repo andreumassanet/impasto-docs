@@ -42,7 +42,7 @@ The same panel, or the same result, from elsewhere:
 | The launcher | type `>` and pick **Appearance** |
 | The control centre | click the **Appearance** block, which shows the wallpaper in use |
 | Settings | **Appearance → Theme → Theme and wallpaper → Open** |
-| Thunar | right-click a picture → **Set as Wallpaper**, once `./setup thunar` has run |
+| Thunar | right-click a picture → **Set as Wallpaper** |
 | A terminal | `qs ipc call wallpaper set /path/to/picture.jpg` |
 
 Thunar and the terminal take any picture on the disk, not only the ones in the
@@ -107,7 +107,7 @@ it stays dark even under Catppuccin Latte.
   same reading.
 - **The login screen** does not follow the palette: it runs before anybody has
   chosen one.
-- **Spotify** takes the palette only when `./setup spotify` runs. See
+- **Spotify** takes a new palette at its next start, not while it plays. See
   [Applications](/theming/apps/#spotify).
 
 ## The nine palettes
@@ -141,15 +141,15 @@ repaint where they stand; others take it the next time they open a window.
 | Program | Takes the new palette |
 |---|---|
 | The island, the bar, the widgets, the dock, the notes, the pets | at once |
-| The pointer, when its colour is **Palette** (Settings → Input) | at once, after `./setup cursors` has run once |
+| The pointer, when its colour is **Palette** (Settings → Input) | at once, once the vector cursor is built |
 | kitty and the prompt | every open terminal, at once |
 | The greeting's scenes | redrawn in the background, a few seconds later |
 | cava, neovim | running ones repaint |
 | btop, yazi, imv | the next one started |
 | GTK windows, Thunar and its folders, Qt and KDE windows | the next window started |
 | Zen, VSCodium | the next window |
-| Vesktop | at once, once its theme is ticked |
-| Spotify | when `./setup spotify` runs |
+| Vesktop | at once |
+| Spotify | its next start |
 | The login screen | never |
 
 <CardGrid>

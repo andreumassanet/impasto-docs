@@ -9,22 +9,26 @@ import Figure from '~/components/Figure.astro';
 
 ## The key sheet
 
-**<kbd>SUPER</kbd> <kbd>H</kbd> puts every key on one sheet in the island.** It
-is the compositor's own list, read each time the sheet opens, so a key changed
-in the settings is on it the next time. The sheet is read, never pressed:
-nothing on it opens or runs.
+**<kbd>SUPER</kbd> <kbd>H</kbd> puts every key in the island, as one list under
+a search field.** It is the compositor's own list, read each time the sheet
+opens, so a key changed in the settings is on it the next time. The sheet is
+read, never pressed: nothing on it opens or runs.
 
-<Figure name="keys" alt="A sheet of every key binding in four groups, shell, applications, windows and workspaces, with session, utilities and media." caption="The key sheet, on SUPER + H." />
+<Figure name="keys" alt="The key sheet in the island: a search field with the number of keys beside it, over one list grouped under headings, each action on the left and its keys drawn as caps on the right." caption="The key sheet, on SUPER + H." />
 
 - **Grouped** in the order you look for them — Shell, Applications, Windows,
-  Workspaces, Session, Utilities, Media — in three columns, with no group split
-  across two.
+  Workspaces, Session, Utilities, Media — the action on the left and its keys
+  on the right.
 - **Folded** where the list repeats itself: the twenty workspace keys are two
   rows, drawn <kbd>1</kbd>…<kbd>0</kbd>, the four arrows are one row, and so are
   the volume keys.
 - **Drawn as keys**, with the modifiers spelled out — Super, Ctrl, Alt, Shift.
 
-The sheet has no search field. To find a key by name, or to change one, open
+**Typing narrows the list.** Every word typed has to begin a word of the
+action, of its group, of its keys, or the name behind a key — so `super shift`
+finds the keys that hold both, `work` the workspaces, and `return` the keys
+drawn *Enter*. The count beside the field says how many match. The arrows and
+<kbd>Page Up</kbd> <kbd>Page Down</kbd> scroll. To change a key, open
 Settings → Keys.
 
 ### Changing a key

@@ -1,6 +1,6 @@
 ---
 title: Applications
-description: How GTK, Qt and KDE windows, Thunar, Zen, Vesktop, Spotify, VSCodium and imv take the palette, and which of them need a command.
+description: How GTK, Qt and KDE windows, Thunar, Zen, Vesktop, Spotify, VSCodium and imv take the palette, and what the install sets up in them once.
 sidebar:
   order: 3
 ---
@@ -9,40 +9,51 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 import Figure from '~/components/Figure.astro';
 
 **Every window on the desk wears the palette, not only the shell's.** Most take
-it on their own the next time they open a window; a few need one command, run
-once; Spotify needs one every time.
+it on their own the next time they open a window. What a few need beyond a
+file, `./setup install` sets up once, and Spotify takes it at its next start.
 
-| Application | Follows on its own | Needs | Takes a new palette |
+| Application | Follows on its own | Set up once by `install` | Takes a new palette |
 |---|---|---|---|
-| GTK windows: satty, file-roller, pavucontrol, gimp | yes | the dark `gsettings` command, once | the next window |
-| Qt and KDE windows | yes | qt6ct, in the package list | the next window |
-| Thunar | colours and folders | `./setup thunar` and the icon `gsettings` command, once | the next window |
-| Zen | yes | nothing | the next window |
-| Vesktop | yes | ticking the theme, once | at once |
-| VSCodium | the colour theme | `./setup vscodium`, once, with the editor closed | the next window |
-| Spotify | no | `./setup spotify`, after every palette change | when the command runs |
-| imv | yes | nothing | the next picture opened |
+| GTK windows: satty, file-roller, pavucontrol, gimp | yes | dark, with the `impasto` icons | the next window |
+| Qt and KDE windows | yes | nothing; qt6ct is in the package list | the next window |
+| Thunar | colours and folders | its settings and right-click menu | the next window |
+| Zen | yes | named for web pages and PDFs | the next window |
+| Vesktop | yes | its theme ticked | at once |
+| VSCodium | the theme, the font and the extensions' colours | its extensions and settings | the next window |
+| Spotify | once patched | the patch | its next start |
+| imv | yes | named for pictures | the next picture opened |
 | The Open dialog, the screen-share picker | yes | nothing | the next dialog |
+
+A program that is open while `install` runs, or a Spotify never started, is
+skipped with the reason and set up by the next `install` or `update`. After
+that `install` leaves them alone, so what you change in them stays; each has a
+verb of its own that sets it up again ([The setup script](/reference/setup/#the-extras)).
 
 <Figure name="windows" alt="VSCodium and Thunar side by side in a green-gold palette, Thunar showing the wallpapers folder, under the bar" caption="VSCodium and Thunar, in the same palette as the bar above them." />
 
 ## Making the rest of the machine agree
 
 **What opens a file, whether GTK windows are dark and which icons they draw are
-the machine's settings**, not files the desk carries. Run these once:
+the machine's settings**, not files the desk carries, so `install` sets them
+once, with `./setup defaults`:
 
-```bash
-xdg-mime default imv.desktop image/jpeg image/png image/gif image/webp image/svg+xml
-xdg-mime default nvim.desktop text/plain application/json
-xdg-mime default thunar.desktop inode/directory
-xdg-mime default zen.desktop application/pdf text/html     # or whichever browser you use
-gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-gsettings set org.gnome.desktop.interface icon-theme impasto
-```
+| Files | Open in |
+|---|---|
+| Pictures: JPEG, PNG, GIF, WebP, SVG | imv |
+| Text and JSON | neovim |
+| Folders | Thunar |
+| Web pages, links and PDFs | Zen |
 
-Without the first `gsettings`, GTK windows come up light with the palette's
-colours on them. Without the second, Thunar's folders stay in the default icon
-theme, whatever `settings.ini` says.
+A line is left alone when `~/.config/mimeapps.list` already names a default for
+any of its types, so a browser or a viewer you chose stays chosen, and a
+program that is not installed is skipped. Then GTK is set dark, and its icon
+theme to `impasto`, which is what gives Thunar's folders the wallpaper's
+colour. Without the first, GTK windows come up light with the palette's
+colours on them.
+
+The GTK settings hold only when set inside the session. Run from a TTY, the
+verb says so, and the next `install` or `update` from a terminal in Hyprland
+sets them.
 
 ## GTK
 
@@ -91,12 +102,13 @@ colours from the same `gtk.css` as the rest.
 theme, `impasto`, in `~/.local/share/icons/`: Papirus-Dark's icons, with the
 folders pointed at whichever of Papirus's twenty-five folder colours is nearest
 the accent. A folder is a drawing, so it lands on the nearest swatch rather than
-on the accent exactly. It needs the icon `gsettings` command above, once, and
-reaches every GTK application started afterwards.
+on the accent exactly. GTK draws it once its icon theme is `impasto`, which
+`install` sets (above), in every GTK application started afterwards.
 
-**`./setup thunar` sets everything that is not a colour.** Close Thunar first —
-the verb refuses while it runs, because Thunar writes its settings back as it
-exits. It sets:
+**`./setup thunar` sets everything that is not a colour, and `install` runs it
+once.** Thunar writes its settings back as it exits, so an open Thunar is
+skipped and set up by the next `install` or `update`, and the verb on its own
+refuses while Thunar runs. It sets:
 
 - one bar instead of two, with the menu behind a button;
 - thumbnails for local files, folders before files, sorting that ignores case;
@@ -145,10 +157,13 @@ version beside it as `theme_manager.py.new`.
 
 ## Vesktop
 
-**Tick the theme once and Vesktop follows from then on.** Every palette change
-writes `~/.config/vesktop/themes/impasto.css`, and Vencord repaints a running
-Vesktop the moment the file changes. Nothing wears it until it is ticked: open
-Vesktop's settings, go to **Themes**, and enable `impasto.css`.
+**Vesktop follows the palette once its theme is ticked, and `install` ticks
+it.** Every palette change writes `~/.config/vesktop/themes/impasto.css`, and
+Vencord repaints a running Vesktop the moment the file changes. The tick goes
+into Vencord's own settings, with everything else in them kept. Vencord
+rewrites that file while it runs, so an open Vesktop is skipped and ticked by
+the next `install` or `update`, or by `./setup vesktop` once it is closed.
+Unticked by hand, under Vesktop's settings → **Themes**, it stays unticked.
 
 - Your Quick CSS is left alone.
 - Nitro's purple stays Discord's.
@@ -158,43 +173,33 @@ Vesktop's settings, go to **Themes**, and enable `impasto.css`.
 
 ## Spotify
 
-**Spotify is the one program the palette cannot reach on its own.** spicetify
-does not theme Spotify, it patches it: the colours are compiled into
-`/opt/spotify`, and nothing is read while it runs. So every palette change
-writes `~/.config/spicetify/Themes/impasto/color.ini` and stops there, and
-`./setup spotify` is what applies it. Applying restarts Spotify, which is why a
-wallpaper change never does it for you.
+**Spotify wears the palette from its next start.** spicetify does not theme
+Spotify, it patches it: the colours are compiled into `/opt/spotify`, and
+nothing is read while it runs. `./setup spotify` is the patch, and `install`
+runs it. After that, every palette change writes
+`~/.config/spicetify/Themes/impasto/color.ini` and rewrites the stylesheets
+inside the patched client, restarting nothing, so a Spotify that is playing
+keeps the old colours until it starts again.
 
-Once, before the first time:
+Before the first patch:
 
 <Steps>
 
-1. Install the `spotify` package from the AUR, not `spotify-launcher`, which
+1. Use the `spotify` package from the AUR, not `spotify-launcher`, which
    updates itself on every start and takes the patch with it. `spotify` and
    `spicetify-cli` are both in the package list.
 
-2. Let your user write to Spotify's folder:
+2. Open Spotify once, and close it: spicetify needs the settings Spotify writes
+   on its first start.
 
-   ```bash
-   sudo chmod a+wr -R /opt/spotify
-   ```
-
-3. Point spicetify at the theme:
-
-   ```bash
-   spicetify config current_theme impasto color_scheme base
-   ```
+3. Run `./setup update`, or `./setup spotify`. It asks to make Spotify's folder
+   writable, selects the theme, and patches it.
 
 </Steps>
 
-Then, whenever you want Spotify to match the desk:
-
-```bash
-./setup spotify
-```
-
-Run it again after every Spotify update as well: the update rewrites
-`/opt/spotify` and takes the patch with it.
+**A Spotify update takes the patch away**, because it rewrites `/opt/spotify`.
+The next `./setup update` sees that and patches it again, with the player
+closed; `./setup spotify` does it at once, and restarts Spotify.
 
 ## VSCodium
 
@@ -203,30 +208,33 @@ Run it again after every Spotify update as well: the update rewrites
 install. A window already open keeps its colours; **Developer: Reload Window**,
 or a new window, takes the new ones.
 
-**`./setup vscodium` does the rest**, once, with VSCodium closed; it refuses
-while the editor is open, because VSCodium rewrites its settings as it exits. It
-installs thirteen extensions from Open VSX and merges into your `settings.json`:
-the Impasto theme selected, the shell's monospace font with ligatures at 14, the
-activity bar along the top, and no minimap, breadcrumbs or command centre.
-Everything else in the file stays; comments in it do not survive the merge.
+**`./setup vscodium` does the rest, and `install` runs it once.** It installs
+four extensions from Open VSX — Material Icon Theme, Fluent Icons, Error Lens
+and indent-rainbow — and merges into your `settings.json`: the Impasto theme
+and the two icon themes selected, the shell's monospace font with ligatures at
+14, the activity bar along the top, and no minimap, breadcrumbs or command
+centre. Everything else in the file stays; comments in it do not survive the
+merge. An extension that cannot be fetched leaves the verb to the next
+`install` or `update`.
 
-- The font is read from the shell's monospace setting, so run the verb again
-  after changing it.
+- **The font and the palette keep up on their own.** A change of the shell's
+  monospace font, or of the palette, rewrites just those values in
+  `settings.json` — the fonts, the folder icons' colour and indent-rainbow's
+  colours — in place and only where they are set, so comments and every other
+  key survive, and a key you delete stays deleted.
 - Without the verb, pick the theme yourself: <kbd>CTRL</kbd> <kbd>K</kbd>, then
   <kbd>CTRL</kbd> <kbd>T</kbd>, then **Impasto**.
 - Error Lens and indent-rainbow draw nothing in a folder until you trust it.
 
-The extensions are Material Icon Theme, Fluent Icons, Error Lens,
-indent-rainbow, Color Highlight, Git Graph, Prettier, Path Intellisense, Code
-Spell Checker, the Java extension pack, Python, Ruff and Continue.
-
 ## imv
 
-**The whole of imv's configuration is written by the palette push**: the picture
-sits on the terminal's tinted background, and the overlay, shown with
-<kbd>d</kbd>, is in the palette. A picture already open keeps its colours.
-Because the push owns `~/.config/imv/config`, anything else you write there is
-replaced at the next palette change.
+**imv opens floating over the windows**, centred at seven tenths of the screen,
+whether the picture comes from yazi, Thunar or a photo on the desktop. Its
+whole configuration is written by the palette push: the picture sits on the
+terminal's tinted background, and the overlay, shown with <kbd>d</kbd>, is in
+the palette. A picture already open keeps its colours. Because the push owns
+`~/.config/imv/config`, anything else you write there is replaced at the next
+palette change.
 
 ## The portals
 

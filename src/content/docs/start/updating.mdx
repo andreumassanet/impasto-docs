@@ -13,11 +13,16 @@ import { Aside } from '@astrojs/starlight/components';
 ./setup update
 ```
 
-It runs `git pull --autostash --ff-only`, then everything `install` does, with
-the same flags: `./setup update --skip-packages` skips the packages on the way
-through. The install runs from the `setup` just pulled, so a release that
-changes the installer takes effect on the same update. A checkout with no
-upstream branch skips the pull and installs what is there.
+It runs `git pull --autostash --ff-only`, says which version it moved from and
+to, then everything `install` does, with the same flags:
+`./setup update --skip-packages` skips the packages on the way through. The
+install runs from the `setup` just pulled, so a release that changes the
+installer takes effect on the same update. A checkout with no upstream branch
+skips the pull and installs what is there.
+
+The extras `install` set up once are left alone, so what you changed in those
+programs stays. One that was skipped is tried again, and Spotify is patched
+again after a Spotify update has taken the palette away.
 
 ## Releases and branches
 
@@ -30,8 +35,9 @@ Every release is a tag, `v0.1.0` and on, with its notes under
 
 **The version you have is under Settings → System → This machine**, beside
 the processor, the memory and the uptime: the release, such as `v0.2.0`, with
-the branch under it. On `dev` the line under it adds the commits since that
-release and a short hash.
+the branch under it. Between releases the line under it adds the commits since
+that release and a short hash, and says *edited* when the checkout has changes
+of its own.
 
 ## Two copies: yours and the repository's
 
@@ -62,7 +68,9 @@ until the repository changes that file again.
 ./setup sync --watch    # copy again on every save, until Ctrl+C
 ```
 
-`--watch` needs `inotify-tools`.
+A sync that changes the shell's files ends by asking the running shell to
+reload, once the last file has landed, so the desk never runs half of a
+change. `--watch` needs `inotify-tools`.
 
 <Aside type="note">
 `sync` only covers `home/`. A change under `system/`, such as the login
@@ -110,12 +118,17 @@ What stays behind:
 - the packages, oh-my-zsh and the Hyprland plugins;
 - the shell's settings, notes, tasks and the rest of `~/.local/state/quickshell/`;
 - the themes the palette wrote, and the `impasto` icon theme;
-- `/var/lib/impasto/faces`, because what is in it is somebody's photograph;
-- the login screen setting, if you changed `Current=` by hand.
+- what the extras set: the default applications, dark GTK, Thunar's and
+  VSCodium's settings, VSCodium's extensions, Vesktop's tick and Spotify's
+  patch;
+- sddm, still enabled, if `install` enabled it;
+- `/var/lib/impasto/faces`, because what is in it is somebody's photograph.
 
 <Aside type="caution">
-The login screen's theme is removed with the rest. If you set
-`Current=impasto`, point it back at another theme before uninstalling.
+The login screen's theme is removed with the rest, and so is
+`10-impasto.conf`, which names it: SDDM comes up in its own theme at the next
+boot. If a file of yours sets `Current=impasto`, point it at another theme
+before uninstalling.
 </Aside>
 
 Add `--dry-run` to see the list first. Every verb is in

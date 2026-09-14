@@ -81,41 +81,40 @@ before there is a user to have chosen one.
 The account and session lists take the pointer only; the keyboard stays in the
 field.
 
-### Switching to it
+### How it starts
 
-`./setup install` copies the theme into `/usr/share/sddm/themes/impasto/`
-(unless `--skip-system`) and does not make it the one that runs. Try it first:
-test mode reads the repository directly, so nothing has to be installed. From
-the repository's root:
+**`./setup install` switches it on**, unless `--skip-system`: it copies the
+theme into `/usr/share/sddm/themes/impasto/`, names it in
+`/etc/sddm.conf.d/10-impasto.conf`, and enables sddm where no display manager
+is enabled yet. The login screen comes up at the next boot.
+
+A machine that already starts another display manager keeps it. To change,
+disable that one, then run `sudo systemctl enable sddm`.
+
+SDDM reads the files in `/etc/sddm.conf.d/` in name order and `/etc/sddm.conf`
+last, each over the one before, so a theme named in a file that sorts after
+`10-impasto.conf` wins. Leave `10-impasto.conf` as it is: `setup` owns it.
+
+To try the theme without logging out, run its test mode from the repository's
+root. It reads the repository directly, so a change can be tried before it is
+installed:
 
 ```bash
 sddm-greeter-qt6 --test-mode --theme system/usr/share/sddm/themes/impasto
 ```
 
+<Aside>
 The power buttons are not drawn in test mode, because SDDM reports them
 unavailable there. A theme that fails to load says why in red on SDDM's own
 fallback screen, not in the terminal.
-
-Then make it the theme, in a file of your own under `/etc/sddm.conf.d/`:
-
-```ini
-[Theme]
-Current=impasto
-```
-
-Leave `10-impasto.conf` as it is: `setup` owns it, and it only says where faces
-are kept. A file that sorts after it wins on any key both set.
-
-<Aside>
-SDDM has to be the display manager your machine starts at boot:
-`sudo systemctl enable sddm`, once any other one is disabled.
 </Aside>
 
 ### Your picture
 
 **The face on both screens is `/var/lib/impasto/faces/<username>.face.icon`**,
-yours to put there. `setup` makes the folder and never removes it. It is kept
-outside your home because SDDM reads as its own user and cannot see into it.
+yours to put there; without one, both show your initials. `setup` makes the
+folder and never removes it. It is kept outside your home because SDDM reads
+as its own user and cannot see into it.
 
 ```bash
 sudo install -m 644 ~/picture.png /var/lib/impasto/faces/$USER.face.icon

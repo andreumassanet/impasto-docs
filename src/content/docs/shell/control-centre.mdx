@@ -16,7 +16,7 @@ closes it, and so do Escape and a click anywhere off the island.
 
 <Gallery columns={2} items={[
   { name: 'control-centre', alt: "The control centre: toggles for Wi-Fi, Bluetooth, power, focus, microphone and airplane mode, volume and brightness sliders, the track playing, the weather, a calendar, the wallpaper and three notifications.", caption: "At rest." },
-  { name: 'control-centre-arrange', alt: "The control centre in arranging mode, with a tray of blocks under it: toggles, appearance, calendar, notifications, clock, notes, tasks, media, weather, pet, games, volume and brightness.", caption: "Arranging, with the tray of blocks under it." },
+  { name: 'control-centre-arrange', alt: "The control centre in arranging mode, its grid's cells showing, with a card under the island holding every block at its smallest size: toggles, appearance, calendar, notifications, clock, notes, tasks, media, weather, pet, games, volume and brightness.", caption: "Arranging, with the card of every block under it." },
 ]} />
 
 ## The top row
@@ -113,24 +113,28 @@ saved network. Pair and forget with `bluetoothctl` and `nmcli`. See
 <Steps>
 
 1. Right-click the control centre's background, or open Settings → Control
-   Centre and press **Edit**. The grid's cells show, and a tray of every block
-   hangs under the island.
+   Centre and press **Edit**. The grid's cells show, and a card of every block,
+   each at the smallest size it offers, opens under the island.
 
-2. Drag a block from the tray onto a cell, or drag a block on the grid to move
-   it. The cell it will land on lights before you let go.
+2. Drag a block from the card onto a cell, or drag a block on the grid to move
+   it. The cell it will land on lights before you let go. A click on a block on
+   the card puts it in the first free place.
 
 3. Pull a block's corner, or scroll over it, to step through the sizes it
    offers.
 
-4. Take a block off with its ⊖ badge, or by dropping it on the tray.
+4. Take a block off with its ⊖ badge, or by dropping it on the card.
 
 5. Click a block for its card: its name, Remove, and its sizes. On a toggles
    block the card lists every tile with a tick, and arrows to order the ones
    ticked — so two toggles blocks can carry two different sets.
 
-6. Press **Done** on the tray, right-click the background again, or close the
-   panel.
+6. Press <kbd>Escape</kbd>, right-click the background again, or close the
+   panel. A second <kbd>Escape</kbd> closes the island.
 
 </Steps>
+
+The card of blocks moves, grows and scrolls as the desktop's does
+([Arranging the desktop](/shell/desktop/#arranging)).
 
 **Default layout**, beside Edit in the settings, puts the grid back as it came.

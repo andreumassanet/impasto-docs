@@ -19,39 +19,47 @@ own, or `./setup help`, prints the list.
 
 | Verb | What it does | Touches |
 |---|---|---|
-| `install` | Everything, in order: `packages`, the user folders, oh-my-zsh, `sync`, `system`, `plugins`. | Packages, `$HOME`, `/`, hyprpm |
-| `update` | `git pull --autostash --ff-only` on the branch you are on (`main` holds the releases), then `install` from the `setup` just pulled, with the same flags. With no upstream branch, installs what is there. | The checkout, then as `install` |
+| `install` | Everything, in order: `packages`, the user folders, oh-my-zsh, `sync`, `system`, `plugins`, then [the extras](#the-extras), once each. | Packages, `$HOME`, `/`, hyprpm, the extras' programs |
+| `update` | `git pull --autostash --ff-only` on the branch you are on (`main` holds the releases), says which version it moved from and to, then runs `install` from the `setup` just pulled, with the same flags. With no upstream branch, installs what is there. | The checkout, then as `install` |
 | `uninstall` | Removes every installed file not edited since, in `$HOME` and `/`, and puts back what the install moved aside. | `$HOME`, `/`, the backups |
 
-`install` ends by saying to log out and in again, or to run `hyprctl reload`.
-The shell and the wallpaper daemon only start with a new session.
+`install` ends by saying to log out and in again: the shell and the wallpaper
+daemon only start with a new Hyprland session.
 
 ## Parts of the install
 
 | Verb | What it does | When to run it |
 |---|---|---|
 | `packages` | Installs what `packages/pacman.txt` lists and is missing, with `sudo pacman -S --needed`, then `packages/aur.txt` with yay or paru. Offers to build `yay-bin` (or the `--aur-helper` one) when neither is installed. | After a pull adds a package. |
-| `sync` | Copies `home/` into `$HOME`, and creates the greeting's scenes and the `impasto` icon theme if they are missing. | After editing the repository. |
-| `system` | Copies `system/` into `/` with sudo, and creates `/var/lib/impasto/faces`. | After a change to the login screen or the other system files. |
+| `sync` | Copies `home/` into `$HOME`. When the shell's files changed, it asks the running shell to reload once the last one has landed. Creates the greeting's scenes and the `impasto` icon theme if they are missing, and records the version Settings → System shows. | After editing the repository. |
+| `system` | Copies `system/` into `/` with sudo, creates `/var/lib/impasto/faces`, and enables sddm from the next boot where no other display manager is enabled. | After a change to the login screen or the other system files. |
 | `plugins` | Builds and enables hypr-dynamic-cursors and hyprglass with hyprpm, then reloads them. Does nothing outside a running Hyprland. | Inside the session, when the plugins are missing. |
 
 A package counts as installed when something provides it, so `fnm-bin`
 satisfies `fnm`.
 
-## The windows that need one command
+## The extras
 
-These are never run by `install`. Each fails with a message if its program is
-missing, and the last two also fail if it is running.
+**What a copied file cannot hold, `install` sets up once.** Each extra is a
+verb of its own. One that cannot run yet — its program open, Spotify never
+started, no network — is skipped with the reason and tried again by the next
+`install` or `update`. After that only its own verb runs it, so a setting you
+change in one of those programs stays. `uninstall` forgets which ones ran, so
+an install after it sets them up again.
 
 | Verb | What it does | Needs |
 |---|---|---|
-| `cursors` | Fetches the Bibata vector cursor into `~/.local/state/quickshell/cursor-src` and builds it in the chosen colour, so shake to find stays sharp. | `hyprcursor` |
-| `spotify` | Runs `spicetify apply`, which patches the palette into Spotify. Run it again after every Spotify update. | `spicetify`, and a writable `/opt/spotify` |
-| `vscodium` | Installs thirteen extensions from Open VSX and merges the editor's settings. The theme lands on the next window. | VSCodium, closed |
+| `defaults` | Makes imv open pictures, neovim text, Thunar folders and Zen web pages and PDFs. A line is skipped whole when a default of yours is already set for any of its types, and so is a program that is not installed. Then GTK applications dark, with the `impasto` icons. | A terminal inside the session |
+| `cursors` | Fetches the Bibata vector cursor into `~/.local/state/quickshell/cursor-src` and builds it in the chosen colour, so shake to find stays sharp. `install` runs it whenever the cursor has not been built. | `hyprcursor`, and the network |
 | `thunar` | Applies Thunar's settings and its right-click entries, *Set as Wallpaper* among them. | Thunar, closed |
+| `vscodium` | Installs four extensions from Open VSX and merges the editor's settings. The theme lands on the next window. | VSCodium, and the network |
+| `vesktop` | Ticks the palette's theme in Vencord's settings. | Vesktop, closed |
+| `spotify` | Patches Spotify with spicetify so it takes the palette, after asking to make `/opt/spotify` writable. `install` runs it again whenever a Spotify update has taken the patch away. | `spicetify`, and a Spotify opened once |
 
-VSCodium and Thunar both write their settings back as they exit, which is why
-they must be closed first. [Applications](/theming/apps/) covers each program.
+Thunar and Vencord write their settings back while they run, which is why both
+must be closed. Patching Spotify restarts it, so `install` waits for it to be
+closed too. Run on its own, a verb stops with the reason where `install` would
+skip. [Applications](/theming/apps/) covers each program.
 
 ## Checking
 
@@ -86,6 +94,9 @@ Every file `sync`, `system` and `update` handle gets one line:
 | `left` | The file left the repository, but you edited it, so it stays. |
 | `unlinked` | A symlink into the repository was removed, so a copy could take its place. |
 | `nothing to do` | Everything already matches. |
+
+A sync that changed the shell's files ends with `reloaded the shell`. An extra
+that has to wait says `skipped`, with the reason and the verb that sets it up.
 
 `uninstall` prints `restored` for each file it puts back. It also reports how
 many could not go back because their path is taken.

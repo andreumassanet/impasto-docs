@@ -94,13 +94,16 @@ System → Profiles. `profiles.json` alone is not a backup of the one in use.
 - ~/.local/state/impasto/
   - home.manifest the hash of every file copied into $HOME
   - system.manifest the same for /
+  - version the version and branch Settings → System shows, written by every sync
+  - applied/ one file per extra install has set up
   - backups/
     - 20260913-101500/ one directory per run that moved something
       - home/ files that were in the way in $HOME
       - system/ files that were in the way in /
 </FileTree>
 
-`uninstall` puts the backups back and deletes the directories it empties.
+`uninstall` puts the backups back, deletes the directories it empties, and
+removes `applied/`, so an install after it sets the extras up again.
 
 ## What the palette writes
 
@@ -121,13 +124,16 @@ reads its theme, so several are in `~/.config` beside the copied files.
 | KDE | `~/.config/kdeglobals`, merged rather than replaced |
 | Folder icons | `~/.local/share/icons/impasto/`, which inherits Papirus |
 | Vesktop | `~/.config/vesktop/themes/impasto.css` |
-| Spotify | `~/.config/spicetify/Themes/impasto/color.ini`, applied by `./setup spotify` |
-| VSCodium | `~/.vscode-oss/extensions/impasto/` |
+| Spotify | `~/.config/spicetify/Themes/impasto/color.ini`, and the stylesheets inside the patched client |
+| VSCodium | `~/.vscode-oss/extensions/impasto/`, and the extensions' colours in `~/.config/VSCodium/User/settings.json` |
 | Zen | `userChrome.css` and `user.js` in the Zen profile under `~/.config/zen/` |
 
-Two verbs write settings that are not colours: `./setup vscodium` merges
-`~/.config/VSCodium/User/settings.json`, and `./setup thunar` writes Thunar's
-xfconf settings and `~/.config/Thunar/uca.xml`. The vector cursor is built into
+The extras write settings that are not colours, once: `./setup vscodium`
+merges `~/.config/VSCodium/User/settings.json`, `./setup thunar` writes
+Thunar's xfconf settings and `~/.config/Thunar/uca.xml`, `./setup vesktop`
+ticks the theme in `~/.config/vesktop/settings/settings.json`, and
+`./setup defaults` names the default applications in
+`~/.config/mimeapps.list`. The vector cursor is built into
 `~/.local/share/icons/impasto-cursor…`. More in [Applications](/theming/apps/).
 
 ## Elsewhere

@@ -11,7 +11,9 @@ import { Aside } from '@astrojs/starlight/components';
 <kbd>S</kbd> photographs the whole screen and shows that photograph, with a bar
 at its foot saying what is about to happen. You draw on the photograph, and the
 crop is cut from the same pixels — so nothing has to be frozen, and a menu that
-closes when the pointer moves is already in the picture.
+closes when the pointer moves is already in the picture. So is a panel open in
+the island: it waits under the surface, and is still open when the surface
+closes.
 
 ## Keys
 
@@ -27,13 +29,14 @@ the same names under `>` in [the launcher](/shell/launcher/).
 
 ## The surface
 
-The bar at the foot has three groups:
+The bar at the foot draws every choice as a glyph, in three groups, and the
+one under the pointer says its name above the bar:
 
 | Group | Choices |
 |---|---|
 | Shape | **Region**, **Window**, **Screen** |
 | Kind | **Photo**, **Video** |
-| Then | For a photo: **Save**, **Copy**, **Annotate**, **Text**. For a video: **No sound**, **Sound**. |
+| Then | For a photo: **Save**, **Copy**, **Annotate**, **Read text**. For a video: **No sound**, **Sound**. |
 
 - **Region** — drag a box. Everything outside it is washed back, and its size
   rides above it. Letting go takes it.
@@ -56,9 +59,9 @@ back at Save: annotating or reading text is chosen each time.
 | Save | Saved to the captures folder **and** copied to the clipboard; the island shows the file's name |
 | Copy | Copied to the clipboard only |
 | Annotate | Opens in satty. What you save from it goes to the captures folder, and its copy button puts it on the clipboard. |
-| Text | Read with tesseract and copied as text; the island says how many characters |
+| Read text | Read with tesseract and copied as text; the island says how many characters |
 
-Annotate is only offered with satty installed, and Text with tesseract. Text
+Annotate is only offered with satty installed, and Read text with tesseract. It
 reads English, and Spanish too when its language pack (`tesseract-data-spa`)
 is installed.
 
