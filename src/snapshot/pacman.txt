@@ -15,7 +15,7 @@
 
 # ── DESKTOP ─────────────────────────────────────────────────────────────────
 
-hyprland                     # the compositor, hyprctl and hyprpm
+hyprland                     # the compositor and hyprctl
 quickshell                   # the shell: the bar, the island, the lock, notifications
 awww                         # the wallpaper
 imagemagick                  # the palette board
@@ -38,6 +38,9 @@ papirus-icon-theme           # what the impasto icon theme inherits
 inter-font                   # the shell's type, and the greeter's
 ttf-jetbrains-mono-nerd      # the terminal's type, and every glyph on the bar
 adwaita-fonts                # the GTK windows' type
+noto-fonts                   # the scripts the three above do not cover
+noto-fonts-emoji             # emoji, in colour
+noto-fonts-cjk               # Chinese, Japanese and Korean, and their punctuation
 
 
 # ── TERMINAL ────────────────────────────────────────────────────────────────
@@ -50,7 +53,8 @@ less                         # kitty's scrollback pager, which base does not bri
 
 # ── QUICK CONTROLS ──────────────────────────────────────────────────────────
 
-brightnessctl                # brightness, and the keys for it
+brightnessctl                # the laptop panel's brightness
+ddcutil                      # an external monitor's, over DDC/CI
 networkmanager               # the network tile, and nmcli
 bluez                        # the bluetooth tile
 bluez-utils                  # bluetoothctl, which switches it
@@ -121,7 +125,8 @@ hyprcursor                   # hyprcursor-util, which ./setup cursors compiles w
 
 # ── HYPRLAND PLUGINS ────────────────────────────────────────────────────────
 
-base-devel                   # hyprpm builds both plugins in ./setup plugins
+hyprpm                       # builds both plugins in ./setup plugins
+base-devel                   # the compiler hyprpm builds with
 cmake
 meson
 cpio
@@ -130,6 +135,11 @@ cpio
 # ── LOGIN SCREEN ────────────────────────────────────────────────────────────
 
 sddm                         # ./setup system
+
+
+# ── FACE UNLOCK ─────────────────────────────────────────────────────────────
+
+v4l-utils                    # v4l2-ctl, which ./setup face finds the infrared camera with
 
 
 # ── DEVELOPMENT ─────────────────────────────────────────────────────────────

@@ -134,29 +134,111 @@ bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true, descript
 
 -- ── WORKSPACES ──────────────────────────────────────────────────────────────
 
+-- The workspace each screen was showing before the one it shows now.
+-- `workspace_back_and_forth` only reaches the plain dispatcher, and the
+-- numbers use `on_current_monitor`; Hyprland's own previous is one for the
+-- whole desk, which on two screens is the wrong one.
+local before  = {}
+local showing = {}
+
+-- Seeded, so the first press of the number already showing has somewhere to
+-- go back to. At the first parse there may be no monitors yet, and the event
+-- below fills it in.
+for _, monitor in ipairs(hl.get_monitors() or {}) do
+    if monitor.active_workspace then
+        showing[monitor.name] = monitor.active_workspace.id
+    end
+end
+
+hl.on("workspace.active", function(workspace)
+    local monitor = workspace and workspace.monitor
+    if not monitor then
+        return
+    end
+    local name = monitor.name
+    if showing[name] ~= nil and showing[name] ~= workspace.id then
+        before[name] = showing[name]
+    end
+    showing[name] = workspace.id
+end)
+
+-- The number of the workspace already here goes back to the one before it.
+local function to_workspace(index)
+    return function()
+        local monitor = hl.get_active_monitor()
+        local active  = hl.get_active_workspace()
+        local back    = monitor and before[monitor.name]
+        local target  = index
+        if active and active.id == index and back and back ~= index then
+            target = back
+        end
+        hl.dispatch(hl.dsp.focus({ workspace = target, on_current_monitor = true }))
+    end
+end
+
 -- · SUPER + [1-9,0] switches; adding SHIFT moves the window there
+--
+-- The ten are shared by every screen, and a number brings its workspace to
+-- the screen you are on rather than taking you to the screen it is on:
+-- `on_current_monitor` swaps the two screens' workspaces where it has to.
 for i = 1, 10 do
     local key = i % 10  -- 10 maps to the 0 key
-    bind(mainMod .. " + " .. key,         hl.dsp.focus({ workspace = i }),
+    bind(mainMod .. " + " .. key,         to_workspace(i),
          { description = "Workspaces · Go to workspace " .. i })
     bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }),
          { description = "Workspaces · Move the window to workspace " .. i })
 end
 
--- · scroll wheel to cycle through them
-bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }), { description = "Workspaces · Next workspace" })
-bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }), { description = "Workspaces · Previous workspace" })
+-- · scroll wheel to cycle through the ones on this screen
+bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "m+1" }), { description = "Workspaces · Next workspace" })
+bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "m-1" }), { description = "Workspaces · Previous workspace" })
+
+
+-- ── SCREENS ─────────────────────────────────────────────────────────────────
+
+-- · the keyboard, and the workspace under it, across screens. A window
+-- · crosses with the window keys above: with nothing that way, they hand it
+-- · to the next screen.
+
+-- The two screens trade what they are showing, and the keyboard goes with the
+-- workspace. Moving it instead buries the other screen's workspace behind
+-- this one and leaves a new empty one where you were. The direction is
+-- resolved by moving the keyboard first: nothing that way leaves it where it
+-- was and changes nothing.
+local function trade_workspace(direction)
+    return function()
+        local here = hl.get_active_monitor()
+        if not here then
+            return
+        end
+
+        hl.dispatch(hl.dsp.focus({ monitor = direction }))
+
+        local there = hl.get_active_monitor()
+        if not there or there.name == here.name then
+            return
+        end
+
+        hl.dispatch(hl.dsp.workspace.swap_monitors({ monitor1 = here.name, monitor2 = there.name }))
+    end
+end
+
+bind(mainMod .. " + ALT + left",          hl.dsp.focus({ monitor = "l" }), { description = "Screens · Focus the screen left" })
+bind(mainMod .. " + ALT + right",         hl.dsp.focus({ monitor = "r" }), { description = "Screens · Focus the screen right" })
+bind(mainMod .. " + ALT + SHIFT + left",  trade_workspace("l"), { description = "Screens · Take the workspace to the screen left" })
+bind(mainMod .. " + ALT + SHIFT + right", trade_workspace("r"), { description = "Screens · Take the workspace to the screen right" })
 
 
 -- ── MEDIA KEYS ──────────────────────────────────────────────────────────────
 
--- · volume and brightness
+-- · volume and brightness; brightness goes through the shell, which knows
+-- · the focused screen and how to dim it
 bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true, description = "Media · Volume up" })
 bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true, description = "Media · Volume down" })
 bind("XF86AudioMute",         hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, description = "Media · Mute output" })
 bind("XF86AudioMicMute",      hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, description = "Media · Mute microphone" })
-bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl set 5%+ -n"),                       { locked = true, repeating = true, description = "Media · Brightness up" })
-bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%- -n"),                       { locked = true, repeating = true, description = "Media · Brightness down" })
+bind("XF86MonBrightnessUp",   hl.dsp.global("quickshell:brightnessUp"),                          { locked = true, repeating = true, description = "Media · Brightness up" })
+bind("XF86MonBrightnessDown", hl.dsp.global("quickshell:brightnessDown"),                        { locked = true, repeating = true, description = "Media · Brightness down" })
 
 -- · Acer laptops send XF86Launch6 for the microphone key
 bind("XF86Launch6",           hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, description = "Media · Mute microphone (Acer)" })
