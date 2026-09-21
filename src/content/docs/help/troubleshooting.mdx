@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: Common problems on an impasto desk and how to fix them — the installer, the plugins, the shell, the login screen and the themed windows.
+description: Common problems on an impasto desk and how to fix them — the installer, the plugins, the shell, the lock and login screens and the themed windows.
 sidebar:
   order: 1
 ---
@@ -13,12 +13,24 @@ under it. If a command below changes a file `setup` installed, see
 
 ## Installing
 
-### setup says the plugins need a running Hyprland
+### The plugins were left for the first session
 
-The plugins are built against the compositor that is running, so `setup` skips
-them outside the session. Open a terminal inside Hyprland and run:
+The plugins are built against the compositor that is running, so an install
+from a console leaves them to the first Hyprland session. That session opens a
+terminal on `./setup plugins`, which asks for your password once; cancel it and
+the next login asks again. To build them now, from a terminal in Hyprland:
 
 ```bash
+./setup plugins
+```
+
+### hyprpm: command not found
+
+hyprpm is a package of its own, not part of hyprland. Install it with the rest
+of the list, then build the plugins:
+
+```bash
+./setup packages
 ./setup plugins
 ```
 
@@ -50,6 +62,18 @@ and close it — then run:
 
 Each also has a verb of its own, such as `./setup vesktop`, which stops with
 the reason instead of skipping.
+
+### update stopped: the pull left conflicts
+
+You edited a file in the repository itself, and the release changed the same
+lines. The pull could not put your edits back, so `update` stopped before
+copying anything, and your edits are in the stash. Resolve the conflicts
+(`git status` lists them), then:
+
+```bash
+git stash drop
+./setup update
+```
 
 ### A file ending in .new appeared
 
@@ -116,11 +140,30 @@ control away: the control is dimmed, or left out entirely.
 | `hyprpicker` | Picking a colour off the screen |
 | `satty` | Annotating a capture |
 | `tesseract` | Reading a region as text |
-| `wf-recorder` and `wl-screenrec` | The recorder, from the bar |
+| `wf-recorder` and `wl-screenrec` | Recording |
 | `pacman-contrib` | A live count of updates |
+| `ddcutil` | The brightness of external monitors |
+| `v4l-utils` and `howdy-next` | Face unlock |
 
-Every package is in `packages/pacman.txt` and `packages/aur.txt`. See
+Every package but howdy-next, which `./setup face` installs, is in
+`packages/pacman.txt` and `packages/aur.txt`. See
 [Packages](/reference/packages/).
+
+### The brightness keys don't dim a monitor
+
+The keys act on the screen with the keyboard, and an external monitor is
+dimmed over DDC/CI with ddcutil. Check that ddcutil is installed
+(`./setup packages`), that DDC/CI is switched on in the monitor's own menu, and
+that the monitor answers:
+
+```bash
+ddcutil detect
+```
+
+`i2c-dev`, which ddcutil needs, is loaded by `./setup system`, or from the next
+boot. Most monitors behind a dock or an MST hub, and DisplayLink, are not
+reached, and NVIDIA's proprietary driver needs its I2C option set. A screen
+that cannot be dimmed passes the keys to the first one that can.
 
 ## Hyprland
 
@@ -164,6 +207,24 @@ running, or at the login screen. Some machines never report a short press at
 all. <kbd>SUPER</kbd> <kbd>X</kbd> and <kbd>CTRL</kbd> <kbd>ALT</kbd>
 <kbd>Delete</kbd> open the same session menu. Holding the button still forces a
 power-off.
+
+## The lock screen
+
+### Face unlock never starts
+
+Face unlock needs an infrared camera, the lock's PAM service and howdy-next
+with your face enrolled. `./setup system` installs the service,
+`/etc/pam.d/impasto-face`; `./setup face` installs howdy-next, points it at the
+camera and enrols you:
+
+```bash
+./setup system
+./setup face
+```
+
+The lock never looks on its own: press a key or move the pointer. After three
+misses it looks again only when you press <kbd>Enter</kbd> in an empty field.
+The login screen always asks for the password.
 
 ## The login screen
 

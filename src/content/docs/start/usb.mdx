@@ -1,0 +1,80 @@
+---
+title: From a USB stick
+description: Build the impasto install medium on an Arch machine, write it to a USB stick, and install Arch Linux with the desk on it.
+sidebar:
+  order: 3
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+**[impasto-iso](https://github.com/andreumassanet/impasto-iso) builds a USB
+stick that installs Arch Linux with the desk on it.** It is the official Arch
+ISO with a launcher added: archinstall opens with most of the answers filled
+in, and the first boot of the new system clones impasto and runs
+`./setup install` before the login screen comes up.
+
+<Aside type="caution" title="Built, not downloaded">
+There is no ISO to download. Building one needs archiso, which runs on Arch
+Linux, so build it on a machine that already runs Arch.
+</Aside>
+
+## Build it
+
+```bash
+git clone https://github.com/andreumassanet/impasto-iso.git
+cd impasto-iso
+sudo pacman -S --needed archiso
+sudo ./build                  # out/impasto-YYYY.MM.DD-x86_64.iso
+sudo ./build --branch dev     # the first boot installs dev instead of main
+```
+
+The desk is not on the stick: the first boot fetches it. So a stick installs
+the latest release whenever it is used, and only needs building again when the
+installer changes.
+
+## Write it to a stick
+
+Everything on the stick is erased. From Linux, with the stick's device in place
+of `/dev/sdX`:
+
+```bash
+sudo dd if=out/impasto-*.iso of=/dev/sdX bs=4M status=progress oflag=sync
+```
+
+From Windows, use Rufus in DD mode, or Ventoy.
+
+## Install
+
+<Steps>
+
+1. Boot the stick in UEFI mode. Ethernet connects on its own; without a
+   network, it opens `iwctl` for Wi-Fi.
+
+2. It lists the disks in the machine and marks the one Windows is on, then
+   asks with the arrow keys: the installer, archinstall on its own, a shell, or
+   reboot.
+
+3. The installer is archinstall with the graphics driver for the card that is
+   fitted, NetworkManager, PipeWire and Bluetooth already filled in. Choose the
+   disk in **Disk configuration** (everything on it is erased), your user in
+   **Authentication**, your keyboard and language in **Locales**, and your
+   **Timezone**. Then **Install**.
+
+4. Take the stick out and reboot when it is done.
+
+</Steps>
+
+## The first boot
+
+**The first boot installs the desk on screen**, before the login screen comes
+up for the first time: it clones impasto's `main` and runs `./setup install`.
+It takes 10 to 20 minutes, online; on Wi-Fi it asks for the network again. If
+something fails, it says why and offers to try again, to try again leaving the
+packages as they are, a shell, or the login screen now and `./setup install`
+later. Everything is logged to `/var/log/impasto-install.log`.
+
+The first time you log in, a terminal builds the two Hyprland plugins, which
+can only be built from inside the session. It asks for your password once.
+With an infrared camera, enrolling your face waits for `./setup face`.
+
+Next: [First steps](/start/first-steps/).

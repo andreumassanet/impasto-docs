@@ -2,7 +2,7 @@
 title: First steps
 description: The first ten minutes on the desk — the keys to know, changing the wallpaper, Settings, the bar, the widgets and profiles.
 sidebar:
-  order: 3
+  order: 4
 ---
 
 import { Steps, Aside } from '@astrojs/starlight/components';
@@ -10,8 +10,9 @@ import Figure from '~/components/Figure.astro';
 
 **The first login starts on a finished desk.** A machine with no settings yet
 opens on the *Moon castle* profile: the whole bar in one capsule, Analogue
-widgets on the wallpaper and the dock at the bottom. Everything below changes
-it.
+widgets on the wallpaper and the dock at the bottom. It types in the machine's
+keyboard layout, the one `localectl` wrote in
+`/etc/X11/xorg.conf.d/00-keyboard.conf`. Everything below changes it.
 
 ## The keys to know
 
@@ -20,7 +21,8 @@ it.
 | <kbd>SUPER</kbd> <kbd>Return</kbd> | Open a terminal |
 | <kbd>SUPER</kbd> <kbd>Space</kbd> | The launcher |
 | <kbd>SUPER</kbd> <kbd>Q</kbd> | Close the focused window |
-| <kbd>SUPER</kbd> <kbd>1</kbd> … <kbd>0</kbd> | Go to a workspace; add <kbd>SHIFT</kbd> to move the window there |
+| <kbd>SUPER</kbd> <kbd>1</kbd> … <kbd>0</kbd> | Go to a workspace, on the screen you are on; add <kbd>SHIFT</kbd> to move the window there |
+| <kbd>SUPER</kbd> <kbd>ALT</kbd> <kbd>←</kbd> <kbd>→</kbd> | Go to the other screen; add <kbd>SHIFT</kbd> to take the workspace with you |
 | <kbd>SUPER</kbd> <kbd>TAB</kbd> | Every workspace at once |
 | <kbd>SUPER</kbd> <kbd>A</kbd> | The control centre |
 | <kbd>SUPER</kbd> <kbd>X</kbd> | The session menu |
@@ -57,7 +59,7 @@ Press <kbd>SUPER</kbd> <kbd>,</kbd>, or right-click the wallpaper and choose
 **Settings**. It is an ordinary window with a search field over the sidebar,
 and the sidebar is in three groups: the shell, the desk and the session.
 
-<Figure name="settings" alt="Two pages of the settings window: the bar arranged on a picture of it, and the appearance page with the wallpaper transitions and the greeting scenes" caption="The bar page and the appearance page." />
+<Figure name="settings" alt="Two pages of the settings window: the bar arranged on a picture of it from a catalogue of modules and buttons, and the desktop's module settings with the pet drawn in its four styles" caption="The bar page and the desktop's module settings." />
 
 ## Arrange the bar
 

@@ -1,6 +1,6 @@
 ---
 title: Widgets on the desktop
-description: The grid of widgets under the windows — the four shapes, arranging them, each widget's own look, the two themes, photos and the note decks on the edges.
+description: The grid of widgets under the windows — the four shapes, arranging them, each widget's own look, the two themes, photos, the note decks on the edges and the sound spectrum.
 sidebar:
   order: 7
 ---
@@ -26,8 +26,8 @@ same module can be on the grid twice: a clock as a band and another as a dial.
 **Everything sits on a grid, and nothing overlaps.** A widget's place is a
 column and a row, and the gap between two widgets is the gap between two
 windows. The grid fills the space under the bar with the same margin on all
-four sides, and stops short of the dock when the dock reserves its space; a
-floating dock draws over the bottom row.
+four sides, and keeps clear of the dock — unless the dock hides until pointed
+at, when the grid runs to the edge and the dock comes out over it.
 
 A widget dropped on an occupied square goes to the nearest free one, or back
 where it came from if the board has no room. The widgets already there never
@@ -118,7 +118,8 @@ its left or under it, wherever there is room.
 
 A note and a photo draw their own paper and picture, so neither has a Style or
 a slider, and a note has no Face. A photo's card holds its **Picture** instead,
-and a print's its **Caption** too ([Photos](#photos)).
+and a print's its **Caption** too ([Photos](#photos)). A spectrum has no Face
+and no Style either, and a card of its own ([Spectrum](#spectrum)).
 
 <Figure name="desktop-styles" alt="The same five widgets in four styles over a coastal wallpaper: Capsule, Accent, Outline and no capsule" caption="Capsule, Accent, Outline and no capsule, on the same five widgets." />
 
@@ -179,6 +180,7 @@ the object on a square and puts the words beside it on a card.
 | GitHub | square, card, band | the wall of contribution squares, in both themes |
 | Notes | all four | paper, in both themes |
 | Photo | all four | an instant print, or a strip of film on the band |
+| Spectrum | card, band, large | its bars, the same in both themes |
 
 A widget switched to a theme with no face for its shape shrinks to the largest
 shape that fits inside the old one, so nothing grows into a neighbour.
@@ -186,8 +188,9 @@ shape that fits inside the old one, so nothing grows into a neighbour.
 **Every widget is always drawn.** With nothing to report it says so — "Nothing
 playing", "No battery", "No forecast" — and keeps its square; the only way for
 a widget to leave is Remove. The weather's location, whose contributions the
-GitHub wall draws and how a note is written are in Settings → Desktop → Module
-settings, and the bar's chips read the same settings.
+GitHub wall draws, how a note is written and how the pet is drawn — Creature,
+Plush, Paper or Pixel — are in Settings → Desktop → Module settings, and the
+bar's chips read the same settings.
 
 On the calendar, a day with a dot has tasks due. Press it and the widget turns
 into that day's tasks; it comes back when the pointer leaves it, or from the
@@ -209,14 +212,13 @@ arrow. See [Notes and tasks](/shell/notes-and-tasks/).
   { name: 'widget-modern-media', alt: "The Media widget in Modern: a track playing, with its cover", caption: 'Media' },
   { name: 'widget-modern-network', alt: "The Network widget in Modern: the Wi-Fi network, online", caption: 'Network' },
   { name: 'widget-modern-notes', alt: "The Notes widget in Modern: a grocery list on paper, in handwriting", caption: 'Notes' },
-  { name: 'widget-modern-pet', alt: "The Pet widget in Modern: Pip at level 17, beaming", caption: 'Pet' },
+  { name: 'widget-modern-pet', alt: "The Pet widget in Modern: Pip, a small blue cat with a star, in a ring, over Lv 17 and beaming", caption: 'Pet' },
   { name: 'widget-modern-stats', alt: "The System widget in Modern: 25 % processor and 55 % memory", caption: 'System' },
   { name: 'widget-modern-tasks', alt: "The Tasks widget in Modern: 7 tasks, 2 due today", caption: 'Tasks' },
   { name: 'widget-modern-timer', alt: "The Timer widget in Modern: 18:05 left on a timer called Tea", caption: 'Timer' },
   { name: 'widget-modern-updates', alt: "The Updates widget in Modern: 447 packages pending", caption: 'Updates' },
   { name: 'widget-modern-volume', alt: "The Volume widget in Modern: 64 %, inside a ring", caption: 'Volume' },
   { name: 'widget-modern-weather', alt: "The Weather widget in Modern: 25° in Kyoto, patchy rain nearby", caption: 'Weather' },
-  { name: 'widget-modern-recorder', alt: "The Recorder widget in Modern: not recording, with the region, window and screen choices and a Record button", caption: 'Recorder' },
 ]} />
 </TabItem>
 <TabItem label="Analogue">
@@ -231,7 +233,7 @@ arrow. See [Notes and tasks](/shell/notes-and-tasks/).
   { name: 'widget-analogue-github', alt: "The GitHub widget in Analogue: the same wall of green squares", caption: 'GitHub' },
   { name: 'widget-analogue-media', alt: "The Media widget in Analogue: a record turning on a turntable", caption: 'Media' },
   { name: 'widget-analogue-network', alt: "The Network widget in Analogue: Wi-Fi arcs over the network's name", caption: 'Network' },
-  { name: 'widget-analogue-pet', alt: "The Pet widget in Analogue: Pip's face over a level bar", caption: 'Pet' },
+  { name: 'widget-analogue-pet', alt: "The Pet widget in Analogue: Pip, a blue cat with a star, larger, on a line of ground over Pip · Lv 17", caption: 'Pet' },
   { name: 'widget-analogue-stats', alt: "The System widget in Analogue: a speedometer at 23 % processor", caption: 'System' },
   { name: 'widget-analogue-tasks', alt: "The Tasks widget in Analogue: a clipboard with three tasks", caption: 'Tasks' },
   { name: 'widget-analogue-timer', alt: "The Timer widget in Analogue: an hourglass running", caption: 'Timer' },
@@ -306,7 +308,8 @@ While arranging:
 - click a tab for the deck's card: **Where** (left, right or bottom), **Along
   the edge** (Start, Middle or End) and **Which notes**, ticked on or off.
 
-There is one deck per edge at most, and none on the top, which is the bar's. A
+There is one deck per edge of each screen at most, and none on the top, which
+is the bar's. A
 note is in one place at a time: putting it on an edge takes it off its square.
 A notes widget on a square shows one note — the newest, or the one picked under
 **Which note** on its card — and a click opens it in the island.
@@ -315,13 +318,62 @@ Decks hide under a full-screen window. Settings → Desktop → Module settings 
 **Edges only on an empty workspace** hides them whenever a window is open on
 the workspace, and brings them back when the last one closes.
 
+## Spectrum
+
+**The spectrum is bars that move with the sound**, read from cava, on the grid
+or along a whole edge. It has no capsule and no theme: wherever it is, it is
+its bars and nothing else.
+
+<Gallery columns={2} items={[
+  { name: 'spectrum-grid', alt: "A Spectrum widget on the grid among other widgets: bare bars rising over the wallpaper, with no capsule round them.", caption: "On the grid, among the widgets." },
+  { name: 'spectrum-edge', alt: "A spectrum running along the whole bottom edge of the screen, under the windows.", caption: "Along the bottom edge, under the windows." },
+]} />
+
+- **On the grid** it is a card (4 × 2), a band (8 × 2) or a large square
+  (4 × 4) of bars.
+- **Against the left, right or bottom edge** it runs the whole of that edge,
+  one per edge, under the windows: beside a window only its foot shows, in the
+  margin the window leaves. A side stops where the bottom's bars begin, so the
+  corner is never crossed.
+
+While arranging, drag the Spectrum piece from the card onto the grid or
+against an edge. Dragged from the grid to an edge, or from an edge onto the
+grid, it turns from one into the other; an edge that has one already takes no
+second. Along an edge the whole strip is its handle: a click opens its card,
+and dropped on the card of modules it is taken off.
+
+<Figure name="spectrum-inspector" alt="The card for a spectrum beside it: Where, Look, Fill, Colour, Size, Lows, Peaks and an opacity slider, each look and fill drawn as a small sample." caption="A spectrum's own card." />
+
+| On its card | |
+|---|---|
+| Shape | On the grid, the three footprints |
+| Where | Grid, Left, Right or Bottom — the same as dragging it |
+| Look | Rounded columns, Square columns, Segments, Dots or Wave |
+| Fill | Fading to the tip, Solid, or Two colours |
+| Colour | Palette, which follows the wallpaper, or a fixed colour; with Two colours, one **From the edge** and one **To the tip** |
+| Size | **Height**, on an edge, and **Bars** and **Gap** |
+| Lows | At the corners or Along the edge |
+| Peaks | Peaks that fall back over the bars |
+| The slider | How solid it is, 20 to 100 % |
+
+Each look and fill on the card is drawn as a sample, so it reads in silence.
+The spectrum leaves under a full-screen window, and stops listening while it
+is away. Settings → Desktop →
+Module settings → Spectrum → **Only on an empty workspace** also takes it away
+whenever a window is open on the workspace, and brings it back when the last
+one closes.
+
 ## Screens and sizes
 
-**The widgets and the decks are on one screen**: the one that carries the
-island, chosen in Settings → Displays → Arrangement → The island is on (see
-[Displays](/shell/displays/)). A widget is filed by its square and nothing
-else, so a second screen would draw the same widgets twice. Other screens get
-the dock and the bar without the island.
+**The widgets, the decks and the spectra are on every screen**, each screen
+with a grid of its own. A widget keeps the screen it was put on by the monitor
+itself, not the port, so moving a cable changes nothing. One whose screen is
+unplugged is drawn on the main screen, set in
+[Displays](/shell/displays/#arrangement), until that screen comes back.
+
+Arranging happens on every screen at once, and the card of modules is on the
+screen the pointer is on. Nothing is dragged from one screen to another: drop
+the widget on the card here and place it again there.
 
 The squares are sized to fill the screen evenly, never smaller than a set
 minimum, so a smaller screen has fewer of them. A layout made on a bigger

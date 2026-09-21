@@ -1,11 +1,12 @@
 ---
 title: Updating
-description: Update with ./setup update, edit your copy or the repository, how setup keeps its copies, and what uninstalling removes and restores.
+description: Update with ./setup update or from Settings, edit your copy or the repository, how setup keeps its copies, and what uninstalling removes and restores.
 sidebar:
-  order: 4
+  order: 5
 ---
 
 import { Aside } from '@astrojs/starlight/components';
+import Figure from '~/components/Figure.astro';
 
 **`./setup update` pulls the repository and installs again.**
 
@@ -18,7 +19,14 @@ to, then everything `install` does, with the same flags:
 `./setup update --skip-packages` skips the packages on the way through. The
 install runs from the `setup` just pulled, so a release that changes the
 installer takes effect on the same update. A checkout with no upstream branch
-skips the pull and installs what is there.
+skips the pull and installs what is there. When a release adds packages, they
+are installed with a full system upgrade in the same step
+(`pacman -Syu --needed`), as Arch expects.
+
+An update stops before copying anything when the pull leaves conflicts, which
+happens when you edited the repository itself and the release changed the same
+lines. Your edits are in the stash: resolve the conflicts (`git status` lists
+them), run `git stash drop`, and update again.
 
 The extras `install` set up once are left alone, so what you changed in those
 programs stays. One that was skipped is tried again, and Spotify is patched
@@ -34,10 +42,30 @@ Every release is a tag, `v0.1.0` and on, with its notes under
 [Releases](https://github.com/andreumassanet/impasto/releases).
 
 **The version you have is under Settings → System → This machine**, beside
-the processor, the memory and the uptime: the release, such as `v0.2.0`, with
+the processor, the memory and the uptime: the release, such as `v0.3.0`, with
 the branch under it. Between releases the line under it adds the commits since
 that release and a short hash, and says *edited* when the checkout has changes
 of its own.
+
+## From Settings
+
+**Settings → System → This machine has an Updates group**, for impasto itself,
+not the packages it runs.
+
+- **Check for updates** asks the remote of the checkout impasto was installed
+  from what has landed since: when the page opens, at most every half hour,
+  and whenever you press **Check**. It reads *Up to date* with the time it
+  checked, or how many commits are waiting, counted from the version that was
+  installed, so an update whose install stopped half-way still offers Update.
+- **What is waiting** lists those commits, newest first: up to twelve, then
+  *+N more*.
+- **Update** appears only when something is waiting, and reads *To* and the
+  version it would leave you on. It runs `setup update` in a floating
+  terminal, where its questions and your password stay visible. It is locked,
+  with *Commits of your own are not on the remote*, when your clone has commits
+  the remote does not, since the pull only fast-forwards.
+
+<Figure name="updates" alt="Settings, System, This machine: the Updates group with the check's reading, the Update row reading To and a version, and the list of commits waiting" caption="Updates, with commits waiting." />
 
 ## Two copies: yours and the repository's
 
@@ -111,7 +139,8 @@ It removes every file it installed that has not been edited since, from both
 `$HOME` and `/`. An edited file is left in place and named. Then it puts back
 what the install moved aside, oldest backup first, wherever the path is free
 again. Anything that cannot go back because the path is taken stays in
-`~/.local/state/impasto/backups/`, and `setup` says how many.
+`~/.local/state/impasto/backups/`, and `setup` says how many. The record of
+which extras have run goes too, so a later install sets them up again.
 
 What stays behind:
 
@@ -121,6 +150,8 @@ What stays behind:
 - what the extras set: the default applications, dark GTK, Thunar's and
   VSCodium's settings, VSCodium's extensions, Vesktop's tick and Spotify's
   patch;
+- howdy-next and the face enrolled with it (the lock's PAM service goes with
+  the rest of `/`);
 - sddm, still enabled, if `install` enabled it;
 - `/var/lib/impasto/faces`, because what is in it is somebody's photograph.
 

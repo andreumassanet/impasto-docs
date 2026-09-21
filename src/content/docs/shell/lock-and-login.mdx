@@ -1,6 +1,6 @@
 ---
 title: Lock and login
-description: The lock screen the shell draws itself, locking when you leave, and the SDDM login screen that is the same screen before the desk.
+description: The lock screen the shell draws itself, unlocking with your face, locking when you leave, and the SDDM login screen that is the same screen before the desk.
 sidebar:
   order: 11
 ---
@@ -10,8 +10,8 @@ import Figure from '~/components/Figure.astro';
 
 <Figure
   name="lock-and-login"
-  alt="Left, the lock screen over the blurred desk: the time and date in the middle, a round picture with the name under it, and the password field. Right, the login screen over a painting of thick brush strokes, with the same time, picture and name, and a prompt to type the password"
-  caption="The lock, and the login screen: one screen at two moments."
+  alt="Three screens. The lock at rest over the blurred desk: the date over a large clock, hours over softer minutes, and the island at the top holding a padlock. The lock looking for a face: the island grown round the padlock with a ring of ticks, and a black pill at the bottom with the picture and name. The login screen over a blurred painting of brush strokes, with the same island, clock and pill"
+  caption="The lock at rest, the lock looking for a face, and the login screen: one screen at two moments."
 />
 
 ## The lock screen
@@ -20,23 +20,39 @@ import Figure from '~/components/Figure.astro';
 itself** through the compositor's session lock, so a shell that crashes leaves
 the machine held rather than open.
 
-- The desk stays behind it, blurred enough that text on it cannot be read.
-- The time and the date are in the middle, and the battery ring in the top
-  right corner.
-- Your picture and name are over the field.
-- "Type your password to unlock" stands where the field is; the field appears
-  when you start typing.
-- Restart and shut down are in the bottom-left corner, each armed by the first
-  click and run by the second.
+**At rest it is the clock alone**: the date over the time, the hours over
+softer minutes. The island sits at the top, where the bar has it, holding a
+padlock, and the battery ring is in the top right corner. The desk stays behind
+it, blurred enough that text on it cannot be read.
+
+<Figure name="lock-rest" alt="The lock at rest over the blurred desk: Monday, 21 September over a large 22 and softer 00, the island at the top holding a padlock, and the battery ring in the top right corner." caption="At rest: the clock alone." />
+
+**Any key wakes it, and that key is kept** as the first character of the
+password, so a password typed straight at the clock arrives whole. A lone
+Shift or Caps Lock does not wake it; a click does.
+
+- Awake, the clock rises and steps back, and one black pill comes up with your
+  picture, your name and "Enter your password" — "Face unlock or password"
+  where [face unlock](#face-unlock) is set up.
+- From the first character, the pill stretches into the field.
+- Restart and shut down are in the bottom-left corner while it is awake, each
+  armed by the first click and run by the second.
+
+<Figure name="lock-awake" alt="The lock awake: the clock risen towards the top, a black pill at the bottom with a round picture, the name andreu and Face unlock or password, and restart and shut down in the bottom-left corner." caption="Awake: the pill, and the power buttons in their corner." />
 
 The password goes through PAM's `login` configuration, so hyprlock is not
-needed. A wrong one shakes the field and says why under it; <kbd>Escape</kbd>
-clears the field.
+needed. A wrong one shakes the pill and says why under it. <kbd>Escape</kbd>
+clears the field and puts the screen back to its clock, and so do 30 seconds
+untouched, never while a password is being checked. Unlocking fades the type
+and relaxes the blur, so the desk is what is left when the lock falls; with two
+screens the blur stays.
 
-Settings → Session → Lock screen holds the **Blur**, 8 to 64 px, previewed over
-the wallpaper, and **You**: a name and a picture for the lock screen — click
-the picture, or drop an image on the card. Left empty, both come from your
-account, as on the login screen.
+Settings → Session → Lock screen holds **You**: a name and a picture for the
+lock screen — click the picture, or drop an image on the card. Left empty,
+both come from your account, as on the login screen. Under **Clock**,
+**Style** is Stacked or Inline, hours over minutes or both on one line; the
+login screen always draws it stacked. Under **Background**, the **Blur** is 8
+to 64 px, previewed over the wallpaper.
 
 ### When you leave it alone
 
@@ -63,23 +79,61 @@ of the desk as it goes up, and a screen that is already dark gives it a plain
 ground instead. The slider says "before the lock" when it is set that way.
 </Aside>
 
+## Face unlock
+
+**With an infrared camera, the lock opens for your face.** `./setup face`
+finds the camera by the 8-bit grey picture only an infrared one gives,
+installs howdy-next from the AUR, points it at that camera and asks to enrol
+your face. `./setup install` runs it once and skips a machine without one.
+
+howdy looks through a PAM service of the lock's own,
+`/etc/pam.d/impasto-face`, beside `login` rather than inside it: a face it does
+not know never costs a password try, and the password never waits on the
+camera. `./setup system` installs that file, and install does it unless
+`--skip-system`.
+
+- **A scan starts when somebody is there**: a key, the pointer moving, the lid
+  opening, or <kbd>Enter</kbd> on an empty field. Never by itself, so the face
+  that has just pressed <kbd>SUPER</kbd> <kbd>L</kbd> does not open it again.
+- **While it looks, the island grows** under the camera and a ring of ticks
+  turns round the padlock. A match closes the ring in green and opens the
+  padlock; a miss turns it red and shakes the island.
+- After a miss it waits a second and a half. After three, only
+  <kbd>Enter</kbd> on an empty field asks again.
+- The password works all along, at rest or awake.
+
+<Figure name="lock-scan" alt="The lock looking for a face: the island at the top grown into a black square round the padlock, with a ring of ticks turning about it." caption="Looking: the island grows under the camera." />
+
+Only the lock uses it: the login screen, sudo and polkit still ask for the
+password. `sudo howdy add` enrols another face, and `sudo howdy config` opens
+howdy's own settings — how sure a match must be, how long it looks, which
+camera.
+
 ## The login screen
 
 **The login screen is the lock with the desk taken away**: an SDDM theme with
-the same clock in the same place, the same face and the same field, over a
-painting of brush strokes. It does not follow the palette, because it comes
-before there is a user to have chosen one.
+the same island and padlock, the same stacked clock and the same two stages,
+over a painting of brush strokes blurred and darkened as a whole. It does not
+follow the palette, because it comes before there is a user to have chosen one.
 
-- **The face is the account picker.** With more than one account, pressing the
-  picture turns it into the list.
-- The session is chosen in the bottom-right corner.
-- Restart and shut down are in the bottom-left corner, armed by the first click
-  and run by the second. There is no suspend.
+- At rest it is the clock alone. A key wakes it and is kept as the first
+  character, and a click wakes it too; <kbd>Escape</kbd> or 30 seconds
+  untouched puts it back.
+- **One pill holds the account and the field.** With more than one account,
+  the picture is the account picker: pressing it opens the list above the
+  pill. <kbd>Escape</kbd> closes an open list before it rests the screen.
+- The padlock opens when the password is accepted. A refused one shakes the
+  pill and empties the field.
+- The session is chosen in the bottom-right corner, and restart and shut down
+  are in the bottom-left, both only while it is awake. The power buttons are
+  armed by the first click and run by the second. There is no suspend.
 - The battery ring sits in the top right, read straight from the battery.
-- The line under the field says when Caps Lock is on.
+- The line under the pill says when Caps Lock is on.
 
 The account and session lists take the pointer only; the keyboard stays in the
 field.
+
+<Figure name="login" alt="The login screen awake over a blurred, darkened painting of coloured brush strokes: the island with its padlock at the top, the stacked clock, the account pill with andreu and Enter your password, the session name in the bottom-right corner and the power buttons in the bottom-left." caption="The login screen, awake." />
 
 ### How it starts
 
@@ -111,7 +165,7 @@ fallback screen, not in the terminal.
 
 ### Your picture
 
-**The face on both screens is `/var/lib/impasto/faces/<username>.face.icon`**,
+**The picture on both screens is `/var/lib/impasto/faces/<username>.face.icon`**,
 yours to put there; without one, both show your initials. `setup` makes the
 folder and never removes it. It is kept outside your home because SDDM reads
 as its own user and cannot see into it.
@@ -121,7 +175,7 @@ sudo install -m 644 ~/picture.png /var/lib/impasto/faces/$USER.face.icon
 ```
 
 The lock screen looks there first, then at `~/.face`, `~/.face.icon` and
-AccountsService. The name under the picture is your account's full name, which
+AccountsService. The name beside the picture is your account's full name, which
 `chfn` sets, or the login name when there is none. The lock screen can take
 another name and picture from Settings → Session; the login screen always reads
 the system's.

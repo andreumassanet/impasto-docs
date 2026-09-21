@@ -14,7 +14,7 @@ or all inside one capsule. Changing the style keeps what is on the bar.
 
 <Figure
   name="bar-styles"
-  alt="The same bar in its three styles: grouped round the island, spread to the two edges, and everything inside one capsule"
+  alt="The same bar in its three styles: grouped round the island, spread to the two edges, and everything inside one capsule, each with the workspaces and three buttons left of the island and the modules right of it"
   caption="Grouped, spread and one island — the same layout each time."
 />
 
@@ -36,9 +36,16 @@ below the top edge or is cut into it as a notch, in every style.
 
 - **Modules** — each a piece that shows a reading and opens a detail in the
   island when clicked. The same click closes it.
-- **The workspace strip** — a dot per workspace; a click goes there.
-- **Buttons** — Search, Overview, Control centre and Session, each opening
-  that panel. The button stays lit while its panel is open.
+- **The workspace strip** — a dot for each of the desk's workspaces, the one
+  this screen shows lit; a click brings that workspace to this screen.
+- **Buttons** — a symbol and no figure: every door of
+  [the control centre](/shell/control-centre/#the-top-row), the control
+  centre itself and Capture. They are Launcher, Workspace overview, Control
+  centre, Capture, Appearance, Notes, Task board, Games, Keys, Packages,
+  Settings and Session menu. Each opens its panel and stays lit while it is
+  open; Settings opens the window, and Capture does what the capture key does
+  — the photo at once, with the surface's last choices. Statistics and the pet
+  are modules here, not buttons.
 - **Split** — ends one capsule and starts the next.
 
 Neighbouring modules share a capsule; the workspace strip is always a capsule
@@ -48,9 +55,9 @@ circle, a button a circle, a symbol and its figure a pill.
 Out of the box the left side holds the workspaces, and the right holds
 Notifications, Network, Bluetooth, Volume and Battery.
 
-A module the machine cannot show — no battery, no backlight, no Bluetooth
-adapter, no screen recorder — is not drawn, even when placed. Nothing on the
-bar moves by itself: a piece is where you put it.
+A piece the machine cannot show — no battery, no screen that can be dimmed, no
+Bluetooth adapter, no grim for Capture — is not drawn, even when placed.
+Nothing on the bar moves by itself: a piece is where you put it.
 
 ## Arranging
 
@@ -70,8 +77,10 @@ bar moves by itself: a piece is where you put it.
 
 </Steps>
 
-The catalogue always holds every piece, and taking from it copies, so a piece
-can be on the bar twice. There is no on or off switch anywhere: on the bar is
+The catalogue is four groups: the modules that measure, the modules that read
+out a state or a count, the buttons, then the workspace strip and the split.
+It always holds every piece, and taking from it copies, so a piece can be on
+the bar twice. There is no on or off switch anywhere: on the bar is
 on.
 
 ## How a piece reads
@@ -83,18 +92,19 @@ Two settings for the whole bar, under The bar → *Chips*:
 | Shape | **Icon** — the module's symbol, small (the default). **Ring** — its gauge as a circle round the symbol: charge, volume, a countdown. |
 | Figure | **No** — the symbol alone. **On hover** — the figure opens under the pointer. **Always** — always beside it (the default). |
 
-A module with nothing to measure — Calendar, Notifications — is its symbol in
+Only a module whose reading fills from empty to full gets a ring. Network,
+Bluetooth, Notifications, Weather, Updates and Calendar keep their symbol in
 either shape.
 
 <Figure name="bar-modules" alt="The same bar four times: the symbols alone, the symbols with their figures, the rings, and the rings with their figures" caption="Icon or ring, with its figure or without, for the whole bar." />
 
-**Any piece can have a look of its own.** Pick it on the picture, and its card
+**Any module can have a look of its own.** Pick it on the picture, and its card
 offers Shape and Figure, each with *Like the bar* to follow the whole bar.
-Media, Timer and Recorder also have **When**: *Always*, or *While it runs*, to
-be on the bar only while something is playing, counting or recording.
+Media and Timer also have **When**: *Always*, or *While it runs*, to be on the
+bar only while something is playing or counting.
 
 Every module has a figure, so Always means all of them. Where there is nothing
-to count it is a word: *Off*, *No devices*, *Muted*, *0:00*, *REC*, *Egg*,
+to count it is a word: *Off*, *No devices*, *Muted*, *0:00*, *Egg*,
 *Nothing playing*.
 
 Warnings do not follow the palette. Off the charger, the battery turns yellow
@@ -110,7 +120,7 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
 | Claude | Claude's mark, and the session's percentage — or its tokens, until the percentage is known | Tokens and messages for the five-hour session and the week, the account's own percentages, and when the session resets | Claude Code (below) |
 | Battery | The charge | The charge, charging or the time left, the power going in or out, and the energy stored | A battery |
 | Volume | The level, or *Muted* | A slider, and mute buttons for the output and the microphone | — |
-| Brightness | The level | A slider | A backlight |
+| Brightness | The level of the screen you are on | A slider for each screen that can be dimmed | A backlight, or a monitor that answers DDC/CI |
 | Network | The network's name, or *Off* | The Wi-Fi list, the same as the control centre's | — |
 | Bluetooth | The connected device, a count, *No devices* or *Off* | The device list | A Bluetooth adapter |
 | Notifications | A bell and how many are kept; crossed out in do not disturb | The history, with Clear | — |
@@ -118,7 +128,6 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
 | System | The processor load | Processor and memory, with their recent history | — |
 | Updates | How many updates are waiting | What is waiting, when it was checked, and Open for the packages panel | pacman-contrib for a fresh count |
 | Pet | The pet that is out, and its level or *Egg* | Feed, play, and the shelf of the whole family | — |
-| Recorder | A muted camera and *REC*; a red dot and the time while recording | Record, the shape and the sound; while recording, what is taken, the sound, the file's size, and stop | wl-screenrec or wf-recorder |
 | Calendar | Its symbol and the day | The month, with a dot under each day that has tasks; such a day opens its list | — |
 
 - **Claude** appears once Claude Code has written its transcripts under
@@ -134,14 +143,13 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
   goes to [the packages panel](/shell/keys-and-packages/), which runs the
   upgrade in a terminal. Without pacman-contrib the count is from the last
   sync.
-- **Recorder** — see [capture](/shell/capture/#recording).
 - **System** — the full panel, with cores, disks and temperatures, is
   <kbd>SUPER</kbd> <kbd>U</kbd>.
 
-**Not on the bar:** Notes, Tasks, Games and GitHub are desktop widgets and
-panels of their own — see [the desktop](/shell/desktop/),
-[notes and tasks](/shell/notes-and-tasks/) and
-[games and pets](/shell/games-and-pets/). GitHub needs a username under
+**Not modules on the bar:** Notes, Tasks, Games and GitHub are desktop widgets,
+and notes, the task board and the games are buttons that open their panels —
+see [the desktop](/shell/desktop/), [notes and tasks](/shell/notes-and-tasks/)
+and [games and pets](/shell/games-and-pets/). GitHub needs a username under
 Settings → Desktop → Module settings → GitHub → **Username**. The clock is the
 island itself.
 
@@ -156,6 +164,6 @@ drawn on the strip (five by default); the rest, up to *Workspaces available*
 (ten by default), appear only while they have windows.
 
 <Aside>
-On a second screen the bar is the two sides and nothing between them, spread
-whatever the style. See [the island](/shell/island/#on-a-second-screen).
+Every screen draws the same bar, and the one with the keyboard is the live
+one. See [Several screens](/shell/screens/).
 </Aside>

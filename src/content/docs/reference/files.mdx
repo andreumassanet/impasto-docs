@@ -33,6 +33,7 @@ Each tree in the repository is its destination as it is: `home/` is `$HOME` and
     - gtk-4.0/ settings.ini
     - starship.toml
   - .local/share/
+    - fonts/ GrapeNuts-Regular.ttf, the script face, and its OFL licence
     - wallpapers/ the forty wallpapers
     - impasto/
       - palette-board.json
@@ -43,6 +44,7 @@ Each tree in the repository is its destination as it is: `home/` is `$HOME` and
 <FileTree>
 - /
   - etc/
+    - pam.d/impasto-face face unlock for the lock screen, beside the password
     - sddm.conf.d/10-impasto.conf where faces are kept, and the battery ring's permission
     - systemd/logind.conf.d/10-impasto.conf the power button goes to the shell
   - usr/share/sddm/themes/impasto/ the login screen
@@ -94,7 +96,8 @@ System → Profiles. `profiles.json` alone is not a backup of the one in use.
 - ~/.local/state/impasto/
   - home.manifest the hash of every file copied into $HOME
   - system.manifest the same for /
-  - version the version and branch Settings → System shows, written by every sync
+  - version the version, the branch and the checkout they came from, written by every sync; Settings → System shows them and checks for updates against that checkout
+  - plugins-pending the checkout, while the Hyprland plugins wait for a session; removed once they build
   - applied/ one file per extra install has set up
   - backups/
     - 20260913-101500/ one directory per run that moved something

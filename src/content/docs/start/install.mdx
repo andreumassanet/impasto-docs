@@ -17,16 +17,19 @@ a copy, and `setup` remembers what it wrote.
 
 - Arch Linux, with `git` to clone the repository.
 - Hyprland 0.56 or newer (tested on 0.56.2), configured in Lua.
-- A terminal **inside the Hyprland session**. The plugins are built against the
-  compositor that is running, so `setup` cannot build them from a TTY or from
-  another desktop.
+- A terminal, in the Hyprland session or on a console before there is one.
+  The plugins are built against the compositor that is running, so from a
+  console the first session builds them.
 - Your password, for sudo.
+
+No Arch on the machine yet? [A USB stick](/start/usb/), built on one that has
+it, installs Arch and the desk together.
 
 ## Install
 
 <Steps>
 
-1. Clone the repository and run the installer from a terminal in Hyprland:
+1. Clone the repository and run the installer:
 
    ```bash
    git clone https://github.com/andreumassanet/impasto.git ~/impasto
@@ -36,10 +39,15 @@ a copy, and `setup` remembers what it wrote.
 
 2. Answer pacman's questions and give your password when sudo asks for it.
 
-3. Log out and back in. The shell, the wallpaper daemon and the plugins start
-   with the session, and the login screen with the next boot.
+3. Log out and back in, or reboot after an install from a console. The shell,
+   the wallpaper daemon and the plugins start with the session, and the login
+   screen with the next boot.
 
 </Steps>
+
+Installed from a console, the first Hyprland session opens a terminal on
+`./setup plugins`, which builds both plugins and asks for your password once.
+Cancel it and the next login asks again.
 
 To see what would happen first, add `--dry-run`. It prints every package it
 would install and every file it would write, and changes nothing.
@@ -48,17 +56,25 @@ would install and every file it would write, and changes nothing.
 ./setup install --dry-run
 ```
 
+### Or pick from a menu
+
+Run `./setup` with nothing after it and it asks instead, with the arrow keys:
+install, update, sync, uninstall, check or help. Install opens a second screen
+that turns the packages, the login screen, the plugins and the extras on or
+off, and picks yay or paru, starting on the one you have. It needs a terminal
+at least 76 columns wide and 20 rows tall; anywhere else it prints the help.
+
 ## What it does, in order
 
 | Step | What happens |
 |---|---|
-| Packages | Installs whatever `packages/pacman.txt` lists and is missing, with `sudo pacman -S --needed`. Then the AUR half, `packages/aur.txt`, through yay or paru. If you have neither, it offers to build `yay-bin` from the AUR. |
+| Packages | Installs whatever `packages/pacman.txt` lists and is missing, with `sudo pacman -Syu --needed`, which upgrades the system in the same step. Then the AUR half, `packages/aur.txt`, through yay or paru. If you have neither, it offers to build `yay-bin` from the AUR. |
 | User folders | Runs `xdg-user-dirs-update`, which creates the folders captures and recordings land in. Existing folders are never renamed. |
 | oh-my-zsh | Clones oh-my-zsh into `~/.oh-my-zsh`, with the zsh-autosuggestions and zsh-syntax-highlighting plugins. It is cloned rather than installed with its own script, because that script replaces `~/.zshrc`. |
 | `home/` | Copies every file into `$HOME`. The first time, it also renders the terminal greeting's scenes (if ImageMagick is installed) and a minimal `impasto` icon theme. |
-| `system/` | Copies the login screen's theme and two configuration fragments into `/`, with sudo, and creates `/var/lib/impasto/faces`. Where no display manager is enabled yet, it enables sddm for the next boot. |
-| Plugins | Builds and enables hypr-dynamic-cursors (shake to find) and hyprglass (glass on the windows) with hyprpm. |
-| Extras | Sets up what a copied file cannot hold: what opens which file, dark GTK windows, the vector cursor, Thunar, VSCodium, Vesktop and Spotify. |
+| `system/` | Copies the login screen's theme, two configuration fragments and the lock screen's PAM service for face unlock into `/`, with sudo, and creates `/var/lib/impasto/faces`. Where no display manager is enabled yet, it enables sddm for the next boot. With ddcutil installed, it loads `i2c-dev`, so the brightness of external monitors works without a reboot. |
+| Plugins | Builds and enables hypr-dynamic-cursors (shake to find) and hyprglass (glass on the windows) with hyprpm. From a console, it leaves them to the first session. |
+| Extras | Sets up what a copied file cannot hold: what opens which file, dark GTK windows, the vector cursor, Thunar, VSCodium, Vesktop, Spotify and face unlock. |
 
 A file of yours that is already in the way is moved to
 `~/.local/state/impasto/backups/` before anything is written. See
@@ -71,6 +87,7 @@ A file of yours that is already in the way is moved to
 | `--skip-packages` | Install nothing; copy and build only. |
 | `--skip-system` | Leave `/` alone: no login screen, and no password for it. |
 | `--skip-plugins` | Do not build the plugins: no shake to find, no glass. |
+| `--skip-extras` | Leave [the extras](#what-it-sets-up-once) alone: what opens which file, GTK, the cursor, Thunar, VSCodium, Vesktop, Spotify and face unlock. |
 | `--aur-helper yay` or `paru` | Which helper installs the AUR half. The one you have is used; if you have neither, this one is built from the AUR (yay if unset). |
 | `--noconfirm` | Take the default answer at every question, pacman's and the helper's included. |
 | `-n`, `--dry-run` | Say what would happen, and do none of it. |
@@ -81,11 +98,13 @@ A file of yours that is already in the way is moved to
 - **sudo for the copy into `/`**, once, before the system files are written
   and sddm is enabled.
 - **sudo for hyprpm**, whose plugin store is root's, under
-  `/var/cache/hyprpm/`. This is why the plugins need a terminal that can ask for
-  a password.
+  `/var/cache/hyprpm/`: once for both plugins. This is why the plugins need a
+  terminal that can ask for a password.
 - **Whether to build yay**, only when neither yay nor paru is installed.
 - **Whether spicetify may patch Spotify**, which makes `/opt/spotify` writable
   with sudo.
+- **Whether to enrol your face**, only where there is an infrared camera. It
+  installs howdy-next from the AUR first, then asks you to look at the camera.
 
 <Aside type="note" title="The power button">
 `system/` tells logind to ignore a short press of the power button, from the
@@ -97,9 +116,9 @@ is still the firmware's forced power-off.
 ## What it sets up once
 
 **The extras run once per machine.** Each has a verb of its own —
-`./setup defaults`, `cursors`, `thunar`, `vscodium`, `vesktop` and `spotify` —
-and after the first time `install` and `update` leave them alone, so what you
-change in those programs stays.
+`./setup defaults`, `cursors`, `thunar`, `vscodium`, `vesktop`, `spotify` and
+`face` — and after the first time `install` and `update` leave them alone, so
+what you change in those programs stays.
 
 One that cannot run yet is skipped with the reason, and the next `install` or
 `update` tries again:
@@ -109,6 +128,8 @@ One that cannot run yet is skipped with the reason, and the next `install` or
 - **A Spotify never started**: spicetify needs the settings Spotify writes on
   its first start. Open it once, close it, and update.
 - **No network**, for the cursor and VSCodium's extensions.
+- **Nobody at the camera**: with `--noconfirm`, enrolling a face waits for
+  `./setup face` or the next update.
 
 Spotify is also patched again whenever a Spotify update has taken the patch
 away. Every extra is in [The setup script](/reference/setup/#the-extras), and
@@ -122,7 +143,7 @@ it enables sddm, which comes up at the next boot; a machine that already starts
 another one keeps it. [Lock and login](/shell/lock-and-login/#how-it-starts)
 has the rest.
 
-<Figure name="lock-and-login" alt="The lock screen over the blurred desk, and the SDDM login screen over a painting of brush strokes, with the same clock, the same face and the same field" caption="The lock screen and the login screen: the same clock, face and field." />
+<Figure name="lock-and-login" alt="The lock screen resting on its clock over the blurred desk, the island grown round the padlock with a ring of ticks while it looks for a face, and the SDDM login screen over a blurred painting of brush strokes" caption="The lock screen and the login screen: the same island, clock and pill." />
 
 ### The face
 

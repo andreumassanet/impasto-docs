@@ -1,6 +1,6 @@
 ---
 title: Questions
-description: Where the wallpapers are, which distributions it runs on, how much of it you can take, monitors, languages, uninstalling and reporting bugs.
+description: Where the wallpapers are, which distributions it runs on, the install medium, how much of it you can take, monitors, languages, uninstalling and reporting bugs.
 sidebar:
   order: 2
 ---
@@ -22,9 +22,9 @@ and `setup` copies them to `~/.local/share/wallpapers/`.
 
 ## Who made the wallpapers?
 
-**They are AI-generated images**, made in the impasto style the project is named
-after: paint laid on thick enough to keep the mark of the brush. Nobody painted
-them by hand.
+**They are photographs somebody else turned into the oil look**, the impasto
+style the project is named after, and then only sharpened. All forty are in
+[`home/.local/share/wallpapers/`](https://github.com/andreumassanet/impasto/tree/main/home/.local/share/wallpapers).
 
 ## Does it work on Manjaro, EndeavourOS or another distribution?
 
@@ -37,8 +37,13 @@ version, so check both before you run it.
 
 ## Is there an ISO?
 
-**No.** Install on a working Arch system with Hyprland, from a terminal inside
-the Hyprland session, and look at what it would do first:
+**There is one to build.** [impasto-iso](https://github.com/andreumassanet/impasto-iso)
+makes a USB stick that installs Arch Linux and puts the desk on it at the first
+boot. Building it needs archiso, so it is built on a machine that already runs
+Arch; nothing is offered for download. See [From a USB stick](/start/usb/).
+
+On a working Arch system, install from a terminal or a console, and look at
+what it would do first:
 
 ```bash
 ./setup install --dry-run    # say what would happen, and do none of it
@@ -51,8 +56,10 @@ See [Installation](/start/install/).
 
 **`setup` installs the whole desk**: there is no option to leave out one
 program's configuration. What you can leave out is a step: `--skip-packages`,
-`--skip-system` (the login screen) and `--skip-plugins` (shake to find and the
-glass).
+`--skip-system` (the login screen), `--skip-plugins` (shake to find and the
+glass) and `--skip-extras` (what opens which file, GTK, the cursor, Thunar,
+VSCodium, Vesktop, Spotify and face unlock). `./setup` with nothing after it
+offers the same four as switches.
 
 Taking part of it by hand is possible, since `home/` is laid out exactly as your
 home directory and `home/.config/quickshell/` is the shell. But only the whole
@@ -75,12 +82,17 @@ change. Most of what people edit by hand is in Settings already: keys under
 
 ## Does it work with more than one monitor?
 
-**Yes.** The island, the widgets and the deck of notes are on the primary
-screen, which you choose under **Settings → Displays**; every other screen gets
-the two ends of the bar without the island, and the dock is on every screen.
-Drag the screens into place on the Displays page and the arrangement is kept for
-that set of screens, and comes back on its own when you plug them in again. See
-[Displays](/shell/displays/), and [what it does not do](/help/limitations/#displays).
+**Yes. Every screen carries the whole bar**, and the island is live on the one
+with the keyboard. Each screen keeps widgets, decks of notes and spectra of its
+own, and the dock is on every screen too; either can be kept to the screen you
+are on instead. A workspace number brings that workspace to the screen you are
+on, <kbd>SUPER</kbd> <kbd>ALT</kbd> <kbd>←</kbd> <kbd>→</kbd> moves to the
+other screen, and the brightness keys dim the screen with the keyboard, an
+external monitor over DDC/CI. Drag the screens into place under
+**Settings → Displays** and the arrangement is kept for that set of screens,
+and comes back on its own when you plug them in again. See
+[how several screens work](/shell/screens/), [Displays](/shell/displays/), and
+[what it does not do](/help/limitations/#displays).
 
 ## Does it work on a HiDPI screen?
 
@@ -101,13 +113,16 @@ language only: it does not change the system's locale or rename your folders.
 
 **It removes every file it installed that nobody has edited since**, lists the
 edited ones and leaves them, and puts back what it moved aside at install. It
-does not remove packages, oh-my-zsh, the Hyprland plugins, or the themes the
-shell wrote into `~/.config`. See [setup](/reference/setup/).
+does not remove packages, oh-my-zsh, the Hyprland plugins, howdy-next and the
+face enrolled with it, or the themes the shell wrote into `~/.config`. See
+[Updating](/start/updating/#uninstalling).
 
 ## How do I update?
 
 **`./setup update` pulls the repository and installs again**, with the same
-options. See [Updating](/start/updating/).
+options. Or press **Update** under **Settings → System → This machine**, which
+lists the commits waiting and runs the same update in a terminal. See
+[Updating](/start/updating/#from-settings).
 
 ## Where do I report a bug?
 

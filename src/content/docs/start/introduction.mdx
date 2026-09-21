@@ -17,8 +17,8 @@ script, `setup`, installs all of it on Arch Linux.
 <Figure name="hero" alt="The desk: the island at the top with a track playing, widgets down the right, a deck of notes on the left edge, a terminal with the lava lamp greeting, and the dock at the bottom" caption="The island, the widgets, a note deck on the edge, the terminal and the dock." />
 
 The name is the painting technique the wallpapers imitate: paint laid on thick
-enough to keep the mark of the brush. The desk comes with forty AI-generated
-images in that style.
+enough to keep the mark of the brush. The desk comes with forty wallpapers in
+that style: photographs somebody else turned into the oil look.
 
 ## Three ideas
 
@@ -51,12 +51,12 @@ images in that style.
 | The island and the bar | The bar in three styles, the island at its centre, notifications, the overview | [The island](/shell/island/), [The bar](/shell/bar/) |
 | The control centre | Quick controls and the doors to every other panel, on <kbd>SUPER</kbd> <kbd>A</kbd> | [Control centre](/shell/control-centre/) |
 | The launcher and the dock | Applications ranked by use, a calculator, windows, a countdown, the clipboard history; the pinned applications | [Launcher](/shell/launcher/), [Dock](/shell/dock/) |
-| The desktop | Widgets on a grid, two themes, notes stacked along the edges | [Desktop](/shell/desktop/) |
+| The desktop | Widgets on a grid, two themes, notes stacked along the edges, a sound spectrum on the grid or along an edge | [Desktop](/shell/desktop/) |
 | Capture | Screenshots, annotation, text from a region, screen recording | [Capture](/shell/capture/) |
 | Notes and tasks | A deck of paper notes and a three-lane board | [Notes and tasks](/shell/notes-and-tasks/) |
 | Games and pets | Eleven games played in the island, and five creatures on the bar | [Games and pets](/shell/games-and-pets/) |
 | Keys and packages | Every key on one sheet; pacman and the AUR in one panel | [Keys and packages](/shell/keys-and-packages/) |
-| Lock and login | The shell's own lock screen, and an SDDM theme that matches it | [Lock and login](/shell/lock-and-login/) |
+| Lock and login | The shell's own lock screen, which opens for your face with an infrared camera, and an SDDM theme that matches it | [Lock and login](/shell/lock-and-login/) |
 | Settings | The one ordinary window, with profiles that keep whole desks under names | [Settings](/shell/settings/) |
 | The terminal | kitty, zsh with oh-my-zsh, starship, fastfetch, and the programs run in it | [Terminal](/theming/terminal/) |
 | Other windows | GTK, Qt and KDE applications, Thunar, Zen, Vesktop, Spotify, VSCodium, imv | [Applications](/theming/apps/) |
@@ -65,10 +65,12 @@ images in that style.
 
 - **Arch Linux.** Every package is named in `packages/pacman.txt` and
   `packages/aur.txt`, and `setup` installs them with pacman and yay or paru.
+  For a machine with no Arch yet, [a USB stick](/start/usb/), built on one
+  that has it, installs Arch and the desk together.
 - **Hyprland 0.56 or newer, configured in Lua.** It is tested on 0.56.2.
 - **Quickshell 0.3**, installed with the rest.
-- **A terminal inside the Hyprland session** to run the installer from, and
-  your password for sudo.
+- **A terminal or a console** to run the installer from, and your password for
+  sudo.
 
 Most features rely on packages that are optional. A missing one takes its own
 control away rather than failing.

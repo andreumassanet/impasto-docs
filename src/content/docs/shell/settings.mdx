@@ -2,7 +2,7 @@
 title: Settings
 description: The settings window — how to open it, what each page holds, profiles that keep whole desks under a name, and the window's language.
 sidebar:
-  order: 13
+  order: 14
 ---
 
 import Figure from '~/components/Figure.astro';
@@ -14,8 +14,8 @@ the thing it changes.
 
 <Figure
   name="settings"
-  alt="Two pages of the settings window: Bar & Island on its bar part, with the chip's shape and figure drawn as tiles of real chips and the bar drawn below; and Appearance on its theme part, with the wallpaper transitions and the greeting scenes drawn as tiles"
-  caption="The bar, arranged on a picture of it; the transitions and the greeting scenes."
+  alt="Two pages of the settings window: Bar & Island on its bar part, with the figure beside a chip drawn as tiles of real chips, the bar drawn below, and under it the catalogue of modules and buttons; and Desktop on its module settings part, with the weather's location, the GitHub username and the pet's four styles drawn as tiles"
+  caption="The bar, arranged on a picture of it; the pet in one of four styles."
 />
 
 ## Opening it
@@ -37,17 +37,17 @@ A long page is split into parts, drawn as a strip under its title.
 
 | Page | Parts | What it holds |
 |---|---|---|
-| [Bar & Island](/shell/bar/) | The island, The bar, Workspaces, Notifications | The bar's style and the island at rest, the time and what runs beside it, what the bar carries and how each piece reads, the workspaces, notifications and Do not disturb |
-| [Desktop](/shell/desktop/) | Module settings, The widgets | The weather's location, whose GitHub contributions, how a note is written; the way into arranging, and the look every widget follows |
+| [Bar & Island](/shell/bar/) | The island, The bar, Workspaces, Notifications | The bar's style, which screens carry it, and the island at rest, the time and what runs beside it, what the bar carries and how each piece reads, the workspaces, notifications and Do not disturb |
+| [Desktop](/shell/desktop/) | Module settings, The widgets | The weather's location, whose GitHub contributions, the pet's style, how a note is written, and whether the edge notes and the spectrum make way for windows; the way into arranging, and the look every widget follows |
 | [Control Centre](/shell/control-centre/) | — | The way into arranging the control centre, and the doors on its top row |
-| [Dock](/shell/dock/) | — | The edge, the alignment, the size, how it behaves, and the applications kept on it |
+| [Dock](/shell/dock/) | — | The edge, the alignment, the size, how it behaves, which screens it is on, and the applications kept on it |
 | [Launcher](/shell/launcher/) | Results, Sigils, Clipboard | How results are ordered and how many, the first character for each mode, the clipboard history |
 | Appearance | Theme, Windows, Type, Motion | The theme and wallpaper, the transition, the greeting scene; window rounding, gaps, opacity, blur, glass and shadow; the interface and monospace fonts; the pace of the animations |
 | [Displays](/shell/displays/) | Arrangement, The screen, The lid, Night light | The screens, the laptop lid and the night light |
 | Input | Keyboard, Pointer | Keyboard layouts and key repeat; sensitivity, the cursor's colour and size, shake to find |
 | [Keys](/shell/keys-and-packages/#changing-a-key) | The shell's own, The compositor's | Every key, for the profile in use |
-| [Session](/shell/lock-and-login/) | Lock screen, When you leave | Your name and picture, the lock's blur, the idle waits |
-| System | Profiles, This machine | Profiles and Reset; the language, and the machine with the version installed |
+| [Session](/shell/lock-and-login/) | Lock screen, When you leave | Your name and picture, the lock's clock and blur, the idle waits |
+| System | Profiles, This machine | Profiles and Reset; the language, the machine with the version installed, and [checking for updates and running them](#updates) |
 
 The wallpaper and the palette themselves are chosen in the island: Appearance →
 Theme opens them there ([Palettes](/theming/palettes/)).
@@ -55,7 +55,9 @@ Theme opens them there ([Palettes](/theming/palettes/)).
 - **A setting made meaningless by another stays on the page, dimmed**, and says
   which setting is responsible. What the machine lacks is dimmed the same way:
   the glass and shake to find say to run `./setup plugins`, the night light
-  that hyprsunset is not installed.
+  that hyprsunset is not installed. So is what a single screen cannot use —
+  the bar's and the dock's **On every screen**, **Arrangement**, **The main
+  screen** — which says that only one screen is there.
 - **A slider's number is a field**: click it, type, <kbd>Enter</kbd>.
 - **Every group is one card**, its rows ruled off by hairlines. The ⓘ beside a
   group's name opens its note, which says what the group does and what to know
@@ -138,3 +140,20 @@ wait in `profiles.json` beside it. An export is the backup.
 **System → This machine → Language: English or Español.** It is the language of
 the settings window: it never changes the system's language or renames a
 folder in your home, and anything without a translation stays in English.
+
+## Updates
+
+**System → This machine → Updates checks for new commits to impasto itself**,
+not the packages it runs. It asks the remote of the checkout impasto was
+installed from when the page opens — at most every half hour — and on
+**Check**, and lists what is waiting, newest first. The count starts from the
+version that was installed, so an update whose install stopped half-way still
+offers one.
+
+**Update**, there only when something is waiting, says the version it leads
+to and runs `./setup update` in a terminal, where its questions and your
+password stay visible. It is locked while the checkout holds commits of your
+own, which the pull would refuse. More in
+[Updating](/start/updating/#from-settings).
+
+<Figure name="updates" alt="The settings window on System, This machine: the Updates group with the check's reading, an Update row saying the version it leads to, and the list of commits waiting." caption="What is waiting, and one button to take it." />

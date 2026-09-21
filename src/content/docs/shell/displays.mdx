@@ -18,14 +18,14 @@ no countdown. Click one to pick it for The screen.
 
 | Row | |
 |---|---|
-| Arrangement | **Extend** across every screen, or **Mirror**: every screen shows the primary's |
-| The island is on | The primary screen — the one that carries the island, the widgets and the notes on the edges |
+| Arrangement | **Extend** across every screen, or **Mirror**: every screen shows the main screen's |
+| The main screen | Where anything with no screen of its own goes, and what mirroring copies |
 | Forget it | Hands this set of screens back to Hyprland's own placement |
 
-Arrangement and The island is on appear with more than one screen, and Forget
-it once the set has an arrangement. A screen that is off has no place on the
-canvas; it gets a line under it, "off, and still plugged in", which is how it is
-selected and switched back on.
+With one screen plugged in, Arrangement and The main screen are shown dimmed,
+and Forget it appears once the set has an arrangement. A screen that is off has
+no place on the canvas; it gets a line under it, "off, and still plugged in",
+which is how it is selected and switched back on.
 
 ### One arrangement per set of screens
 
@@ -40,7 +40,7 @@ nothing. The shell never writes `~/.config/hypr/modules/monitors.lua`: that
 file is the fallback, and what you arrange is applied over it at login, after
 every reload and after every hotplug.
 
-When a screen goes away, the workspaces that were on it move to the primary
+When a screen goes away, the workspaces that were on it move to the main
 screen. If nothing plugged in would be lit, every screen present is switched
 on.
 
@@ -52,7 +52,7 @@ The screen picked on the canvas — or under **Editing**, with more than one:
 |---|---|
 | On | Switches it off or on; the last lit screen cannot be switched off |
 | Resolution | The modes the monitor reports, largest first; choosing one takes its fastest refresh rate |
-| Refresh rate | The rates that resolution offers |
+| Refresh rate | The rates that resolution offers; dimmed when it offers only one |
 | Scale | 1× to 3×, in steps of 0.05 |
 | Rotation | None, 90°, 180° or 270° |
 | Variable refresh | On or off |
@@ -85,13 +85,12 @@ you turn it off. The same switch is a tile in the
 
 ## The other screens
 
-**The island is on one screen.** Every other screen gets the two ends of the
-bar and nothing between them — no island and no panels — and a detail asked
-for there opens in the island on the primary. The dock is on every screen, and
-the widgets and the notes on the edges stay on the primary
-([Widgets on the desktop](/shell/desktop/#screens-and-sizes)). A screen
-plugged in later gets the wallpaper too.
+**Every screen carries the whole bar, the dock, its own widgets and the notes
+on its edges**, and the one with the keyboard is the live one. How the keys,
+the bar and the rest behave across them is on
+[Several screens](/shell/screens/). A screen plugged in later gets the
+wallpaper too.
 
-Bit depth is not offered, mirroring copies the primary to every other screen,
-and the page does not notice a change made from outside while it is open. The
-rest is under [Limitations](/help/limitations/).
+Bit depth is not offered, mirroring copies the main screen to every other
+screen, and the page does not notice a change made from outside while it is
+open. The rest is under [Limitations](/help/limitations/).

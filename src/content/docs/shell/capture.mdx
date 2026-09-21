@@ -8,10 +8,11 @@ sidebar:
 import { Aside } from '@astrojs/starlight/components';
 
 **One key opens a thing you can look at.** <kbd>SUPER</kbd> <kbd>SHIFT</kbd>
-<kbd>S</kbd> photographs the whole screen and shows that photograph, with a bar
-at its foot saying what is about to happen. You draw on the photograph, and the
-crop is cut from the same pixels — so nothing has to be frozen, and a menu that
-closes when the pointer moves is already in the picture. So is a panel open in
+<kbd>S</kbd> photographs the screen the keyboard is on and shows that
+photograph over it, with a bar at its foot saying what is about to happen. You
+draw on the photograph, and the crop is cut from the same pixels — so nothing
+has to be frozen, and a menu that closes when the pointer moves is already in
+the picture. So is a panel open in
 the island: it waits under the surface, and is still open when the surface
 closes.
 
@@ -20,12 +21,14 @@ closes.
 | Key | Does |
 |---|---|
 | <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>S</kbd>, or <kbd>Print</kbd> | Opens the capture surface |
-| <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>R</kbd> | Starts or stops a recording |
+| <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>R</kbd> | Records the screen the keyboard is on, or stops the recording |
 | <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>C</kbd> | Picks a colour off the screen |
 
 The Capture, Annotate, Read text, Colour and Record tiles in
 [the control centre](/shell/control-centre/) do the same, and so do the rows of
-the same names under `>` in [the launcher](/shell/launcher/).
+the same names under `>` in [the launcher](/shell/launcher/). The bar's
+**Capture** button, placed from [the layout editor](/shell/bar/#arranging),
+opens the surface as the key does.
 
 ## The surface
 
@@ -72,19 +75,21 @@ Files are named by the moment they were taken, as
 
 ## Recording
 
-**<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>R</kbd> starts a recording, and the
-same key stops it.** What it records is set on the Recorder's card on the bar:
-**Screen** starts at once; **Region** and **Window** open the capture surface
-in Video, and the take starts once you have drawn the box or clicked the
-window. Choosing Video on the surface yourself does the same.
+**<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>R</kbd> records the screen the
+keyboard is on, at once, and the same key stops it.** The Record tile in the
+control centre does the same. A region or a window is recorded from the
+surface: choose **Video**, then draw the box or click the window, and the take
+starts; **Screen** in Video records that whole screen.
 
 - While it runs, a red dot and the minutes sit beside the time on
-  [the island](/shell/island/). A click on the dot stops it; so do the key,
-  the Recorder's card and the Record tile.
-- **Sound** records what the machine plays, not the microphone. The choice is
+  [the island](/shell/island/). A click on the dot stops it; so do the key and
+  the Record tile.
+- **Sound** is chosen on the surface, beside Video, and holds for the key and
+  the tile too. It records what the machine plays, not the microphone, and is
   only there when there is an output to record from.
-- The take is written with wl-screenrec, or wf-recorder without it, as an mp4
-  named like `2026-09-13-101500_impasto.mp4` — in `XDG_SCREENCASTS_DIR`, or a
+- The take is written with wl-screenrec, or with wf-recorder when wl-screenrec
+  is missing or will not start, as an mp4 named like
+  `2026-09-13-101500_impasto.mp4` — in `XDG_SCREENCASTS_DIR`, or a
   `Screencasts` folder inside your videos folder.
 - The island says *Recording* when it starts and *Recorded* with the length
   when it stops. A recording keeps going if the shell is restarted, and the

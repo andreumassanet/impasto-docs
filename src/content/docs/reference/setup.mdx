@@ -8,19 +8,27 @@ sidebar:
 import { Aside } from '@astrojs/starlight/components';
 
 **`setup` is one bash script with verbs and flags.** It is bash because it has
-to run before anything else is installed. One verb at a time; `./setup` on its
-own, or `./setup help`, prints the list.
+to run before anything else is installed. One verb at a time; `./setup help`
+prints the list.
 
 ```bash
 ./setup <verb> [flags]
 ```
+
+**`./setup` on its own opens a menu** on a terminal at least 76 columns wide
+and 20 rows tall, and prints the help anywhere smaller or not a terminal. The
+first screen picks a verb — install, update, sync, uninstall, check or help —
+with the arrows and <kbd>Enter</kbd>. Picking install leads to a second one,
+where <kbd>Space</kbd> switches the packages, the login screen, the plugins and
+the extras on or off, and the last row picks yay or paru, starting on the one
+installed.
 
 ## Installing
 
 | Verb | What it does | Touches |
 |---|---|---|
 | `install` | Everything, in order: `packages`, the user folders, oh-my-zsh, `sync`, `system`, `plugins`, then [the extras](#the-extras), once each. | Packages, `$HOME`, `/`, hyprpm, the extras' programs |
-| `update` | `git pull --autostash --ff-only` on the branch you are on (`main` holds the releases), says which version it moved from and to, then runs `install` from the `setup` just pulled, with the same flags. With no upstream branch, installs what is there. | The checkout, then as `install` |
+| `update` | `git pull --autostash --ff-only` on the branch you are on (`main` holds the releases), says which version it moved from and to, then runs `install` from the `setup` just pulled, with the same flags. Stops there when the pull leaves conflicts; your edits are in the stash. With no upstream branch, installs what is there. | The checkout, then as `install` |
 | `uninstall` | Removes every installed file not edited since, in `$HOME` and `/`, and puts back what the install moved aside. | `$HOME`, `/`, the backups |
 
 `install` ends by saying to log out and in again: the shell and the wallpaper
@@ -30,10 +38,10 @@ daemon only start with a new Hyprland session.
 
 | Verb | What it does | When to run it |
 |---|---|---|
-| `packages` | Installs what `packages/pacman.txt` lists and is missing, with `sudo pacman -S --needed`, then `packages/aur.txt` with yay or paru. Offers to build `yay-bin` (or the `--aur-helper` one) when neither is installed. | After a pull adds a package. |
-| `sync` | Copies `home/` into `$HOME`. When the shell's files changed, it asks the running shell to reload once the last one has landed. Creates the greeting's scenes and the `impasto` icon theme if they are missing, and records the version Settings → System shows. | After editing the repository. |
-| `system` | Copies `system/` into `/` with sudo, creates `/var/lib/impasto/faces`, and enables sddm from the next boot where no other display manager is enabled. | After a change to the login screen or the other system files. |
-| `plugins` | Builds and enables hypr-dynamic-cursors and hyprglass with hyprpm, then reloads them. Does nothing outside a running Hyprland. | Inside the session, when the plugins are missing. |
+| `packages` | Installs what `packages/pacman.txt` lists and is missing, with `sudo pacman -Syu --needed`, so the system is upgraded in the same step, then `packages/aur.txt` with yay or paru. Offers to build `yay-bin` (or the `--aur-helper` one) when neither is installed. | After a pull adds a package. |
+| `sync` | Copies `home/` into `$HOME`. When the shell's files changed, it asks the running shell to reload once the last one has landed. Creates the greeting's scenes and the `impasto` icon theme if they are missing, and records the version, the branch and the checkout, which Settings → System shows and checks for updates against. | After editing the repository. |
+| `system` | Copies `system/` into `/` with sudo — the login screen, the lock screen's PAM service for face unlock and the rest — creates `/var/lib/impasto/faces`, and enables sddm from the next boot where no other display manager is enabled. Loads `i2c-dev` for the brightness of external monitors, so the session after the install has it without a reboot. | After a change to the login screen or the other system files. |
+| `plugins` | Builds and enables hypr-dynamic-cursors and hyprglass with hyprpm, then reloads them, asking for your password once. Outside a running Hyprland it leaves them to the first session: that login opens a terminal that builds them, and asks again at every login until they are built. | Inside the session, when the plugins are missing. |
 
 A package counts as installed when something provides it, so `fnm-bin`
 satisfies `fnm`.
@@ -55,6 +63,7 @@ an install after it sets them up again.
 | `vscodium` | Installs four extensions from Open VSX and merges the editor's settings. The theme lands on the next window. | VSCodium, and the network |
 | `vesktop` | Ticks the palette's theme in Vencord's settings. | Vesktop, closed |
 | `spotify` | Patches Spotify with spicetify so it takes the palette, after asking to make `/opt/spotify` writable. `install` runs it again whenever a Spotify update has taken the patch away. | `spicetify`, and a Spotify opened once |
+| `face` | Finds the infrared camera, installs howdy-next, points it at the camera and, after asking, enrols your face, so the lock screen opens for it. A machine without an infrared camera is skipped. | An infrared camera, `v4l-utils`, yay or paru, `./setup system` run first, and you in front of the camera |
 
 Thunar and Vencord write their settings back while they run, which is why both
 must be closed. Patching Spotify restarts it, so `install` waits for it to be
@@ -75,6 +84,7 @@ skip. [Applications](/theming/apps/) covers each program.
 | `--skip-packages` | `install`, `update` | Leave the packages alone. |
 | `--skip-system` | `install`, `update` | Leave `/` alone. |
 | `--skip-plugins` | `install`, `update` | Do not build the plugins. |
+| `--skip-extras` | `install`, `update` | Leave [the extras](#the-extras) alone. |
 | `--aur-helper NAME` | `install`, `update`, `packages` | `yay` or `paru`. The one installed is used; when there is neither, this one is built from the AUR. `yay` if unset. Also written `--aur-helper=NAME`. |
 | `--noconfirm` | any | Answer every question with its default, pacman's and the AUR helper's included. |
 | `-n`, `--dry-run` | any | Say what would change, and change nothing. Opens with `dry run — nothing on this machine is changed`. |

@@ -9,9 +9,12 @@ tableOfContents: false
 import Packages from '~/components/Packages.astro';
 
 **`./setup packages` installs whatever on this page is missing.** The official
-packages go through `pacman -S --needed`, the AUR ones through yay or paru. The
-desktop and the terminal are required; every later group is a feature that
-takes its own control away when its packages are missing, rather than
-failing.
+packages go through `pacman -Syu --needed`, which upgrades the system in the
+same step, and the AUR ones through yay or paru. The desktop and the terminal
+are required; every later group is a feature that takes its own control away
+when its packages are missing, rather than failing.
+
+howdy-next, for face unlock, is not listed: `./setup face` installs it, and
+only where there is an infrared camera.
 
 <Packages />

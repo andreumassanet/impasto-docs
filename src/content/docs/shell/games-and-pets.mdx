@@ -10,7 +10,7 @@ import Gallery from '~/components/Gallery.astro';
 
 <Figure
   name="games-and-pets"
-  alt="Three views: Tetris played in the island with its score and best along the top; Flood Colors, a grid of coloured squares with six colour buttons under it; and the pet panel with Pip out, a level bar, Fed and Play, and the rest of the family listed with their levels and Bring out"
+  alt="Three views: Tetris played in the island, bevelled blocks in a well with its own grid and the score and best along the top; Whack-a-Mole, two moles up in a three by three field of holes under a time bar; and the pet panel with Pip out, a level bar, Fed and Play, and the rest of the family listed with their levels and Bring out"
   caption="Two of the eleven games, and the pets."
 />
 
@@ -24,7 +24,7 @@ shelf reopens on the game played last, and the line under it is that game's
 best, or "Not played yet".
 
 While a game is on, the strip over the board carries the score — or the moves —
-and the best, and nothing else.
+and the best, and nothing else. The score beats when it changes.
 
 | Key | |
 |---|---|
@@ -32,9 +32,11 @@ and the best, and nothing else.
 | <kbd>R</kbd> | Starts the round again, at any moment |
 | <kbd>Enter</kbd> or <kbd>Space</kbd> | Plays again once the round is over |
 
-A finished round is washed over with "Game over" — "Solved" for the puzzles —
-and **Play again**; a click on the wash does the same. Closing the island
-leaves the game, and the round with it.
+A finished round washes the board back and ends on a card that lands over it:
+"Game over" — "Solved" for the puzzles — the score, or "★ New best" when it
+beat the best, and **Play again**; a click on the wash does the same. A beaten
+best throws a ring of sparks behind the card. Closing the island leaves the
+game, and the round with it.
 
 The arcade is also on the wallpaper, as the Games widget, and in the
 [control centre](/shell/control-centre/), as a block: both show the latest
@@ -48,17 +50,17 @@ the same, except in Lights Out.
 <Figure name="games-shelf" alt="The games shelf with Whack-a-Mole in the middle and Snake Sprint and Flood Colors beside it." caption="The shelf, on SUPER + G." />
 
 <Gallery columns={4} items={[
-  { name: 'game-whack', alt: "Whack-a-Mole in the island, mid-game: a three by three field of holes with one mole up and a time bar across the top.", caption: "Whack-a-Mole" },
-  { name: 'game-snake', alt: "Snake Sprint in the island, mid-game: a short green snake moving toward a pink dot.", caption: "Snake Sprint" },
+  { name: 'game-whack', alt: "Whack-a-Mole in the island, mid-game: a three by three field of holes with two moles up, creatures with a body and a face, and a time bar across the top.", caption: "Whack-a-Mole" },
+  { name: 'game-snake', alt: "Snake Sprint in the island, mid-game: a snake with eyes moving across the board's cells toward an apple.", caption: "Snake Sprint" },
   { name: 'game-flood', alt: "Flood Colors in the island, mid-game: a grid of coloured squares with six colour buttons under it.", caption: "Flood Colors" },
-  { name: 'game-mini2048', alt: "2048 Mini in the island, mid-game: a four by four board with tiles 16, 4, 4, 2 and 2.", caption: "2048 Mini" },
-  { name: 'game-lights', alt: "Lights Out in the island, mid-game: a five by five grid of round lights, most of them lit.", caption: "Lights Out" },
-  { name: 'game-hextris', alt: "Hextris in the island, mid-game: a hexagon with coloured slabs sliding in toward its centre.", caption: "Hextris" },
-  { name: 'game-bots', alt: "Bot Bash in the island, mid-game: five lanes with two pink robots coming down them.", caption: "Bot Bash" },
-  { name: 'game-target', alt: "Target Smash in the island, mid-game: an empty board with one round pink target.", caption: "Target Smash" },
-  { name: 'game-space', alt: "Space Blaster in the island, mid-game: rows of little invaders above a triangular ship firing at them.", caption: "Space Blaster" },
-  { name: 'game-tetris', alt: "Tetris in the island, mid-game: a well half filled with pieces, a falling piece and the next piece beside it.", caption: "Tetris" },
-  { name: 'game-solitaire', alt: "Solitaire in the island, mid-game: a game of Klondike solitaire with the tableau laid out and the foundations empty.", caption: "Solitaire" },
+  { name: 'game-mini2048', alt: "2048 Mini in the island, mid-game: a four by four board with a few numbered tiles.", caption: "2048 Mini" },
+  { name: 'game-lights', alt: "Lights Out in the island, mid-game: a five by five grid of round bulbs, some of them lit.", caption: "Lights Out" },
+  { name: 'game-hextris', alt: "Hextris in the island, mid-game: a hexagonal core with coloured slabs sliding in toward it, under a limit line.", caption: "Hextris" },
+  { name: 'game-bots', alt: "Bot Bash in the island, mid-game: five lanes with robots, each with a body and a face, coming down them.", caption: "Bot Bash" },
+  { name: 'game-target', alt: "Target Smash in the island, mid-game: a target of rings and a bullseye on a field of dots.", caption: "Target Smash" },
+  { name: 'game-space', alt: "Space Blaster in the island, mid-game: rows of pixel invaders above a ship with a cockpit, firing at them.", caption: "Space Blaster" },
+  { name: 'game-tetris', alt: "Tetris in the island, mid-game: a well with its own grid, partly filled with bevelled blocks, a falling piece and the next piece beside it.", caption: "Tetris" },
+  { name: 'game-solitaire', alt: "Solitaire in the island, mid-game: a game of Klondike solitaire with the tableau laid out, each card casting on the one under it.", caption: "Solitaire" },
 ]} />
 
 | Game | What it is | Controls |
@@ -76,7 +78,10 @@ the same, except in Lights Out.
 | Solitaire | Klondike, dealt one card at a time; click a card to pick it up and click where it goes | The pointer; <kbd>Space</kbd> turns the stock |
 
 The games follow the palette like everything else: each one's colours are the
-wallpaper's.
+wallpaper's. The boards are drawn with volume — the moles and the robots have
+bodies and faces, Tetris's blocks are bevelled, Solitaire's cards cast on the
+ones beneath — and a hit is paid with a burst where it lands. The snake slides
+between its cells rather than jumping.
 
 ### Bests
 
@@ -101,7 +106,7 @@ that is out, its mood, how far it is to the next level, and **Feed** and
 **Play**. Its name is edited in place. The Pet chip on the bar has the same
 Feed and Play in its detail.
 
-<Figure name="pet" alt="The pet panel: Pip, a blue creature at level 17, with Fed and Play buttons, and four more pets and an unhatched egg below." caption="Feed, Play, and the family on its shelf." />
+<Figure name="pet" alt="The pet panel: Pip, the blue pet that is out, with its mood, its level bar, Fed and Play, and the rest of the family listed below with their levels and Bring out." caption="Feed, Play, and the family on its shelf." />
 
 | | Experience |
 |---|---|
@@ -109,9 +114,9 @@ Feed and Play in its detail.
 | Play | 12, once every five minutes, plus three for every hour since the last game, up to 18 more |
 | Being out | 1 every five minutes, while the pet is on the bar and awake and the screen is unlocked |
 
-An egg hatches at its first meal or its first game, and never on its own. Each
-level takes a little more than the one before; ears arrive at level 5 and a
-star at level 15.
+An egg hatches at its first meal or its first game, and never on its own, and
+the creature is whole from the moment it hatches. Each level takes a little
+more than the one before, and a star arrives at level 15.
 
 The mood is read off when it was last fed and played with: **Beaming**,
 **Content**, **Peckish** — a snack is owed — **Lonely** — nobody has played
@@ -123,8 +128,6 @@ Under the pet that is out is the family, each with its level and **Bring out**.
 **Only the pet that is out earns anything**; the others sleep on the shelf, and
 the time asleep does not count against them.
 
-<Figure name="pets" alt="The five species as an egg, hatched, at level five and at level fifteen, and the moods a pet shows: beaming, content, peckish, lonely and asleep" caption="Five species, four stages each, and five moods." />
-
 Another egg is laid when the family's levels added together reach 6, then 16,
 30 and 50, and it hatches into one of the species the family does not have yet
 — so the five are found by taking turns rather than by playing harder with one.
@@ -134,3 +137,20 @@ With all five found, a star waits at level fifteen for each.
 lonely or asleep, and nothing is ever reset. The family is kept in
 `~/.local/state/quickshell/pet.json` and is the same in every profile. The
 games earn it nothing.
+
+### Four styles
+
+**The same five are drawn in one of four styles**, chosen at Settings →
+Desktop → Module settings → Pet → **Style**. The species decides the colour and
+what the creature is; the style decides how it is drawn, and every style wears
+the mood on its face. The drawing is the same on the bar, in the pet's panel
+and on the desktop.
+
+| Style | |
+|---|---|
+| Creature | A different animal for each species. The default. |
+| Plush | One round body, shaded. |
+| Paper | Flat, cut from two tones. |
+| Pixel | A sprite, sixteen cells across. |
+
+<Figure name="pets" alt="The five species, Dot, Sprout, Ember, Sol and Drift, in rows, each drawn in the four styles in columns: Creature, Plush, Paper and Pixel." caption="Five species, four styles." />

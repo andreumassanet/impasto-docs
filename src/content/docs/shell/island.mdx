@@ -27,8 +27,10 @@ button.
 opens the [control centre](/shell/control-centre/).
 
 **What is running sits either side of the time**: a recording, a countdown, a
-track — in that order, two at most. One running thing splits across both
-sides, its mark on the left and its figure on the right; two take a side each.
+track — in that order, two at most. A recording is always shown, and first;
+a countdown and a track can be kept off the island (see [Settings](#settings)).
+One running thing splits across both sides, its mark on the left and its
+figure on the right; two take a side each.
 
 - A recording is a red dot and the minutes. A click on the dot stops it; under
   the pointer it squares off to say so.
@@ -86,7 +88,7 @@ second.
   { name: 'session', alt: "The session menu: Lock, Suspend, Log out, Restart and Shut down, as five large buttons.", caption: "The session menu." },
   { name: 'appearance', alt: "A strip of painted wallpapers with Pagoda Fuji Blossom in the middle, marked as in use.", caption: "Appearance, on SUPER + T." },
   { name: 'stats', alt: "The statistics panel with graphs for processor, memory, temperature and network, and bars for free storage.", caption: "System statistics, on SUPER + U." },
-  { name: 'pet', alt: "The pet panel: Pip, a blue creature at level 17, with Fed and Play buttons, and four more pets and an unhatched egg below.", caption: "The pet, on SUPER + SHIFT + P." },
+  { name: 'pet', alt: "The pet panel: Pip, a blue creature at level 17, with Fed and Play buttons, and the family below it, three more pets and an unhatched egg.", caption: "The pet, on SUPER + SHIFT + P." },
 ]} />
 
 <Figure name="and-the-rest" alt="The overview with ten workspaces, the capture surface cutting a box out of a photograph of the screen, the dock's menu on the terminal with its windows by name, system statistics, and the pet with its family" caption="The overview, the capture surface, the dock's menu, system statistics and the pet." />
@@ -100,7 +102,7 @@ windows without taking it back.
 
 <Figure
   name="island-details"
-  alt="Module details in the island: the player, the battery, Claude Code's usage, the processor and memory, the recorder, the Wi-Fi list, the weather, the pet, the volume, the month with task dots, the tasks, a countdown and the GitHub wall"
+  alt="Module details in the island: the player, the battery, Claude Code's usage, the processor and memory, the volume, the Wi-Fi list, the weather, the pet, the month with task dots, the tasks, a countdown and the GitHub wall"
   caption="Every module on the bar opens into the island."
 />
 
@@ -163,14 +165,14 @@ egg for the pet, a profile switched.
 
 **<kbd>SUPER</kbd> <kbd>TAB</kbd> shows every workspace at once**, five to a
 row, up to the number set under Settings → Bar & Island → Workspaces →
-Workspaces available. Each cell is a scale model of the screen: every window is
-drawn live, at its own place and size. The workspace you are on has a thin
-outline, and the one Enter goes to a thick one.
+Workspaces available. Each cell is a scale model of the screen its workspace is
+on, scaled to fit: every window is drawn live, at its own place and size. The
+workspace you are on has a thin outline, and the one Enter goes to a thick one.
 
 | Do | And |
 |---|---|
 | Arrow keys, or move the pointer | move the outline; it wraps at the edges |
-| <kbd>Enter</kbd>, or click a cell | go to that workspace |
+| <kbd>Enter</kbd>, or click a cell | bring that workspace to the screen the overview is on |
 | <kbd>Escape</kbd> | close the overview |
 | Click a window | focus it |
 | Right-click a window | close it |
@@ -187,14 +189,15 @@ Under Settings → Bar & Island → The island:
 | Style | Grouped, Spread or One island — see [the bar](/shell/bar/#styles) |
 | Island | Floating below the top edge, or Notch, cut into it |
 | Span the whole screen | One island only: the band runs the width of the bar |
+| On every screen | *One on each, and the one you are on is the live one*, or *Only on the screen you are on*. Dimmed with one screen |
 | A glance on hover | Off, only a click opens anything |
 | Clock format | 24-hour or 12-hour |
 | Show the date, Show seconds | What the time carries |
-| Beside the time | Media, Timer and Recorder, each on the island while it runs or only where its piece is put |
+| Beside the time | Timer and Media, each on the island while it runs or only where its piece is put |
 
 ## On a second screen
 
-**The island is on one screen.** Every other screen gets a bar with its two
-sides and nothing between them, and a detail asked for there opens in the
-island on the main screen. Which screen is the main one is set in
-[Displays](/shell/displays/).
+**Every screen draws the whole bar, and one of them is live**: the screen with
+the keyboard. The live bar opens panels and shows notifications; the others
+show the island at rest. The island moves only while it is shut, so an open
+panel holds it where it is. See [Several screens](/shell/screens/).

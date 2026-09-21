@@ -1,0 +1,99 @@
+---
+title: Several screens
+description: Two monitors or more — the shared workspaces and the keys that move them, the live bar, the dock, widgets and spectra on each screen, brightness per screen, and captures.
+sidebar:
+  order: 13
+---
+
+import Figure from '~/components/Figure.astro';
+
+**Every screen is a whole desk, and the one with the keyboard is live.** Each
+carries the bar, the dock, widgets of its own, notes on its edges and spectra.
+The live one is where panels open and notifications arrive, and what the keys
+act on. Where the screens sit is set in [Displays](/shell/displays/).
+
+<Figure
+  name="screens"
+  alt="Two screens side by side. On the left, the bar with the island at rest on the time, the desktop's widgets and the dock. On the right, a terminal with the greeting, the same bar, and the live island open on the player."
+  caption="The screen with the keyboard, right, holds the live island; the other rests on the time."
+/>
+
+## Workspaces
+
+**The ten workspaces are shared by every screen**, and a number brings its
+workspace to the screen you are on rather than taking you to the screen it is
+on.
+
+| Keys | What they do |
+|---|---|
+| <kbd>SUPER</kbd> <kbd>1</kbd> … <kbd>0</kbd> | Bring that workspace to this screen; if another screen is showing it, the two swap |
+| The number of the workspace already here | Go back to the one this screen showed before |
+| <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>1</kbd> … <kbd>0</kbd> | Move the window to that workspace |
+| <kbd>SUPER</kbd> and the wheel | Walk the workspaces on this screen |
+| <kbd>SUPER</kbd> <kbd>ALT</kbd> <kbd>←</kbd> <kbd>→</kbd> | Take the keyboard to the screen left or right |
+| <kbd>SUPER</kbd> <kbd>ALT</kbd> <kbd>SHIFT</kbd> <kbd>←</kbd> <kbd>→</kbd> | The two screens trade workspaces, and the keyboard goes with yours |
+| <kbd>SUPER</kbd> <kbd>SHIFT</kbd> and an arrow | Move the window; with nothing that way, it crosses to the next screen |
+
+These are the default keys; every profile carries its own, changed in
+Settings → Keys ([Keybindings](/reference/keybindings/)).
+
+Each bar's workspace strip has a dot for every workspace on the desk and
+lights the one its screen is showing; a click brings that workspace to that
+screen. [The overview](/shell/island/#the-overview) draws each workspace as the
+screen it is on, and <kbd>Enter</kbd> brings it to the screen the overview is
+on.
+
+## The bar and the island
+
+**Every screen draws the whole bar, and one is live**: the screen with the
+keyboard, which follows the pointer. The live bar opens panels, holds the
+keyboard and shows notifications and passing readings; the others show the
+island at rest, on the time. The island moves only while it is shut, so an
+open panel holds it where it is until it closes.
+
+Settings → Bar & Island → The island → **On every screen** is on by default:
+*One on each, and the one you are on is the live one*. Off, *Only on the
+screen you are on*, and the others keep the bar's space empty, so no window
+moves as you cross.
+
+## The dock
+
+Settings → Dock → **On every screen** is on by default too: *One on each, all
+showing the same*. Off, *Only on the screen you are on*. Every dock shows the
+same shelf — every application on the desk, whichever screen its windows are
+on — and leaves only on the screen that has a full-screen window. See
+[the dock](/shell/dock/).
+
+## Widgets, notes and spectra
+
+**Every screen has a grid of its own**, and a widget, a deck or a spectrum
+belongs to the screen it was put on. One whose screen is unplugged is drawn on
+the main screen until it comes back. Arranging happens on every screen at
+once, and the card of modules is on the screen the pointer is on. Nothing is
+dragged from one screen to another: drop it on the card here and place it
+again there. See [Screens and sizes](/shell/desktop/#screens-and-sizes).
+
+## Brightness
+
+**The brightness keys act on the screen you are on**: the laptop's panel
+through brightnessctl, and an external monitor over DDC/CI through ddcutil.
+When that screen cannot be dimmed, they act on the first one that can. The
+Brightness detail on the bar has a slider for each screen that can be dimmed.
+
+A monitor answers only with DDC/CI switched on in its own menu. ddcutil
+reaches monitors through the `i2c-dev` module, which `setup` loads so the
+session after the install has it without a reboot.
+
+## Captures and recordings
+
+**A capture or a recording takes the screen with the keyboard**: the capture
+surface on <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>S</kbd> opens there, and
+<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>R</kbd> records it. To take another
+screen, move the keyboard to it first; two screens are never one picture. See
+[Capture](/shell/capture/).
+
+The lock covers every screen, and a key on any of them wakes them all.
+
+What does not work across screens — one bar layout for all of them, the same
+dock items on each, nothing dragged from one to another — is listed under
+[Limitations](/help/limitations/).

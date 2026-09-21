@@ -56,9 +56,10 @@ there is a way round, it is given.
 ## The island and the bar
 
 - **One bar layout for every style and every screen.**
-- **A second screen's bar has no island and no panels.** Its workspace strip
-  shows the same workspaces as the primary's, and a detail asked for there opens
-  on the primary.
+- **Every screen carries the bar, and one is live**: the screen with the
+  keyboard. The island moves only while it is shut, so an open panel holds it
+  where it is. The workspace dots are the desk's ten shared workspaces; only
+  which one is lit is each screen's own.
 - **The glance does not open while a notification or an OSD holds the island.**
 - **The island shows two running things beside the time at most**; a third is
   only in the glance.
@@ -99,19 +100,30 @@ there is a way round, it is given.
 - **After a screen is unplugged and plugged back in, its workspaces come back to
   the primary screen**, not to the screen they were on.
 - **A lid already shut when the session starts is not known to the shell.**
+- **An external monitor is dimmed over DDC/CI**, which has to be switched on in
+  the monitor's own menu. Most monitors behind a dock or an MST hub, and
+  DisplayLink, are not reached, and NVIDIA's proprietary driver needs its I2C
+  option set first. A monitor's own buttons go unnoticed until the brightness
+  detail or the control centre opens again.
 
 ## The desktop
 
-- **Widgets live on the primary screen only.**
+- **A widget cannot be dragged between screens**: take it off by the card and
+  place it again on the other. Two decks or two spectra that land on one edge
+  of one screen, with a laptop undocked or the main screen changed, are drawn
+  over each other.
 - **No stacking and no auto-arrange**: the grid fills from the top left, and what
   you place stays where it is.
 - **Arranging has no key.** Right-click the wallpaper or a widget, or start it
   from Settings.
-- **A floating dock draws over the bottom row of widgets**, unless it reserves
-  its space.
+- **A dock that hides until pointed at draws over the widgets along its
+  edge.** One that stays keeps the grid clear of it.
 - **A photo holds one picture, as a path**: no album, nothing dropped on it
   from a file manager, and a picture moved on disk leaves it empty. Its picker
   has no typed path and no search, and lists PNG, JPEG, WebP and BMP only.
+- **A spectrum needs cava and a monitor source** to read the sound from. Its
+  bars step with cava's frames rather than gliding, and it has no menu at rest:
+  it is changed while arranging.
 
 ## Notes and tasks
 
@@ -136,7 +148,8 @@ there is a way round, it is given.
 
 ## Captures and recordings
 
-- **One screen, and the compositor picks which.**
+- **One screen: the one with the keyboard.** Move the keyboard to another
+  screen to capture that one; two screens are never one picture.
 - **No delay, no pointer in the picture, no scrolling capture**, and nothing kept
   of what was taken: no gallery, no undo.
 - **Window mode offers only the windows on the workspace in view.**
@@ -148,10 +161,11 @@ there is a way round, it is given.
 - **Captures land in `XDG_SCREENSHOTS_DIR`** when `user-dirs.dirs` names one, and
   in a `Screenshots` folder inside your pictures folder when it does not.
   Recordings the same, with `XDG_SCREENCASTS_DIR` and `Screencasts`.
-- **The recorder is one take at a time**, with no pause, no countdown and no
+- **Recording is one take at a time**, with no pause, no countdown and no
   trimming. Sound is the machine's output or nothing, never the microphone. It
-  writes mp4 only, with no GIF, and without wf-recorder or wl-screenrec it is
-  not on the bar.
+  writes mp4 only, with no GIF, and without wf-recorder or wl-screenrec there is
+  no recording. There is no recorder module: a take shows beside the clock in
+  the island.
 
 ## The dock
 
@@ -211,6 +225,24 @@ there is a way round, it is given.
   `./setup cursors` later.
 - **Applications that draw their own pointer**, Electron and XWayland ones, show
   their own, uncoloured and unmagnified.
+
+## The lock screen
+
+- **Two clock styles, Stacked and Inline**, and nothing more: no size, face or
+  position of its own. The login screen always draws it stacked.
+- **Awake and at rest are one state for every screen**: a key on one wakes
+  them all, and the 30 seconds before the clock comes back is not a setting.
+- **Face unlock is the lock screen's only.** The login screen, sudo and polkit
+  still ask for the password.
+- **Face unlock needs an infrared camera**; a webcam is not offered.
+- **It looks only when touched**: a key, the pointer or the lid. After three
+  misses it asks again only on <kbd>Enter</kbd> in an empty field.
+- **howdy's own settings**, such as how certain it must be, the timeout and the
+  camera, are `sudo howdy config`, not Settings.
+- **Nothing says whether a face is enrolled.** The pill offers *Face unlock or
+  password* wherever howdy-next and the lock's PAM service are installed,
+  enrolled or not.
+- **With two screens the blur does not lift** on the way out.
 
 ## The login screen
 
