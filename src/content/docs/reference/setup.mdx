@@ -40,7 +40,8 @@ daemon only start with a new Hyprland session.
 |---|---|---|
 | `packages` | Installs what `packages/pacman.txt` lists and is missing, with `sudo pacman -Syu --needed`, so the system is upgraded in the same step, then `packages/aur.txt` with yay or paru. Offers to build `yay-bin` (or the `--aur-helper` one) when neither is installed. | After a pull adds a package. |
 | `sync` | Copies `home/` into `$HOME`. When the shell's files changed, it asks the running shell to reload once the last one has landed. Creates the greeting's scenes and the `impasto` icon theme if they are missing, and records the version, the branch and the checkout, which Settings → System shows and checks for updates against. | After editing the repository. |
-| `system` | Copies `system/` into `/` with sudo — the login screen, the lock screen's PAM service for face unlock and the rest — creates `/var/lib/impasto/faces`, and enables sddm from the next boot where no other display manager is enabled. Loads `i2c-dev` for the brightness of external monitors, so the session after the install has it without a reboot. | After a change to the login screen or the other system files. |
+| `system` | Copies `system/` into `/` with sudo — the login screen, the lock screen's PAM service for face unlock, the two small helpers Settings changes your faces and your picture through, with their polkit rules, and the rest — creates `/var/lib/impasto/faces`, and enables sddm from the next boot where no other display manager is enabled. Loads `i2c-dev` for the brightness of external monitors, so the session after the install has it without a reboot. | After a change to the login screen or the other system files. |
+| `files` | Lists the installed files under `$HOME` you have deleted or edited, and puts each one back: `files list` prints them as JSON, `files restore <path>` brings a deleted one back, `files reset <path>` puts the repository's version over yours and keeps yours in the backups, `files keep <path>` keeps yours and takes the version waiting beside it as seen. Paths are as `list` prints them. Settings → System → Changed files is this verb, with a button for each. | When you want a file back, or the page to do it. |
 | `plugins` | Builds and enables hypr-dynamic-cursors and hyprglass with hyprpm, then reloads them, asking for your password once. Outside a running Hyprland it leaves them to the first session: that login opens a terminal that builds them, and asks again at every login until they are built. | Inside the session, when the plugins are missing. |
 
 A package counts as installed when something provides it, so `fnm-bin`
@@ -89,6 +90,7 @@ skip. [Applications](/theming/apps/) covers each program.
 | `--noconfirm` | any | Answer every question with its default, pacman's and the AUR helper's included. |
 | `-n`, `--dry-run` | any | Say what would change, and change nothing. Opens with `dry run — nothing on this machine is changed`. |
 | `-w`, `--watch` | `sync` | Copy again every time a file under `home/` is saved. Needs `inotify-tools`. Stop it with <kbd>Ctrl</kbd> <kbd>C</kbd>. |
+| `--restore` | `install`, `update`, `sync`, `system` | Put back the installed files you deleted. Without it, a file you delete stays deleted. |
 
 ## What it prints
 
@@ -103,6 +105,7 @@ Every file `sync`, `system` and `update` handle gets one line:
 | `removed` | The file left the repository and was unedited, so it was deleted. |
 | `left` | The file left the repository, but you edited it, so it stays. |
 | `unlinked` | A symlink into the repository was removed, so a copy could take its place. |
+| `skipped N deleted here` | N installed files you deleted were left deleted. `--restore` puts them back. |
 | `nothing to do` | Everything already matches. |
 
 A sync that changed the shell's files ends with `reloaded the shell`. An extra

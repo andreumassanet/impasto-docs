@@ -48,9 +48,9 @@ untouched, never while a password is being checked. Unlocking fades the type
 and relaxes the blur, so the desk is what is left when the lock falls; with two
 screens the blur stays.
 
-Settings → Session → Lock screen holds **You**: a name and a picture for the
-lock screen — click the picture, or drop an image on the card. Left empty,
-both come from your account, as on the login screen. Under **Clock**,
+Settings → Session → Lock screen holds **You**: your account's name and
+picture, for both screens at once — click the picture, or drop an image on the
+card, and type the name. [Your picture](#your-picture) says where they go. Under **Clock**,
 **Style** is Stacked or Inline, hours over minutes or both on one line; the
 login screen always draws it stacked. Under **Background**, the **Blur** is 8
 to 64 px, previewed over the wallpaper.
@@ -93,6 +93,16 @@ finds the camera by the 8-bit grey picture only an infrared one gives,
 installs howdy-next from the AUR, points it at that camera and asks to enrol
 your face. `./setup install` runs it once and skips a machine without one.
 
+**Settings → Session → Face unlock keeps the faces.** It says whether the
+machine has an infrared camera, lists the faces howdy knows with **Remove**
+beside each, and **Add a face** looks at the camera with the lock's own ring
+turning in the card. **Try it** runs the lock's own check without locking, so
+a match there is a match on the lock. Adding or removing a face asks for your
+password, since a face added is a way into your session; listing them does not.
+Where howdy or its helper is missing, the same row offers **Set up** or
+**Finish setting up**, which run `./setup face` or `./setup system` in a
+terminal.
+
 howdy looks through a PAM service of the lock's own,
 `/etc/pam.d/impasto-face`, beside `login` rather than inside it: a face it does
 not know never costs a password try, and the password never waits on the
@@ -115,9 +125,9 @@ camera. `./setup system` installs that file, and install does it unless
 <Figure name="lock-scan" alt="The lock looking for a face: the island at the top grown into a black square round the padlock, with a ring of ticks turning about it." caption="Looking: the island grows under the camera." />
 
 Only the lock uses it: the login screen, sudo and polkit still ask for the
-password. `sudo howdy add` enrols another face, and `sudo howdy config` opens
-howdy's own settings — how sure a match must be, how long it looks, which
-camera.
+password. The lock offers the face only when one is enrolled. `sudo howdy
+config` opens howdy's own settings — how sure a match must be, how long it
+looks, which camera.
 
 ## The login screen
 
@@ -176,19 +186,20 @@ fallback screen, not in the terminal.
 ### Your picture
 
 **The picture on both screens is `/var/lib/impasto/faces/<username>.face.icon`**,
-yours to put there; without one, both show your initials. `setup` makes the
-folder and never removes it. It is kept outside your home because SDDM reads
-as its own user and cannot see into it.
+and Settings → Session → You puts it there: the image you choose is made a
+256 px square and written through a small helper, without a password. Without
+one, both show your initials. `setup` makes the folder and never removes it.
+It is kept outside your home because SDDM reads as its own user and cannot see
+into it.
 
-```bash
-sudo install -m 644 ~/picture.png /var/lib/impasto/faces/$USER.face.icon
-```
+The helper takes the picture itself, never a path, so it cannot be used to copy
+a file only root can read. It arrives with `./setup system`; before that, the
+picture chosen in Settings shows on the lock screen alone, and the card says
+so.
 
-The lock screen looks there first, then at `~/.face`, `~/.face.icon` and
-AccountsService. The name beside the picture is your account's full name, which
-`chfn` sets, or the login name when there is none. The lock screen can take
-another name and picture from Settings → Session; the login screen always reads
-the system's.
+**The name is your account's full name**, which both screens show, or the
+login name when there is none. Typing it in Settings changes it on the account,
+through AccountsService, as `chfn` would.
 
 What the two screens do not do is listed under
 [Limitations](/help/limitations/).

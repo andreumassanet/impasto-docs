@@ -85,8 +85,19 @@ keep one:
 diff ~/.config/kitty/kitty.conf ~/.config/kitty/kitty.conf.new
 ```
 
-Move the `.new` over yours to take the repository's version, or delete the
-`.new` to keep yours.
+Settings → System → Changed files lists it with **Keep mine** and **Use the
+new one**. Or by hand: move the `.new` over yours to take the repository's
+version, or delete the `.new` to keep yours.
+
+### A file I deleted does not come back
+
+That is on purpose: a file `setup` installed and you deleted stays deleted, so
+the wallpapers you removed do not return with the next update. Settings →
+System → Changed files has **Restore**, or from a terminal:
+
+```bash
+./setup sync --restore
+```
 
 ## The shell
 
@@ -212,8 +223,10 @@ power-off.
 
 ### Face unlock never starts
 
-Face unlock needs an infrared camera, the lock's PAM service and howdy-next
-with your face enrolled. `./setup system` installs the service,
+Settings → Session → Face unlock says what is missing and offers the step
+that fixes it, and **Try it** checks a face without locking. Face unlock
+needs an infrared camera, the lock's PAM service and howdy-next with your face
+enrolled. `./setup system` installs the service,
 `/etc/pam.d/impasto-face`; `./setup face` installs howdy-next, points it at the
 camera and enrols you:
 

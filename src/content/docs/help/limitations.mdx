@@ -239,9 +239,10 @@ there is a way round, it is given.
   misses it asks again only on <kbd>Enter</kbd> in an empty field.
 - **howdy's own settings**, such as how certain it must be, the timeout and the
   camera, are `sudo howdy config`, not Settings.
-- **Nothing says whether a face is enrolled.** The pill offers *Face unlock or
-  password* wherever howdy-next and the lock's PAM service are installed,
-  enrolled or not.
+- **A face being added cannot be cancelled**: howdy looks for a few seconds as
+  root, and the page cannot stop it.
+- **Until `./setup system` has run since 0.3.2**, Settings cannot list the
+  faces or share the picture with the login screen, and says so.
 - **With two screens the blur does not lift** on the way out.
 
 ## The login screen

@@ -46,8 +46,8 @@ A long page is split into parts, drawn as a strip under its title.
 | [Displays](/shell/displays/) | Arrangement, The screen, The lid, Night light | The screens, the laptop lid and the night light |
 | Input | Keyboard, Pointer | Keyboard layouts and key repeat; sensitivity, the cursor's colour and size, shake to find |
 | [Keys](/shell/keys-and-packages/#changing-a-key) | The shell's own, The compositor's | Every key, for the profile in use |
-| [Session](/shell/lock-and-login/) | Lock screen, When you leave | Your name and picture, the lock's clock and blur, the idle waits |
-| System | Profiles, This machine | Profiles and Reset; the language, the machine with the version installed, and [checking for updates and running them](#updates) |
+| [Session](/shell/lock-and-login/) | Lock screen, When you leave | Your account's name and picture, the lock's clock and blur, [face unlock](/shell/lock-and-login/#face-unlock), the idle waits |
+| System | Profiles, This machine | Profiles and Reset; the language, the machine with the version installed, [checking for updates and running them](#updates), and [the files you changed](#changed-files) |
 
 The wallpaper and the palette themselves are chosen in the island: Appearance →
 Theme opens them there ([Palettes](/theming/palettes/)).
@@ -157,3 +157,15 @@ own, which the pull would refuse. More in
 [Updating](/start/updating/#from-settings).
 
 <Figure name="updates" alt="The settings window on System, This machine: the Updates group with the check's reading, an Update row saying the version it leads to, and the list of commits waiting." caption="What is waiting, and one button to take it." />
+
+## Changed files
+
+**System → This machine → Changed files lists the installed files you have
+edited or deleted**, since an update leaves both as you left them. A deleted
+file has **Restore**, and deleted files are gathered by folder, so forty
+wallpapers are one line. An edited one has **Reset**, which puts impasto's
+version back and keeps yours in the backups, or, when a newer version waits
+beside it as `.new`, **Keep mine** and **Use the new one**. The list follows
+every change as it happens. More in
+[Updating](/start/updating/#two-copies-yours-and-the-repositorys).
+

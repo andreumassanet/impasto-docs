@@ -77,7 +77,15 @@ applies at once. `setup` notices it has been edited and leaves it alone. When th
 repository later changes that file, the repository's version is written beside
 yours as `<name>.new` and yours stays in place.
 
-To settle a `.new` file, compare the two and keep one:
+**Settings → System → Changed files lists them**: every installed file you
+have edited or deleted, with a button for each. A deleted one has
+**Restore**; an edited one has **Reset**, which puts impasto's version back and
+keeps yours in the backups, or, when a newer version is waiting beside it,
+**Keep mine** and **Use the new one**. Deleted wallpapers are gathered by
+folder, so forty of them are one line. `./setup files` does the same from a
+terminal.
+
+Or settle a `.new` file by hand — compare the two and keep one:
 
 ```bash
 diff ~/.config/hypr/modules/look.lua ~/.config/hypr/modules/look.lua.new
@@ -114,7 +122,8 @@ run it decides file by file:
 
 | What it finds | What it does |
 |---|---|
-| Nothing at the path | Writes the file. |
+| Nothing at the path, never written | Writes the file. |
+| The file it wrote, deleted since | Leaves it deleted — the wallpapers you do not want, say — and says how many it left out. `--restore` puts them back. |
 | A different file, the first time | Moves it to `~/.local/state/impasto/backups/<timestamp>/`, then writes. A link in the way is moved there too. |
 | The file it wrote, unedited | Replaces it with the repository's version. |
 | The file it wrote, edited since | Keeps yours, and writes the repository's beside it as `<name>.new`. |
