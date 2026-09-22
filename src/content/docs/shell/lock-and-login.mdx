@@ -27,9 +27,10 @@ it, blurred enough that text on it cannot be read.
 
 <Figure name="lock-rest" alt="The lock at rest over the blurred desk: Monday, 21 September over a large 22 and softer 00, the island at the top holding a padlock, and the battery ring in the top right corner." caption="At rest: the clock alone." />
 
-**Any key wakes it, and that key is kept** as the first character of the
-password, so a password typed straight at the clock arrives whole. A lone
-Shift or Caps Lock does not wake it; a click does.
+**Any key wakes it, and that key only wakes it**: it is not typed into the
+password, so a space pressed to open the screen is not a first character. A
+lone Shift or Caps Lock does not wake it; a click does, and so does opening
+the lid.
 
 - Awake, the clock rises and steps back, and one black pill comes up with your
   picture, your name and "Enter your password" — "Face unlock or password"
@@ -70,6 +71,12 @@ until you set them. A video player, or a browser playing full screen, asks the
 compositor not to count as idle, and nothing happens while it plays. Suspend
 always locks first, and is skipped if the lock does not come up.
 
+**Every sleep locks first**, not only these: shutting the lid, a suspend key,
+`systemctl suspend`. The shell asks the system to wait before sleeping, locks,
+and lets it sleep once the lock is up, so the machine never wakes on the desk.
+With a monitor plugged in, shutting the lid does not sleep and so does not
+lock.
+
 The screen comes back with the next key or movement, and
 <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>D</kbd> switches it off and on by hand.
 
@@ -92,15 +99,18 @@ not know never costs a password try, and the password never waits on the
 camera. `./setup system` installs that file, and install does it unless
 `--skip-system`.
 
-- **A scan starts when somebody is there**: a key, the pointer moving, the lid
-  opening, or <kbd>Enter</kbd> on an empty field. Never by itself, so the face
-  that has just pressed <kbd>SUPER</kbd> <kbd>L</kbd> does not open it again.
+- **A scan starts when the lock wakes** — a key, a click or the lid opening —
+  and again, while it is awake, on the pointer moving or <kbd>Enter</kbd> on
+  an empty field. Never at rest and never by itself, so a nudged mouse does
+  not turn the camera on, and the face that has just pressed
+  <kbd>SUPER</kbd> <kbd>L</kbd> does not open it again.
 - **While it looks, the island grows** under the camera and a ring of ticks
   turns round the padlock. A match closes the ring in green and opens the
   padlock; a miss turns it red and shakes the island.
 - After a miss it waits a second and a half. After three, only
   <kbd>Enter</kbd> on an empty field asks again.
 - The password works all along, at rest or awake.
+- Going back to rest stops a scan under way.
 
 <Figure name="lock-scan" alt="The lock looking for a face: the island at the top grown into a black square round the padlock, with a ring of ticks turning about it." caption="Looking: the island grows under the camera." />
 
