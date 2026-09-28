@@ -26,32 +26,46 @@ button.
 **The island rests on the time.** Under the pointer it lights, and a click
 opens the [control centre](/shell/control-centre/).
 
-**What is running sits either side of the time**: a recording, a countdown, a
-track — in that order, two at most. A recording is always shown, and first;
-a countdown and a track can be kept off the island (see [Settings](#settings)).
-One running thing splits across both sides, its mark on the left and its
-figure on the right; two take a side each.
+**What is running sits either side of the time**: a recording, what is using
+the microphone, the camera or the screen, a countdown, a track, the workspace —
+in that order, two at most. A recording is always shown, and first; the rest
+are switched under Settings → Bar & Island → **Beside the time** (see
+[Settings](#settings)). One running thing splits across both sides, its mark
+on the left and its figure on the right; two take a side each.
 
 - A recording is a red dot and the minutes. A click on the dot stops it; under
   the pointer it squares off to say so.
+- Privacy is a glyph for each of the microphone, the camera and the shared
+  screen in use, in fixed orange, green and blue, and the program's name on the
+  other side of the time. It opens nothing, so the glance and a click work over
+  it as they do over the time. On by default.
 - A countdown is a ring that drains and the time left. A click opens its
   detail.
 - A track is its artwork and a spectrum that follows the sound. A click opens
   the player.
+- The workspace is a mark and the number, or the name, of the workspace the
+  screen shows, for a bar without the workspace strip. It is always there when
+  switched on, so it comes last. A click opens [the overview](#the-overview).
+  Off by default.
 
 ## The glance
 
 **Rest the pointer on the time and a glance opens at once**; it closes a moment
-after the pointer leaves. It holds the time large, the weekday and the date,
-what is playing, and a line of readings: the battery, the volume, how many
-notifications are kept, a recording, a countdown. The weather is on it when the
-weather is already on the bar or on the desktop.
+after the pointer leaves. It has two faces.
 
-<Figure name="glance" alt="The island opened into a glance under the pointer: the time and the date, the track playing, and the battery, the volume and a running countdown." caption="The glance: the time, what is playing, and a line of readings." />
+- **With a player**: the cover, the track and its artist, previous, play or
+  pause, and next, and at the far end the time large with the day and the date
+  under it.
+- **Without one**: the time large, with the weather on a small line under it
+  when the weather is already on the bar or on the desktop, and at the far end
+  five days of the week with today in the middle.
 
-Nothing on it is pressed: a click anywhere opens the control centre. It does
-not open while a notification or a reading holds the island, or over a running
-thing's mark. Turn it off with **A glance on hover** (see [Settings](#settings)).
+<Figure name="glance" alt="The island opened into a glance: the cover of Resurrections by Lena Raine, a painting of Mount Fuji, with previous, pause and next under the track, and at the far end 19:32 large over MONDAY 28 SEPTEMBER." caption="The glance with a player: the cover, the track, its controls and the time." />
+
+The player's controls are the only things on it to press: a click anywhere else
+opens the control centre. It does not open while a notification or a reading
+holds the island, or over a running thing's mark. Turn it off with **A glance
+on hover** (see [Settings](#settings)).
 
 ## What it becomes
 
@@ -119,22 +133,29 @@ opening a panel sends a notification on screen away — it stays in the list.
 ## Notifications
 
 **The shell is the notification daemon**, and a notification arrives in the
-island: its picture or a bell, the summary, the application's name, the first
-line of the body, and a close mark.
+island as one row: the sender's picture with the application's mark on its
+corner, or the application's icon, or a bell; the title, with the application
+and the time at its far end; and two lines of the body.
 
-<Figure name="notification" alt="The island opened into a notification from Vesktop: Laura asks whether the market at nine is still on." caption="A notification, in the island." />
+<Figure name="notification" alt="The island opened into a notification from Vesktop: Laura's picture with the Vesktop mark, Are we still on for the market at nine?, and two buttons at the end, Reply in the accent and Later." caption="A notification with two buttons, in the island." />
 
+- **Buttons** the application sends sit at the end of the row, up to two, the
+  first in the accent. More than two, or longer ones, share the width in a row
+  underneath.
+- **A click** runs the notification's default action, or closes it when it has
+  none. **A right click** always closes it. There is no close button.
 - A notification with no timeout of its own stays as long as **Bar & Island →
   Notifications → How long one stays** says: two to fifteen seconds, five by
-  default. One that asks for longer is held to fifteen. A critical one stays until you close it, and
-  a newer ordinary one does not replace it.
-- The close mark closes it and tells the application. A click anywhere else on
-  it opens the control centre.
+  default. One that asks for longer is held to fifteen. A critical one stays
+  until you close it, and a newer ordinary one does not replace it.
 - Every notification is kept, newest first, up to fifty: in the bell's detail
-  on the bar and in the control centre's notification block. Under the pointer
-  a row shows a close mark that removes it, and **Clear** empties the list.
-- The list is kept in memory, so restarting the shell empties it. Actions and
-  inline replies are not shown.
+  on the bar and in the control centre's notification block. A click on a row
+  runs its default action while the notification is still open. Under the
+  pointer a row shows a close mark that removes it, and **Clear** empties the
+  list.
+- **The list is kept across restarts** and logins, in the shell's state
+  directory. A notification that asks not to be kept is shown and not stored.
+  Inline replies are not shown.
 
 **Do not disturb** keeps notifications off the island and still keeps them in
 the list; a critical one comes through anyway. The bell is crossed out while
@@ -182,7 +203,7 @@ workspace you are on has a thin outline, and the one Enter goes to a thick one.
 
 ## Settings
 
-Under Settings → Bar & Island → The island:
+Under Settings → Bar & Island, in Shape, Clock and Beside the time:
 
 | Setting | What it does |
 |---|---|
@@ -193,7 +214,7 @@ Under Settings → Bar & Island → The island:
 | A glance on hover | Off, only a click opens anything |
 | Clock format | 24-hour or 12-hour |
 | Show the date, Show seconds | What the time carries |
-| Beside the time | Timer and Media, each on the island while it runs or only where its piece is put |
+| Beside the time | Privacy, Timer, Media and Workspace, each on the island or not; see [At rest](#at-rest) |
 
 ## On a second screen
 

@@ -1,6 +1,6 @@
 ---
 title: The launcher
-description: One field in the island for applications, sums, windows, countdowns, the clipboard history and the shell's own places — chosen by the first character.
+description: One field in the island for applications, sums, windows, countdowns, the clipboard history, emoji and the shell's own places — chosen by the first character.
 sidebar:
   order: 4
 ---
@@ -31,6 +31,7 @@ too.
 | `@firefox` | An open window, by title or class | Goes to it, on whatever workspace it is |
 | `!25m` | A countdown: `25m`, `90s`, `1h30`, `1:30` | Starts it; it runs beside the time on the island |
 | `'` | The clipboard history, newest first | Copies the entry back |
+| `:heart` | An emoji, by name or keyword | Copies it |
 | `>` | The shell's own places | Opens it |
 
 The characters are the defaults, and each can be changed under Settings →
@@ -66,13 +67,33 @@ launches from the launcher count — what you open from the dock or a terminal
 does not move the list. The list of applications is read again every time the
 launcher opens, so anything installed since shows up at once.
 
+## `:` — emoji
+
+**Every emoji, in a grid.** <kbd>SUPER</kbd> <kbd>.</kbd> opens the launcher
+already in this mode. <kbd>Enter</kbd>, or a click, copies the emoji that is
+lit, ready to paste anywhere.
+
+<Figure name="launcher-emoji" alt="The launcher in emoji mode with :heart typed: a strip of group marks under the field, the recent picks chosen, and a grid of hearts, faces with hearts, a love letter and couples with a heart, with a raised hand at the end of the field for the skin tone." caption=": finds an emoji by name." />
+
+- **Names** come from Unicode's CLDR annotations in the shell's language. The
+  search also matches the keywords in English and in the system's language,
+  and ignores accents. A flag is named after its country.
+- **One skin tone** for every emoji that takes one: the hand at the end of the
+  field shows it, and a click on it steps to the next.
+- **The strip under the field** narrows the grid to one of Unicode's nine
+  groups, or to the recent picks. <kbd>Tab</kbd> and <kbd>SHIFT</kbd>
+  <kbd>Tab</kbd> step through it. With nothing typed and no group chosen, the
+  recent picks lead.
+- The arrow keys move through the grid in all four directions, and stop at
+  its ends rather than wrapping.
+
 ## `>` — the shell's own places
 
 **Every panel, every mode and every one-press action, by name.**
 
 - **Panels**: System statistics, Settings, Pet, Games, Notes, Task board,
   Workspace overview, Appearance, Session menu, Keys, Packages.
-- **Modes**: Calculate, Windows, Timer and Clipboard, each with its character
+- **Modes**: Calculate, Windows, Timer, Clipboard and Emoji, each with its character
   on the row. Enter on one switches the field to it and keeps the launcher
   open, so it teaches the character as well.
 - **Actions**: Capture, Annotate, Read text, Colour, Record and Clear
@@ -92,6 +113,8 @@ characters.
 
 - <kbd>Enter</kbd> copies the entry back onto the clipboard; paste it yourself
   with <kbd>CTRL</kbd> <kbd>V</kbd>.
+- On a copied image, <kbd>SHIFT</kbd> or <kbd>CTRL</kbd> with <kbd>Enter</kbd>,
+  or with a click, opens the picture in imv instead, and closes the launcher.
 - <kbd>SHIFT</kbd> <kbd>Delete</kbd> forgets the selected entry. It cannot be
   undone.
 - Copies that a password manager marks as secret are never stored.
@@ -104,6 +127,8 @@ characters.
 |---|---|
 | <kbd>Up</kbd> <kbd>Down</kbd> | Move through the list; it wraps at both ends |
 | <kbd>Enter</kbd> | Run what is lit |
+| <kbd>SHIFT</kbd> or <kbd>CTRL</kbd> <kbd>Enter</kbd> | Open the lit clipboard image in imv |
+| <kbd>Tab</kbd>, <kbd>SHIFT</kbd> <kbd>Tab</kbd> | Step through the emoji groups |
 | <kbd>Escape</kbd> | Close the launcher |
 | <kbd>SHIFT</kbd> <kbd>Delete</kbd> | Forget the lit clipboard entry |
 

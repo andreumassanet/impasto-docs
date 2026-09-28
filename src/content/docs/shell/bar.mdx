@@ -7,6 +7,7 @@ sidebar:
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 import Figure from '~/components/Figure.astro';
+import Gallery from '~/components/Gallery.astro';
 
 **Three styles, one layout.** Pieces are dragged out of a catalogue onto a
 picture of the bar, then drawn grouped round the island, spread to the edges,
@@ -32,12 +33,32 @@ In One island, **Span the whole screen** runs the band the full width of the
 bar instead of fitting what is on it. **Island** sets whether the island floats
 below the top edge or is cut into it as a notch, in every style.
 
+**Ground** is **Classic**, the island's black, or **Glass**, the terminal's own
+ground: the accent over a blur of what is behind, with a lit edge. The desktop's
+widgets and the dock follow it unless they are given a ground of their own.
+
+## Sides
+
+**The sides can sit straight on the wallpaper.** Under Settings → Bar & Island
+→ The island → **Sides**, *In capsules* draws each group on its black capsule;
+*On the wallpaper* drops the capsules and leaves the icons and figures, white
+with a tight shadow so they read on a light picture as well as a dark one. The
+island keeps its capsule either way. In the One island style the sides already
+sit on its band, so the setting is locked there.
+
+<Figure name="bar-capsules" alt="The bar with its sides in black capsules: the workspaces on the left, the modules on the right, the island between them" caption="In capsules." />
+
+<Figure name="bar-bare" alt="The same bar with the capsules gone: white icons and figures straight on the wallpaper either side of the black island" caption="On the wallpaper." />
+
 ## What goes on it
 
 - **Modules** — each a piece that shows a reading and opens a detail in the
   island when clicked. The same click closes it.
-- **The workspace strip** — a dot for each of the desk's workspaces, the one
-  this screen shows lit; a click brings that workspace to this screen.
+- **The workspace strip** — a mark for each of the desk's workspaces, the one
+  this screen shows lit; a click brings that workspace to this screen. It is
+  drawn in one of seven styles ([below](#size-and-workspaces)).
+- **The tray** — the icons applications put in the system tray, in one
+  capsule (below).
 - **Buttons** — a symbol and no figure: every door of
   [the control centre](/shell/control-centre/#the-top-row), the control
   centre itself and Capture. They are Launcher, Workspace overview, Control
@@ -48,8 +69,8 @@ below the top edge or is cut into it as a notch, in every style.
   are modules here, not buttons.
 - **Split** — ends one capsule and starts the next.
 
-Neighbouring modules share a capsule; the workspace strip is always a capsule
-of its own. A capsule holding one piece takes that piece's shape: a ring is a
+Neighbouring modules share a capsule; the workspace strip and the tray are
+always a capsule of their own. A capsule holding one piece takes that piece's shape: a ring is a
 circle, a button a circle, a symbol and its figure a pill.
 
 Out of the box the left side holds the workspaces, and the right holds
@@ -82,6 +103,25 @@ out a state or a count, the buttons, then the workspace strip and the split.
 It always holds every piece, and taking from it copies, so a piece can be on
 the bar twice. There is no on or off switch anywhere: on the bar is
 on.
+
+## The tray
+
+**The applications' tray icons, in one capsule, drawn grey** so they keep to
+the bar's black. Place the Tray piece from the catalogue like any other; it is
+not drawn while no application has an icon in it. Past five icons, the rest
+fold behind a count, and a click on the count shows them.
+
+| On an icon | Does |
+|---|---|
+| Click | The application's own action, usually opening its window |
+| Right click | Opens the application's menu in the island |
+| Middle click | Its second action, where it has one |
+| Wheel | Scrolls it, for the applications that listen |
+
+The menu is drawn by the shell, so every application's menu looks like the
+island. An entry with a submenu replaces the list with it, and the chevron in
+the header steps back out. <kbd>Up</kbd> and <kbd>Down</kbd> move,
+<kbd>Enter</kbd> or <kbd>Right</kbd> opens, <kbd>Left</kbd> goes back.
 
 ## How a piece reads
 
@@ -118,6 +158,7 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
 | Media | The track's title, or *Nothing playing* | The player: artwork, title, artist, progress, previous, play or pause, next | A media player on the session bus (MPRIS) |
 | Timer | A ring that drains, and the time left | Idle, set a countdown; running, hold, restart or stop it | — |
 | Claude | Claude's mark, and the session's percentage — or its tokens, until the percentage is known | Tokens and messages for the five-hour session and the week, the account's own percentages, and when the session resets | Claude Code (below) |
+| Codex | Codex's mark, and the share used of the fullest limit still running | Each limit the plan sets, its share used and when it resets, and when it was read | Codex (below) |
 | Battery | The charge | The charge, charging or the time left, the power going in or out, and the energy stored | A battery |
 | Volume | The level, or *Muted* | A slider, and mute buttons for the output and the microphone | — |
 | Brightness | The level of the screen you are on | A slider for each screen that can be dimmed | A backlight, or a monitor that answers DDC/CI |
@@ -136,6 +177,11 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
   is on screen, every ten minutes the shell sends the smallest possible
   request to the API, signed in with Claude Code's own credentials, and reads
   the answer's headers. The token is never stored or printed.
+- **Codex** appears once Codex has written a session log under
+  `~/.codex/sessions` (or `$CODEX_HOME`). The limits are read from the end of
+  its newest logs, which Codex rewrites on every turn, so nothing is sent
+  anywhere and the figures are as old as the last turn. A limit past its reset
+  shows no share until Codex runs again.
 - **Weather** comes from wttr.in, which guesses the place from your connection
   when none is set. Set it under Settings → Desktop → Module settings →
   **Location**: a city, a postcode or an airport code.
@@ -150,8 +196,8 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
 and notes, the task board and the games are buttons that open their panels —
 see [the desktop](/shell/desktop/), [notes and tasks](/shell/notes-and-tasks/)
 and [games and pets](/shell/games-and-pets/). GitHub needs a username under
-Settings → Desktop → Module settings → GitHub → **Username**. The clock is the
-island itself.
+Settings → Desktop → Module settings → GitHub → **Username**. Codex is the one
+module with no desktop widget. The clock is the island itself.
 
 ## Size and workspaces
 
@@ -162,6 +208,17 @@ scales with its height; as a notch, the island ignores the top margin.
 Under Settings → Bar & Island → **Workspaces**: *Workspaces shown* are always
 drawn on the strip (five by default); the rest, up to *Workspaces available*
 (ten by default), appear only while they have windows.
+
+**The strip draws in one of seven styles**: Dots, the default, Bars or Rings,
+or the workspace's number written out — Numbers, Roman, Kanji or Greek. The
+written styles mark the one in view with an accent pill that slides from one
+to the next. It is one setting for the whole bar, chosen from tiles on the
+Workspaces tab or on the strip's own card in the bar's layout.
+
+<Figure name="workspace-styles" alt="The workspace strip seven times: dots, bars, rings, then the numbers written as digits, roman numerals, kanji and greek letters, each with the workspace in view lit in the accent" caption="Dots, bars, rings, numbers, roman, kanji and greek." />
+
+For a bar without the strip, the workspace can sit beside the time on
+[the island](/shell/island/) instead.
 
 <Aside>
 Every screen draws the same bar, and the one with the keyboard is the live

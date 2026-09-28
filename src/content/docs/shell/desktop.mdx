@@ -1,6 +1,6 @@
 ---
 title: Widgets on the desktop
-description: The grid of widgets under the windows — the four shapes, arranging them, each widget's own look, the two themes, photos, the note decks on the edges and the sound spectrum.
+description: The grid of widgets under the windows — the four shapes, arranging them, each widget's own look, the three themes, photos, the note decks on the edges and the sound spectrum.
 sidebar:
   order: 7
 ---
@@ -17,8 +17,8 @@ same module can be on the grid twice: a clock as a band and another as a dial.
 
 <Figure
   name="desktop-themes"
-  alt="The same wall of widgets split down the middle: on the left, Modern widgets with large figures and captions; on the right, Analogue widgets drawn as objects — a thermometer, a wall calendar, a battery cell, a knob, gauges, a parcel and a joystick"
-  caption="The same widgets in Modern, left, and Analogue, right."
+  alt="A wall of widgets in three columns: on the left, Modern widgets with large figures and captions; in the middle, Analogue widgets drawn as objects — a thermometer, a wall calendar, a battery cell, a knob, a parcel and a joystick; on the right, Sticker widgets cut out as coloured shapes — a cloud with 19°, the pet on a disc, a green pill at 100, a pink Monday 28 and a lobed clock"
+  caption="Modern, Analogue and Sticker."
 />
 
 ## The grid
@@ -111,46 +111,44 @@ its left or under it, wherever there is room.
 | On the card | |
 |---|---|
 | Shape | The shapes the module offers, drawn as footprints — the same choice as the corner handle |
-| Face | Modern or Analogue |
-| Style | Capsule, Accent, Outline or No capsule |
-| The slider | How solid the capsule is, 20 to 100 %, with a button that puts it back |
+| Face | Modern, Analogue or Sticker |
+| The slider | How solid the capsule is, 20 to 100 %, with a button that puts it back — only on the classic ground, and not for a sticker |
 | Remove | Takes the widget off |
 
-A note and a photo draw their own paper and picture, so neither has a Style or
-a slider, and a note has no Face. A photo's card holds its **Picture** instead,
+A note and a photo draw their own paper and picture, so neither has a slider,
+and a note has no Face. A photo's card holds its **Picture** instead,
 and a print's its **Caption** too ([Photos](#photos)). A spectrum has no Face
-and no Style either, and a card of its own ([Spectrum](#spectrum)).
+and no slider either, and a card of its own ([Spectrum](#spectrum)).
 
-<Figure name="desktop-styles" alt="The same five widgets in four styles over a coastal wallpaper: Capsule, Accent, Outline and no capsule" caption="Capsule, Accent, Outline and no capsule, on the same five widgets." />
-
-The first tile under Face and under Style is **Default**, marked with a dot: it
-follows the desktop's own setting, and a widget keeps following it until you
-pick something else. The line under the styles says what the widget is wearing.
+The first tile under Face is **Default**, marked with a dot: it follows the
+desktop's own setting, and a widget keeps following it until you pick
+something else. The line under the faces says what the widget is wearing.
 The card closes on a click on the wallpaper, and when a drag starts.
 
 Settings → Desktop → The widgets holds what every widget follows by default:
-**Face**, **Style** and **Background**, the opacity.
+**Face**, **Ground** and **Background**, the opacity.
 
-| Style | What it draws |
-|---|---|
-| Capsule | The island's black ground with a hairline edge |
-| Accent | The colours turned inside out, with the accent as the ground |
-| Outline | The edge alone, over the wallpaper |
-| No capsule | The contents straight on the wallpaper |
+**The ground is the bar's unless you give the widgets their own**: *As the
+bar*, **Classic** or **Glass**. Classic is the island's black, and its
+**Background** slider lowers it until the wallpaper shows through blurred.
+Glass is the terminal's own ground, the accent over a blur of the wallpaper,
+with a lit edge; the slider is locked while it is on. A sticker, a note, a
+photo and the spectrum draw no capsule, so on a desk made only of them both
+rows are locked, and they unlock as soon as one widget has a capsule.
 
-Outline and No capsule shadow the type so it reads on the picture. With the
-background lowered, the wallpaper shows through blurred.
+Each widget casts a shadow, switched under Settings → Appearance → Depth.
 
-**The ground is the island's black and everything else is the palette**, so
-every widget repaints with the wallpaper. Warnings keep their fixed colours — a
+**Everything but the ground is the palette**, so every widget repaints with the
+wallpaper. Warnings keep their fixed colours — a
 battery in the red is red in every palette — and the GitHub wall keeps GitHub's
 grey to green. There is no palette per widget.
 
-## Two themes
+## Three themes
 
 **Modern is a figure with a caption; Analogue draws each module as an object**,
-read by where something is rather than by a number. Either one is a choice per
-widget.
+read by where something is rather than by a number; **Sticker cuts each module
+out as a coloured die-cut sticker** that sits on the wallpaper without filling
+its squares. Any of the three is a choice per widget.
 
 Modern lays every widget out on the same grid — the mark top left, the name top
 right, the reading along the bottom — so a wall of them reads as a set, and a
@@ -159,28 +157,35 @@ square the middle. The player's sleeve, the month, the GitHub wall and a photo
 are drawn whole rather than as a reading. Analogue keeps the figure small under
 the object on a square and puts the words beside it on a card.
 
-| Module | Shapes | Analogue draws |
-|---|---|---|
-| Clock | square, card, band | a dial, which is also offered as a large square |
-| Calendar | square, card, large | a leaf off a wall calendar |
-| Weather | all four | the sky, with a thermometer beside it |
-| Media | square, card, large | a record that turns while it plays |
-| System | square, card, large | a gauge with a needle |
-| Claude | square, card, large | a fuel gauge from E to F, without the large square |
-| Battery | square, card | a cell that fills |
-| Timer | square, card | an hourglass |
-| Volume | square, card | a knob |
-| Brightness | square, card | a fader |
-| Network | square, card | arcs |
-| Bluetooth | square, card | the Bluetooth rune |
-| Updates | square, card | a parcel with the count on its label |
-| Tasks | square, card, large | a clipboard |
-| Pet | square, card | the pet on a line of ground |
-| Games | square, card | a joystick |
-| GitHub | square, card, band | the wall of contribution squares, in both themes |
-| Notes | all four | paper, in both themes |
-| Photo | all four | an instant print, or a strip of film on the band |
-| Spectrum | card, band, large | its bars, the same in both themes |
+A sticker is a lobed cookie, a disc, a pill or a soft square, cut from one of
+the palette's hues with a pale vinyl edge round it and leaning a little, each
+widget its own way. It has no capsule and no ground: the wallpaper shows all
+round it, and its shadow is the widgets' shadow setting, cast by the sticker's
+own shape. On a card the words go on a tag stuck beside it. Nothing on a
+sticker moves — the record does not turn.
+
+| Module | Shapes | Analogue draws | Sticker draws |
+|---|---|---|---|
+| Clock | square, card, band | a dial, which is also offered as a large square | a lobed dial with the minute hand red, also as a large square; wide, one sticker per figure |
+| Calendar | square, card, large | a leaf off a wall calendar | today on a soft red square, with a round count of what is due; large, the month on a sheet |
+| Weather | all four | the sky, with a thermometer beside it | the sky — a sun, a night disc or a cloud — with the temperature on it; no large square |
+| Media | square, card, large | a record that turns while it plays | the record with the cover on it, and round buttons beside it |
+| System | square, card, large | a gauge with a needle | three badges: processor, memory and temperature; no large square |
+| Claude | square, card, large | a fuel gauge from E to F, without the large square | a ring round the mark, without the large square |
+| Battery | square, card | a cell that fills | an upright pill that fills |
+| Timer | square, card | an hourglass | a ring round the countdown |
+| Volume | square, card | a knob | an open ring round the speaker |
+| Brightness | square, card | a fader | a sun with the level on a ring |
+| Network | square, card | arcs | a disc with the connection's glyph, its name on a tag |
+| Bluetooth | square, card | the Bluetooth rune | the rune, with a round count of devices |
+| Updates | square, card | a parcel with the count on its label | the count on a soft square, a tick when up to date |
+| Tasks | square, card, large | a clipboard | the count on a seal, red with anything late; wide, the next tasks on strips of tape |
+| Pet | square, card | the pet on a line of ground | the pet on a disc, its name on a tag |
+| Games | square, card | a joystick | a pad; wide, a round Play that opens the arcade |
+| GitHub | square, card, band | the wall of contribution squares, in every theme | the wall, on a black sticker |
+| Notes | all four | paper, in every theme | paper |
+| Photo | all four | an instant print, or a strip of film on the band | the picture cut out with a vinyl border |
+| Spectrum | card, band, large | its bars, the same in every theme | its bars |
 
 A widget switched to a theme with no face for its shape shrinks to the largest
 shape that fits inside the old one, so nothing grows into a neighbour.
@@ -196,7 +201,7 @@ On the calendar, a day with a dot has tasks due. Press it and the widget turns
 into that day's tasks; it comes back when the pointer leaves it, or from the
 arrow. See [Notes and tasks](/shell/notes-and-tasks/).
 
-### Every widget in both themes
+### Every widget in each theme
 
 <Tabs syncKey="face">
 <TabItem label="Modern">
@@ -242,6 +247,27 @@ arrow. See [Notes and tasks](/shell/notes-and-tasks/).
   { name: 'widget-analogue-weather', alt: "The Weather widget in Analogue: a rain cloud, 25° in Kyoto", caption: 'Weather' },
 ]} />
 </TabItem>
+<TabItem label="Sticker">
+<Gallery columns={4} items={[
+  { name: 'widget-sticker-battery', alt: "The Battery widget in Sticker: a green upright pill reading 100", caption: 'Battery' },
+  { name: 'widget-sticker-bluetooth', alt: "The Bluetooth widget in Sticker: the Bluetooth rune on a pale blue six-lobed sticker", caption: 'Bluetooth' },
+  { name: 'widget-sticker-brightness', alt: "The Brightness widget in Sticker: a sun-shaped cream sticker with the level on a ring round the glyph", caption: 'Brightness' },
+  { name: 'widget-sticker-calendar', alt: "The Calendar widget in Sticker: a pink square with Monday 28, and a round sticker counting 2 due", caption: 'Calendar' },
+  { name: 'widget-sticker-claude', alt: "The Claude widget in Sticker: the Claude mark and 1.8M on a lobed sticker, with a ring for what is used", caption: 'Claude' },
+  { name: 'widget-sticker-clock', alt: "The Clock widget in Sticker: a twelve-lobed dial with pill hands, the minute hand red", caption: 'Clock' },
+  { name: 'widget-sticker-games', alt: "The Games widget in Sticker: a game pad on a pink eight-lobed sticker", caption: 'Games' },
+  { name: 'widget-sticker-github', alt: "The GitHub widget in Sticker: the contribution wall in greens on a black sticker", caption: 'GitHub' },
+  { name: 'widget-sticker-media', alt: "The Media widget in Sticker: the record as a round sticker with the cover on it, and a round pause button", caption: 'Media' },
+  { name: 'widget-sticker-network', alt: "The Network widget in Sticker: a disc with the Wi-Fi glyph, and Atelier on a tag", caption: 'Network' },
+  { name: 'widget-sticker-pet', alt: "The Pet widget in Sticker: Pip, the blue cat with a star, on a green disc, with Pip · Lv 17 on a tag", caption: 'Pet' },
+  { name: 'widget-sticker-stats', alt: "The System widget in Sticker: three badges: 13 CPU, 68 RAM and 50° temperature", caption: 'System' },
+  { name: 'widget-sticker-tasks', alt: "The Tasks widget in Sticker: 7 to do on a green scalloped seal", caption: 'Tasks' },
+  { name: 'widget-sticker-timer', alt: "The Timer widget in Sticker: a stopwatch glyph on a grey seven-lobed sticker, idle", caption: 'Timer' },
+  { name: 'widget-sticker-updates', alt: "The Updates widget in Sticker: 303 updates on a cream soft square", caption: 'Updates' },
+  { name: 'widget-sticker-volume', alt: "The Volume widget in Sticker: the speaker inside an open ring on a pale blue sticker", caption: 'Volume' },
+  { name: 'widget-sticker-weather', alt: "The Weather widget in Sticker: 19° on a blue cloud-shaped sticker, with Kyoto on a tag", caption: 'Weather' },
+]} />
+</TabItem>
 </Tabs>
 
 ## Photos
@@ -251,7 +277,9 @@ Modern the picture fills the widget edge to edge, with the widget's own
 corners and no capsule. In Analogue it is an instant print — a paper border, a
 strip of tape along the top and a caption handwritten in its chin — leaning a
 little, each photo its own way; on the band it is a strip of film, the one
-picture running under three frames. Photo is a desktop widget only.
+picture running under three frames. In Sticker the picture is cut out with a
+wide vinyl border and soft corners, leaning like the rest. Photo is a desktop
+widget only.
 
 <Tabs syncKey="face">
 <TabItem label="Modern">

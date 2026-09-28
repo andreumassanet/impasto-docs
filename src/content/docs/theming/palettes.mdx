@@ -42,11 +42,11 @@ The same panel, or the same result, from elsewhere:
 | The launcher | type `>` and pick **Appearance** |
 | The control centre | click the **Appearance** block, which shows the wallpaper in use |
 | Settings | **Appearance → Theme → Theme and wallpaper → Open** |
-| Thunar | right-click a picture → **Set as Wallpaper** |
+| Thunar | right-click a picture or a video → **Set as Wallpaper** |
 | A terminal | `qs ipc call wallpaper set /path/to/picture.jpg` |
 
-Thunar and the terminal take any picture on the disk, not only the ones in the
-wallpapers folder, and go through the shell the way the island does: the same
+Thunar and the terminal take any picture or video on the disk, not only the
+ones in the wallpapers folder, and go through the shell the way the island does: the same
 transition, the same repaint.
 
 A profile carries a wallpaper and a palette, so switching profile under
@@ -76,6 +76,27 @@ thick oil paint, then sharpened.
 The [questions page](/help/faq/) says which file is which.
 
 <Figure name="wallpapers" alt="The forty wallpapers that come with the desk, in a grid" caption="The forty that come with it." />
+
+## Animated wallpapers
+
+**Put a video in `~/.local/share/wallpapers/animated/`** and it shows on a
+strip of its own above the wallpapers in the appearance panel: open it with
+<kbd>SUPER</kbd> <kbd>T</kbd> and press <kbd>Up</kbd>. MP4, WebM, MKV, MOV and
+GIF files are read. The tiles are each video's first frame, and
+<kbd>Enter</kbd> applies the one in the middle, as with a picture.
+
+The video is played by mpvpaper, under the windows, on every screen, cropped to
+fill each one. It has no sound and loops. It pauses under a full-screen window,
+and starts again at login and when a screen is plugged in.
+
+**The palette comes from the video's first frame.** The same frame is what the
+lock screen, the overview and the arranging desk draw, and what shows while the
+transition runs. Picking a still wallpaper stops the video. A profile keeps the
+video itself.
+
+Nothing comes in the `animated` folder: the videos are yours to add. Without
+mpvpaper the first frame stands in for the video, and without ffmpeg a video is
+not listed, since its first frame cannot be read.
 
 ## How a palette is made
 
@@ -114,8 +135,8 @@ it stays dark even under Catppuccin Latte.
 ## The nine palettes
 
 **<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>T</kbd> opens the palettes**, the page
-under the wallpapers in the same panel; <kbd>Down</kbd> and <kbd>Up</kbd> switch
-between the two. The first tile, **Adaptive (Wallpaper)**, is the palette taken
+under the wallpapers in the same panel; <kbd>Down</kbd> and <kbd>Up</kbd> move
+between the animated wallpapers, the wallpapers and the palettes. The first tile, **Adaptive (Wallpaper)**, is the palette taken
 from the wallpaper, and it is the default. Any other tile keeps its palette
 whatever wallpaper you pick afterwards, until you go back to Adaptive.
 

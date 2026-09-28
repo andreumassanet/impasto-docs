@@ -43,7 +43,7 @@ A long page is split into parts, drawn as a strip under its title.
 | [Dock](/shell/dock/) | — | The edge, the alignment, the size, how it behaves, which screens it is on, and the applications kept on it |
 | [Launcher](/shell/launcher/) | Results, Sigils, Clipboard | How results are ordered and how many, the first character for each mode, the clipboard history |
 | Appearance | Theme, Windows, Type, Motion | The theme and wallpaper, the transition, the greeting scene; window rounding, gaps, opacity, blur, glass and shadow; the interface and monospace fonts; the pace of the animations |
-| [Displays](/shell/displays/) | Arrangement, The screen, The lid, Night light | The screens, the laptop lid and the night light |
+| [Displays](/shell/displays/) | Arrangement, The screen, The lid | The screens and the laptop lid |
 | Input | Keyboard, Pointer | Keyboard layouts and key repeat; sensitivity, the cursor's colour and size, shake to find |
 | [Keys](/shell/keys-and-packages/#changing-a-key) | The shell's own, The compositor's | Every key, for the profile in use |
 | [Session](/shell/lock-and-login/) | Lock screen, When you leave | Your account's name and picture, the lock's clock and blur, [face unlock](/shell/lock-and-login/#face-unlock), the idle waits |
@@ -54,8 +54,7 @@ Theme opens them there ([Palettes](/theming/palettes/)).
 
 - **A setting made meaningless by another stays on the page, dimmed**, and says
   which setting is responsible. What the machine lacks is dimmed the same way:
-  the glass and shake to find say to run `./setup plugins`, the night light
-  that hyprsunset is not installed. So is what a single screen cannot use —
+  the glass and shake to find say to run `./setup plugins`. So is what a single screen cannot use —
   the bar's and the dock's **On every screen**, **Arrangement**, **The main
   screen** — which says that only one screen is there.
 - **A slider's number is a field**: click it, type, <kbd>Enter</kbd>.
@@ -69,13 +68,13 @@ Theme opens them there ([Palettes](/theming/palettes/)).
   the window never writes them.
 
 <Gallery columns={3} items={[
-  { name: 'settings-bar-and-island', alt: "The settings window on the Bar & Island page, with the sidebar on the left; the page shows the bar's three styles, grouped, spread and one island, and whether the island floats or cuts into the top edge.", caption: "Bar & Island" },
-  { name: 'settings-desktop', alt: "The settings window on the Desktop page, with the sidebar on the left; the page shows the weather location, the GitHub username and how a note is written.", caption: "Desktop" },
-  { name: 'settings-control-centre', alt: "The settings window on the Control Centre page, with the sidebar on the left; the page shows the button to arrange the panel and the buttons of its top row, each with a switch.", caption: "Control Centre" },
-  { name: 'settings-dock', alt: "The settings window on the Dock page, with the sidebar on the left; the page shows whether the dock shows, the edge it sits on, its alignment and its size.", caption: "Dock" },
+  { name: 'settings-bar-and-island', alt: "The settings window on the Bar & Island page, with the sidebar on the left; the page shows the bar's three styles, grouped, spread and one island, whether the island floats or cuts into the top edge, its ground, classic or glass, and whether the sides sit in capsules or on the wallpaper.", caption: "Bar & Island" },
+  { name: 'settings-desktop', alt: "The settings window on the Desktop page, with the sidebar on the left; the page shows the weather location, the GitHub username, the pet drawn four ways and how a note is written.", caption: "Desktop" },
+  { name: 'settings-control-centre', alt: "The settings window on the Control Centre page, with the sidebar on the left; the page shows the panel's columns and rows, the button to arrange it, and its top row with a button on each side and the rest in a tray to drag them from.", caption: "Control Centre" },
+  { name: 'settings-dock', alt: "The settings window on the Dock page, with the sidebar on the left; the page shows whether the dock shows, the edge it sits on, its alignment, its ground — as the bar, classic or glass — its size and its background.", caption: "Dock" },
   { name: 'settings-launcher', alt: "The settings window on the Launcher page, with the sidebar on the left; the page shows the order of results, how many are shown and a preview of the list, and under it the applications kept on the dock, kitty first.", caption: "Launcher" },
   { name: 'settings-appearance', alt: "The settings window on the Appearance page, with the sidebar on the left; the page shows the theme and wallpaper, the wallpaper transition and the greeting scene.", caption: "Appearance" },
-  { name: 'settings-displays', alt: "The settings window on the Displays page, with the sidebar on the left; the page shows the night light, off, and its colour temperature.", caption: "Displays" },
+  { name: 'settings-displays', alt: "The settings window on the Displays page, with the sidebar on the left; the page is on The lid: what the laptop's screen does when the lid closes, and the screens connected right now.", caption: "Displays" },
   { name: 'settings-input', alt: "The settings window on the Input page, with the sidebar on the left; the page shows the keyboard layouts, how to switch between them and the key repeat rate.", caption: "Input" },
   { name: 'settings-keys', alt: "The settings window on the Keys page, with the sidebar on the left; the page shows the shell's own key bindings, each one editable, with a search field.", caption: "Keys" },
   { name: 'settings-session', alt: "The settings window on the Session page, with the sidebar on the left; the page shows when to lock, turn the screen off and suspend after the machine is left alone, all set to never.", caption: "Session" },

@@ -52,6 +52,9 @@ there is a way round, it is given.
   parsers are compiled when the `tree-sitter` CLI is installed; it is in the
   package list. There is no format-on-save, debugger or test runner.
 - **`matrix` needs a font with half-width katakana**, or its rain is empty boxes.
+- **`lava` keeps the palette it started in** until you quit it, and in a
+  palette whose accent and bright accent sit close together the lamp is one
+  colour. lavat comes from the AUR.
 
 ## The island and the bar
 
@@ -71,14 +74,24 @@ there is a way round, it is given.
   opens a terminal for that.
 - **In the overview, two windows of one application with the same title share a
   thumbnail**, and a window with nothing to draw looks like an empty cell.
+- **The tray shows labels as the application sends them**, so a menu entry
+  can read `_Quit`. Menus go two submenus deep at most, with no tooltips and
+  no icons on the entries. An application that sends a picture instead of an
+  icon name is drawn grey, and may be dark.
+- **The privacy mark sees the camera only in your own processes**, so face
+  unlock never lights it, and a camera plugged in after the shell started is
+  not watched until it restarts. An application that keeps a microphone stream
+  open while muted keeps the mark. A shared screen is recognised by the
+  portal's name for it, so another portal can go unseen.
 - **The Claude module reads Claude Code's own login** and sends one small request
   every ten minutes to read the account's usage. Without that login it shows
   counts only.
 
 ## Notifications
 
-- No action buttons and no inline reply.
-- The history is lost when the shell restarts.
+- **No inline reply**, and three buttons at most.
+- **A notification kept from an earlier session is text only**: its buttons
+  are gone, and a picture sent with it comes back as the application's mark.
 
 ## Network and Bluetooth
 
@@ -121,6 +134,10 @@ there is a way round, it is given.
 - **A photo holds one picture, as a path**: no album, nothing dropped on it
   from a file manager, and a picture moved on disk leaves it empty. Its picker
   has no typed path and no search, and lists PNG, JPEG, WebP and BMP only.
+- **Sticker has no large square for the weather or the system widget**, and no
+  band past the clock, the weather and GitHub. Its record does not turn, and
+  the updates sticker names no packages. On the card of modules a sticker
+  still sits on a black tile.
 - **A spectrum needs cava and a monitor source** to read the sound from. Its
   bars step with cava's frames rather than gliding, and it has no menu at rest:
   it is changed while arranging.
@@ -267,3 +284,8 @@ there is a way round, it is given.
 - **No search and no jump by letter** through the wallpapers:
   <kbd>Home</kbd>, <kbd>End</kbd> and the page keys are what there is.
 - **The transition tiles are close to awww's effects**, not exact copies.
+- **An animated wallpaper costs about a tenth of a core while it shows**, and
+  it shows through the terminal's glass, so it pauses only under a full-screen
+  window. One video plays on every screen, cropped to fill each, and never with
+  sound. The strip shows each video's first frame, not the video playing.
+  Nothing ships in the `animated` folder.

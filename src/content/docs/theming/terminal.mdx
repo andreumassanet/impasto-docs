@@ -54,6 +54,7 @@ is checked for first, so a missing one prints nothing.
 | <kbd>CTRL</kbd> <kbd>T</kbd> | fzf for a file, pasted into the line |
 | <kbd>ALT</kbd> <kbd>C</kbd> | fzf for a folder to change into |
 | `matrix`, `bonsai`, `clock` | unimatrix, cbonsai and tty-clock, in the accent |
+| `lava` | a lava lamp from lavat, its blobs running from the accent to its bright shade |
 | `cls` | clear |
 
 - `EDITOR` and `VISUAL` are neovim, or vim when there is no neovim.
@@ -115,13 +116,18 @@ Greeting**, where each tile plays it.
 | yazi | the interface, and the syntax colours in the preview pane | the next yazi started |
 | neovim | the whole colourscheme | every running neovim repaints |
 | unimatrix (`matrix`), cbonsai (`bonsai`), tty-clock (`clock`), asciiquarium | they draw in the terminal's own colours | with the terminal |
+| lavat (`lava`) | the accent and its bright shade, read from kitty | the next lamp started |
 
 <Figure name="terminal" alt="yazi browsing the wallpapers with a preview, cbonsai growing a tree, and neovim editing the island's source, all in the palette of a golden wallpaper" caption="yazi, cbonsai and neovim, in the palette of a golden wallpaper." />
 
 - **btop keeps nothing you change inside it.** It is told not to save its
   settings on exit, so a preset picked in a running btop lasts until you quit.
-- unimatrix, cbonsai and tty-clock come from the AUR and asciiquarium from
-  pacman; `./setup packages` installs all four.
+- unimatrix, cbonsai, tty-clock and lavat come from the AUR and asciiquarium
+  from pacman; `./setup packages` installs all five.
+- **`lava` asks kitty for its colours when it starts**, so a lamp left running
+  keeps the palette it started in. Outside kitty it draws in the terminal's
+  cyan. Anything after `lava` is passed to lavat. `fa lava` is the greeting's
+  own lava lamp, a different drawing.
 
 ## yazi
 

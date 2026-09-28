@@ -1,59 +1,66 @@
 ---
 title: The control centre
-description: What the island opens onto when you click it — the session row, the doors to other panels, and a grid of blocks you arrange yourself.
+description: What the island opens onto when you click it — a row of small buttons, a grid of blocks you arrange yourself, and the pages behind their chevrons.
 sidebar:
   order: 3
 ---
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 import Figure from '~/components/Figure.astro';
-import Gallery from '~/components/Gallery.astro';
 
 **The control centre is a grid of blocks under one row of buttons.** It opens
 with <kbd>SUPER</kbd> <kbd>A</kbd>, with a click on the island at rest or on
 its glance, or with the Control centre button if it is on the bar. The same key
 closes it, and so do Escape and a click anywhere off the island.
 
-<Gallery columns={2} items={[
-  { name: 'control-centre', alt: "The control centre: toggles for Wi-Fi, Bluetooth, power, focus, microphone and airplane mode, volume and brightness sliders, the track playing, the weather, a calendar, the wallpaper and three notifications.", caption: "At rest." },
-  { name: 'control-centre-arrange', alt: "The control centre in arranging mode, its grid's cells showing, with a card under the island holding every block at its smallest size: toggles, appearance, calendar, notifications, clock, notes, tasks, media, weather, pet, games, volume and brightness.", caption: "Arranging, with the card of every block under it." },
-]} />
+<Figure name="control-centre" alt="The control centre: a row of small buttons across the top, session actions on the left and shortcuts on the right; Wi-Fi, Bluetooth, Power, Focus, Microphone and Airplane tiles; volume and brightness sliders; the appearance card; the player on Resurrections by Lena Raine; the weather in Kyoto; September's calendar; four notifications; and along the bottom, the session's round buttons and a row of shortcuts." caption="The control centre as it comes." />
 
 ## The top row
 
-**Session actions on the left, doors on the right.**
+**Small buttons over the grid, on a left and a right side.** Out of the box,
+the session's actions are on the left — Lock, Suspend, Log out, Restart, Shut
+down — and doors to other panels on the right: System statistics, Settings,
+Pet, Games, Notes and Task board. Lock and Suspend run at once; the other three
+turn red on the first click and run on the second.
 
-- **Lock, Suspend, Log out, Restart, Shut down.** Lock and Suspend run at
-  once. The other three turn red on the first click and run on the second.
-- **Doors** open another panel, or the settings window. Out of the box they are
-  System statistics, Settings, Pet, Games, Notes and Task board.
+Any button can go on either side. The doors on offer are System statistics,
+Settings, Pet, Games, Notes, Task board, Workspace overview, Launcher,
+Appearance, Session menu, Keys and Packages. With both sides empty there is no
+row, and no space for one.
 
-Which doors are on the row, and in what order, is set under Settings →
-Control Centre → *The top row*: a switch for each, and two arrows to move the
-ones that are on. The doors on offer are System statistics, Settings, Pet,
-Games, Notes, Task board, Workspace overview, Launcher, Appearance, Session
-menu, Keys and Packages.
+- **In Settings → Control Centre → The top row**, the row is drawn in
+  miniature with a tray of the buttons on neither side. Drag a button from the
+  tray onto a side, along it, across to the other, or back into the tray to
+  take it off.
+- **While arranging**, click the row as you would a block. Its card lists every
+  button with a tick for the ones on the row, the side each is on — a click
+  moves it across — and arrows to order it along that side. An empty row shows
+  while arranging, so it can be filled.
 
 ## The grid
 
-**Six columns by eight rows, and every block takes a whole number of cells.**
-A cell is one toggle tile, wider than it is tall, so the square sizes are 1×2
-and 2×4. Blocks never overlap, and a block can be on the grid more than once.
+**A grid of blocks, and every block takes a whole number of cells.** It is six
+columns by eight rows out of the box, and two to six columns by two to eight
+rows can be chosen. A cell is one toggle tile, wider than it is tall, so the
+square sizes are 1×2 and 2×4. Blocks never overlap, and a block can be on the
+grid more than once.
 
-Out of the box: the toggles, the volume and brightness sliders and the
-wallpaper down the left; the player, the weather and the month in the middle;
-the notifications down the right.
+Out of the box: the toggles, the volume and brightness sliders, the appearance
+card and the session's buttons down the left; the player, the weather, the
+month and a row of shortcuts in the middle; the notifications down the right.
 
 | Block | Sizes (columns × rows) | What it holds |
 |---|---|---|
 | Toggles | 2×2, 2×3, 2×4, 3×2, 3×3, 4×2, 4×3 | Switches and one-press actions, in pages (below) |
-| Volume | 2×1, 3×1, 4×1 | The output's slider |
-| Brightness | 2×1, 3×1, 4×1 | The slider for the screen the keyboard is on |
+| Volume | 2×1, 3×1, 4×1 | The output's slider; its chevron opens [the sound page](#the-pages) |
+| Brightness | 2×1, 3×1, 4×1 | The slider for the screen the keyboard is on; with several screens, a chevron opens one for each |
 | Appearance | 2×2, 2×3, 2×4, 3×3, 4×2 | The wallpaper; a click opens the appearance panel |
 | Media | 2×2, 2×3, 3×2, 4×2 | The player |
 | Weather | 2×1, 2×2, 2×3, 4×2 | The conditions now, and the rest of the day when there is room |
 | Calendar | 2×3, 2×4, 3×4 | The month, a dot under each day with tasks; such a day turns into its list |
-| Notifications | 2×4, 2×6, 2×8, 3×8 | The history, with Clear |
+| Notifications | 3×2, 3×3, 2×4, 3×4, 2×6, 2×8, 3×8 | The history, with Clear |
+| Session | 1×1, 2×1, 3×1, 1×2, 2×2, 4×1 | Round buttons for Lock, Suspend, Log out, Restart and Shut down |
+| Shortcuts | 1×1, 2×1, 3×1, 1×2, 2×2, 4×1, 6×1 | Round buttons that open other panels, chosen per block |
 | impasto | 1×2, 2×2, 2×4 | The terminal greeting in miniature: the palette board and the machine's lines |
 | Pet | 2×2, 2×3 | The pet's face and mood, feed and play; three rows add the shelf |
 | Clock | 1×2, 2×2, 2×4 | The time over the day, larger with the room |
@@ -62,7 +69,8 @@ the notifications down the right.
 | Tasks | 1×2, 2×2, 2×3, 2×4 | How many are left and what is next; larger, the next few with Open |
 
 A block with nothing to show — the player with no music — draws its empty card
-rather than leaving the cell.
+rather than leaving the cell. Session and shortcuts blocks hold as many
+buttons as their cells fit.
 
 ## The toggles
 
@@ -73,13 +81,13 @@ and Airplane.
 
 | Tile | What it does |
 |---|---|
-| Wi-Fi | Switches the radio. Its arrow opens the Wi-Fi list. |
-| Bluetooth | Switches Bluetooth. Its arrow opens the device list. |
+| Wi-Fi | Switches the radio. Its chevron opens the Wi-Fi list. |
+| Bluetooth | Switches Bluetooth. Its chevron opens the device list. |
 | Power | Switches the power profile between balanced and performance; lit on performance |
 | Focus | Do not disturb — notifications stay off the island |
-| Microphone | Mutes the microphone |
+| Microphone | Mutes the microphone. Its chevron opens [its page](#the-pages). |
 | Airplane | Wi-Fi and Bluetooth off together, or back on |
-| Night light | A warmer screen, through hyprsunset; the temperature is under Settings → Displays → Night light |
+| Night light | A warmer screen, through hyprsunset. Its chevron opens [its page](#the-pages). |
 | Output | Mutes the sound |
 | Dock | Shows or hides [the dock](/shell/dock/) |
 | Notch | Cuts the island into the top edge, or floats it |
@@ -108,13 +116,32 @@ saved network. Pair and forget with `bluetoothctl` and `nmcli`. See
 [limitations](/help/limitations/).
 </Aside>
 
+## The pages
+
+**A chevron opens a page of its own in the island**, as the Wi-Fi and
+Bluetooth tiles open their lists. The back arrow at the top returns to the
+control centre.
+
+- **Sound**, from the volume slider: the output's level, a row for every
+  application playing with its own level, and the outputs to choose from.
+- **Microphone**, from its tile: the input's level, every application
+  recording it with its own level, and the inputs to choose from.
+- **Night light**, from its tile: the warmth as a level, and four presets —
+  Candle, Warm, Soft and Neutral, 2500 K to 5500 K. The tile itself is the
+  switch.
+- **Brightness**, from its slider when there is more than one screen to dim: a
+  level for each screen, by name. With one screen there is no chevron.
+
+<Figure name="controls-volume" alt="The Sound page in the island: the speaker at 64%, Google Chrome with its own level at 100% under Apps, and the outputs Speaker, ticked, HDMI 1, HDMI 2 and HDMI 3." caption="The sound page: the level, each application's, and the output." />
+
 ## Arranging
 
 <Steps>
 
-1. Right-click the control centre's background, or open Settings → Control
-   Centre and press **Edit**. The grid's cells show, and a card of every block,
-   each at the smallest size it offers, opens under the island.
+1. Right-click the panel's margin or the space between blocks, or open
+   Settings → Control Centre and press **Edit**. The grid's cells show, a pill
+   under the island sets its columns and rows, and a card of every block, each
+   at the smallest size it offers, opens under them.
 
 2. Drag a block from the card onto a cell, or drag a block on the grid to move
    it. The cell it will land on lights before you let go. A click on a block on
@@ -127,14 +154,21 @@ saved network. Pair and forget with `bluetoothctl` and `nmcli`. See
 
 5. Click a block for its card: its name, Remove, and its sizes. On a toggles
    block the card lists every tile with a tick, and arrows to order the ones
-   ticked — so two toggles blocks can carry two different sets.
+   ticked; on a shortcuts block it does the same for the doors. So two blocks
+   of either kind can carry two different sets. Click the top row for
+   [its card](#the-top-row).
 
-6. Press <kbd>Escape</kbd>, right-click the background again, or close the
-   panel. A second <kbd>Escape</kbd> closes the island.
+6. Press <kbd>Escape</kbd>, right-click the margin again, or close the panel.
+   A second <kbd>Escape</kbd> closes the island.
 
 </Steps>
+
+<Figure name="control-centre-arrange" alt="The control centre in arranging mode, its grid's cells showing, with a card under the island holding every block at its smallest size: toggles, appearance, calendar, notifications, clock, notes, tasks, media, weather, pet, games, volume and brightness." caption="Arranging, with the card of every block under it." />
+
+Columns come and go on both sides alike, so the blocks stay centred.
 
 The card of blocks moves, grows and scrolls as the desktop's does
 ([Arranging the desktop](/shell/desktop/#arranging)).
 
-**Default layout**, beside Edit in the settings, puts the grid back as it came.
+The columns and rows are also under Settings → Control Centre → The panel.
+**Default layout**, beside Edit there, puts the grid back as it came.
