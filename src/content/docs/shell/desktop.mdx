@@ -26,8 +26,13 @@ same module can be on the grid twice: a clock as a band and another as a dial.
 **Everything sits on a grid, and nothing overlaps.** A widget's place is a
 column and a row, and the gap between two widgets is the gap between two
 windows. The grid fills the space under the bar with the same margin on all
-four sides, and keeps clear of the dock — unless the dock hides until pointed
-at, when the grid runs to the edge and the dock comes out over it.
+four sides, whatever the dock does: the dock is drawn over what is under it,
+so moving it, hiding it or letting it stay never moves a widget. In
+[zen](/shell/bar/#zen) the grid fills the whole screen.
+
+<kbd>SUPER</kbd> <kbd>CTRL</kbd> <kbd>W</kbd> takes every widget off the
+wallpaper until you press it again; the same switch is **Hide the widgets** on
+Settings → Desktop, and arranging shows them meanwhile.
 
 A widget dropped on an occupied square goes to the nearest free one, or back
 where it came from if the board has no room. The widgets already there never
@@ -172,6 +177,7 @@ sticker moves — the record does not turn.
 | Media | square, card, large | a record that turns while it plays | the record with the cover on it, and round buttons beside it |
 | System | square, card, large | a gauge with a needle | three badges: processor, memory and temperature; no large square |
 | Claude | square, card, large | a fuel gauge from E to F, without the large square | a ring round the mark, without the large square |
+| Codex | square, card, large | a fuel gauge from E to F, without the large square | a ring round the mark, without the large square |
 | Battery | square, card | a cell that fills | an upright pill that fills |
 | Timer | square, card | an hourglass | a ring round the countdown |
 | Volume | square, card | a knob | an open ring round the speaker |
