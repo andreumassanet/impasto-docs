@@ -1,6 +1,6 @@
 ---
 title: The island
-description: The black capsule in the middle of the bar, at rest on the time, and every shape it takes — panels, details, notifications, readings and the overview.
+description: The black capsule in the middle of the bar, at rest on the time, and every shape it takes — the glance, the lyrics, panels, details, notifications, readings, the password for root and the overview.
 sidebar:
   order: 1
 ---
@@ -27,11 +27,13 @@ button.
 opens the [control centre](/shell/control-centre/).
 
 **What is running sits either side of the time**: a recording, what is using
-the microphone, the camera or the screen, a countdown, a track, the workspace —
-in that order, two at most. A recording is always shown, and first; the rest
-are switched under Settings → Bar & Island → **Beside the time** (see
-[Settings](#settings)). One running thing splits across both sides, its mark
-on the left and its figure on the right; two take a side each.
+the microphone, the camera or the screen, a countdown, a track, a virtual
+machine and the workspace, in that order, two at most. A recording is always
+shown, and first; the rest are switched under Settings → Bar & Island →
+**Beside the time** (see [Settings](#settings)). One running thing splits
+across both sides, its mark on the left and its figure on the right; two take
+a side each. What is running past those two is counted at the island's end as
+a small **+N**, and every one of them is in [the glance](#the-glance).
 
 - A recording is a red dot and the minutes. A click on the dot stops it; under
   the pointer it squares off to say so.
@@ -43,6 +45,8 @@ on the left and its figure on the right; two take a side each.
   detail.
 - A track is its artwork and a spectrum that follows the sound. A click opens
   the player.
+- A virtual machine is its system's mark and how long it has run, or how many
+  run when there are several. A click opens [the machines](/shell/machines/).
 - The workspace is a mark and the number, or the name, of the workspace the
   screen shows, for a bar without the workspace strip. It is always there when
   switched on, so it comes last. A click opens [the overview](#the-overview).
@@ -51,21 +55,55 @@ on the left and its figure on the right; two take a side each.
 ## The glance
 
 **Rest the pointer on the time and a glance opens at once**; it closes a moment
-after the pointer leaves. It has two faces.
+after the pointer leaves. It is always one face: a square at the near end,
+what is in it beside the square with its controls, and at the far end the time
+large with the day and the date under it.
 
-- **With a player**: the cover, the track and its artist, previous, play or
-  pause, and next, and at the far end the time large with the day and the date
-  under it.
-- **Without one**: the time large, with the weather on a small line under it
-  when the weather is already on the bar or on the desktop, and at the far end
-  five days of the week with today in the middle.
+- **The face is the running thing with the most to press**: the music first,
+  then a countdown, a virtual machine, a recording, and what is using the
+  microphone, the camera or the screen.
+- **Everything else running is a chip** on a strip under the face: its mark,
+  its name and a reading.
+- **The square is never an empty box**: a cover fills it, and anything else is
+  drawn large in it: the countdown's ring, the recording's dot, the machine's
+  or the weather's mark.
+- **With nothing running**, the face is the weather, when the weather is
+  already on the bar or on the desktop, and otherwise the time alone, centred.
+
+| Face | Its controls |
+|---|---|
+| Music | Previous, play or pause, next; under the title, the line being sung |
+| Countdown | Restart, pause or resume, cancel |
+| Virtual machine | Open its window, pause or resume, shut down |
+| Recording | Stop |
 
 <Figure name="glance" alt="The island opened into a glance: the cover of Resurrections by Lena Raine, a painting of Mount Fuji, with previous, pause and next under the track, and at the far end 19:32 large over MONDAY 28 SEPTEMBER." caption="The glance with a player: the cover, the track, its controls and the time." />
 
-The player's controls are the only things on it to press: a click anywhere else
-opens the control centre. It does not open while a notification or a reading
-holds the island, or over a running thing's mark. Turn it off with **A glance
-on hover** (see [Settings](#settings)).
+**The square and a chip do what that thing's mark does at rest**: the cover
+opens [the lyrics](#lyrics), a countdown its detail, a machine the machines
+panel, and a recording's dot stops it. The square, the chips and the controls
+are the only things on it to press; a click anywhere else opens the control
+centre. It does not open while a notification or a reading holds the island,
+or over a running thing's mark. Turn it off with **A glance on hover** (see
+[Settings](#settings)).
+
+## Lyrics
+
+**The lyrics of whatever is playing come from lrclib.net**, timed per line,
+with any player. The glance carries the line being sung under the track's
+title, and the [desktop](/shell/desktop/#lyrics) has a widget that shows the
+words and nothing else.
+
+**Click the music, on the bar, in the glance or at rest, and once its lyrics
+are known it opens out round them**: the cover large on one side with the
+track, the progress and the controls under it, and the lyrics on the other,
+the line being sung lit and held in the middle. A click on a line goes to that
+place in the song. Lyrics that are not timed are the whole text, to scroll,
+with nothing lit; a track lrclib does not know opens the plain player.
+
+Every lookup tells lrclib.net what is playing, so one switch turns all of it
+off: Settings → Bar & Island → **Lyrics**. It is on by default, and nothing is
+looked up while nothing on screen shows lyrics.
 
 ## What it becomes
 
@@ -85,6 +123,7 @@ on hover** (see [Settings](#settings)).
 | [The task board](/shell/notes-and-tasks/) | <kbd>SUPER</kbd> <kbd>K</kbd> |
 | [Every key](/shell/keys-and-packages/) | <kbd>SUPER</kbd> <kbd>H</kbd> |
 | [Packages](/shell/keys-and-packages/) | <kbd>SUPER</kbd> <kbd>I</kbd> |
+| [Virtual machines](/shell/machines/) | <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>M</kbd> |
 | A module's detail | a click on its piece on [the bar](/shell/bar/) |
 | The Wi-Fi and Bluetooth lists | their pieces on the bar, or the arrow on their control-centre tiles |
 
@@ -180,7 +219,23 @@ detail open, its own slider shows the change instead.
 
 The same capsule carries messages with no level: what a capture did, the
 colour picked, a recording starting and stopping, a new best in a game, a new
-egg for the pet, a profile switched.
+egg for the pet, a profile switched, the window layout cycled, game mode on or
+off.
+
+## Asking for root
+
+**The shell is the password dialog.** When a program asks for root through
+polkit, `pkexec` or any other, the island opens on the request: *Authentication required* and what the program wants,
+the lock screen's pill for the password, and under it the action asked for,
+with **Cancel** and **Authorize**.
+
+- A refused password shakes the pill and says *That password didn't work*.
+- While Caps Lock is on, the line under the pill says so.
+- Closing the island any way, <kbd>Escape</kbd> included, answers no.
+- It comes over a full-screen window as well.
+
+Should the shell fail to take the role, the KDE password dialog does it
+instead until the next login.
 
 ## The overview
 
@@ -212,9 +267,10 @@ Under Settings → Bar & Island, in Shape, Clock and Beside the time:
 | Span the whole screen | One island only: the band runs the width of the bar |
 | On every screen | *One on each, and the one you are on is the live one*, or *Only on the screen you are on*. Dimmed with one screen |
 | A glance on hover | Off, only a click opens anything |
+| Lyrics | Off, no lyrics anywhere, and nothing is looked up; see [Lyrics](#lyrics) |
 | Clock format | 24-hour or 12-hour |
 | Show the date, Show seconds | What the time carries |
-| Beside the time | Privacy, Timer, Media and Workspace, each on the island or not; see [At rest](#at-rest) |
+| Beside the time | Privacy, Timer, Media, Virtual machines and Workspace, each on the island or not; see [At rest](#at-rest) |
 
 ## On a second screen
 

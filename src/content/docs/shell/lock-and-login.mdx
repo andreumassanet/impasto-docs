@@ -2,7 +2,7 @@
 title: Lock and login
 description: The lock screen the shell draws itself, unlocking with your face, locking when you leave, and the SDDM login screen that is the same screen before the desk.
 sidebar:
-  order: 11
+  order: 12
 ---
 
 import { Aside } from '@astrojs/starlight/components';
@@ -51,9 +51,31 @@ screens the blur stays.
 Settings → Session → Lock screen holds **You**: your account's name and
 picture, for both screens at once — click the picture, or drop an image on the
 card, and type the name. [Your picture](#your-picture) says where they go. Under **Clock**,
-**Style** is Stacked or Inline, hours over minutes or both on one line; the
-login screen always draws it stacked. Under **Background**, the **Blur** is 8
-to 64 px, previewed over the wallpaper.
+**Style** is Stacked, Inline or Flip: hours over minutes, both on one line, or
+a black card for each part of the time, split at a hinge, whose top folds down
+over the new figure as it turns. The login screen always draws it stacked.
+Under **Background**, the **Blur** is 8 to 64 px, previewed over the
+wallpaper.
+
+### Music on the lock
+
+**While something plays, the lock shows it.** The clock moves up to where it
+sits when the lock is awake, and the middle of the screen takes the cover, the
+track, its progress and the controls, with the lyrics beside them if you want
+them, the line being sung level with the cover. The controls work from the
+lock; a click on them also wakes the screen, as any click does.
+
+Settings → Session → Lock screen → **Music** chooses what it shows:
+
+| Setting | Choices |
+|---|---|
+| Show | **Nothing**, **The player**, or **With lyrics**, the default |
+| Behind it | **The cover**, the default, blurred into a wash of its colours, or **The desktop**, as the lock draws it without music |
+
+The lyrics follow the **Lyrics** switch on Bar & Island
+([Lyrics](/shell/island/#lyrics)). On a short screen the player is drawn
+smaller to fit between the clock and the pill. The login screen has no session
+and shows no music.
 
 ### When you leave it alone
 

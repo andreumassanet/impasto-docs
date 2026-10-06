@@ -32,7 +32,9 @@ Each tree in the repository is its destination as it is: `home/` is `$HOME` and
     - gtk-3.0/ settings.ini
     - gtk-4.0/ settings.ini
     - starship.toml
+  - .local/bin/impasto the impasto command
   - .local/share/
+    - zsh/site-functions/_impasto its completion
     - fonts/ GrapeNuts-Regular.ttf, the script face, and its OFL licence
     - wallpapers/ the forty wallpapers
     - impasto/
@@ -82,6 +84,7 @@ Everything the shell writes lives in `~/.local/state/quickshell/`, or under
   - greeting-….gif one per scene
   - greeting.gif
   - claude-usage.json
+  - lyrics/ each track's lyrics, as lrclib.net answered
   - cursor-src/ the cursor's source, from ./setup cursors
 </FileTree>
 
@@ -147,5 +150,6 @@ ticks the theme in `~/.config/vesktop/settings/settings.json`, and
 | Screenshots | `XDG_SCREENSHOTS_DIR` in `~/.config/user-dirs.dirs`, else `Screenshots` in your pictures folder |
 | Recordings | `XDG_SCREENCASTS_DIR`, else `Screencasts` in your videos folder |
 | Wallpapers you add | `~/.local/share/wallpapers`, JPEG, PNG or WebP |
+| Virtual machines | `~/.local/share/impasto/machines`, one quickemu configuration and folder each |
 | oh-my-zsh | `~/.oh-my-zsh`, with its two plugins under `custom/plugins` |
 | Hyprland plugins | `/var/cache/hyprpm/<username>/`, built by hyprpm |

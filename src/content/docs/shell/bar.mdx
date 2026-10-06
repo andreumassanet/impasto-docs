@@ -155,7 +155,7 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
 
 | Module | On the bar | Its detail in the island | Needs |
 |---|---|---|---|
-| Media | The track's title, or *Nothing playing* | The player: artwork, title, artist, progress, previous, play or pause, next | A media player on the session bus (MPRIS) |
+| Media | The track's title, or *Nothing playing* | The player: artwork, title, artist, progress, previous, play or pause, next; once the track's lyrics are known, [the lyrics](/shell/island/#lyrics) beside it | A media player on the session bus (MPRIS) |
 | Timer | A ring that drains, and the time left | Idle, set a countdown; running, hold, restart or stop it | — |
 | Claude | Claude's mark, and the session's percentage — or its tokens, until the percentage is known | Tokens and messages for the five-hour session and the week, the account's own percentages, and when the session resets | Claude Code (below) |
 | Codex | Codex's mark, and the share used of the fullest limit still running | Each limit the plan sets, its share used and when it resets, and when it was read | Codex (below) |
@@ -192,7 +192,7 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
 - **System** — the full panel, with cores, disks and temperatures, is
   <kbd>SUPER</kbd> <kbd>U</kbd>.
 
-**Not modules on the bar:** Notes, Tasks, Games and GitHub are desktop widgets,
+**Not modules on the bar:** Notes, Tasks, Games, GitHub and Lyrics are desktop widgets,
 and notes, the task board and the games are buttons that open their panels —
 see [the desktop](/shell/desktop/), [notes and tasks](/shell/notes-and-tasks/)
 and [games and pets](/shell/games-and-pets/). GitHub needs a username under
@@ -204,8 +204,8 @@ island itself.
 <kbd>SUPER</kbd> <kbd>CTRL</kbd> <kbd>B</kbd> puts the bar away and gives its
 band to the windows. The island still comes down, on its own, for a
 notification, the volume or brightness, or a panel you open by its key, and
-goes back up when it is done; the desktop's widgets spread over the whole
-screen meanwhile. Press it again for the bar. The same switch is **Zen** under
+goes back up when it is done. The desktop's widgets stay where they are.
+Press it again for the bar. The same switch is **Zen** under
 Settings → Bar & Island, and `qs ipc call bar toggle` flips it from anything
 else.
 

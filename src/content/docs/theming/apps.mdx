@@ -80,9 +80,9 @@ on every palette change. Rules of your own in it are lost.
 **Qt windows take the palette through qt6ct, in Qt's Fusion style.** The session
 names qt6ct as the platform theme, and every palette change writes its colour
 scheme to `~/.config/qt6ct/colors/impasto.conf`. KDE applications, such as
-gwenview, spectacle and the polkit password dialog, read `~/.config/kdeglobals`
-instead, so the push merges its colours into that file too and leaves everything
-else in it alone.
+gwenview, spectacle and the KDE password dialog the shell falls back on, read
+`~/.config/kdeglobals` instead, so the push merges its colours into that file
+too and leaves everything else in it alone.
 
 - A window already open keeps its colours; the next one comes up in the new
   palette.

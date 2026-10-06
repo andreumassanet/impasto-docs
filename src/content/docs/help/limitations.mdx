@@ -64,8 +64,9 @@ there is a way round, it is given.
   where it is. The workspace dots are the desk's ten shared workspaces; only
   which one is lit is each screen's own.
 - **The glance does not open while a notification or an OSD holds the island.**
-- **The island shows two running things beside the time at most**; a third is
-  only in the glance.
+- **The island shows two running things beside the time at most**; the rest
+  are a count, +N, and chips in the glance. A glance with four chips and long
+  names can run past its edge, and the last is cut.
 - **Closing a panel by clicking on a browser or Vesktop window** can blank the
   pointer for a moment.
 - **One timer at a time**, and the timer's own steppers cannot set seconds; the
@@ -86,6 +87,26 @@ there is a way round, it is given.
 - **The Claude module reads Claude Code's own login** and sends one small request
   every ten minutes to read the account's usage. Without that login it shows
   counts only.
+
+## Lyrics
+
+- **Only what lrclib.net has**: a track it does not know shows no line and the
+  plain player, and one it knows only as plain text shows the text with
+  nothing lit.
+- **Every lookup tells lrclib.net what is playing.** Turn Lyrics off under
+  Settings → Bar & Island to stop it.
+- **A player that reports its position late**, such as a browser tab, sings a
+  little behind.
+
+## Asking for root
+
+- **One identity only**: the first one polkit offers, so a machine with several
+  administrators cannot pick another.
+- **Reloading the shell cancels a request** in flight, and closing the island
+  any way answers no.
+- **No face unlock** for these requests.
+- **If the shell cannot become the agent**, the KDE password dialog takes its
+  place until the next login.
 
 ## Notifications
 
@@ -212,6 +233,34 @@ there is a way round, it is given.
 - **A game pauses only when the panel closes**, not when the pointer leaves.
 - **Solitaire has no drag, no undo and no draw-three.**
 
+## Windows
+
+- **One layout for every workspace**: dwindle, master or scrolling, not one
+  per workspace. Master and scrolling have no keys of their own beyond focus
+  and move.
+- **Game mode leaves some things moving**: the wallpaper's transition, the
+  lock screen's rings and the clock's seconds. Turning it off reloads Hyprland.
+
+## Virtual machines
+
+- **Local machines through quickemu only**: no SSH or remote machines, no GPU
+  passthrough, no USB passthrough from the panel, and no ISO of your own.
+- **The disk cannot grow** after the machine is made.
+- **Snapshots only with the machine off**, and only after its first start.
+- **The island shows the first machine running**; several read as a count.
+- **Windows and macOS fetch in two downloads**, so the progress runs to the end
+  twice. Windows comes from Microsoft at the moment of the fetch, and fails
+  when Microsoft refuses. Apple's licence on macOS is yours to read.
+- **A machine's window is spicy's**, with spicy's own menus.
+
+## The impasto command
+
+- **It needs the shell running**, except `version`, `capture screen` and
+  `capture text`.
+- **`impasto watch` is up to a second late**, and only what the status holds is
+  an event: not a notification, a key or a window.
+- **Notes and tasks are named by key**, which only their `list` gives.
+
 ## Keys, settings and profiles
 
 - **Changing a key, Reset and switching profile all reload Hyprland**, so
@@ -245,8 +294,11 @@ there is a way round, it is given.
 
 ## The lock screen
 
-- **Two clock styles, Stacked and Inline**, and nothing more: no size, face or
-  position of its own. The login screen always draws it stacked.
+- **Three clock styles, Stacked, Inline and Flip**, and nothing more: no size,
+  face or position of its own. The flip is on the lock only, not on the
+  island, and the login screen always draws it stacked.
+- **The music's controls also wake the screen**, as any click on the lock
+  does. On a screen under about 1070 px the player is drawn smaller.
 - **Awake and at rest are one state for every screen**: a key on one wakes
   them all, and the 30 seconds before the clock comes back is not a setting.
 - **Face unlock is the lock screen's only.** The login screen, sudo and polkit

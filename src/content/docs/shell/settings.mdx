@@ -2,7 +2,7 @@
 title: Settings
 description: The settings window — how to open it, what each page holds, profiles that keep whole desks under a name, and the window's language.
 sidebar:
-  order: 14
+  order: 15
 ---
 
 import Figure from '~/components/Figure.astro';
@@ -37,16 +37,16 @@ A long page is split into parts, drawn as a strip under its title.
 
 | Page | Parts | What it holds |
 |---|---|---|
-| [Bar & Island](/shell/bar/) | The island, The bar, Workspaces, Notifications | The bar's style, which screens carry it, and the island at rest, the time and what runs beside it, what the bar carries and how each piece reads, the workspaces, notifications and Do not disturb |
+| [Bar & Island](/shell/bar/) | The island, The bar, Workspaces, Notifications | The bar's style, which screens carry it, and the island at rest, the glance, [the lyrics](/shell/island/#lyrics), the time and what runs beside it, what the bar carries and how each piece reads, the workspaces, notifications and Do not disturb |
 | [Desktop](/shell/desktop/) | Module settings, The widgets | The weather's location, whose GitHub contributions, the pet's style, how a note is written, and whether the edge notes and the spectrum make way for windows; the way into arranging, and the look every widget follows |
 | [Control Centre](/shell/control-centre/) | — | The way into arranging the control centre, and the doors on its top row |
 | [Dock](/shell/dock/) | — | The edge, the alignment, the size, how it behaves, which screens it is on, and the applications kept on it |
 | [Launcher](/shell/launcher/) | Results, Sigils, Clipboard | How results are ordered and how many, the first character for each mode, the clipboard history |
-| Appearance | Theme, Windows, Type, Motion | The theme and wallpaper, the transition, the greeting scene; window rounding, gaps, opacity, blur, glass and shadow; the interface and monospace fonts; the pace of the animations |
+| Appearance | Theme, Windows, Depth, Type, Motion | The theme and wallpaper, the transition, the greeting scene; [the window layout](#window-layouts), window rounding, gaps, opacity, blur and glass; the shadows; the interface and monospace fonts; [game mode](#game-mode) and the pace of the animations |
 | [Displays](/shell/displays/) | Arrangement, The screen, The lid | The screens and the laptop lid |
 | Input | Keyboard, Pointer | Keyboard layouts and key repeat; sensitivity, the cursor's colour and size, shake to find |
 | [Keys](/shell/keys-and-packages/#changing-a-key) | The shell's own, The compositor's | Every key, for the profile in use |
-| [Session](/shell/lock-and-login/) | Lock screen, When you leave | Your account's name and picture, the lock's clock and blur, [face unlock](/shell/lock-and-login/#face-unlock), the idle waits |
+| [Session](/shell/lock-and-login/) | Lock screen, When you leave | Your account's name and picture, the lock's clock, [its music](/shell/lock-and-login/#music-on-the-lock) and its blur, [face unlock](/shell/lock-and-login/#face-unlock), the idle waits |
 | System | Profiles, This machine | Profiles and Reset; the language, the machine with the version installed, [checking for updates and running them](#updates), and [the files you changed](#changed-files) |
 
 The wallpaper and the palette themselves are chosen in the island: Appearance →
@@ -80,6 +80,32 @@ Theme opens them there ([Palettes](/theming/palettes/)).
   { name: 'settings-session', alt: "The settings window on the Session page, with the sidebar on the left; the page shows when to lock, turn the screen off and suspend after the machine is left alone, all set to never.", caption: "Session" },
   { name: 'settings-system', alt: "The settings window on the System page, with the sidebar on the left; the page shows the four profiles, Default, Fuji in use, Night bay and Moon castle, and the reset.", caption: "System" },
 ]} />
+
+## Window layouts
+
+**Every workspace tiles its windows one way, chosen under Appearance → Windows
+→ Layout.**
+
+- **Dwindle** splits the space each new window lands in.
+- **Master** keeps one large window beside a stack of the rest.
+- **Scrolling** lays the windows in a row wider than the screen.
+
+<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>L</kbd> cycles the three, and the island
+says which it moved to. The layout is kept across Hyprland's reloads.
+<kbd>SUPER</kbd> <kbd>J</kbd> flips dwindle's split and turns master's stack to
+its next side; in scrolling it does nothing.
+
+## Game mode
+
+**Game mode stills everything that moves**, for a game or a slow machine. The
+shell's animations stop, and so do the spectrum, the pet and the record, and
+Hyprland drops its animations, blur, shadows and glass. Every setting under it
+is kept, and comes back as it was when game mode goes off.
+
+Switch it with <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>G</kbd>, under
+Appearance → Motion → **Game mode**, or with the **Game mode** tile in
+[the control centre](/shell/control-centre/#the-toggles); the island says
+which way it went. It stays on across a profile switch.
 
 ## Profiles
 

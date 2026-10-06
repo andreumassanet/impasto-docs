@@ -1,0 +1,105 @@
+---
+title: The impasto command
+description: "Drive the shell from a terminal, a script or an assistant: timers, notes, tasks, panels, music, machines, layouts, palettes and wallpapers, each answered in one line of JSON."
+sidebar:
+  order: 5
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+**`impasto` drives the running shell from a terminal**: timers, notes, tasks,
+panels, music, virtual machines, the window layout, palettes, wallpapers, the
+lock and more. It is installed in `~/.local/bin`, which the shell's `.zshrc`
+puts on the path.
+
+```bash
+impasto <command> [arguments] [--flags]
+```
+
+**Every answer is one line of JSON**, `{"ok": true, ...}` or
+`{"error": "..."}`, and an error exits 1, so a script or an assistant can read
+what happened and go on. In a terminal the same answer is indented to read.
+An error names the values that would have done.
+
+```bash
+$ impasto timer start 25m Pomodoro
+$ impasto layout scrolling
+$ impasto status
+{"ok": true, "timer": null, "media": {"title": "…", "artist": "…", "playing": true}, "notes": 1, "tasks": {"todo": 0, "doing": 0, "done": 0}, "machines": [], "palette": "adaptive", "wallpaper": "…", "layout": "dwindle", "game": false, "focus": false, "nightLight": false, "volume": 90, "muted": false, "brightness": 21}
+```
+
+`impasto help` lists every command, and `impasto help <command>` one of them.
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `status` | Everything at once: the timer, the music, notes, tasks, machines and the look |
+| `timer start <duration> [label]` | Starts a countdown: `25m`, `1h30m`, `90s`, `10:00` |
+| `timer pause`, `timer resume`, `timer cancel` | Pauses it, carries on, stops it |
+| `timer` | What is left |
+| `note add <text> [--title …] [--tint …]` | A new note; `--tint` is yellow, pink, blue, green, orange or purple |
+| `note list` | Every note that is not archived, newest first |
+| `note get`, `append`, `archive`, `remove` `<key>` | One note: read it, add a line, put it away, delete it |
+| `task add <text> [--due …] [--state …] [--notes …]` | A new task; `--due` takes `today`, `tomorrow`, `fri`, `12 oct`, `+3` or `2026-10-12`, `--state` todo, doing or done |
+| `task list [--state …]` | Every task, or those in one state |
+| `task done`, `move`, `due`, `remove` `<key>` | Marks it done, moves it to a lane, sets or clears its date, deletes it |
+| `open <panel>`, `close`, `panels` | Opens a panel of the island, closes the island, lists the panels `open` takes |
+| `vm list` | The [virtual machines](/shell/machines/), and which run |
+| `vm start`, `open`, `pause`, `resume`, `stop`, `kill` `<name>` | Boots one without a window, opens its window, freezes it, carries on, shuts it down as its power button does, ends it at once |
+| `media play`, `pause`, `toggle`, `next`, `prev` | The player; `media` alone is what is playing |
+| `game [on\|off\|toggle]` | [Game mode](/shell/settings/#game-mode) |
+| `layout [dwindle\|master\|scrolling\|next]` | [How windows are tiled](/shell/settings/#window-layouts) |
+| `focus [on\|off\|toggle]` | Do not disturb |
+| `nightlight [on\|off\|toggle]` | The night light |
+| `bar`, `widgets` | Hide or show the bar, or the desktop widgets |
+| `volume set <percent>`, `volume mute [on\|off\|toggle]`, `volume` | The output's volume |
+| `brightness set <percent>`, `brightness` | The screen's brightness |
+| `theme list`, `theme set <id>` | The palettes, and which is on; `adaptive` follows the wallpaper |
+| `wallpaper set <path>`, `list`, `random` | Changes the wallpaper, and the palette with it |
+| `say <text> [--icon …]` | A message on the island for a moment |
+| `lock` | Locks the screen |
+| `reload` | Reloads the shell |
+| `capture screen` | A shot of the focused screen to a file; prints its path |
+| `capture text` | The text on the focused screen, read with tesseract |
+| `capture region`, `capture window` | Opens [the capture surface](/shell/capture/) to pick one by hand |
+| `watch [--interval s]` | A line of JSON for each change, below |
+| `version` | impasto's version, as `./setup` last installed it |
+
+**Notes and tasks are named by key**, which their `list` gives:
+
+```bash
+impasto task list --state todo
+impasto task done task-muvd69it
+```
+
+## Watching
+
+**`impasto watch` prints a line for each change** until it is stopped. The
+first line is the status itself; after it, one event a line, each with the
+time it was seen:
+
+| Event | When |
+|---|---|
+| `timer.started`, `timer.paused`, `timer.resumed` | A countdown changes |
+| `timer.finished`, `timer.cancelled` | It runs out, or is stopped |
+| `media.track`, `media.playing`, `media.paused`, `media.stopped` | The player changes |
+| `machine.started`, `machine.stopped` | A virtual machine boots or goes down |
+| `shell.gone` | The shell stopped answering |
+
+It reads the status once a second, or every `--interval` seconds, so an event
+is up to that late.
+
+## Completion
+
+**zsh completes it**: the commands, then the keys of notes and tasks, the
+palettes and the machines, asked of the command itself, so the completion is
+never behind it. `wallpaper set` completes file names.
+
+<Aside>
+Everything but `version` and `capture screen` or `capture text` needs the shell
+running. The capture commands copy what they take, as a capture always does.
+</Aside>
+
+What the command does not do is listed under
+[Limitations](/help/limitations/#the-impasto-command).

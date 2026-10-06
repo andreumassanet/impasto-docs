@@ -1,6 +1,6 @@
 ---
 title: Widgets on the desktop
-description: The grid of widgets under the windows — the four shapes, arranging them, each widget's own look, the three themes, photos, the note decks on the edges and the sound spectrum.
+description: The grid of widgets under the windows — the four shapes, arranging them, each widget's own look, the three themes, the lyrics, photos, the note decks on the edges and the sound spectrum.
 sidebar:
   order: 7
 ---
@@ -27,8 +27,9 @@ same module can be on the grid twice: a clock as a band and another as a dial.
 column and a row, and the gap between two widgets is the gap between two
 windows. The grid fills the space under the bar with the same margin on all
 four sides, whatever the dock does: the dock is drawn over what is under it,
-so moving it, hiding it or letting it stay never moves a widget. In
-[zen](/shell/bar/#zen) the grid fills the whole screen.
+so moving it, hiding it or letting it stay never moves a widget. Hiding the
+bar, in [zen](/shell/bar/#zen), moves none either: the grid stays below where
+the bar was.
 
 <kbd>SUPER</kbd> <kbd>CTRL</kbd> <kbd>W</kbd> takes every widget off the
 wallpaper until you press it again; the same switch is **Hide the widgets** on
@@ -117,13 +118,14 @@ its left or under it, wherever there is room.
 |---|---|
 | Shape | The shapes the module offers, drawn as footprints — the same choice as the corner handle |
 | Face | Modern, Analogue or Sticker |
-| The slider | How solid the capsule is, 20 to 100 %, with a button that puts it back — only on the classic ground, and not for a sticker |
+| The slider | How solid the capsule is, 0 to 100 %, with a button that puts it back; at 0 the capsule, its outline and its shadow are gone. Only on the classic ground, and not for a sticker |
 | Remove | Takes the widget off |
 
 A note and a photo draw their own paper and picture, so neither has a slider,
 and a note has no Face. A photo's card holds its **Picture** instead,
 and a print's its **Caption** too ([Photos](#photos)). A spectrum has no Face
-and no slider either, and a card of its own ([Spectrum](#spectrum)).
+and no slider either, and a card of its own ([Spectrum](#spectrum)). The
+[lyrics](#lyrics) have no Face: they look the same in every theme.
 
 The first tile under Face is **Default**, marked with a dot: it follows the
 desktop's own setting, and a widget keeps following it until you pick
@@ -135,7 +137,8 @@ Settings → Desktop → The widgets holds what every widget follows by default:
 
 **The ground is the bar's unless you give the widgets their own**: *As the
 bar*, **Classic** or **Glass**. Classic is the island's black, and its
-**Background** slider lowers it until the wallpaper shows through blurred.
+**Background** slider lowers it until the wallpaper shows through blurred,
+and at 0 takes the capsule away altogether.
 Glass is the terminal's own ground, the accent over a blur of the wallpaper,
 with a lit edge; the slider is locked while it is on. A sticker, a note, a
 photo and the spectrum draw no capsule, so on a desk made only of them both
@@ -192,6 +195,7 @@ sticker moves — the record does not turn.
 | Notes | all four | paper, in every theme | paper |
 | Photo | all four | an instant print, or a strip of film on the band | the picture cut out with a vinyl border |
 | Spectrum | card, band, large | its bars, the same in every theme | its bars |
+| Lyrics | all four | the words, the same in every theme | the words, on their capsule |
 
 A widget switched to a theme with no face for its shape shrinks to the largest
 shape that fits inside the old one, so nothing grows into a neighbour.
@@ -276,6 +280,23 @@ arrow. See [Notes and tasks](/shell/notes-and-tasks/).
 </TabItem>
 </Tabs>
 
+## Lyrics
+
+**The Lyrics widget is the words of what is playing and nothing else**: no
+cover, no track, no controls, so it sits beside the player rather than inside
+it. The line being sung is large; on a card and a band the next one waits
+under it, and on a large square the lines run past with the one being sung
+held in the middle.
+
+With no line to show it says why: *Nothing playing*, *Looking for lyrics*,
+*Instrumental*, *No lyrics for this one*, or *Lyrics are off*. It is drawn
+the same in Modern, Analogue and Sticker, as a note is paper in every theme,
+and it comes in all four shapes.
+
+The words come from lrclib.net, and the widget looks up every track while it
+is on the desk, as long as Settings → Bar & Island → **Lyrics** is on. See
+[Lyrics](/shell/island/#lyrics).
+
 ## Photos
 
 **A photo widget holds a picture of your own**, in any of the four shapes. In
@@ -347,8 +368,9 @@ While arranging:
 on, straight onto the edge. It is off until you turn it on, and only one deck
 has it: turned on for another, it moves there.
 
-There is one deck per edge of each screen at most, and none on the top, which
-is the bar's. A
+A deck on the left or right runs the screen's whole height, from the top edge
+down. There is one deck per edge of each screen at most, and none on the top,
+which is the bar's. A
 note is in one place at a time: putting it on an edge takes it off its square.
 A notes widget on a square shows one note — the newest, or the one picked under
 **Which note** on its card — and a click opens it in the island.
@@ -372,8 +394,8 @@ its bars and nothing else.
   (4 × 4) of bars.
 - **Against the left, right or bottom edge** it runs the whole of that edge,
   one per edge, under the windows: beside a window only its foot shows, in the
-  margin the window leaves. A side stops where the bottom's bars begin, so the
-  corner is never crossed.
+  margin the window leaves. A side runs from the top of the screen, behind the
+  bar, down to where the bottom's bars begin, so the corner is never crossed.
 
 While arranging, drag the Spectrum piece from the card onto the grid or
 against an edge. Dragged from the grid to an edge, or from an edge onto the

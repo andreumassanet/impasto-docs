@@ -1,0 +1,78 @@
+---
+title: Virtual machines
+description: "The machines panel on SUPER + SHIFT + M, over quickemu and quickget: fetch a system, start, pause, snapshot and stop it from the island."
+sidebar:
+  order: 11
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+**<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>M</kbd> opens the virtual machines in
+the island**, run by quickemu. Every system quickget knows can be fetched from
+the panel, with its versions and editions, and every machine kept is started,
+paused, snapshotted and stopped from the same place. `qemu-desktop` and
+`quickemu` are in the package list, so the install brings both.
+
+The panel has two views behind a switch at the top: **Machines**, the ones
+there are, and **New**, the catalogue. With no machine yet it opens on New.
+
+## Machines
+
+**One row per machine**: its system's mark, its cores, memory and disk, and
+its state, with the answers that state allows.
+
+| State | Answers |
+|---|---|
+| Off | Start, and a button that opens the row out |
+| Running | Open its window, pause, shut down |
+| Paused | Open its window, resume, shut down |
+| Shutting down | A second press of the power button ends it at once |
+
+**A machine starts without a window**, and its window opens and closes
+without stopping it: close the window and the machine keeps running, open it
+again from its row. The window is spicy's, with spicy's own menus.
+
+Shutting down presses the machine's own power button, so the system inside
+goes down cleanly. A system that ignores the button, such as a live ISO, is
+ended by pressing it again.
+
+**Opened out**, a machine that is off shows:
+
+- **Cores** and **Memory**, to change before the next start;
+- **Take a snapshot**, and each snapshot kept, with a cross to remove it. A
+  click on a snapshot reads *Restore …?* and the second click takes the disk
+  back to it. Snapshots come after the first start, since that is when the
+  disk is made;
+- **Delete**, which reads *Delete it and its disk* on the first press and
+  removes both on the second.
+
+## A new machine
+
+**New lists every system quickget can fetch**, with a search field over the
+list. Pick one on the left, and on the right choose its **Version**, its
+**Edition** where it has several, and what the machine gets: **Cores**,
+**Memory** and **Disk**, 8 to 512 GB. **Download and create** fetches it.
+
+The download's progress takes the top of Machines until it is done, with a
+cross that stops it; a download stopped half way leaves nothing behind.
+
+Machines are kept in `~/.local/share/impasto/machines`, one quickemu
+configuration and one folder each.
+
+## On the island
+
+**A running machine shows beside the time**: its system's mark and how long it
+has run, or how many run when there are several. A click opens the panel. In
+[the glance](/shell/island/#the-glance) it has its own face, with its window,
+pause and shut down. It can be kept off the island under Settings → Bar &
+Island → Beside the time → **Virtual machines**.
+
+The [`impasto` command](/reference/command/) starts, pauses and stops them from
+a terminal too.
+
+<Aside>
+Without quickemu installed the panel says so: `./setup packages` installs it.
+</Aside>
+
+What the panel does not do is listed under
+[Limitations](/help/limitations/#virtual-machines).
