@@ -1,0 +1,61 @@
+---
+title: Screen time
+description: "Where the day went, application by application: the screen time panel on SUPER + Y, the chip on the bar, the desk widget, and what is recorded."
+sidebar:
+  order: 14
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+**<kbd>SUPER</kbd> <kbd>Y</kbd> opens the time spent in each application**, by
+the day, the week or the month. The shell counts while the session is in use
+and writes it down on the machine; nothing leaves it.
+
+## The panel
+
+**Day, Week or Month, behind a switch at the top**, and arrows to step back
+through earlier ones.
+
+- **The total, and how it compares**: a day against the week before it, a week
+  or a month by its daily average against the one before.
+- **Bars** per hour of the day, or per day of the week or month, stacked in
+  shades of the accent by what the time went to.
+- **When**: the day's sessions as a ribbon, or the week as a grid of weekdays
+  by hours.
+- **Most used**: the applications, or their groups (Development, Social,
+  Games and the like, read from each application's own categories), with a
+  switch between the two.
+- **First use**, **Unlocks**, **Notifications** and the **Longest session**.
+
+The first day there is little to show, and the panel says screen time counts
+from now on.
+
+## On the bar and the desk
+
+**The Screen time module puts today's total on a chip.** Its detail is the day
+in brief: a ring by group, the hours, the three most used, and **Open** for the
+whole panel. On [the desktop](/shell/desktop/#three-themes) it comes in all
+four shapes in Modern, as a 24-hour dial in Analogue, a session per arc with
+midnight at the top, and as a sticker in Sticker, with a ring that fills as the
+day reaches the week's average.
+
+**Screen time** is also a door for the
+[control centre's top row](/shell/control-centre/#the-top-row), and one of the
+shell's places after `>` in [the launcher](/shell/launcher/).
+
+## What counts
+
+**The time counts while the session is unlocked**, for the window in front. It
+stops when the screen locks, or when the idle setting turns the screen off, and
+starts again when you are back. A screen switched off by hand, with
+<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>D</kbd>, still counts.
+
+**Only the window's class is kept, never its title**: which application, not
+what was in it. Each day is one file in `~/.local/state/quickshell/screentime/`,
+written at least every five minutes, so a crash loses no more than that. Days
+older than about thirteen months are removed.
+
+<Aside>
+A suspend nobody locked for ends the open span where the clock stopped, so a
+night with the lid shut does not count as a night at the screen.
+</Aside>

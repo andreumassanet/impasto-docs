@@ -1,6 +1,6 @@
 ---
 title: The island
-description: The black capsule in the middle of the bar, at rest on the time, and every shape it takes — the glance, the lyrics, panels, details, notifications, readings, the password for root and the overview.
+description: The black capsule in the middle of the bar, at rest on the time, and every shape it takes, from the glance, the lyrics, panels, details, notifications, readings, the password for root and the overview.
 sidebar:
   order: 1
 ---
@@ -29,7 +29,7 @@ opens the [control centre](/shell/control-centre/).
 **What is running sits either side of the time**: a recording, what is using
 the microphone, the camera or the screen, a countdown, a track, a virtual
 machine and the workspace, in that order, two at most. A recording is always
-shown, and first; the rest are switched under Settings → Bar & Island →
+shown, and first; the rest are switched under Settings → Island → The island →
 **Beside the time** (see [Settings](#settings)). One running thing splits
 across both sides, its mark on the left and its figure on the right; two take
 a side each. What is running past those two is counted at the island's end as
@@ -68,7 +68,8 @@ large with the day and the date under it.
   drawn large in it: the countdown's ring, the recording's dot, the machine's
   or the weather's mark.
 - **With nothing running**, the face is the weather, when the weather is
-  already on the bar or on the desktop, and otherwise the time alone, centred.
+  already on the bar or on the desktop, and otherwise five days of the week,
+  today in the middle and lit, beside the time.
 
 | Face | Its controls |
 |---|---|
@@ -102,7 +103,7 @@ place in the song. Lyrics that are not timed are the whole text, to scroll,
 with nothing lit; a track lrclib does not know opens the plain player.
 
 Every lookup tells lrclib.net what is playing, so one switch turns all of it
-off: Settings → Bar & Island → **Lyrics**. It is on by default, and nothing is
+off: Settings → Modules → Lyrics → **Look them up**. It is on by default, and nothing is
 looked up while nothing on screen shows lyrics.
 
 ## What it becomes
@@ -124,6 +125,9 @@ looked up while nothing on screen shows lyrics.
 | [Every key](/shell/keys-and-packages/) | <kbd>SUPER</kbd> <kbd>H</kbd> |
 | [Packages](/shell/keys-and-packages/) | <kbd>SUPER</kbd> <kbd>I</kbd> |
 | [Virtual machines](/shell/machines/) | <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>M</kbd> |
+| [Development servers](/shell/servers/) | <kbd>SUPER</kbd> <kbd>O</kbd> |
+| [Camera effects](/shell/camera/) | <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>W</kbd> |
+| [Screen time](/shell/screen-time/) | <kbd>SUPER</kbd> <kbd>Y</kbd> |
 | A module's detail | a click on its piece on [the bar](/shell/bar/) |
 | The Wi-Fi and Bluetooth lists | their pieces on the bar, or the arrow on their control-centre tiles |
 
@@ -132,7 +136,7 @@ in Settings → Keys; the full list is in [the keybindings](/reference/keybindin
 [Settings](/shell/settings/) itself, <kbd>SUPER</kbd> <kbd>,</kbd>, is the one
 panel that is not the island: it opens as a window.
 
-The session menu is five tiles — Lock, Suspend, Log out, Restart, Shut down —
+The session menu is five tiles (Lock, Suspend, Log out, Restart, Shut down),
 moved through with the arrows or the pointer. Lock and Suspend run at once;
 the other three turn red and read Confirm on the first press, and run on the
 second.
@@ -145,6 +149,8 @@ second.
 ]} />
 
 <Figure name="and-the-rest" alt="The overview with ten workspaces, the capture surface cutting a box out of a photograph of the screen, the dock's menu on the terminal with its windows by name, system statistics, and the pet with its family" caption="The overview, the capture surface, the dock's menu, system statistics and the pet." />
+
+<Figure name="panels" alt="Six panels of the island: notes in handwriting on pastel paper, Tetris, the task board with three lanes, a day of screen time by app, the virtual machine catalogue, and the local servers listening with their ports" caption="Notes, a game, tasks, screen time, machines and servers." />
 
 ## Opening and closing
 
@@ -173,7 +179,7 @@ opening a panel sends a notification on screen away — it stays in the list.
 
 **The shell is the notification daemon**, and a notification arrives in the
 island as one row: the sender's picture with the application's mark on its
-corner, or the application's icon, or a bell; the title, with the application
+corner, or the application's icon from the icon set; the title, with the application
 and the time at its far end; and two lines of the body.
 
 <Figure name="notification" alt="The island opened into a notification from Vesktop: Laura's picture with the Vesktop mark, Are we still on for the market at nine?, and two buttons at the end, Reply in the accent and Later." caption="A notification with two buttons, in the island." />
@@ -183,7 +189,7 @@ and the time at its far end; and two lines of the body.
   underneath.
 - **A click** runs the notification's default action, or closes it when it has
   none. **A right click** always closes it. There is no close button.
-- A notification with no timeout of its own stays as long as **Bar & Island →
+- A notification with no timeout of its own stays as long as **Island →
   Notifications → How long one stays** says: two to fifteen seconds, five by
   default. One that asks for longer is held to fifteen. A critical one stays
   until you close it, and a newer ordinary one does not replace it.
@@ -199,7 +205,7 @@ and the time at its far end; and two lines of the body.
 **Do not disturb** keeps notifications off the island and still keeps them in
 the list; a critical one comes through anyway. The bell is crossed out while
 it is on, and it stays on across a restart. Switch it with the **Focus** tile
-in the control centre, or in Settings → Bar & Island → Notifications.
+in the control centre, or in Settings → Island → Notifications.
 
 <Aside>
 If another notification daemon is running — mako, dunst, swaync — it holds the
@@ -240,7 +246,7 @@ instead until the next login.
 ## The overview
 
 **<kbd>SUPER</kbd> <kbd>TAB</kbd> shows every workspace at once**, five to a
-row, up to the number set under Settings → Bar & Island → Workspaces →
+row, up to the number set under Settings → Bar → Workspaces →
 Workspaces available. Each cell is a scale model of the screen its workspace is
 on, scaled to fit: every window is drawn live, at its own place and size. The
 workspace you are on has a thin outline, and the one Enter goes to a thick one.
@@ -258,19 +264,18 @@ workspace you are on has a thin outline, and the one Enter goes to a thick one.
 
 ## Settings
 
-Under Settings → Bar & Island, in Shape, Clock and Beside the time:
+Under Settings → Island → The island, in The island, Clock and Beside the time:
 
 | Setting | What it does |
 |---|---|
-| Style | Grouped, Spread or One island — see [the bar](/shell/bar/#styles) |
-| Island | Floating below the top edge, or Notch, cut into it |
-| Span the whole screen | One island only: the band runs the width of the bar |
-| On every screen | *One on each, and the one you are on is the live one*, or *Only on the screen you are on*. Dimmed with one screen |
+| Position | Floating below the top edge, or Notch, cut into it. The [bezel](/shell/bar/#styles) is always cut in |
 | A glance on hover | Off, only a click opens anything |
-| Lyrics | Off, no lyrics anywhere, and nothing is looked up; see [Lyrics](#lyrics) |
 | Clock format | 24-hour or 12-hour |
 | Show the date, Show seconds | What the time carries |
 | Beside the time | Privacy, Timer, Media, Virtual machines and Workspace, each on the island or not; see [At rest](#at-rest) |
+
+The style, which screens carry the bar and the island's ground are on the
+[Bar](/shell/bar/#styles) page, and [the lyrics](#lyrics) on Modules.
 
 ## On a second screen
 

@@ -1,6 +1,6 @@
 ---
 title: The control centre
-description: What the island opens onto when you click it — a row of small buttons, a grid of blocks you arrange yourself, and the pages behind their chevrons.
+description: "What the island opens onto when you click it: a row of small buttons, a grid of blocks you arrange yourself, and the pages behind their chevrons."
 sidebar:
   order: 3
 ---
@@ -13,7 +13,7 @@ with <kbd>SUPER</kbd> <kbd>A</kbd>, with a click on the island at rest or on
 its glance, or with the Control centre button if it is on the bar. The same key
 closes it, and so do Escape and a click anywhere off the island.
 
-<Figure name="control-centre" alt="The control centre: a row of small buttons across the top, session actions on the left and shortcuts on the right; Wi-Fi, Bluetooth, Power, Focus, Microphone and Airplane tiles; volume and brightness sliders; the appearance card; the player on Resurrections by Lena Raine; the weather in Kyoto; September's calendar; four notifications; and along the bottom, the session's round buttons and a row of shortcuts." caption="The control centre as it comes." />
+<Figure name="control-centre" alt="The control centre: a row of small buttons across the top, session actions on the left and shortcuts on the right; Wi-Fi, Bluetooth, Power, Focus, Microphone and Airplane tiles; volume and brightness sliders; the appearance card; the player on Resurrections by Lena Raine; the weather in Kyoto; September's calendar; four notifications; and along the bottom, the session's round buttons and a row of shortcuts." caption="A control centre, with a row of shortcuts along the bottom." />
 
 ## The top row
 
@@ -25,7 +25,7 @@ turn red on the first click and run on the second.
 
 Any button can go on either side. The doors on offer are System statistics,
 Settings, Pet, Games, Notes, Task board, Workspace overview, Launcher,
-Appearance, Session menu, Keys and Packages. With both sides empty there is no
+Appearance, Session menu, Keys, Packages, Servers, Screen time and Camera. With both sides empty there is no
 row, and no space for one.
 
 - **In Settings → Control Centre → The top row**, the row is drawn in
@@ -33,8 +33,8 @@ row, and no space for one.
   tray onto a side, along it, across to the other, or back into the tray to
   take it off.
 - **While arranging**, click the row as you would a block. Its card lists every
-  button with a tick for the ones on the row, the side each is on — a click
-  moves it across — and arrows to order it along that side. An empty row shows
+  button with a tick for the ones on the row, the side each is on (a click
+  moves it across), and arrows to order it along that side. An empty row shows
   while arranging, so it can be filled.
 
 ## The grid
@@ -45,9 +45,9 @@ rows can be chosen. A cell is one toggle tile, wider than it is tall, so the
 square sizes are 1×2 and 2×4. Blocks never overlap, and a block can be on the
 grid more than once.
 
-Out of the box: the toggles, the volume and brightness sliders, the appearance
-card and the session's buttons down the left; the player, the weather, the
-month and a row of shortcuts in the middle; the notifications down the right.
+Out of the box: the toggles, the volume and brightness sliders and the
+appearance card down the left; the player, the weather and the month in the
+middle; the notifications down the right.
 
 | Block | Sizes (columns × rows) | What it holds |
 |---|---|---|
@@ -68,7 +68,7 @@ month and a row of shortcuts in the middle; the notifications down the right.
 | Notes | 1×2, 2×2, 2×4 | The front note of the deck; a click opens it |
 | Tasks | 1×2, 2×2, 2×3, 2×4 | How many are left and what is next; larger, the next few with Open |
 
-A block with nothing to show — the player with no music — draws its empty card
+A block with nothing to show (the player with no music) draws its empty card
 rather than leaving the cell. Session and shortcuts blocks hold as many
 buttons as their cells fit.
 
@@ -91,8 +91,8 @@ and Airplane.
 | Output | Mutes the sound |
 | Dock | Shows or hides [the dock](/shell/dock/) |
 | Notch | Cuts the island into the top edge, or floats it |
-| Shadows | Shadows on the windows |
-| Game mode | Stills the shell and drops Hyprland's animations, blur, shadows and glass; see [game mode](/shell/settings/#game-mode) |
+| Shadows | The shadows on the windows, the bar, the dock and the widgets, all at once |
+| Game mode | Stills the shell, makes it solid, and drops Hyprland's animations, blur, shadows and refraction; see [game mode](/shell/settings/#game-mode) |
 | Capture | Opens [the capture surface](/shell/capture/) on its last choices |
 | Annotate | A region, straight into satty |
 | Read text | A region, read as text onto the clipboard |
@@ -101,7 +101,7 @@ and Airplane.
 | Clear clipboard | Empties the clipboard history; only there while something is kept |
 
 The last six close the panel first, so it is not in the picture. A tile the
-machine cannot do — no Bluetooth adapter, no satty, no hyprpicker — is dimmed
+machine cannot do (no Bluetooth adapter, no satty, no hyprpicker) is dimmed
 and does nothing.
 
 **The Wi-Fi list** shows the networks in range with their signal, which are
@@ -127,7 +127,7 @@ control centre.
   application playing with its own level, and the outputs to choose from.
 - **Microphone**, from its tile: the input's level, every application
   recording it with its own level, and the inputs to choose from.
-- **Night light**, from its tile: the warmth as a level, and four presets —
+- **Night light**, from its tile: the warmth as a level, and four presets,
   Candle, Warm, Soft and Neutral, 2500 K to 5500 K. The tile itself is the
   switch.
 - **Brightness**, from its slider when there is more than one screen to dim: a
@@ -140,9 +140,11 @@ control centre.
 <Steps>
 
 1. Right-click the panel's margin or the space between blocks, or open
-   Settings → Control Centre and press **Edit**. The grid's cells show, a pill
-   under the island sets its columns and rows, and a card of every block, each
-   at the smallest size it offers, opens under them.
+   Settings → Control Centre and press **Edit**. The grid's cells show. Left
+   of the island, one card sets the grid's size and another edits the top
+   row; on the right, a card holds every block at the smallest size it
+   offers, grouped under Controls, At a glance and Personal. A screen with no
+   room beside the island stacks them under it instead.
 
 2. Drag a block from the card onto a cell, or drag a block on the grid to move
    it. The cell it will land on lights before you let go. A click on a block on
@@ -166,10 +168,8 @@ control centre.
 
 <Figure name="control-centre-arrange" alt="The control centre in arranging mode, its grid's cells showing, with a card under the island holding every block at its smallest size: toggles, appearance, calendar, notifications, clock, notes, tasks, media, weather, pet, games, volume and brightness." caption="Arranging, with the card of every block under it." />
 
-Columns come and go on both sides alike, so the blocks stay centred.
-
-The card of blocks moves, grows and scrolls as the desktop's does
-([Arranging the desktop](/shell/desktop/#arranging)).
-
-The columns and rows are also under Settings → Control Centre → The panel.
-**Default layout**, beside Edit there, puts the grid back as it came.
+**The size is picked on a miniature of the largest grid**, lit from the top
+left: the cell clicked becomes the grid's far corner. Columns come and go on
+both sides alike, so the blocks stay centred. The same miniature is under
+Settings → Control Centre → The panel → **Size**, and **Default layout**,
+beside Edit there, puts the grid back as it came.

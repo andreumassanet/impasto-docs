@@ -1,6 +1,6 @@
 ---
 title: The terminal
-description: kitty, zsh, the prompt and the greeting, and what runs in the terminal — btop, cava, yazi and neovim — all following the palette.
+description: kitty, zsh, the prompt and the greeting, and what runs in the terminal (btop, cava, yazi and neovim), all following the palette.
 sidebar:
   order: 2
 ---
@@ -16,9 +16,17 @@ repaints the moment the wallpaper changes.
 
 ## kitty
 
-**<kbd>SUPER</kbd> <kbd>Return</kbd> opens one.** The window is translucent over
-the blurred wallpaper, and its background is the accent at 22 %, so it is tinted
-by the wallpaper and dark under every palette, the light one included.
+**<kbd>SUPER</kbd> <kbd>Return</kbd> opens one.** Its ground is one of the
+shell's three, chosen under **Settings → Appearance → Terminal → Look →
+Ground**:
+
+| Ground | The window |
+|---|---|
+| Glass | Translucent over the blurred wallpaper, its background the accent at 22 %, so it is tinted by the wallpaper and dark under every palette, the light one included. The default |
+| Liquid | A neutral smoke, clearer than glass, so the blurred wallpaper shows through in its own colours |
+| Classic | Opaque black |
+
+Open windows take a new ground at once, and so does every window opened after.
 
 - **Every palette change repaints every open kitty window.** It sets red, green,
   yellow and blue with their bright halves, the two text greys, and the accent
@@ -78,7 +86,7 @@ generated for it.
 ## The greeting
 
 **`fa` runs fastfetch beside an animated pixel-art scene**, drawn in the
-terminal's own colours. Choose the scene under **Settings → Appearance → Theme →
+terminal's own colours. Choose the scene under **Settings → Appearance → Terminal →
 Greeting**, where each tile plays it.
 
 | Scene | Name for `fa` |

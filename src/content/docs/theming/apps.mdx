@@ -1,6 +1,6 @@
 ---
 title: Applications
-description: How GTK, Qt and KDE windows, Thunar, Zen, Vesktop, Spotify, VSCodium and imv take the palette, and what the install sets up in them once.
+description: How GTK, Qt and KDE windows, Nautilus, Zen, Vesktop, Spotify, VSCodium and imv take the palette, and what the install sets up in them once.
 sidebar:
   order: 3
 ---
@@ -16,7 +16,7 @@ file, `./setup install` sets up once, and Spotify takes it at its next start.
 |---|---|---|---|
 | GTK windows: satty, file-roller, pavucontrol, gimp | yes | dark, with the `impasto` icons | the next window |
 | Qt and KDE windows | yes | nothing; qt6ct is in the package list | the next window |
-| Thunar | colours and folders | its settings and right-click menu | the next window |
+| Nautilus | colours, folders and its right-click menu | its preferences and sidebar | the next window |
 | Zen | yes | named for web pages and PDFs | the next window |
 | Vesktop | yes | its theme ticked | at once |
 | VSCodium | the theme, the font and the extensions' colours | its extensions and settings | the next window |
@@ -29,7 +29,7 @@ skipped with the reason and set up by the next `install` or `update`. After
 that `install` leaves them alone, so what you change in them stays; each has a
 verb of its own that sets it up again ([The setup script](/reference/setup/#the-extras)).
 
-<Figure name="windows" alt="VSCodium and Thunar side by side in a green-gold palette, Thunar showing the wallpapers folder, under the bar" caption="VSCodium and Thunar, in the same palette as the bar above them." />
+<Figure name="windows" alt="VSCodium and Thunar side by side in a green-gold palette, Thunar showing the wallpapers folder, under the bar" caption="Two windows in the same palette as the bar above them." />
 
 ## Making the rest of the machine agree
 
@@ -41,13 +41,13 @@ once, with `./setup defaults`:
 |---|---|
 | Pictures: JPEG, PNG, GIF, WebP, SVG | imv |
 | Text and JSON | neovim |
-| Folders | Thunar |
+| Folders | Nautilus |
 | Web pages, links and PDFs | Zen |
 
 A line is left alone when `~/.config/mimeapps.list` already names a default for
 any of its types, so a browser or a viewer you chose stays chosen, and a
 program that is not installed is skipped. Then GTK is set dark, and its icon
-theme to `impasto`, which is what gives Thunar's folders the wallpaper's
+theme to `impasto`, which is what gives Nautilus's folders the wallpaper's
 colour. Without the first, GTK windows come up light with the palette's
 colours on them.
 
@@ -93,10 +93,12 @@ too and leaves everything else in it alone.
 - Qt 5 applications, VLC among them, are not themed.
 - Merging into `kdeglobals` drops any comments in it.
 
-## Thunar
+## Nautilus
 
-**<kbd>SUPER</kbd> <kbd>E</kbd> opens Thunar**, a GTK window that takes its
-colours from the same `gtk.css` as the rest.
+**<kbd>SUPER</kbd> <kbd>E</kbd> opens Nautilus**, the file manager, a GTK 4
+window that takes its colours from the named colours in the same
+`~/.config/gtk-4.0/gtk.css` as the rest, with nothing added. On the dock it is
+a tile of its own.
 
 **The folders are the wallpaper's colour.** Every palette change writes an icon
 theme, `impasto`, in `~/.local/share/icons/`: Papirus-Dark's icons, with the
@@ -105,32 +107,29 @@ the accent. A folder is a drawing, so it lands on the nearest swatch rather than
 on the accent exactly. GTK draws it once its icon theme is `impasto`, which
 `install` sets (above), in every GTK application started afterwards.
 
-**`./setup thunar` sets everything that is not a colour, and `install` runs it
-once.** Thunar writes its settings back as it exits, so an open Thunar is
-skipped and set up by the next `install` or `update`, and the verb on its own
-refuses while Thunar runs. It sets:
-
-- one bar instead of two, with the menu behind a button;
-- thumbnails for local files, folders before files, sorting that ignores case;
-- dates as `2026-09-13 18:30`, and sizes in binary units;
-- the image preview inside the side pane;
-- double click to open;
-- a Delete that skips the bin, beside Move to Trash, with the confirmation kept;
-- a shell script opened rather than run on a double click.
-
-And five entries on the right-click menu:
+**The right-click menu carries five entries of the desk's own**, from a
+nautilus-python extension the desk carries, so they are there from the first
+window:
 
 | Entry | Does | On |
 |---|---|---|
-| Open Terminal Here | kitty, in that folder | folders |
-| Open yazi Here | yazi in kitty, in that folder | folders |
-| Open in the Editor | VSCodium | folders, text and other files |
-| Set as Wallpaper | that picture as the wallpaper, and the palette from it | pictures |
-| Copy Path | the full path, to the clipboard | everything |
+| Open Terminal Here | kitty, in that folder | a folder, or a folder's background |
+| Open yazi Here | yazi in kitty, in that folder | a folder, or a folder's background |
+| Open in the Editor | VSCodium | anything selected, or a folder's background |
+| Set as Wallpaper | that picture or video as the wallpaper, and the palette from it | one picture or video |
+| Copy Path | the full paths, to the clipboard | anything selected |
 
-A setting you change later in Thunar's own preferences stays until you run the
-verb again. The row with the path in it stays on the window's plain background:
-it is the one part of Thunar the stylesheet cannot reach.
+**`./setup nautilus` sets what is not a colour or a file, and `install` runs it
+once.** It sets:
+
+- hidden files off, and folders before files;
+- **Delete Permanently** and **Create Link** on the menu;
+- your Desktop, Documents, Pictures and Downloads folders in the sidebar, where
+  they are missing;
+- folders opening in Nautilus when Thunar is still their default.
+
+A setting you change later in Nautilus's own preferences stays until you run
+the verb again.
 
 ## Zen
 
@@ -229,7 +228,7 @@ merge. An extension that cannot be fetched leaves the verb to the next
 ## imv
 
 **imv opens floating over the windows**, centred at seven tenths of the screen,
-whether the picture comes from yazi, Thunar or a photo on the desktop. Its
+whether the picture comes from yazi, Nautilus or a photo on the desktop. Its
 whole configuration is written by the palette push: the picture sits on the
 terminal's tinted background, and the overlay, shown with <kbd>d</kbd>, is in
 the palette. A picture already open keeps its colours. Because the push owns

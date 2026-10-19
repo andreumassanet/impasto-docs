@@ -51,10 +51,10 @@ Install yay or paru, or let `setup` build one, then run:
 
 ### install skipped a program
 
-`install` sets up Thunar, VSCodium, Vesktop and Spotify once, and skips one it
-cannot set up yet, with the reason: Thunar or Vesktop open, Spotify open or
-never started, no network. Close the program — for Spotify, open it once first
-and close it — then run:
+`install` sets up Nautilus, VSCodium, Vesktop, Spotify, the camera and the
+boot splash once, and skips one it cannot set up yet, with the reason: Vesktop
+open, Spotify open or never started, no network. Close the program (for
+Spotify, open it once first and close it), then run:
 
 ```bash
 ./setup update
@@ -85,7 +85,7 @@ keep one:
 diff ~/.config/kitty/kitty.conf ~/.config/kitty/kitty.conf.new
 ```
 
-Settings → System → Changed files lists it with **Keep mine** and **Use the
+Settings → System → Updates → Changed files lists it with **Keep mine** and **Use the
 new one**. Or by hand: move the `.new` over yours to take the repository's
 version, or delete the `.new` to keep yours.
 
@@ -93,7 +93,7 @@ version, or delete the `.new` to keep yours.
 
 That is on purpose: a file `setup` installed and you deleted stays deleted, so
 the wallpapers you removed do not return with the next update. Settings →
-System → Changed files has **Restore**, or from a terminal:
+System → Updates → Changed files has **Restore**, or from a terminal:
 
 ```bash
 ./setup sync --restore
@@ -189,7 +189,7 @@ hyprctl configerrors
 
 The config Hyprland reads is the copy in `~/.config/hypr/`.
 
-### The glass or shake to find stopped working after a Hyprland update
+### Refraction or shake to find stopped working after a Hyprland update
 
 Plugins are built against one version of Hyprland, and an update leaves them
 behind. Settings dims both switches until they are rebuilt:
@@ -278,7 +278,36 @@ A file in `/etc/sddm.conf.d/` that sorts after `10-impasto.conf` sets its own
 Add `QML_XHR_ALLOW_FILE_READ=1` to that line. The ring also stays empty if the
 battery is not `BAT0`, `BAT1` or `BAT2`.
 
-## The terminal
+### The boot splash does not show
+
+`./setup splash` sets it up from inside the session and says why when it
+cannot: Plymouth not installed, an initramfs not built by mkinitcpio, or a
+boot loader it does not know, which gets no `splash` argument. Run it again
+and read its last line:
+
+```bash
+./setup splash
+```
+
+On a GRUB machine the argument comes from `/etc/default/grub.d/impasto.cfg`,
+which `./setup system` installs; the verb rebuilds `grub.cfg` after it.
+
+
+## The camera
+
+### No call lists impasto camera
+
+The virtual camera is listed only while the shell writes to it. Open the
+panel with <kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>W</kbd> and check that
+**Virtual camera** is on. If the panel says to run `./setup camera`, run it;
+if v4l2loopback was already loaded with other options, the camera appears
+after a reboot.
+
+### The camera could not be opened
+
+Another program holds the webcam itself. Close it, or pick **impasto camera**
+in it instead of the webcam.
+
 
 ### fa greets with no picture
 
@@ -332,7 +361,7 @@ set from inside the session. From a terminal in Hyprland, run:
 ./setup defaults
 ```
 
-### Thunar's folders stay blue
+### Nautilus's folders stay blue
 
 The folder colours are an icon theme, and dconf decides which one GTK uses.
 `./setup defaults` sets it, or set it alone:

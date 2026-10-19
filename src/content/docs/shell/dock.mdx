@@ -1,6 +1,6 @@
 ---
 title: The dock
-description: The shelf on the edge of the screen — what you kept, then whatever else is open, with each application's windows a right-click away.
+description: The shelf on the edge of the screen, with what you kept, then whatever else is open, with each application's windows a right-click away.
 sidebar:
   order: 5
 ---
@@ -15,6 +15,13 @@ kept place, not a second one beside it. The same kept applications come first
 in [the launcher](/shell/launcher/). With nothing kept, nothing open and no
 launcher button, it is not drawn at all.
 
+**Every application is drawn from the WhiteSur icon set**, one rounded square
+each, so the shelf reads as a set whatever the applications ship. The file
+manager has a tile of its own. **Hovering magnifies the icons** under the
+pointer and parts their neighbours, and the icon under the pointer holds still
+while it grows. Up to three dots under an icon say how many windows it has
+open.
+
 <Figure name="dock" alt="A black dock at the bottom of the screen with six applications: kitty, Zen, Thunar, VSCodium, Vesktop and Spotify, with marks under the ones that are running." caption="Kept applications, then what is running, with a dot under each open one." />
 
 ## Using it
@@ -25,7 +32,7 @@ launcher button, it is not drawn at all.
 | Middle-click | Opens a new window of it |
 | Right-click | Opens its menu |
 | Drag a kept icon | Moves it along the kept ones |
-| Point at an icon | Shows its name over it |
+| Point at an icon | Magnifies it and shows its name over it |
 
 The button at the start of the dock opens the launcher.
 
@@ -65,18 +72,22 @@ Under Settings → Dock:
 | Show the dock | The dock on or off; also the Dock tile in the control centre |
 | Edge | Bottom, Left or Right — the top is the bar's |
 | Alignment | Start, Middle or End of that edge |
-| Ground | **As the bar**, **Classic** or **Glass**; the capsule, the name plate and the menu all wear it |
+| On every screen | On, *One on each, all showing the same*; off, *Only on the screen you are on*. Dimmed with one screen |
 | Icon size | 28 to 72 px; everything on the dock scales with it |
-| Background | How solid the classic capsule is; lower lets the blurred wallpaper through. Locked while the ground is glass |
+| Magnify on hover | The icons under the pointer swell and their neighbours make room. On by default |
+| Ground | **Classic**, **Glass** or **Liquid**; the capsule, the name plate and the menu all wear it |
+| Background | How solid the capsule is, 20 to 100 %; lower lets the blurred wallpaper through. On glass and liquid it thins the glass itself |
+| Shadow | Lifts the dock off the wallpaper |
 | Launcher button | The button at the start that opens the launcher |
 | Open applications | Running applications that are not kept, after the line |
-| On every screen | On, *One on each, all showing the same*; off, *Only on the screen you are on*. Dimmed with one screen |
 | Hide until pointed at | The dock slides off its edge, and pointing at the edge brings it back |
 
-**The dock's ground is the bar's unless you give it its own.** Classic is the
+**The dock has a ground of its own**, classic out of the box. Classic is the
 island's black; glass is the terminal's own ground, the accent over a blur of
-what is behind, with a lit edge. The compositor blurs behind the dock while it
-is glass, or while a classic capsule is below full opacity.
+what is behind, with a lit edge; liquid is a clear frosted pane, lit from one
+side, that lets the wallpaper's own colours through. The three are the same
+as [the bar's](/shell/bar/#ground). The compositor blurs behind the dock while
+it is glass or liquid, or while a classic capsule is below full opacity.
 
 Windows and widgets pass under the dock, so moving it, hiding it or letting it
 stay never moves anything else.

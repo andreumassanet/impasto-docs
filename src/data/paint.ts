@@ -1,7 +1,7 @@
 // ╭──────────────────────────────────────────────────────────────────────────╮
 // │                                                                          │
 // │   P A I N T                                                              │
-// │   the forty wallpapers and the nine palettes · read from the repository  │
+// │   the wallpapers and the nine palettes · read from the repository        │
 // │                                                                          │
 // │   github.com/andreumassanet/impasto-docs                                 │
 // │                                                                          │

@@ -1,6 +1,6 @@
 ---
 title: Files
-description: Where everything lives on an installed machine — the copied configuration, the shell's state, setup's manifests and backups, and the files the palette writes.
+description: "Where everything lives on an installed machine: the copied configuration, the shell's state, setup's manifests and backups, and the files the palette writes."
 sidebar:
   order: 3
 ---
@@ -36,20 +36,26 @@ Each tree in the repository is its destination as it is: `home/` is `$HOME` and
   - .local/share/
     - zsh/site-functions/_impasto its completion
     - fonts/ GrapeNuts-Regular.ttf, the script face, and its OFL licence
-    - wallpapers/ the forty wallpapers
+    - icons/hicolor/ impasto-files, the file manager's tile on the dock
+    - nautilus-python/extensions/impasto.py Nautilus's right-click menu
+    - wallpapers/ the thirty-three wallpapers
     - impasto/
       - palette-board.json
       - palette-board.png
       - profiles/ Moon castle, Fuji and Night bay
+      - camera/ the sample the camera's effect tiles are drawn on
 </FileTree>
 
 <FileTree>
 - /
   - etc/
+    - default/grub.d/impasto.cfg the `splash` argument, for GRUB
+    - mkinitcpio.conf.d/impasto.conf the boot splash in the initramfs
     - pam.d/impasto-face face unlock for the lock screen, beside the password
     - sddm.conf.d/10-impasto.conf where faces are kept, and the battery ring's permission
     - systemd/logind.conf.d/10-impasto.conf the power button goes to the shell
   - usr/share/sddm/themes/impasto/ the login screen
+  - usr/share/plymouth/themes/impasto/ the boot splash
   - var/lib/impasto/faces/ your picture, created empty
 </FileTree>
 
@@ -79,12 +85,15 @@ Everything the shell writes lives in `~/.local/state/quickshell/`, or under
   - dynamic-colors.json
   - kitty-palette.conf
   - kitty-font.conf
+  - kitty-ground.conf the terminal's ground
   - nvim/colors/impasto.lua
   - greeting the scene `fa` plays
   - greeting-….gif one per scene
   - greeting.gif
   - claude-usage.json
   - lyrics/ each track's lyrics, as lrclib.net answered
+  - screentime/ one file per day of screen time
+  - workspaces shared or per screen, and the screens' order, read by the number keys
   - cursor-src/ the cursor's source, from ./setup cursors
 </FileTree>
 
@@ -135,8 +144,9 @@ reads its theme, so several are in `~/.config` beside the copied files.
 | Zen | `userChrome.css` and `user.js` in the Zen profile under `~/.config/zen/` |
 
 The extras write settings that are not colours, once: `./setup vscodium`
-merges `~/.config/VSCodium/User/settings.json`, `./setup thunar` writes
-Thunar's xfconf settings and `~/.config/Thunar/uca.xml`, `./setup vesktop`
+merges `~/.config/VSCodium/User/settings.json`, `./setup nautilus` sets
+Nautilus's preferences with gsettings and adds your folders to
+`~/.config/gtk-3.0/bookmarks`, `./setup vesktop`
 ticks the theme in `~/.config/vesktop/settings/settings.json`, and
 `./setup defaults` names the default applications in
 `~/.config/mimeapps.list`. The vector cursor is built into
@@ -151,5 +161,8 @@ ticks the theme in `~/.config/vesktop/settings/settings.json`, and
 | Recordings | `XDG_SCREENCASTS_DIR`, else `Screencasts` in your videos folder |
 | Wallpapers you add | `~/.local/share/wallpapers`, JPEG, PNG or WebP |
 | Virtual machines | `~/.local/share/impasto/machines`, one quickemu configuration and folder each |
+| Camera photos | `XDG_CAMERA_DIR`, else `Camera` in your pictures folder |
+| The camera's models | `~/.local/share/impasto/camera`, downloaded by `./setup camera` |
+| The virtual camera's module options | `/etc/modprobe.d/impasto-camera.conf` and `/etc/modules-load.d/impasto-camera.conf`, written by `./setup camera` |
 | oh-my-zsh | `~/.oh-my-zsh`, with its two plugins under `custom/plugins` |
 | Hyprland plugins | `/var/cache/hyprpm/<username>/`, built by hyprpm |

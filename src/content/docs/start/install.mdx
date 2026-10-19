@@ -72,9 +72,9 @@ at least 76 columns wide and 20 rows tall; anywhere else it prints the help.
 | User folders | Runs `xdg-user-dirs-update`, which creates the folders captures and recordings land in. Existing folders are never renamed. |
 | oh-my-zsh | Clones oh-my-zsh into `~/.oh-my-zsh`, with the zsh-autosuggestions and zsh-syntax-highlighting plugins. It is cloned rather than installed with its own script, because that script replaces `~/.zshrc`. |
 | `home/` | Copies every file into `$HOME`. The first time, it also renders the terminal greeting's scenes (if ImageMagick is installed) and a minimal `impasto` icon theme. |
-| `system/` | Copies the login screen's theme, two configuration fragments and the lock screen's PAM service for face unlock into `/`, with sudo, and creates `/var/lib/impasto/faces`. Where no display manager is enabled yet, it enables sddm for the next boot. With ddcutil installed, it loads `i2c-dev`, so the brightness of external monitors works without a reboot. |
-| Plugins | Builds and enables hypr-dynamic-cursors (shake to find) and hyprglass (glass on the windows) with hyprpm. From a console, it leaves them to the first session. |
-| Extras | Sets up what a copied file cannot hold: what opens which file, dark GTK windows, the vector cursor, Thunar, VSCodium, Vesktop, Spotify and face unlock. |
+| `system/` | Copies the login screen's theme, the boot splash's theme and its drop-ins, a few configuration fragments and the lock screen's PAM service for face unlock into `/`, with sudo, and creates `/var/lib/impasto/faces`. Where no display manager is enabled yet, it enables sddm for the next boot. With ddcutil installed, it loads `i2c-dev`, so the brightness of external monitors works without a reboot. |
+| Plugins | Builds and enables hypr-dynamic-cursors (shake to find) and hyprglass (refraction on the windows) with hyprpm. From a console, it leaves them to the first session. |
+| Extras | Sets up what a copied file cannot hold: what opens which file, dark GTK windows, the vector cursor, Nautilus, VSCodium, Vesktop, Spotify, face unlock, camera effects and the boot splash. |
 
 A file of yours that is already in the way is moved to
 `~/.local/state/impasto/backups/` before anything is written. See
@@ -86,8 +86,8 @@ A file of yours that is already in the way is moved to
 |---|---|
 | `--skip-packages` | Install nothing; copy and build only. |
 | `--skip-system` | Leave `/` alone: no login screen, and no password for it. |
-| `--skip-plugins` | Do not build the plugins: no shake to find, no glass. |
-| `--skip-extras` | Leave [the extras](#what-it-sets-up-once) alone: what opens which file, GTK, the cursor, Thunar, VSCodium, Vesktop, Spotify and face unlock. |
+| `--skip-plugins` | Do not build the plugins: no shake to find, no refraction. |
+| `--skip-extras` | Leave [the extras](#what-it-sets-up-once) alone: what opens which file, GTK, the cursor, Nautilus, VSCodium, Vesktop, Spotify, face unlock, camera effects and the boot splash. |
 | `--aur-helper yay` or `paru` | Which helper installs the AUR half. The one you have is used; if you have neither, this one is built from the AUR (yay if unset). |
 | `--noconfirm` | Take the default answer at every question, pacman's and the helper's included. |
 | `-n`, `--dry-run` | Say what would happen, and do none of it. |
@@ -105,6 +105,10 @@ A file of yours that is already in the way is moved to
   with sudo.
 - **Whether to enrol your face**, only where there is an infrared camera. It
   installs howdy-next from the AUR first, then asks you to look at the camera.
+- **sudo for camera effects**, only where there is a webcam: the virtual
+  camera's module, OpenCV and MediaPipe.
+- **sudo for the boot splash**, to choose its theme and rebuild the
+  initramfs.
 
 <Aside type="note" title="The power button">
 `system/` tells logind to ignore a short press of the power button, from the
@@ -115,19 +119,19 @@ is still the firmware's forced power-off.
 
 ## What it sets up once
 
-**The extras run once per machine.** Each has a verb of its own —
-`./setup defaults`, `cursors`, `thunar`, `vscodium`, `vesktop`, `spotify` and
-`face` — and after the first time `install` and `update` leave them alone, so
+**The extras run once per machine.** Each has a verb of its own
+(`./setup defaults`, `cursors`, `nautilus`, `vscodium`, `vesktop`, `spotify`,
+`face`, `camera` and `splash`), and after the first time `install` and `update` leave them alone, so
 what you change in those programs stays.
 
 One that cannot run yet is skipped with the reason, and the next `install` or
 `update` tries again:
 
-- **A program that is open**: Thunar and Vesktop write their settings back
-  while they run, and patching Spotify restarts it. Close it and update.
+- **A program that is open**: Vesktop writes its settings back while it runs,
+  and patching Spotify restarts it. Close it and update.
 - **A Spotify never started**: spicetify needs the settings Spotify writes on
   its first start. Open it once, close it, and update.
-- **No network**, for the cursor and VSCodium's extensions.
+- **No network**, for the cursor, VSCodium's extensions and the camera's models.
 - **Nobody at the camera**: with `--noconfirm`, enrolling a face waits for
   `./setup face` or the next update.
 
@@ -143,7 +147,7 @@ it enables sddm, which comes up at the next boot; a machine that already starts
 another one keeps it. [Lock and login](/shell/lock-and-login/#how-it-starts)
 has the rest.
 
-<Figure name="lock-and-login" alt="The lock screen resting on its clock over the blurred desk, the island grown round the padlock with a ring of ticks while it looks for a face, and the SDDM login screen over a blurred painting of brush strokes" caption="The lock screen and the login screen: the same island, clock and pill." />
+<Figure name="lock-and-login" alt="The lock screen resting on its clock over the blurred desk, the island grown round the padlock with a ring of ticks while it looks for a face, and the SDDM login screen over a blurred painting of brush strokes" caption="The lock screen and the login screen: the same clock and pill." />
 
 ### The face
 

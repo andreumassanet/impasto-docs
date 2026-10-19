@@ -1,0 +1,44 @@
+---
+title: Development servers
+description: "The servers panel on SUPER + O: every port your projects listen on, what runs it, and one press to open, copy or stop it."
+sidebar:
+  order: 12
+---
+
+**<kbd>SUPER</kbd> <kbd>O</kbd> lists the development servers you have
+running**, one row per port, so a server left running in some terminal is
+one press from your browser or from being stopped.
+
+## A row
+
+**Each row is one TCP port listening**, held by a process of yours started
+inside a project under your home:
+
+- the project's folder, and what runs it (`vite`, `astro dev`, `http.server`),
+  with how long it has been up;
+- the port, and whether only **this machine** can reach it or **the network
+  too**, in a warning colour, when it listens on more than the loopback
+  address.
+
+| Do | And |
+|---|---|
+| Click the row | Opens `http://localhost:<port>` in your browser |
+| The globe | The same |
+| Copy | Copies the address |
+| Stop | Stops the server as <kbd>Ctrl</kbd> <kbd>C</kbd> would, the whole job when it has its own in a terminal; one that does not stop is ended a few seconds later |
+
+The line along the bottom says how many are listening, and how many are open
+to the network.
+
+## What counts as a project
+
+**A folder with a marker in it**, found by walking up from the process's
+working directory: `package.json`, `Cargo.toml`, `go.mod`, `pyproject.toml`,
+`manage.py`, `Gemfile`, a git checkout and the like. A port held by something
+outside a project is somebody's daemon and is left out, and so is anything
+another user runs.
+
+The panel reads the ports with `ss` and the processes from `/proc`, only while
+it is open, every few seconds. **Servers** is also a door for the
+[control centre's top row](/shell/control-centre/#the-top-row), and one of the
+shell's places after `>` in [the launcher](/shell/launcher/).

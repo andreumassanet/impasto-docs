@@ -1,0 +1,84 @@
+---
+title: Camera effects
+description: "Effects and gesture reactions on your webcam, for any call: the camera panel on SUPER + SHIFT + W and the virtual camera it feeds."
+sidebar:
+  order: 13
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+**<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>W</kbd> opens your webcam in the
+island, with effects that every call sees.** The shell feeds a virtual camera
+named **impasto camera**: pick it as the camera in Discord, a browser or any
+other program, and what it shows is the picture the panel shows, effects and
+all.
+
+## The panel
+
+- **The preview**, drawn as a mirror: the picture a call gets, read back from
+  the virtual camera.
+- **A strip of effects** under it, moved with the wheel, a sideways swipe or a
+  drag, and picked with a click.
+- **Reactions**, a tile per gesture, lit in the accent when it is on.
+- **The status line** along the bottom: the **Virtual camera** switch, and
+  what is reading it right now. Off, no program can use it.
+- **The shutter** saves the picture, mirrored as the preview shows it, into
+  your camera folder (or `Camera` under your pictures), and copies it.
+
+The webcam is on only while something reads the virtual camera, a call or the
+panel itself, and the effects run only then: at rest it reads nothing and uses
+no processor. While a call reads it, it takes about one core. The
+[privacy mark](/shell/island/#at-rest) beside the time names the program
+reading the virtual camera.
+
+## Effects
+
+| Effect | What it does |
+|---|---|
+| Natural | The webcam as it is |
+| Palette | The picture tinted in the palette's accent |
+| Mono | Black and white |
+| Warm | A warmer picture, toward the palette's yellow |
+| Blur back | Everything behind you blurred |
+| Centre Stage | Closes in on your face and follows it as you move |
+| Shades | Sunglasses on your face |
+| Crown | A crown on your head |
+| Sparkle | Sparkles circling your head, passing behind it |
+
+Shades, the crown and the sparkles are built in 3D on the angle of your head,
+so they turn with it and hide behind it.
+
+## Reactions
+
+**A gesture sends its own emoji up from the hand that made it.** Each one is
+switched on its tile:
+
+| Gesture | |
+|---|---|
+| Thumbs up 👍 | On |
+| Thumbs down 👎 | On |
+| Heart 🫶 | On |
+| Peace ✌️ | On |
+| Horns 🤘 | On |
+| OK 👌 | On |
+| Middle finger 🖕 | Off until you switch it on |
+
+The effect and the reactions belong to the machine, so they stay the same
+across profiles.
+
+## Setting it up
+
+**`./setup camera` installs the virtual camera**, and `./setup install` runs
+it once on a machine with a webcam, unless `--skip-extras`. It installs
+v4l2loopback with your kernel's headers, OpenCV and MediaPipe (from the AUR),
+has the module load at every boot as **impasto camera**, and downloads the
+face, hand and background models from Google's storage into
+`~/.local/share/impasto/camera`. A machine without a webcam is skipped.
+
+<Aside>
+Until it is set up, the panel says to run `./setup camera`. When another
+program already holds the webcam, the panel says it could not open it.
+</Aside>
+
+What the effects do not do is listed under
+[Limitations](/help/limitations/#camera-effects).

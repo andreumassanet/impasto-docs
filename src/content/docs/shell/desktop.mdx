@@ -1,6 +1,6 @@
 ---
 title: Widgets on the desktop
-description: The grid of widgets under the windows — the four shapes, arranging them, each widget's own look, the three themes, the lyrics, photos, the note decks on the edges and the sound spectrum.
+description: The grid of widgets under the windows, with the four shapes, arranging them, each widget's own look, the three themes, the lyrics, photos, the note decks on the edges and the sound spectrum.
 sidebar:
   order: 7
 ---
@@ -10,7 +10,7 @@ import Figure from '~/components/Figure.astro';
 import Gallery from '~/components/Gallery.astro';
 
 **Any module can live on the wallpaper.** Widgets sit on a grid under the
-windows, and each one is a module the bar and the island already know — the
+windows, and each one is a module the bar and the island already know: the
 same player, the same battery, the same weather. The desktop and the bar do not
 consult each other, so a module can be on one, on both or on neither, and the
 same module can be on the grid twice: a clock as a band and another as a dial.
@@ -32,8 +32,7 @@ bar, in [zen](/shell/bar/#zen), moves none either: the grid stays below where
 the bar was.
 
 <kbd>SUPER</kbd> <kbd>CTRL</kbd> <kbd>W</kbd> takes every widget off the
-wallpaper until you press it again; the same switch is **Hide the widgets** on
-Settings → Desktop, and arranging shows them meanwhile.
+wallpaper until you press it again, and arranging shows them meanwhile.
 
 A widget dropped on an occupied square goes to the nearest free one, or back
 where it came from if the board has no room. The widgets already there never
@@ -68,19 +67,24 @@ smallest shape it offers.
 
 <Figure name="arrange" alt="The desk in arranging mode: widgets on a faint grid over the bare wallpaper, one widget selected with a card beside it for its shape, face, style and opacity, and a card holding every module's face at the bottom." caption="Arranging: the card of every module, and one widget's own card open." />
 
-- **Add** — drag a piece from the card onto the grid; the squares it will land
+- **Add**: drag a piece from the card onto the grid; the squares it will land
   on are lit before you let go. A click on a piece puts it on the first free
   square instead. It lands at its smallest shape.
-- **Move** — drag the widget.
-- **Change its shape** — pull the handle in its bottom-right corner. The shape
+- **Move**: drag the widget.
+- **Change its shape**: pull the handle in its bottom-right corner. The shape
   changes as the pointer crosses from one footprint to the next, never
   stretching in between. The mouse wheel over a widget steps through its
   shapes too.
-- **Remove** — the ⊖ badge in its top-left corner, or drop the widget on the
-  card.
-- **Give it a look of its own** — click it (below).
+- **Remove**: the ⊖ badge in its top-left corner, or drop the widget on the
+  pill along the bottom (below).
+- **Give it a look of its own**: click it (below).
 
 The badge and the handle appear under the pointer and on the selected widget.
+
+**While anything is carried, the card steps aside**: it fades out, and a pill
+along the bottom takes the drop that removes, red while the widget is over it.
+A widget let go where the card was stays on the grid. A widget's aim follows
+the pointer even past the board's edge, where the widget itself stops.
 
 **The card moves and grows.** Drag it by any part that is not a piece, or by
 the circle on its top-left corner. The circle on the opposite corner resizes it
@@ -92,7 +96,7 @@ it lasts until arranging ends, and its size for the session.
 click on the bar or on any other surface. It also ends by itself when the
 screen changes under it: another workspace, the special workspace, a window
 opening or one going full screen. The same mode opens from Settings → Desktop →
-The widgets → **Edit**, which closes the settings window meanwhile.
+**Arrange the desktop** → **Edit**, which closes the settings window meanwhile.
 
 ### The right button
 
@@ -101,7 +105,7 @@ At rest, the right button opens a menu where it was pressed:
 | On | The menu |
 |---|---|
 | The wallpaper | Arrange widgets, New note, Wallpaper, Palette, Settings |
-| A widget | Edit — arranging, opened on that widget's card — and Remove |
+| A widget | Edit (arranging, opened on that widget's card) and Remove |
 | A note | Open, Edit and Remove |
 
 Wallpaper and Palette open the island's pickers ([Palettes](/theming/palettes/)).
@@ -111,14 +115,14 @@ keyboard: a click elsewhere closes it.
 
 ## Each widget's own look
 
-**Click a widget while arranging and a card opens beside it** — to its right,
+**Click a widget while arranging and a card opens beside it**: to its right,
 its left or under it, wherever there is room.
 
 | On the card | |
 |---|---|
-| Shape | The shapes the module offers, drawn as footprints — the same choice as the corner handle |
+| Shape | The shapes the module offers, drawn as footprints: the same choice as the corner handle |
 | Face | Modern, Analogue or Sticker |
-| The slider | How solid the capsule is, 0 to 100 %, with a button that puts it back; at 0 the capsule, its outline and its shadow are gone. Only on the classic ground, and not for a sticker |
+| The slider | How solid the capsule is, 0 to 100 %, with a button that puts it back; at 0 the capsule, its outline and its shadow are gone. Not for a sticker |
 | Remove | Takes the widget off |
 
 A note and a photo draw their own paper and picture, so neither has a slider,
@@ -132,19 +136,21 @@ desktop's own setting, and a widget keeps following it until you pick
 something else. The line under the faces says what the widget is wearing.
 The card closes on a click on the wallpaper, and when a drag starts.
 
-Settings → Desktop → The widgets holds what every widget follows by default:
-**Face**, **Ground** and **Background**, the opacity.
+Settings → Desktop → Look holds what every widget follows by default:
+**Face**, **Ground**, **Background**, the opacity, and **Shadow**.
 
-**The ground is the bar's unless you give the widgets their own**: *As the
-bar*, **Classic** or **Glass**. Classic is the island's black, and its
+**The widgets have a ground of their own**, classic out of the box:
+**Classic**, **Glass** or **Liquid**, the same three as
+[the bar's](/shell/bar/#ground). Classic is the island's black, and its
 **Background** slider lowers it until the wallpaper shows through blurred,
-and at 0 takes the capsule away altogether.
-Glass is the terminal's own ground, the accent over a blur of the wallpaper,
-with a lit edge; the slider is locked while it is on. A sticker, a note, a
-photo and the spectrum draw no capsule, so on a desk made only of them both
-rows are locked, and they unlock as soon as one widget has a capsule.
+and at 0 takes the capsule away altogether. Glass is the terminal's own
+ground, the accent over a blur of the wallpaper, with a lit edge; liquid is a
+clear frosted pane, lit from one side. On glass and liquid the slider thins
+the glass itself. A sticker, a note, a photo and the spectrum draw no
+capsule, so neither row changes them; both stay open for the next widget
+that has one.
 
-Each widget casts a shadow, switched under Settings → Appearance → Depth.
+**Shadow** casts one under every widget, a sticker's from its own shape.
 
 **Everything but the ground is the palette**, so every widget repaints with the
 wallpaper. Warnings keep their fixed colours — a
@@ -170,13 +176,15 @@ the palette's hues with a pale vinyl edge round it and leaning a little, each
 widget its own way. It has no capsule and no ground: the wallpaper shows all
 round it, and its shadow is the widgets' shadow setting, cast by the sticker's
 own shape. On a card the words go on a tag stuck beside it. Nothing on a
-sticker moves — the record does not turn.
+sticker moves: the record does not turn.
 
 | Module | Shapes | Analogue draws | Sticker draws |
 |---|---|---|---|
 | Clock | square, card, band | a dial, which is also offered as a large square | a lobed dial with the minute hand red, also as a large square; wide, one sticker per figure |
 | Calendar | square, card, large | a leaf off a wall calendar | today on a soft red square, with a round count of what is due; large, the month on a sheet |
-| Weather | all four | the sky, with a thermometer beside it | the sky — a sun, a night disc or a cloud — with the temperature on it; no large square |
+| Weather | all four | the sky, with a thermometer beside it | the sky (a sun, a night disc or a cloud) with the temperature on it; no large square |
+| Markets | all four | the first pair's history on a chart recorder's paper, the pen in the colour of the day's move; square and card only | the day's move as an arrow and a percentage, on a sticker in the move's colour; square and card only |
+| Screen time | all four | the day on a 24-hour dial, midnight at the top, a session per arc; a large square adds the week; no band | today's total on a lobed sticker, with a ring that fills as the day reaches the week's average; square and card only |
 | Media | square, card, large | a record that turns while it plays | the record with the cover on it, and round buttons beside it |
 | System | square, card, large | a gauge with a needle | three badges: processor, memory and temperature; no large square |
 | Claude | square, card, large | a fuel gauge from E to F, without the large square | a ring round the mark, without the large square |
@@ -200,11 +208,11 @@ sticker moves — the record does not turn.
 A widget switched to a theme with no face for its shape shrinks to the largest
 shape that fits inside the old one, so nothing grows into a neighbour.
 
-**Every widget is always drawn.** With nothing to report it says so — "Nothing
-playing", "No battery", "No forecast" — and keeps its square; the only way for
+**Every widget is always drawn.** With nothing to report it says so ("Nothing
+playing", "No battery", "No forecast") and keeps its square; the only way for
 a widget to leave is Remove. The weather's location, whose contributions the
-GitHub wall draws, how a note is written and how the pet is drawn — Creature,
-Plush, Paper or Pixel — are in Settings → Desktop → Module settings, and the
+GitHub wall draws, the markets followed, how a note is written and how the pet
+is drawn (Creature, Plush, Paper or Pixel) are in Settings → Modules, and the
 bar's chips read the same settings.
 
 On the calendar, a day with a dot has tasks due. Press it and the widget turns
@@ -294,7 +302,7 @@ the same in Modern, Analogue and Sticker, as a note is paper in every theme,
 and it comes in all four shapes.
 
 The words come from lrclib.net, and the widget looks up every track while it
-is on the desk, as long as Settings → Bar & Island → **Lyrics** is on. See
+is on the desk, as long as Settings → Modules → Lyrics → **Look them up** is on. See
 [Lyrics](/shell/island/#lyrics).
 
 ## Photos
@@ -357,7 +365,8 @@ While arranging:
 - drag the Notes piece from the card against an edge, and the newest note
   starts a deck there;
 - drag a tab along its edge to reorder it, to another edge to move it, onto the
-  grid to make it a square of its own, or onto the card to take it off;
+  grid to make it a square of its own, or onto the pill along the bottom to
+  take it off;
 - drag a note widget against an edge and it joins the deck there;
 - drag the round grip before the first tab to slide the whole deck along;
 - click a tab for the deck's card: **Where** (left, right or bottom), **Along
@@ -375,9 +384,9 @@ note is in one place at a time: putting it on an edge takes it off its square.
 A notes widget on a square shows one note — the newest, or the one picked under
 **Which note** on its card — and a click opens it in the island.
 
-Decks hide under a full-screen window. Settings → Desktop → Module settings →
-**Edges only on an empty workspace** hides them whenever a window is open on
-the workspace, and brings them back when the last one closes.
+Decks hide under a full-screen window. Settings → Desktop → Behaviour →
+**Notes on the edges** hides them whenever a window is open on the workspace,
+and brings them back when the last one closes.
 
 ## Spectrum
 
@@ -401,7 +410,7 @@ While arranging, drag the Spectrum piece from the card onto the grid or
 against an edge. Dragged from the grid to an edge, or from an edge onto the
 grid, it turns from one into the other; an edge that has one already takes no
 second. Along an edge the whole strip is its handle: a click opens its card,
-and dropped on the card of modules it is taken off.
+and dropped on the pill along the bottom it is taken off.
 
 <Figure name="spectrum-inspector" alt="The card for a spectrum beside it: Where, Look, Fill, Colour, Size, Lows, Peaks and an opacity slider, each look and fill drawn as a small sample." caption="A spectrum's own card." />
 
@@ -419,8 +428,7 @@ and dropped on the card of modules it is taken off.
 
 Each look and fill on the card is drawn as a sample, so it reads in silence.
 The spectrum leaves under a full-screen window, and stops listening while it
-is away. Settings → Desktop →
-Module settings → Spectrum → **Only on an empty workspace** also takes it away
+is away. Settings → Desktop → Behaviour → **Spectrum** also takes it away
 whenever a window is open on the workspace, and brings it back when the last
 one closes.
 
@@ -433,8 +441,8 @@ unplugged is drawn on the main screen, set in
 [Displays](/shell/displays/#arrangement), until that screen comes back.
 
 Arranging happens on every screen at once, and the card of modules is on the
-screen the pointer is on. Nothing is dragged from one screen to another: drop
-the widget on the card here and place it again there.
+screen the pointer is on. Nothing is dragged from one screen to another: take
+the widget off here and place it again there.
 
 The squares are sized to fill the screen evenly, never smaller than a set
 minimum, so a smaller screen has fewer of them. A layout made on a bigger

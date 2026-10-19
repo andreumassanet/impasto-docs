@@ -49,8 +49,8 @@ of its own.
 
 ## From Settings
 
-**Settings → System → This machine has an Updates group**, for impasto itself,
-not the packages it runs.
+**Settings → System → Updates is for impasto itself**, not the packages it
+runs.
 
 - **Check for updates** asks the remote of the checkout impasto was installed
   from what has landed since: when the page opens, at most every half hour,
@@ -77,7 +77,7 @@ applies at once. `setup` notices it has been edited and leaves it alone. When th
 repository later changes that file, the repository's version is written beside
 yours as `<name>.new` and yours stays in place.
 
-**Settings → System → Changed files lists them**: every installed file you
+**Settings → System → Updates → Changed files lists them**: every installed file you
 have edited or deleted, with a button for each. A deleted one has
 **Restore**; an edited one has **Reset**, which puts impasto's version back and
 keeps yours in the backups, or, when a newer version is waiting beside it,
@@ -123,7 +123,7 @@ run it decides file by file:
 | What it finds | What it does |
 |---|---|
 | Nothing at the path, never written | Writes the file. |
-| The file it wrote, deleted since | Leaves it deleted — the wallpapers you do not want, say — and says how many it left out. `--restore` puts them back. |
+| The file it wrote, deleted since | Leaves it deleted (the wallpapers you do not want, say) and says how many it left out. `--restore` puts them back. |
 | A different file, the first time | Moves it to `~/.local/state/impasto/backups/<timestamp>/`, then writes. A link in the way is moved there too. |
 | The file it wrote, unedited | Replaces it with the repository's version. |
 | The file it wrote, edited since | Keeps yours, and writes the repository's beside it as `<name>.new`. |
@@ -149,16 +149,18 @@ It removes every file it installed that has not been edited since, from both
 what the install moved aside, oldest backup first, wherever the path is free
 again. Anything that cannot go back because the path is taken stays in
 `~/.local/state/impasto/backups/`, and `setup` says how many. The record of
-which extras have run goes too, so a later install sets them up again.
+which extras have run goes too, so a later install sets them up again. The
+virtual camera's module options are removed, and the boot splash goes back to
+Plymouth's default theme, with the initramfs rebuilt.
 
 What stays behind:
 
 - the packages, oh-my-zsh and the Hyprland plugins;
 - the shell's settings, notes, tasks and the rest of `~/.local/state/quickshell/`;
 - the themes the palette wrote, and the `impasto` icon theme;
-- what the extras set: the default applications, dark GTK, Thunar's and
-  VSCodium's settings, VSCodium's extensions, Vesktop's tick and Spotify's
-  patch;
+- what the extras set: the default applications, dark GTK, Nautilus's and
+  VSCodium's settings, VSCodium's extensions, Vesktop's tick, Spotify's patch,
+  and the packages and models camera effects installed;
 - howdy-next and the face enrolled with it (the lock's PAM service goes with
   the rest of `/`);
 - sddm, still enabled, if `install` enabled it;

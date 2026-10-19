@@ -9,7 +9,7 @@ The questions people ask most, answered from the repository.
 
 ## Where is the wallpaper in the screenshots?
 
-**All forty wallpapers are in the repository**, in
+**All thirty-three wallpapers are in the repository**, in
 [`home/.local/share/wallpapers/`](https://github.com/andreumassanet/impasto/tree/main/home/.local/share/wallpapers),
 and `setup` copies them to `~/.local/share/wallpapers/`.
 
@@ -23,7 +23,7 @@ and `setup` copies them to `~/.local/share/wallpapers/`.
 ## Who made the wallpapers?
 
 **They are photographs somebody else turned into the oil look**, the impasto
-style the project is named after, and then only sharpened. All forty are in
+style the project is named after, and then only sharpened. All of them are in
 [`home/.local/share/wallpapers/`](https://github.com/andreumassanet/impasto/tree/main/home/.local/share/wallpapers).
 
 ## Does it work on Manjaro, EndeavourOS or another distribution?
@@ -56,9 +56,10 @@ See [Installation](/start/install/).
 
 **`setup` installs the whole desk**: there is no option to leave out one
 program's configuration. What you can leave out is a step: `--skip-packages`,
-`--skip-system` (the login screen), `--skip-plugins` (shake to find and the
-glass) and `--skip-extras` (what opens which file, GTK, the cursor, Thunar,
-VSCodium, Vesktop, Spotify and face unlock). `./setup` with nothing after it
+`--skip-system` (the login screen and the boot splash's files),
+`--skip-plugins` (shake to find and refraction) and `--skip-extras` (what
+opens which file, GTK, the cursor, Nautilus, VSCodium, Vesktop, Spotify, face
+unlock, camera effects and the boot splash). `./setup` with nothing after it
 offers the same four as switches.
 
 Taking part of it by hand is possible, since `home/` is laid out exactly as your
@@ -76,10 +77,10 @@ its paths is moved to `~/.local/state/impasto/backups/` first, and
 To change the desk's configuration, edit the copies under
 `~/.config/hypr/modules/`. `setup` keeps an edited file and writes its own new
 version beside it as `<name>.new`, so `./setup update` never overwrites your
-change, and Settings → System → Changed files lists every such file with a
+change, and Settings → System → Updates → Changed files lists every such file with a
 button to settle it. Most of what people edit by hand is in Settings already: keys under
 **Keys**, screens under **Displays**, gaps and rounding under
-**Appearance → Windows**.
+**Windows**.
 
 ## Does it work with more than one monitor?
 
@@ -87,8 +88,9 @@ button to settle it. Most of what people edit by hand is in Settings already: ke
 with the keyboard. Each screen keeps widgets, decks of notes and spectra of its
 own, and the dock is on every screen too; either can be kept to the screen you
 are on instead. A workspace number brings that workspace to the screen you are
-on, <kbd>SUPER</kbd> <kbd>ALT</kbd> <kbd>←</kbd> <kbd>→</kbd> moves to the
-other screen, and the brightness keys dim the screen with the keyboard, an
+on, or each screen can have ten workspaces of its own;
+<kbd>SUPER</kbd> <kbd>ALT</kbd> <kbd>←</kbd> <kbd>→</kbd> moves to the other
+screen, and the brightness keys dim the screen with the keyboard, an
 external monitor over DDC/CI. Drag the screens into place under
 **Settings → Displays** and the arrangement is kept for that set of screens,
 and comes back on its own when you plug them in again. See
@@ -102,7 +104,7 @@ slider from 1× to 3× in steps of 0.05.
 
 ## What languages does it speak?
 
-**English and Spanish.** **Settings → System → Language** switches the settings
+**English and Spanish.** **Settings → System → This machine → Language** switches the settings
 window, and the cards used to arrange the desktop and the control centre; most of what the island shows stays in English. It is the shell's
 language only: it does not change the system's locale or rename your folders.
 
@@ -114,14 +116,16 @@ language only: it does not change the system's locale or rename your folders.
 
 **It removes every file it installed that nobody has edited since**, lists the
 edited ones and leaves them, and puts back what it moved aside at install. It
-does not remove packages, oh-my-zsh, the Hyprland plugins, howdy-next and the
-face enrolled with it, or the themes the shell wrote into `~/.config`. See
+puts the default boot splash back and removes the virtual camera's module
+options. It does not remove packages, oh-my-zsh, the Hyprland plugins,
+howdy-next and the face enrolled with it, the camera's models, or the themes
+the shell wrote into `~/.config`. See
 [Updating](/start/updating/#uninstalling).
 
 ## How do I update?
 
 **`./setup update` pulls the repository and installs again**, with the same
-options. Or press **Update** under **Settings → System → This machine**, which
+options. Or press **Update** under **Settings → System → Updates**, which
 lists the commits waiting and runs the same update in a terminal. See
 [Updating](/start/updating/#from-settings).
 

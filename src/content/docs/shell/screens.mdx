@@ -1,8 +1,8 @@
 ---
 title: Several screens
-description: Two monitors or more — the shared workspaces and the keys that move them, the live bar, the dock, widgets and spectra on each screen, brightness per screen, and captures.
+description: Two monitors or more, with shared workspaces or ten for each screen and the keys that move them, the live bar, the dock, widgets and spectra on each screen, brightness per screen, and captures.
 sidebar:
-  order: 14
+  order: 17
 ---
 
 import Figure from '~/components/Figure.astro';
@@ -20,9 +20,9 @@ act on. Where the screens sit is set in [Displays](/shell/displays/).
 
 ## Workspaces
 
-**The ten workspaces are shared by every screen**, and a number brings its
-workspace to the screen you are on rather than taking you to the screen it is
-on.
+**The ten workspaces are shared by every screen**, out of the box, and a
+number brings its workspace to the screen you are on rather than taking you to
+the screen it is on.
 
 | Keys | What they do |
 |---|---|
@@ -43,6 +43,22 @@ screen. [The overview](/shell/island/#the-overview) draws each workspace as the
 screen it is on, and <kbd>Enter</kbd> brings it to the screen the overview is
 on.
 
+### Ten for each screen
+
+**Settings → Bar → Workspaces → With more screens → Per screen gives every
+screen ten workspaces of its own.** The main screen has 1 to 10, the next 11
+to 20, and so on from left to right. The number keys and
+<kbd>SUPER</kbd> <kbd>SHIFT</kbd> and a number go to the screen's own: on the
+second screen <kbd>SUPER</kbd> <kbd>4</kbd> is workspace 14. Each bar and the
+overview show that screen's ten, numbered from 1.
+
+The two screens trading, on <kbd>SUPER</kbd> <kbd>ALT</kbd> <kbd>SHIFT</kbd>
+and an arrow, trade the windows instead, so every screen keeps its own
+numbers. A workspace left over from an unplugged screen shows on the main
+screen's strip by its own number until the screen comes back. The choice
+belongs to the machine, so it stays the same across profiles, and switching
+it needs no reload.
+
 ## The bar and the island
 
 **Every screen draws the whole bar, and one is live**: the screen with the
@@ -51,7 +67,7 @@ keyboard and shows notifications and passing readings; the others show the
 island at rest, on the time. The island moves only while it is shut, so an
 open panel holds it where it is until it closes.
 
-Settings → Bar & Island → The island → **On every screen** is on by default:
+Settings → Bar → Style → **On every screen** is on by default:
 *One on each, and the one you are on is the live one*. Off, *Only on the
 screen you are on*, and the others keep the bar's space empty, so no window
 moves as you cross.
@@ -60,8 +76,8 @@ moves as you cross.
 
 Settings → Dock → **On every screen** is on by default too: *One on each, all
 showing the same*. Off, *Only on the screen you are on*. Every dock shows the
-same shelf — every application on the desk, whichever screen its windows are
-on — and leaves only on the screen that has a full-screen window. See
+same shelf (every application on the desk, whichever screen its windows are
+on) and leaves only on the screen that has a full-screen window. See
 [the dock](/shell/dock/).
 
 ## Widgets, notes and spectra
@@ -70,7 +86,7 @@ on — and leaves only on the screen that has a full-screen window. See
 belongs to the screen it was put on. One whose screen is unplugged is drawn on
 the main screen until it comes back. Arranging happens on every screen at
 once, and the card of modules is on the screen the pointer is on. Nothing is
-dragged from one screen to another: drop it on the card here and place it
+dragged from one screen to another: take it off here and place it
 again there. See [Screens and sizes](/shell/desktop/#screens-and-sizes).
 
 ## Brightness

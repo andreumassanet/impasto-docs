@@ -54,7 +54,7 @@ const description =
 	'A Hyprland shell whose colours come from a painting. One black island that changes shape, a desk of widgets under the windows, and every program around it repainted by whatever wallpaper is up.';
 const followers = [
 	'the island', 'the widgets', 'kitty', 'the prompt', 'btop', 'cava', 'yazi', 'neovim', 'VSCodium',
-	'GTK', 'Qt and KDE', 'Thunar', 'Vesktop', 'Zen', 'Spotify', 'the login screen',
+	'GTK', 'Qt and KDE', 'Nautilus', 'Vesktop', 'Zen', 'Spotify', 'the login screen',
 ];
 const wallCss = `:root{--im-wall:url("${first.medium}")}@media (min-width:75rem) and (min-resolution:1.5dppx),(min-width:112rem){:root{--im-wall:url("${first.large}")}}`;
 ---
@@ -176,11 +176,12 @@ const wallCss = `:root{--im-wall:url("${first.medium}")}@media (min-width:75rem)
 
 			<section class="room wide" id="bar">
 				<div class="text">
-					<h2>Three styles, one layout.</h2>
+					<h2>Four styles, one layout.</h2>
 					<div>
 						<p>
 							Pieces are dragged out of a catalogue onto a picture of the bar, then drawn grouped round the island,
-							spread to the edges, or all inside one capsule. Any piece can have a look of its own.
+							spread to the edges, all inside one capsule, or on a bezel across the top edge. Any piece can have a
+							look of its own, and the bar, the dock, the widgets and the terminal are each classic, glass or liquid.
 						</p>
 						<a class="more" href={href('/shell/bar/')}>Arranging the bar</a>
 					</div>
@@ -195,7 +196,7 @@ const wallCss = `:root{--im-wall:url("${first.medium}")}@media (min-width:75rem)
 					<h2>The palette comes out of the painting.</h2>
 					<p>
 						Pick a wallpaper and its colours reach everything at once. Or pick one of nine palettes instead, and the
-						wallpaper stays where it is. This page does the same with the forty wallpapers the desk comes with.
+						wallpaper stays where it is. This page does the same with the wallpapers the desk comes with.
 					</p>
 					<a class="more" href={href('/theming/palettes/')}>Where the colours go</a>
 					<ul class="followers" aria-label="What follows the palette">
@@ -280,7 +281,8 @@ const wallCss = `:root{--im-wall:url("${first.medium}")}@media (min-width:75rem)
 					<div>
 						<p>
 							The shell locks the session itself, over the blurred desk, and opens for your face where there is an
-							infrared camera. The SDDM theme draws the same island, clock and pill before anybody has logged in.
+							infrared camera. The SDDM theme draws the same clock and pill before anybody has logged in, and the boot
+							splash paints the palette board before that.
 						</p>
 						<a class="more" href={href('/shell/lock-and-login/')}>Lock and login</a>
 					</div>

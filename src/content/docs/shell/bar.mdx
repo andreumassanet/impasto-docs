@@ -1,6 +1,6 @@
 ---
 title: The bar
-description: The three bar styles, arranging pieces on a picture of the bar, how each piece reads, and every module that can go on it.
+description: The four bar styles, arranging pieces on a picture of the bar, how each piece reads, and every module that can go on it.
 sidebar:
   order: 2
 ---
@@ -9,42 +9,62 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 import Figure from '~/components/Figure.astro';
 import Gallery from '~/components/Gallery.astro';
 
-**Three styles, one layout.** Pieces are dragged out of a catalogue onto a
+**Four styles, one layout.** Pieces are dragged out of a catalogue onto a
 picture of the bar, then drawn grouped round the island, spread to the edges,
-or all inside one capsule. Changing the style keeps what is on the bar.
+all inside one capsule, or on a bezel across the top edge. Changing the style
+keeps what is on the bar.
 
 <Figure
   name="bar-styles"
   alt="The same bar in its three styles: grouped round the island, spread to the two edges, and everything inside one capsule, each with the workspaces and three buttons left of the island and the modules right of it"
-  caption="Grouped, spread and one island — the same layout each time."
+  caption="Grouped, spread and one island: the same layout each time."
 />
 
 ## Styles
 
-Chosen under Settings → Bar & Island → The island → **Style**.
+Chosen under Settings → Bar → Style → **Style**.
 
 | Style | How it is drawn |
 |---|---|
 | Grouped | The workspaces, the island and the modules together in the middle. The default. A detail opening pushes the sides out. |
 | Spread | The workspaces at one edge, the modules at the other, the island between them. The sides hold still. |
 | One island | Everything inside a single capsule. Whatever the island becomes, the whole band changes shape into it. |
+| Bezel | One band across the whole top edge, cut into it. It never moves: whatever the island becomes drops out of its middle, with a curve either side. |
 
-In One island, **Span the whole screen** runs the band the full width of the
-bar instead of fitting what is on it. **Island** sets whether the island floats
-below the top edge or is cut into it as a notch, in every style.
+**Island**, under Settings → Island → The island → **Position**, sets whether
+the island floats below the top edge or is cut into it as a notch. The bezel is
+always cut in.
 
-**Ground** is **Classic**, the island's black, or **Glass**, the terminal's own
-ground: the accent over a blur of what is behind, with a lit edge. The desktop's
-widgets and the dock follow it unless they are given a ground of their own.
+**Rounded corners**, beside the style, curves every screen's four corners
+like the windows. They take no clicks, and under the bezel they curve under
+its ends.
+
+## Ground
+
+**Every layer is made of one of three grounds**, chosen per layer: the bar
+and the island here, under Bar → Style → *Look*, and the
+[dock](/shell/dock/#settings), the [desktop's widgets](/shell/desktop/#each-widgets-own-look)
+and [the terminal](/theming/terminal/#kitty) on their own pages.
+
+| Ground | What it is |
+|---|---|
+| Classic | The island's black, solid. The default |
+| Glass | The terminal's own ground: the accent over a blur of what is behind, with a lit edge |
+| Liquid | A clear frosted pane that lets the wallpaper's own colours through, lit from one side |
+
+<Figure name="liquid-glass" alt="The control centre three times over a painting of a rocket launch: solid black, tinted glass over the blur, and clear liquid glass lit from one side" caption="Classic, glass and liquid." />
+
+The island always wears the bar's ground. **Shadow**, under the ground, lifts
+the bar off the wallpaper.
 
 ## Sides
 
-**The sides can sit straight on the wallpaper.** Under Settings → Bar & Island
-→ The island → **Sides**, *In capsules* draws each group on its black capsule;
+**The sides can sit straight on the wallpaper.** Under Settings → Bar → Style
+→ **Sides**, *In capsules* draws each group on its black capsule;
 *On the wallpaper* drops the capsules and leaves the icons and figures, white
 with a tight shadow so they read on a light picture as well as a dark one. The
-island keeps its capsule either way. In the One island style the sides already
-sit on its band, so the setting is locked there.
+island keeps its capsule either way. In the One island and Bezel styles the
+sides already sit on its band, so the setting is locked there.
 
 <Figure name="bar-capsules" alt="The bar with its sides in black capsules: the workspaces on the left, the modules on the right, the island between them" caption="In capsules." />
 
@@ -52,22 +72,22 @@ sit on its band, so the setting is locked there.
 
 ## What goes on it
 
-- **Modules** — each a piece that shows a reading and opens a detail in the
+- **Modules**: each a piece that shows a reading and opens a detail in the
   island when clicked. The same click closes it.
-- **The workspace strip** — a mark for each of the desk's workspaces, the one
+- **The workspace strip**: a mark for each of the desk's workspaces, the one
   this screen shows lit; a click brings that workspace to this screen. It is
   drawn in one of seven styles ([below](#size-and-workspaces)).
-- **The tray** — the icons applications put in the system tray, in one
+- **The tray**: the icons applications put in the system tray, in one
   capsule (below).
-- **Buttons** — a symbol and no figure: every door of
+- **Buttons**: a symbol and no figure: every door of
   [the control centre](/shell/control-centre/#the-top-row), the control
   centre itself and Capture. They are Launcher, Workspace overview, Control
   centre, Capture, Appearance, Notes, Task board, Games, Keys, Packages,
   Settings and Session menu. Each opens its panel and stays lit while it is
-  open; Settings opens the window, and Capture does what the capture key does
-  — the photo at once, with the surface's last choices. Statistics and the pet
+  open; Settings opens the window, and Capture does what the capture key does:
+  the photo at once, with the surface's last choices. Statistics and the pet
   are modules here, not buttons.
-- **Split** — ends one capsule and starts the next.
+- **Split**: ends one capsule and starts the next.
 
 Neighbouring modules share a capsule; the workspace strip and the tray are
 always a capsule of their own. A capsule holding one piece takes that piece's shape: a ring is a
@@ -76,15 +96,15 @@ circle, a button a circle, a symbol and its figure a pill.
 Out of the box the left side holds the workspaces, and the right holds
 Notifications, Network, Bluetooth, Volume and Battery.
 
-A piece the machine cannot show — no battery, no screen that can be dimmed, no
-Bluetooth adapter, no grim for Capture — is not drawn, even when placed.
+A piece the machine cannot show (no battery, no screen that can be dimmed, no
+Bluetooth adapter, no grim for Capture) is not drawn, even when placed.
 Nothing on the bar moves by itself: a piece is where you put it.
 
 ## Arranging
 
 <Steps>
 
-1. Open Settings (<kbd>SUPER</kbd> <kbd>,</kbd>) → Bar & Island → **The bar**.
+1. Open Settings (<kbd>SUPER</kbd> <kbd>,</kbd>) → Bar → **Layout**.
    Under *Layout* is a picture of the bar in its style, with the
    real time in the island, and the catalogue under it.
 
@@ -125,16 +145,16 @@ the header steps back out. <kbd>Up</kbd> and <kbd>Down</kbd> move,
 
 ## How a piece reads
 
-Two settings for the whole bar, under The bar → *Chips*:
+Two settings for the whole bar, under Bar → Layout → *Chips*:
 
 | Setting | Choices |
 |---|---|
-| Shape | **Icon** — the module's symbol, small (the default). **Ring** — its gauge as a circle round the symbol: charge, volume, a countdown. |
-| Figure | **No** — the symbol alone. **On hover** — the figure opens under the pointer. **Always** — always beside it (the default). |
+| Shape | **Icon**: the module's symbol, small (the default). **Ring**: its gauge as a circle round the symbol: charge, volume, a countdown. |
+| Figure | **No**: the symbol alone. **On hover**: the figure opens under the pointer. **Always**: always beside it (the default). |
 
 Only a module whose reading fills from empty to full gets a ring. Network,
-Bluetooth, Notifications, Weather, Updates and Calendar keep their symbol in
-either shape.
+Bluetooth, Notifications, Weather, Markets, Screen time, Updates and Calendar
+keep their symbol in either shape.
 
 <Figure name="bar-modules" alt="The same bar four times: the symbols alone, the symbols with their figures, the rings, and the rings with their figures" caption="Icon or ring, with its figure or without, for the whole bar." />
 
@@ -157,7 +177,7 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
 |---|---|---|---|
 | Media | The track's title, or *Nothing playing* | The player: artwork, title, artist, progress, previous, play or pause, next; once the track's lyrics are known, [the lyrics](/shell/island/#lyrics) beside it | A media player on the session bus (MPRIS) |
 | Timer | A ring that drains, and the time left | Idle, set a countdown; running, hold, restart or stop it | — |
-| Claude | Claude's mark, and the session's percentage — or its tokens, until the percentage is known | Tokens and messages for the five-hour session and the week, the account's own percentages, and when the session resets | Claude Code (below) |
+| Claude | Claude's mark, and the session's percentage, or its tokens until the percentage is known | Tokens and messages for the five-hour session and the week, the account's own percentages, and when the session resets | Claude Code (below) |
 | Codex | Codex's mark, and the share used of the fullest limit still running | Each limit the plan sets, its share used and when it resets, and when it was read | Codex (below) |
 | Battery | The charge | The charge, charging or the time left, the power going in or out, and the energy stored | A battery |
 | Volume | The level, or *Muted* | A slider, and mute buttons for the output and the microphone | — |
@@ -166,6 +186,8 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
 | Bluetooth | The connected device, a count, *No devices* or *Off* | The device list | A Bluetooth adapter |
 | Notifications | A bell and how many are kept; crossed out in do not disturb | The history, with Clear | — |
 | Weather | The conditions and the temperature | The place, feels-like, the reading's age and the next hours | A network connection (below) |
+| Markets | The first pair's price and the day's change | The first pair charted, and up to four more listed with their price and change | A network connection (below) |
+| Screen time | Today's total | The day in brief: a ring by group, the hours and the three most used, with Open for [the whole panel](/shell/screen-time/) | — |
 | System | The processor load | Processor and memory, with their recent history | — |
 | Updates | How many updates are waiting | What is waiting, when it was checked, and Open for the packages panel | pacman-contrib for a fresh count |
 | Pet | The pet that is out, and its level or *Egg* | Feed, play, and the shelf of the whole family | — |
@@ -183,20 +205,26 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
   anywhere and the figures are as old as the last turn. A limit past its reset
   shows no share until Codex runs again.
 - **Weather** comes from wttr.in, which guesses the place from your connection
-  when none is set. Set it under Settings → Desktop → Module settings →
+  when none is set. Set it under Settings → Modules → Weather →
   **Location**: a city, a postcode or an airport code.
+- **Markets** follows the pairs under Settings → Modules → Markets →
+  **Follow**, BTC, ETH and EUR/USD out of the box. A coin alone is priced in
+  US dollars and BTC/EUR in euros, from CoinGecko; two currencies, such as
+  EUR/USD, follow the European Central Bank's daily rate, through
+  Frankfurter. Neither needs an account, and both see what you follow. The
+  prices are read every five minutes while something on screen shows them.
 - **Updates** counts the repositories and the AUR, and never installs: Open
   goes to [the packages panel](/shell/keys-and-packages/), which runs the
   upgrade in a terminal. Without pacman-contrib the count is from the last
   sync.
-- **System** — the full panel, with cores, disks and temperatures, is
+- **System**: the full panel, with cores, disks and temperatures, is
   <kbd>SUPER</kbd> <kbd>U</kbd>.
 
 **Not modules on the bar:** Notes, Tasks, Games, GitHub and Lyrics are desktop widgets,
-and notes, the task board and the games are buttons that open their panels —
+and notes, the task board and the games are buttons that open their panels:
 see [the desktop](/shell/desktop/), [notes and tasks](/shell/notes-and-tasks/)
 and [games and pets](/shell/games-and-pets/). GitHub needs a username under
-Settings → Desktop → Module settings → GitHub → **Username**. The clock is the
+Settings → Modules → GitHub → **Username**. The clock is the
 island itself.
 
 ## Zen
@@ -205,22 +233,23 @@ island itself.
 band to the windows. The island still comes down, on its own, for a
 notification, the volume or brightness, or a panel you open by its key, and
 goes back up when it is done. The desktop's widgets stay where they are.
-Press it again for the bar. The same switch is **Zen** under
-Settings → Bar & Island, and `qs ipc call bar toggle` flips it from anything
-else.
+Press it again for the bar, or flip it from anything else with
+`qs ipc call bar toggle`.
 
 ## Size and workspaces
 
-Under Settings → Bar & Island → The island → *Scale*: **Bar height** (24–48 px),
+Under Settings → Bar → Style → *Scale*: **Bar height** (24–48 px),
 **Top margin** (0–32 px) and **Side margin** (0–48 px). Everything on the bar
 scales with its height; as a notch, the island ignores the top margin.
 
-Under Settings → Bar & Island → **Workspaces**: *Workspaces shown* are always
+Under Settings → Bar → **Workspaces**: *Workspaces shown* are always
 drawn on the strip (five by default); the rest, up to *Workspaces available*
-(ten by default), appear only while they have windows.
+(ten by default), appear only while they have windows. **With more screens**
+is whether every screen shares the same ten or each has
+[ten of its own](/shell/screens/#ten-for-each-screen).
 
 **The strip draws in one of seven styles**: Dots, the default, Bars or Rings,
-or the workspace's number written out — Numbers, Roman, Kanji or Greek. The
+or the workspace's number written out: Numbers, Roman, Kanji or Greek. The
 written styles mark the one in view with an accent pill that slides from one
 to the next. It is one setting for the whole bar, chosen from tiles on the
 Workspaces tab or on the strip's own card in the bar's layout.

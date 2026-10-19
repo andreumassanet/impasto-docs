@@ -11,7 +11,7 @@ there is a way round, it is given.
 ## Theming
 
 - **Most programs take a new palette only in their next window**: btop, yazi,
-  imv, GTK and Qt windows, Thunar and its folders, Zen and VSCodium. Restart the
+  imv, GTK and Qt windows, Nautilus and its folders, Zen and VSCodium. Restart the
   program, or in VSCodium run **Developer: Reload Window**.
 - **Spotify takes a new palette at its next start**, not while it plays. A
   Spotify update takes the patch away until the next `./setup update`, and your
@@ -32,9 +32,10 @@ there is a way round, it is given.
   Hyprland. The shell's font setting does not reach them.
 - **Without qt6ct, Qt windows come up light grey.** Qt 5 applications, VLC among
   them, are not themed.
-- **Thunar's path row cannot be painted.** The folders land on the nearest of
-  Papirus's twenty-five colours rather than on the accent, and without Papirus
-  there are no coloured folders.
+- **Nautilus takes only what libadwaita's named colours reach**; the rest of
+  it stays Adwaita's. The folders land on the nearest of Papirus's twenty-five
+  colours rather than on the accent, and without Papirus there are no coloured
+  folders. The sidebar's Desktop row keeps a plain folder icon.
 - **yazi's file icons keep their own colours**: a Python file is Python's blue
   and yellow under every palette.
 - **The selected row in btop and yazi is low-contrast in a few palettes**, and
@@ -61,8 +62,17 @@ there is a way round, it is given.
 - **One bar layout for every style and every screen.**
 - **Every screen carries the bar, and one is live**: the screen with the
   keyboard. The island moves only while it is shut, so an open panel holds it
-  where it is. The workspace dots are the desk's ten shared workspaces; only
-  which one is lit is each screen's own.
+  where it is. The workspace dots are the desk's ten shared workspaces, and
+  only which one is lit is each screen's own, unless each screen has ten of
+  its own.
+- **With ten workspaces per screen, a screen's numbers are its place** from
+  left to right, dealt again when a screen comes or goes. A workspace cannot
+  be taken to another screen in that mode, only what is on it.
+- **Rounded corners are a layer on the screen**, so a screenshot or a
+  recording of the whole screen has them in it. Their curve follows the
+  desktop's radius, not the window rounding slider.
+- **The lock screen and the settings window keep their own ground**: the
+  bar's ground does not reach them.
 - **The glance does not open while a notification or an OSD holds the island.**
 - **The island shows two running things beside the time at most**; the rest
   are a count, +N, and chips in the glance. A glance with four chips and long
@@ -93,8 +103,8 @@ there is a way round, it is given.
 - **Only what lrclib.net has**: a track it does not know shows no line and the
   plain player, and one it knows only as plain text shows the text with
   nothing lit.
-- **Every lookup tells lrclib.net what is playing.** Turn Lyrics off under
-  Settings → Bar & Island to stop it.
+- **Every lookup tells lrclib.net what is playing.** Turn it off under
+  Settings → Modules → Lyrics to stop it.
 - **A player that reports its position late**, such as a browser tab, sings a
   little behind.
 
@@ -142,7 +152,7 @@ there is a way round, it is given.
 
 ## The desktop
 
-- **A widget cannot be dragged between screens**: take it off by the card and
+- **A widget cannot be dragged between screens**: take it off and
   place it again on the other. Two decks or two spectra that land on one edge
   of one screen, with a laptop undocked or the main screen changed, are drawn
   over each other.
@@ -155,10 +165,16 @@ there is a way round, it is given.
 - **A photo holds one picture, as a path**: no album, nothing dropped on it
   from a file manager, and a picture moved on disk leaves it empty. Its picker
   has no typed path and no search, and lists PNG, JPEG, WebP and BMP only.
-- **Sticker has no large square for the weather or the system widget**, and no
+- **Sticker has no large square for the weather, the system, the markets or
+  screen time**, and no
   band past the clock, the weather and GitHub. Its record does not turn, and
   the updates sticker names no packages. On the card of modules a sticker
   still sits on a black tile.
+- **No stocks in the markets**, since no free source answers without a key.
+  A markets widget shows the first pair followed and cannot be told another.
+  Its line spans the source's history (a week of a coin, a month of a rate)
+  while its colour and arrow are the day's move, and a rate is the European
+  Central Bank's daily reference, which moves once a working day.
 - **A spectrum needs cava and a monitor source** to read the sound from. Its
   bars step with cava's frames rather than gliding, and it has no menu at rest:
   it is changed while arranging.
@@ -208,6 +224,8 @@ there is a way round, it is given.
 ## The dock
 
 - **The same items on every screen.**
+- **An application the icon set does not draw** gets its own icon, or the
+  launcher's generic mark when its entry names an icon nothing has.
 - **Its menu has no keyboard.** A click elsewhere closes it.
 - **Closing an application closes its windows one by one**, without asking.
 - **Two windows of one program can show as two icons** if they report different
@@ -239,7 +257,8 @@ there is a way round, it is given.
   per workspace. Master and scrolling have no keys of their own beyond focus
   and move.
 - **Game mode leaves some things moving**: the wallpaper's transition, the
-  lock screen's rings and the clock's seconds. Turning it off reloads Hyprland.
+  lock screen's rings and the clock's seconds. The bar keeps its style.
+  Turning it off reloads Hyprland.
 
 ## Virtual machines
 
@@ -252,6 +271,41 @@ there is a way round, it is given.
   twice. Windows comes from Microsoft at the moment of the fetch, and fails
   when Microsoft refuses. Apple's licence on macOS is yours to read.
 - **A machine's window is spicy's**, with spicy's own menus.
+
+## Development servers
+
+- **Only servers inside a project under your home**, over TCP. A server in a
+  container is held by Docker's or Podman's proxy and is not listed, nor is
+  one that leaves its project's folder once started.
+- **The address is always `http://localhost`**; a server on https opens on
+  http.
+- **Nothing is read while the panel is shut**, so nothing announces a new
+  server.
+
+## Camera effects
+
+- **One effect at a time**, and no picture of your own behind you: blurring
+  the background is all there is.
+- **Seven reactions, each with its own emoji**, none of them changeable for
+  another. The heart is the least reliable, since it is read from the shape of
+  two hands.
+- **A program that opens the webcam itself holds it**, and the panel then says
+  it cannot open it. While the switch is off the virtual camera is in no
+  program's list.
+- **About a core of processor while it is read.**
+- **Restarting the shell drops a call's picture for a second.**
+- **Not on the lock screen or the login screen.**
+
+## Screen time
+
+- **Only the window's class is kept**, so a browser is one application and
+  never the sites in it.
+- **One window counts at a time**: a video on a second screen does not count
+  while another window has the focus.
+- **With locking and the screen's idle off both set to never**, a machine left
+  unlocked counts until it sleeps.
+- **No limits, and no switch to stop recording.** Time while the shell is not
+  running is not counted.
 
 ## The impasto command
 
@@ -281,11 +335,11 @@ there is a way round, it is given.
 
 ## The plugins and the pointer
 
-- **Shake to find and the glass are Hyprland plugins** built for the Hyprland
+- **Shake to find and refraction are Hyprland plugins** built for the Hyprland
   that is running. After a Hyprland update they are gone until you run
   `hyprpm update`, or `./setup plugins`.
-- **The glass shows only through translucent windows**, which in practice means
-  the terminal.
+- **Refraction shows only through translucent windows**, which in practice
+  means the terminal.
 - **Until the vector cursor is built, the pointer is a small picture** that
   pixelates when it grows. `install` builds it; without the network, run
   `./setup cursors` later.
@@ -331,13 +385,25 @@ there is a way round, it is given.
 - **Installs and removals open in kitty**, and a package installed elsewhere
   while the panel is open shows when it is opened again.
 
+## The boot splash
+
+- **GRUB, systemd-boot, a unified kernel image and Limine** get the `splash`
+  argument; another boot loader does not, and `./setup splash` says so.
+- **The progress is Plymouth's own estimate**, so the first boot after it is
+  set up lands its daubs slowly, and a fast boot can end before the board is
+  painted.
+- **It is drawn for the first display**, from a 1080-line design, so a 4K
+  panel gets its pictures scaled up.
+- **`./setup uninstall` takes `splash` back out of GRUB only**: elsewhere the
+  argument stays, harmless, with no splash left to show.
+
 ## The appearance panel
 
 - **No search and no jump by letter** through the wallpapers:
   <kbd>Home</kbd>, <kbd>End</kbd> and the page keys are what there is.
 - **The transition tiles are close to awww's effects**, not exact copies.
 - **An animated wallpaper costs about a tenth of a core while it shows**, and
-  it shows through the terminal's glass, so it pauses only under a full-screen
+  it shows through the terminal, so it pauses only under a full-screen
   window. One video plays on every screen, cropped to fill each, and never with
   sound. The strip shows each video's first frame, not the video playing.
   Nothing ships in the `animated` folder.
