@@ -128,7 +128,8 @@ there is a way round, it is given.
 
 - **Wi-Fi cannot forget a network from the shell.** Use
   `nmcli connection delete "<name>"`.
-- **Bluetooth connects but cannot pair.** Pair a new device with `bluetoothctl`.
+- **A Bluetooth device that asks for a PIN cannot be paired from the shell**:
+  there is no prompt for one. Pair it with `bluetoothctl`.
 - **A Wi-Fi password is passed to nmcli on the command line**, where other
   programs running as you can read it for the seconds a connection takes.
 
@@ -144,6 +145,9 @@ there is a way round, it is given.
 - **After a screen is unplugged and plugged back in, its workspaces come back to
   the primary screen**, not to the screen they were on.
 - **A lid already shut when the session starts is not known to the shell.**
+- **Dimming below the backlight darkens every screen at once**: the gamma it
+  works through is Hyprland's, one for all of them, set by the screen dimmed
+  furthest.
 - **An external monitor is dimmed over DDC/CI**, which has to be switched on in
   the monitor's own menu. Most monitors behind a dock or an MST hub, and
   DisplayLink, are not reached, and NVIDIA's proprietary driver needs its I2C
@@ -399,11 +403,8 @@ there is a way round, it is given.
 
 ## The appearance panel
 
-- **No search and no jump by letter** through the wallpapers:
-  <kbd>Home</kbd>, <kbd>End</kbd> and the page keys are what there is.
 - **The transition tiles are close to awww's effects**, not exact copies.
 - **An animated wallpaper costs about a tenth of a core while it shows**, and
   it shows through the terminal, so it pauses only under a full-screen
   window. One video plays on every screen, cropped to fill each, and never with
-  sound. The strip shows each video's first frame, not the video playing.
-  Nothing ships in the `animated` folder.
+  sound. No video ships with the desk.

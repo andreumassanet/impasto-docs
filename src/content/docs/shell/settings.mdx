@@ -1,6 +1,6 @@
 ---
 title: Settings
-description: "The settings window: how to open it, what each page holds, profiles that keep whole desks under a name, and the window's language."
+description: "The settings window: how to open it, what each page holds, profiles that keep whole desks under a name, and the shell's language."
 sidebar:
   order: 18
 ---
@@ -39,15 +39,15 @@ long page is split into parts, drawn as a strip under its title.
 | Page | Parts | What it holds |
 |---|---|---|
 | [Bar](/shell/bar/) | Style, Layout, Workspaces | The style, rounded screen corners, the sides, which screens carry it, its height and margins, its ground and shadow; what the bar carries and how each piece reads; the workspace strip, how many workspaces, and [shared or per screen](/shell/screens/#ten-for-each-screen) |
-| [Island](/shell/island/#settings) | The island, Notifications | Floating or a notch, the glance, the clock and what runs beside the time; how long a notification stays, Do not disturb, the history |
-| [Control Centre](/shell/control-centre/) | | The grid's size, the way into arranging it, and the buttons on its top row |
+| [Island](/shell/island/#settings) | The island, Notifications | Floating or a notch, the glance, the sound panel's effects row, the clock and what runs beside the time; how long a notification stays, Do not disturb, the history |
+| [Control Centre](/shell/control-centre/) | | [Volume above 100 %](/shell/control-centre/#volume-and-brightness-past-their-ends), the grid's size and the way into arranging it, how a tile answers a click, and the time, the battery and the buttons on its top row |
 | [Launcher](/shell/launcher/) | Results, Sigils, Clipboard | How results are ordered and how many, the first character for each mode, the clipboard history |
 | [Dock](/shell/dock/) | | The edge, the alignment, which screens it is on, the icon size and magnifying, its ground, background and shadow, how it behaves, and the applications kept on it |
 | [Desktop](/shell/desktop/) | | The way into arranging; the face, ground, background and shadow every widget follows; whether the edge notes and the spectrum make way for windows |
-| Modules | | What the modules know, wherever they are: the weather's location, whose GitHub contributions, the markets followed, the pet's style, [the lyrics](/shell/island/#lyrics), how a note is written |
-| Appearance | Wallpaper, Terminal, Type, Motion | The theme and wallpaper and the transition; [the terminal's ground](/theming/terminal/#kitty) and its greeting scene; the interface and monospace fonts; [game mode](#game-mode) and the pace of the shell's animations |
+| Modules | | What the modules know, wherever they are: the weather's location, whose GitHub contributions, the markets followed, the pet's style, [the lyrics](/shell/island/#lyrics), [the calendars linked](/shell/control-centre/#calendar-events), how a note is written |
+| Appearance | Wallpaper, Terminal, Type, Motion | The theme and wallpaper, the transition and [which programs the palette is written to](/theming/apps/#choosing-the-programs); [the terminal's ground](/theming/terminal/#kitty) and its greeting scene; the interface and monospace fonts; [game mode](#game-mode) and the pace of the shell's animations |
 | Windows | | [The window layout](#window-layouts), window rounding, border and gaps; inactive opacity, blur, refraction and the windows' shadow; the animation preset |
-| [Displays](/shell/displays/) | Arrangement, The screen, The lid | The screens and the laptop lid |
+| [Displays](/shell/displays/) | Arrangement, The screen, The lid | The screens, [dimming below the backlight](/shell/control-centre/#volume-and-brightness-past-their-ends) and the laptop lid |
 | Input | Keyboard, Pointer | Keyboard layouts and key repeat; sensitivity, the cursor's colour and size, shake to find |
 | [Keys](/shell/keys-and-packages/#changing-a-key) | The shell's own, The compositor's | Every key, for the profile in use |
 | [Session](/shell/lock-and-login/) | Lock screen, Face unlock, When you leave | Your account's name and picture, the lock's clock, [its music](/shell/lock-and-login/#music-on-the-lock) and its blur; [face unlock](/shell/lock-and-login/#face-unlock); the idle waits |
@@ -131,7 +131,7 @@ dock and how many widgets it has.
 
 | In a profile | Kept by the machine, whatever the profile | In no profile |
 |---|---|---|
-| The bar, the widgets, the dock, the launcher, the control centre, the look, **every key**, the wallpaper and its palette | The screens and the lid, workspaces shared or per screen, your name and picture, the language, the keyboard layouts, the weather's location, the GitHub user, the markets followed, Do not disturb, the night light, game mode, the camera's effect and reactions | Notes, tasks, the clipboard, the pets, the game bests |
+| The bar, the widgets, the dock, the launcher, the control centre, the look, **every key**, the wallpaper and its palette | The screens and the lid, workspaces shared or per screen, your name and picture, the language, the keyboard layouts, the weather's location, the GitHub user, the markets followed, Do not disturb, the night light, game mode, dimming below the backlight, the power tile's profile, the calendar links, the favourite wallpapers, which programs the palette is written to, the camera's effect and reactions | Notes, tasks, the clipboard, the pets, the game bests |
 
 ### The three that ship
 
@@ -178,8 +178,11 @@ wait in `profiles.json` beside it. An export is the backup.
 ## Language
 
 **System → This machine → Language: English or Español.** It is the language of
-the settings window: it never changes the system's language or renames a
-folder in your home, and anything without a translation stays in English.
+the whole shell: the settings window, the island and its panels, the control
+centre, the widgets, the lock screen and the capture bar, and the days and
+months they spell out. It never changes the system's language or renames a
+folder in your home. Files the shell writes, such as the generated themes,
+stay in English, and so does the login screen, which runs before the shell.
 
 ## Updates
 

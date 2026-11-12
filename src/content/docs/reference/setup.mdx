@@ -21,7 +21,9 @@ first screen picks a verb (install, update, sync, uninstall, check or help)
 with the arrows and <kbd>Enter</kbd>. Picking install leads to a second one,
 where <kbd>Space</kbd> switches the packages, the login screen, the plugins and
 the extras on or off, and the last row picks yay or paru, starting on the one
-installed.
+installed. On a machine installed shell-only it opens with only the packages
+on, and turning on any of the other three installs everything, as `--full`
+does.
 
 ## Installing
 
@@ -39,8 +41,8 @@ daemon only start with a new Hyprland session.
 | Verb | What it does | When to run it |
 |---|---|---|
 | `packages` | Installs what `packages/pacman.txt` lists and is missing, with `sudo pacman -Syu --needed`, so the system is upgraded in the same step, then `packages/aur.txt` with yay or paru. Offers to build `yay-bin` (or the `--aur-helper` one) when neither is installed. | After a pull adds a package. |
-| `sync` | Copies `home/` into `$HOME`. When the shell's files changed, it asks the running shell to reload once the last one has landed. Creates the greeting's scenes and the `impasto` icon theme if they are missing, and records the version, the branch and the checkout, which Settings → System shows and checks for updates against. | After editing the repository. |
-| `system` | Copies `system/` into `/` with sudo (the login screen, the boot splash and its two drop-ins, the lock screen's PAM service for face unlock, the two small helpers Settings changes your faces and your picture through, with their polkit rules, and the rest), creates `/var/lib/impasto/faces`, and enables sddm from the next boot where no other display manager is enabled. Loads `i2c-dev` for the brightness of external monitors, so the session after the install has it without a reboot. | After a change to the login screen or the other system files. |
+| `sync` | Copies `home/` into `$HOME`, or only the shell's and Hyprland's files on a [shell-only](#flags) machine. When the shell's files changed, it asks the running shell to reload once the last one has landed. Creates the greeting's scenes and the `impasto` icon theme if they are missing, and records the version, the branch and the checkout, which Settings → System shows and checks for updates against. | After editing the repository. |
+| `system` | Copies `system/` into `/` with sudo (the login screen, the boot splash and its two drop-ins, the lock screen's PAM service for face unlock, the two small helpers Settings changes your faces and your picture through, with their polkit rules, and the rest), creates `/var/lib/impasto/faces`, and enables sddm from the next boot where no other display manager is enabled. Once, where CUPS is installed, it sets up printing: enables CUPS on its socket and Avahi, and puts `mdns_minimal` on the hosts line of `/etc/nsswitch.conf`. Loads `i2c-dev` for the brightness of external monitors, so the session after the install has it without a reboot. | After a change to the login screen or the other system files. |
 | `files` | Lists the installed files under `$HOME` you have deleted or edited, and puts each one back: `files list` prints them as JSON, `files restore <path>` brings a deleted one back, `files reset <path>` puts the repository's version over yours and keeps yours in the backups, `files keep <path>` keeps yours and takes the version waiting beside it as seen. Paths are as `list` prints them. Settings → System → Updates → Changed files is this verb, with a button for each. | When you want a file back, or the page to do it. |
 | `plugins` | Builds and enables hypr-dynamic-cursors and hyprglass with hyprpm, then reloads them, asking for your password once. Outside a running Hyprland it leaves them to the first session: that login opens a terminal that builds them, and asks again at every login until they are built. | Inside the session, when the plugins are missing. |
 
@@ -84,8 +86,10 @@ skip. [Applications](/theming/apps/) covers each program.
 
 | Flag | Verbs | Effect |
 |---|---|---|
+| `--shell-only` | `install`, `update`, `sync` | Only the shell (`~/.config/quickshell`) and Hyprland (`~/.config/hypr`, never its `custom/` folder), with the shell's data, the wallpapers and the `impasto` command: no user folders, no oh-my-zsh, no `/`, no plugins, no extras and no other program's configuration. The packages are the full list; add `--skip-packages` to install none. The first time, the palette is written to no other program until one is switched on in Settings. Remembered, so `update`, `sync` and Settings' **Update** keep to it, and each says so when it starts. |
+| `--full` | `install`, `update`, `sync` | Everything again, and forget `--shell-only`. The two cannot be given together. |
 | `--skip-packages` | `install`, `update` | Leave the packages alone. |
-| `--skip-system` | `install`, `update` | Leave `/` alone. |
+| `--skip-system` | `install`, `update` | Leave `/` alone, printing included. |
 | `--skip-plugins` | `install`, `update` | Do not build the plugins. |
 | `--skip-extras` | `install`, `update` | Leave [the extras](#the-extras) alone. |
 | `--aur-helper NAME` | `install`, `update`, `packages` | `yay` or `paru`. The one installed is used; when there is neither, this one is built from the AUR. `yay` if unset. Also written `--aur-helper=NAME`. |

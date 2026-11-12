@@ -260,6 +260,26 @@
   }
  },
  {
+  "id": "jason-lucia-sunset",
+  "file": "jason-lucia-sunset.webp",
+  "name": "Jason Lucia Sunset",
+  "palette": {
+   "background": "#191419",
+   "surface": "#272227",
+   "surfaceHover": "#373239",
+   "border": "#47424d",
+   "text": "#eef2f7",
+   "textMuted": "#94a1b2",
+   "accent": "#DF2D21",
+   "accentHover": "#ff4234",
+   "accentText": "#ffffff",
+   "red": "#f38ba8",
+   "green": "#a6e3a1",
+   "yellow": "#f9e2af",
+   "blue": "#89b4fa"
+  }
+ },
+ {
   "id": "koi-pond",
   "file": "koi-pond.webp",
   "name": "Koi Pond",

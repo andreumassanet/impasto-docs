@@ -17,25 +17,25 @@ closes it, and so do Escape and a click anywhere off the island.
 
 ## The top row
 
-**Small buttons over the grid, on a left and a right side.** Out of the box,
-the session's actions are on the left — Lock, Suspend, Log out, Restart, Shut
-down — and doors to other panels on the right: System statistics, Settings,
-Pet, Games, Notes and Task board. Lock and Suspend run at once; the other three
-turn red on the first click and run on the second.
+**Small buttons over the grid, on its right, and the time and the battery on
+its left.** Out of the box the row holds the session's actions — Lock,
+Suspend, Log out, Restart, Shut down — then doors to other panels: System
+statistics, Settings, Pet, Games, Notes and Task board. Lock and Suspend run at
+once; the other three turn red on the first click and run on the second.
 
-Any button can go on either side. The doors on offer are System statistics,
-Settings, Pet, Games, Notes, Task board, Workspace overview, Launcher,
-Appearance, Session menu, Keys, Packages, Servers, Screen time and Camera. With both sides empty there is no
-row, and no space for one.
+The doors on offer are System statistics, Settings, Pet, Games, Notes, Task
+board, Workspace overview, Launcher, Appearance, Session menu, Keys, Packages,
+Servers, Screen time and Camera. The time and the battery's charge are off out
+of the box, and switched under Settings → Control Centre → Clicks, the clock
+and the battery; the battery is offered only on a machine with one. With no
+buttons and neither of the two there is no row, and no space for one.
 
 - **In Settings → Control Centre → The top row**, the row is drawn in
-  miniature with a tray of the buttons on neither side. Drag a button from the
-  tray onto a side, along it, across to the other, or back into the tray to
-  take it off.
+  miniature with a tray of the buttons off it. Drag a button from the tray
+  onto the row, along it, or back into the tray to take it off.
 - **While arranging**, click the row as you would a block. Its card lists every
-  button with a tick for the ones on the row, the side each is on (a click
-  moves it across), and arrows to order it along that side. An empty row shows
-  while arranging, so it can be filled.
+  button with a tick for the ones on the row, and arrows to order them along
+  it. An empty row shows while arranging, so it can be filled.
 
 ## The grid
 
@@ -55,9 +55,9 @@ middle; the notifications down the right.
 | Volume | 2×1, 3×1, 4×1 | The output's slider; its chevron opens [the sound page](#the-pages) |
 | Brightness | 2×1, 3×1, 4×1 | The slider for the screen the keyboard is on; with several screens, a chevron opens one for each |
 | Appearance | 2×2, 2×3, 2×4, 3×3, 4×2 | The wallpaper; a click opens the appearance panel |
-| Media | 2×2, 2×3, 3×2, 4×2 | The player |
-| Weather | 2×1, 2×2, 2×3, 4×2 | The conditions now, and the rest of the day when there is room |
-| Calendar | 2×3, 2×4, 3×4 | The month, a dot under each day with tasks; such a day turns into its list |
+| Media | 2×2, 2×3, 3×2, 4×2 | The player; a click on the cover opens the player's detail |
+| Weather | 2×1, 2×2, 2×3, 4×2 | The conditions now, and the rest of the day when there is room; a click opens its detail |
+| Calendar | 2×3, 2×4, 3×4 | The month, a dot under each day with [events](#calendar-events) or tasks; such a day turns into its hours and its list |
 | Notifications | 3×2, 3×3, 2×4, 3×4, 2×6, 2×8, 3×8 | The history, with Clear |
 | Session | 1×1, 2×1, 3×1, 1×2, 2×2, 4×1 | Round buttons for Lock, Suspend, Log out, Restart and Shut down |
 | Shortcuts | 1×1, 2×1, 3×1, 1×2, 2×2, 4×1, 6×1 | Round buttons that open other panels, chosen per block |
@@ -79,13 +79,19 @@ pages, turned with the wheel, a sideways drag, the arrows or the dots along the
 bottom. The six out of the box are Wi-Fi, Bluetooth, Power, Focus, Microphone
 and Airplane.
 
+A tile with a chevron toggles wherever it is pressed, and the chevron opens its
+page. With **Menu on the label** on, under Settings → Control Centre → Clicks,
+the clock and the battery, the icon toggles and the rest of the tile opens the
+page.
+
 | Tile | What it does |
 |---|---|
 | Wi-Fi | Switches the radio. Its chevron opens the Wi-Fi list. |
 | Bluetooth | Switches Bluetooth. Its chevron opens the device list. |
-| Power | Switches the power profile between balanced and performance; lit on performance |
+| Power | Lit off balanced: a press goes from balanced to the last other profile picked, power saver until one is, and back. Its chevron opens [every profile](#the-pages). Needs power-profiles-daemon. |
 | Focus | Do not disturb — notifications stay off the island |
 | Microphone | Mutes the microphone. Its chevron opens [its page](#the-pages). |
+| Keep awake | Holds off the idle lock, the screen going off and suspend while it is on; it is not kept across a restart of the shell |
 | Airplane | Wi-Fi and Bluetooth off together, or back on |
 | Night light | A warmer screen, through hyprsunset. Its chevron opens [its page](#the-pages). |
 | Output | Mutes the sound |
@@ -97,24 +103,32 @@ and Airplane.
 | Annotate | A region, straight into satty |
 | Read text | A region, read as text onto the clipboard |
 | Colour | The colour of one pixel, onto the clipboard |
-| Record | Records the screen the keyboard is on, at once, or stops the recording |
+| Record | Records the screen the keyboard is on, at once, or stops the recording. Its chevron opens [the recent takes](#the-pages). |
 | Clear clipboard | Empties the clipboard history; only there while something is kept |
+| Song | Listens to 12 seconds of what the speakers play and names the song in a notification, through songrec; listed only where songrec and parec are installed |
 
-The last six close the panel first, so it is not in the picture. A tile the
+Capture, Annotate, Read text, Colour, Record, Clear clipboard and Song close
+the panel first, so it is not in the picture. Song sends a short fingerprint of what is playing,
+a call included, to Shazam. A tile the
 machine cannot do (no Bluetooth adapter, no satty, no hyprpicker) is dimmed
 and does nothing.
 
-**The Wi-Fi list** shows the networks in range with their signal, which are
-secured and which are saved, a Rescan and the switch. A click on a secured
-network opens a password field in its row. **The Bluetooth list** shows the
-devices that have a name, and anything paired or connected; the unnamed ones
-are folded under a line at the bottom. A click connects. Both lists also open
-from the Network and Bluetooth pieces on [the bar](/shell/bar/).
+**Bluetooth, Wi-Fi and Sound are tabs of one panel**, along a strip at its
+top: a click on a tab, or <kbd>Tab</kbd> and <kbd>Shift</kbd> <kbd>Tab</kbd>,
+goes between them. **The Wi-Fi list** shows the networks in range with their
+signal, which are secured and which are saved, a Rescan and the switch. A
+click on a secured network opens a password field in its row. **The Bluetooth
+list** shows the devices that have a name, and anything paired or connected;
+the unnamed ones are folded under a line at the bottom. A click on a new
+device pairs it, trusts it and connects it once paired; on a paired one it
+connects or disconnects. The bin on a paired device under the pointer, or the
+right button, forgets it. Both lists also open from the Network and Bluetooth
+pieces on [the bar](/shell/bar/).
 
 <Aside>
-Bluetooth connects but cannot pair a new device, and Wi-Fi cannot forget a
-saved network. Pair and forget with `bluetoothctl` and `nmcli`. See
-[limitations](/help/limitations/).
+Wi-Fi cannot forget a saved network, and a Bluetooth device that asks for a
+PIN cannot be paired here. Use `nmcli` and `bluetoothctl`. See
+[limitations](/help/limitations/#network-and-bluetooth).
 </Aside>
 
 ## The pages
@@ -124,7 +138,10 @@ Bluetooth tiles open their lists. The back arrow at the top returns to the
 control centre.
 
 - **Sound**, from the volume slider: the output's level, a row for every
-  application playing with its own level, and the outputs to choose from.
+  application playing with its own level, the outputs to choose from and,
+  where there is a microphone, the inputs under them. With EasyEffects
+  installed, **Sound effects row** under Settings → Island adds a row that
+  says whether it is on, with a button for its window.
 - **Microphone**, from its tile: the input's level, every application
   recording it with its own level, and the inputs to choose from.
 - **Night light**, from its tile: the warmth as a level, and four presets,
@@ -132,8 +149,48 @@ control centre.
   switch.
 - **Brightness**, from its slider when there is more than one screen to dim: a
   level for each screen, by name. With one screen there is no chevron.
+- **Power**, from its tile: one row per profile power-profiles-daemon offers,
+  Power saver, Balanced and, where the machine has it, Performance. The
+  battery's card on [the bar](/shell/bar/) switches the same three.
+- **Record**, from its tile: the four newest takes, newest first, with the
+  date and size of each, and a row that opens the folder. A click on a take
+  plays it. A recording is stopped from the island, which shows it wherever
+  you are.
+
+### Volume and brightness past their ends
+
+- **Volume above 100 %**, under Settings → Control Centre → Sound, lets the
+  output, the input and every application go to 150 %. The sliders, the
+  volume keys and the volume command all stop at the same place. Off out of
+  the box: above 100 % the sound is amplified and can distort.
+- **Dim below the backlight**, under Settings → Displays → The screen →
+  Brightness, gives the slider and the keys a bottom fifth that darkens the
+  picture past the backlight's lowest step, down to a quarter, through
+  hyprsunset. Screenshots, recordings and the colour picker keep the true
+  colours. It is kept by the machine, since it depends on the panel, and off
+  out of the box.
 
 <Figure name="controls-volume" alt="The Sound page in the island: the speaker at 64%, Google Chrome with its own level at 100% under Apps, and the outputs Speaker, ticked, HDMI 1, HDMI 2 and HDMI 3." caption="The sound page: the level, each application's, and the output." />
+
+## Calendar events
+
+**The calendar shows the events of calendars you link, and of khal.** Under
+Settings → Modules → Calendar, give a calendar a name and its iCalendar link
+(an `https://` or `webcal://` address ending in `.ics`) and press **Add**:
+Google's *Secret address in iCal format*, under the calendar's settings, or
+Outlook's published ICS link under Shared calendars → Publish a calendar. Each
+link's row says how many events are ahead, or why it could not be read, and
+its bin removes it. Calendars already set up in khal show without a link.
+
+- A day with events gets a dot, in the calendar block and in the desktop's
+  calendar. A click on it shows the day as hours, each event a block from its
+  start to its end, side by side where they overlap, with all-day events above
+  and a line at the time now on today. Then the day's tasks.
+- Links are read at most every fifteen minutes, repeating events included, and
+  the last good copy is kept for when a download fails. Events are read only:
+  nothing is written back.
+- The link is private: anyone who has it can read the calendar. It is kept by
+  the machine, not the profile.
 
 ## Arranging
 

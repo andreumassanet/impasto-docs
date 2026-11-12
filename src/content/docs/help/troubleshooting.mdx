@@ -61,7 +61,19 @@ Spotify, open it once first and close it), then run:
 ```
 
 Each also has a verb of its own, such as `./setup vesktop`, which stops with
-the reason instead of skipping.
+the reason instead of skipping. VSCodium, Vesktop and Nautilus are also left
+alone while they are switched off under Settings → Appearance → Wallpaper →
+Applications.
+
+### A shell-only install
+
+`./setup install --shell-only` is remembered, so `update`, `sync` and
+**Update** in Settings copy only the shell and Hyprland, and say so when they
+start. To have the rest of the desk, install again with `--full`:
+
+```bash
+./setup install --full
+```
 
 ### update stopped: the pull left conflicts
 
@@ -153,6 +165,8 @@ control away: the control is dimmed, or left out entirely.
 | `tesseract` | Reading a region as text |
 | `wf-recorder` and `wl-screenrec` | Recording |
 | `pacman-contrib` | A live count of updates |
+| `power-profiles-daemon` | The power tile and its page, and the profiles on the battery's card |
+| `songrec` and `libpulse` | The Song tile |
 | `ddcutil` | The brightness of external monitors |
 | `v4l-utils` and `howdy-next` | Face unlock |
 
@@ -316,6 +330,13 @@ run `./setup sync`, which draws them if they are missing. The next palette
 change redraws them too.
 
 ## Other windows
+
+### A program does not follow the palette
+
+Check its switch under Settings → Appearance → Wallpaper → Applications: a
+program switched off there keeps the last palette written to it. A shell-only
+install starts with every switch off. Switched back on, it is painted at once,
+and an open window takes it as it would any palette change.
 
 ### Spotify keeps the old colours
 

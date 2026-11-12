@@ -21,7 +21,9 @@ install runs from the `setup` just pulled, so a release that changes the
 installer takes effect on the same update. A checkout with no upstream branch
 skips the pull and installs what is there. When a release adds packages, they
 are installed with a full system upgrade in the same step
-(`pacman -Syu --needed`), as Arch expects.
+(`pacman -Syu --needed`), as Arch expects. A machine installed with
+[`--shell-only`](/start/install/#only-the-shell) is updated the same way, as
+the shell and Hyprland only; `./setup update --full` brings the rest.
 
 An update stops before copying anything when the pull leaves conflicts, which
 happens when you edited the repository itself and the release changed the same
@@ -72,6 +74,11 @@ runs.
 Every configuration file exists twice, once in the repository and once where it
 is used. The desk reads the copy, never the repository.
 
+**For Hyprland, put your change in `~/.config/hypr/custom/`** instead: a file
+named like a module, `custom/look.lua`, is loaded right after
+`modules/look.lua` and can override what it set. Nothing installs into that
+folder, so an update never leaves a `.new` beside it.
+
 **Edit your copy** — `~/.config/hypr/modules/look.lua`, say — and the change
 applies at once. `setup` notices it has been edited and leaves it alone. When the
 repository later changes that file, the repository's version is written beside
@@ -104,8 +111,9 @@ until the repository changes that file again.
 ./setup sync --watch    # copy again on every save, until Ctrl+C
 ```
 
-A sync that changes the shell's files ends by asking the running shell to
-reload, once the last file has landed, so the desk never runs half of a
+On a shell-only machine, `sync` copies only the shell's and Hyprland's
+files, as the install did. A sync that changes the shell's files ends by asking
+the running shell to reload, once the last file has landed, so the desk never runs half of a
 change. `--watch` needs `inotify-tools`.
 
 <Aside type="note">

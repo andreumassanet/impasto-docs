@@ -133,8 +133,10 @@ looked up while nothing on screen shows lyrics.
 
 These are the default keys. Every key belongs to a profile and can be changed
 in Settings → Keys; the full list is in [the keybindings](/reference/keybindings/).
-[Settings](/shell/settings/) itself, <kbd>SUPER</kbd> <kbd>,</kbd>, is the one
-panel that is not the island: it opens as a window.
+[Settings](/shell/settings/) itself, <kbd>SUPER</kbd> <kbd>,</kbd>, is not the
+island: it opens as a window, and so does
+[the key window](/shell/keys-and-packages/#the-key-window) on <kbd>SUPER</kbd>
+<kbd>SHIFT</kbd> <kbd>H</kbd>.
 
 The session menu is five tiles (Lock, Suspend, Log out, Restart, Shut down),
 moved through with the arrows or the pointer. Lock and Suspend run at once;
@@ -202,6 +204,17 @@ and the time at its far end; and two lines of the body.
   directory. A notification that asks not to be kept is shown and not stored.
   Inline replies are not shown.
 
+**Each application can be told apart** under Settings → Island →
+Notifications → **Per application**, which has a row for every application
+that has notified and any that has a rule:
+
+| Rule | Its notifications |
+|---|---|
+| Default | Shown and kept, as any other |
+| Mute | Closed unseen, and not kept |
+| Silent | Kept in the list, never shown |
+| Popup only | Shown, never kept |
+
 **Do not disturb** keeps notifications off the island and still keeps them in
 the list; a critical one comes through anyway. The bell is crossed out while
 it is on, and it stays on across a restart. Switch it with the **Focus** tile
@@ -221,12 +234,18 @@ reading. Holding a key gives one smooth reading rather than a flicker of
 them, and it falls away after under two seconds. With the volume or brightness
 detail open, its own slider shows the change instead.
 
+**A passing reading comes over a full-screen window**, a video or a game, on
+the screen that has it. That screen's bar is away, as in
+[zen](/shell/bar/#zen), and the island alone comes down over the window for as
+long as the reading shows. A notification or a panel stays under the window.
+
 <Figure name="osd" alt="The island as a narrow bar with a speaker symbol, a volume slider and 72%." caption="The volume, passing." />
 
 The same capsule carries messages with no level: what a capture did, the
 colour picked, a recording starting and stopping, a new best in a game, a new
 egg for the pet, a profile switched, the window layout cycled, game mode on or
-off.
+off, Caps Lock on or off. On the lock, Caps Lock is said
+[under the field](/shell/lock-and-login/#the-lock-screen) instead.
 
 ## Asking for root
 

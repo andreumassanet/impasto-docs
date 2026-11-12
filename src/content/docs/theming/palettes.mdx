@@ -30,6 +30,19 @@ are a strip with the one in the middle drawn large: <kbd>Left</kbd> and
 the panel stays open so you can try the next. The folder is read again every
 time the panel opens.
 
+- **Folders are tiles too**, drawn over the first picture inside them:
+  <kbd>Enter</kbd> opens one, and its first tile or <kbd>Backspace</kbd> goes
+  back up. The panel opens in the folder of the wallpaper in use.
+- **Typing searches by name**, best match first, across every folder at once,
+  or among the favourites. The footer shows what is typed and the folder of
+  the match in the middle. <kbd>Escape</kbd> clears the search and goes back
+  to the wallpaper in use; a second one closes the panel.
+- **<kbd>Ctrl</kbd> <kbd>D</kbd> keeps a wallpaper as a favourite**, or lets
+  it go. The favourites are the page above the wallpapers, <kbd>Up</kbd> from
+  them, and they belong to the machine, not the profile.
+- <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>Page Up</kbd> and <kbd>Page Down</kbd>
+  jump along the strip.
+
 <Figure name="appearance" alt="A strip of painted wallpapers with Pagoda Fuji Blossom in the middle, marked as in use." caption="The wallpapers, on SUPER + T." />
 
 <Figure name="appearance-palettes" alt="The same strip turned to palettes, with Adaptive (Wallpaper) in use beside Catppuccin Mocha and Catppuccin Latte." caption="The palettes, on SUPER + SHIFT + T." />
@@ -63,15 +76,17 @@ transition takes one second.
 
 ## Adding your own
 
-**Put the picture in `~/.local/share/wallpapers/`** and open the appearance panel
-again. JPEG, PNG and WebP files are read (`.jpg`, `.jpeg`, `.png`, `.webp`);
-subfolders and hidden files are not. The name under the tile is the file name,
+**Put the picture in `~/.local/share/wallpapers/`**, or in a folder inside it,
+and open the appearance panel again. JPEG, PNG and WebP files are read (`.jpg`,
+`.jpeg`, `.png`, `.webp`), in folders at any depth, and the picker shows them
+by folder, as they are on disk. Hidden files and folders are not read, and a
+link to a folder is followed once. The name under the tile is the file name,
 with dashes and underscores turned into spaces.
 
 `setup` never touches a file it did not put there, so your pictures stay through
 `./setup update` and `./setup uninstall`.
 
-The thirty-three that come with the desk are photographs turned into the look of
+The thirty-four that come with the desk are photographs turned into the look of
 thick oil paint, then sharpened.
 The [questions page](/help/faq/) says which file is which.
 
@@ -79,11 +94,12 @@ The [questions page](/help/faq/) says which file is which.
 
 ## Animated wallpapers
 
-**Put a video in `~/.local/share/wallpapers/animated/`** and it shows on a
-strip of its own above the wallpapers in the appearance panel: open it with
-<kbd>SUPER</kbd> <kbd>T</kbd> and press <kbd>Up</kbd>. MP4, WebM, MKV, MOV and
-GIF files are read. The tiles are each video's first frame, and
-<kbd>Enter</kbd> applies the one in the middle, as with a picture.
+**Put a video anywhere in `~/.local/share/wallpapers/`** and it shows among the
+pictures in the appearance panel, in its folder, marked as a video. MP4, WebM,
+MKV, MOV and GIF files are read. The video in the middle of the strip plays,
+muted, and <kbd>Enter</kbd> applies it, as with a picture. A folder named
+`animated` is not shown as a folder: the videos in it sit where the folder
+is.
 
 The video is played by mpvpaper, under the windows, on every screen, cropped to
 fill each one. It has no sound and loops. It pauses under a full-screen window,
@@ -94,7 +110,7 @@ lock screen, the overview and the arranging desk draw, and what shows while the
 transition runs. Picking a still wallpaper stops the video. A profile keeps the
 video itself.
 
-Nothing comes in the `animated` folder: the videos are yours to add. Without
+No video comes with the desk: the videos are yours to add. Without
 mpvpaper the first frame stands in for the video, and without ffmpeg a video is
 not listed, since its first frame cannot be read.
 
@@ -136,7 +152,7 @@ it stays dark even under Catppuccin Latte.
 
 **<kbd>SUPER</kbd> <kbd>SHIFT</kbd> <kbd>T</kbd> opens the palettes**, the page
 under the wallpapers in the same panel; <kbd>Down</kbd> and <kbd>Up</kbd> move
-between the animated wallpapers, the wallpapers and the palettes. The first tile, **Adaptive (Wallpaper)**, is the palette taken
+between the favourites, the wallpapers and the palettes. The first tile, **Adaptive (Wallpaper)**, is the palette taken
 from the wallpaper, and it is the default. Any other tile keeps its palette
 whatever wallpaper you pick afterwards, until you go back to Adaptive.
 

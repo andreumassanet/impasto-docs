@@ -131,6 +131,10 @@ the bar's black. Place the Tray piece from the catalogue like any other; it is
 not drawn while no application has an icon in it. Past five icons, the rest
 fold behind a count, and a click on the count shows them.
 
+**An application can be left out.** Settings → Bar → Layout → **Tray** lists
+every application showing an icon now, each with a switch; one switched off
+stays off the bar until it is switched back on.
+
 | On an icon | Does |
 |---|---|
 | Click | The application's own action, usually opening its window |
@@ -151,9 +155,14 @@ Two settings for the whole bar, under Bar → Layout → *Chips*:
 |---|---|
 | Shape | **Icon**: the module's symbol, small (the default). **Ring**: its gauge as a circle round the symbol: charge, volume, a countdown. |
 | Figure | **No**: the symbol alone. **On hover**: the figure opens under the pointer. **Always**: always beside it (the default). |
+| On hover | With the figure on hover: **Inline**, the piece widens to show it (the default), or **Pill**, a small card with the piece's name and figure drops from the bar under it, so nothing on the bar moves. |
+
+The pill stays on the piece's own screen and not while the island is open; in
+the One island and Bezel styles it grows down out of the band. A button has no
+figure, so it shows none.
 
 Only a module whose reading fills from empty to full gets a ring. Network,
-Bluetooth, Notifications, Weather, Markets, Screen time, Updates and Calendar
+Network speed, Bluetooth, Notifications, Weather, Markets, Screen time, Updates and Calendar
 keep their symbol in either shape.
 
 <Figure name="bar-modules" alt="The same bar four times: the symbols alone, the symbols with their figures, the rings, and the rings with their figures" caption="Icon or ring, with its figure or without, for the whole bar." />
@@ -183,6 +192,7 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
 | Volume | The level, or *Muted* | A slider, and mute buttons for the output and the microphone | — |
 | Brightness | The level of the screen you are on | A slider for each screen that can be dimmed | A backlight, or a monitor that answers DDC/CI |
 | Network | The network's name, or *Off* | The Wi-Fi list, the same as the control centre's | — |
+| Network speed | The download and upload speed | The speed now, the totals since boot, the interface the traffic leaves by and its address, and both speeds over the last minutes | — |
 | Bluetooth | The connected device, a count, *No devices* or *Off* | The device list | A Bluetooth adapter |
 | Notifications | A bell and how many are kept; crossed out in do not disturb | The history, with Clear | — |
 | Weather | The conditions and the temperature | The place, feels-like, the reading's age and the next hours | A network connection (below) |
@@ -191,7 +201,7 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
 | System | The processor load | Processor and memory, with their recent history | — |
 | Updates | How many updates are waiting | What is waiting, when it was checked, and Open for the packages panel | pacman-contrib for a fresh count |
 | Pet | The pet that is out, and its level or *Egg* | Feed, play, and the shelf of the whole family | — |
-| Calendar | Its symbol and the day | The month, with a dot under each day that has tasks; such a day opens its list | — |
+| Calendar | Its symbol and the day | The month, with a dot under each day that has tasks or events; such a day opens its events as blocks on the day's hours, then its tasks | Calendar links or khal, for events (below) |
 
 - **Claude** appears once Claude Code has written its transcripts under
   `~/.claude/projects`; the token and message counts are read from them. The
@@ -206,7 +216,19 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
   shows no share until Codex runs again.
 - **Weather** comes from wttr.in, which guesses the place from your connection
   when none is set. Set it under Settings → Modules → Weather →
-  **Location**: a city, a postcode or an airport code.
+  **Location**: a city, a postcode or an airport code. **Icons**, beside it,
+  draws the sky in the palette's colours or, with *In colour*, as Breeze's
+  full-colour pictures, the same in every palette; it is offered while
+  breeze-icons is installed.
+- **Media** draws the cover as a rounded rectangle or a circle, under
+  Settings → Modules → Media cover → **Shape**, everywhere the shell shows it:
+  the bar, the island, the lyrics and the control centre.
+- **Calendar** shows events from the calendars under Settings → Modules →
+  Calendar: a calendar's iCalendar link, such as Google's secret address or
+  Outlook's published ICS, with a name. Each is read every fifteen minutes,
+  repeating events included, and its row says how many events are ahead or why
+  it could not be read. The link is private: anyone who has it can read the
+  calendar. Calendars set up in khal show too. Events are read-only.
 - **Markets** follows the pairs under Settings → Modules → Markets →
   **Follow**, BTC, ETH and EUR/USD out of the box. A coin alone is priced in
   US dollars and BTC/EUR in euros, from CoinGecko; two currencies, such as
@@ -247,6 +269,19 @@ drawn on the strip (five by default); the rest, up to *Workspaces available*
 (ten by default), appear only while they have windows. **With more screens**
 is whether every screen shares the same ten or each has
 [ten of its own](/shell/screens/#ten-for-each-screen).
+
+**Applications**, on the same tab, puts the focused workspace's applications
+after its mark, an icon for each, up to four: inside the pill in the written
+styles, beside the shape in the others. **Numbers while Super is held** draws
+plain numbers on the strip, in any style, for as long as <kbd>SUPER</kbd> is
+down. Both are off by default.
+
+**The scratchpad** is a workspace shown over the one you are on:
+<kbd>SUPER</kbd> <kbd>Z</kbd> shows or hides it, and <kbd>SUPER</kbd>
+<kbd>SHIFT</kbd> <kbd>Z</kbd> sends the focused window into it, or back out to
+the workspace under it. While it, or any other special workspace, is open over
+a screen, the strip ends in an accent pill with its name and its
+applications, in every style; a click on the pill hides it.
 
 **The strip draws in one of seven styles**: Dots, the default, Bars or Rings,
 or the workspace's number written out: Numbers, Roman, Kanji or Greek. The

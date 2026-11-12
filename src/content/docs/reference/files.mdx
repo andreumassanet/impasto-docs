@@ -38,7 +38,7 @@ Each tree in the repository is its destination as it is: `home/` is `$HOME` and
     - fonts/ GrapeNuts-Regular.ttf, the script face, and its OFL licence
     - icons/hicolor/ impasto-files, the file manager's tile on the dock
     - nautilus-python/extensions/impasto.py Nautilus's right-click menu
-    - wallpapers/ the thirty-three wallpapers
+    - wallpapers/ the thirty-four wallpapers
     - impasto/
       - palette-board.json
       - palette-board.png
@@ -61,6 +61,12 @@ Each tree in the repository is its destination as it is: `home/` is `$HOME` and
 
 These copies are yours to edit. See [Updating](/start/updating/) for what
 happens to an edited one.
+
+**`~/.config/hypr/custom/` is yours alone.** A file there named like a module,
+`custom/keybinds.lua` beside `modules/keybinds.lua`, is loaded right after that
+module and can override what it set. Nothing installs into that folder and
+`setup` never touches it, so a change there needs no merging on an update. An
+error in one leaves the rest loaded.
 
 ## The shell's state
 
@@ -110,6 +116,7 @@ System → Profiles. `profiles.json` alone is not a backup of the one in use.
   - system.manifest the same for /
   - version the version, the branch and the checkout they came from, written by every sync; Settings → System shows them and checks for updates against that checkout
   - plugins-pending the checkout, while the Hyprland plugins wait for a session; removed once they build
+  - install-mode `shell` on a machine installed with --shell-only, so update and sync keep to it
   - applied/ one file per extra install has set up
   - backups/
     - 20260913-101500/ one directory per run that moved something
@@ -159,7 +166,8 @@ ticks the theme in `~/.config/vesktop/settings/settings.json`, and
 | The face on the lock and login screens | `/var/lib/impasto/faces/<username>.face.icon`, then `~/.face` |
 | Screenshots | `XDG_SCREENSHOTS_DIR` in `~/.config/user-dirs.dirs`, else `Screenshots` in your pictures folder |
 | Recordings | `XDG_SCREENCASTS_DIR`, else `Screencasts` in your videos folder |
-| Wallpapers you add | `~/.local/share/wallpapers`, JPEG, PNG or WebP |
+| Wallpapers you add | `~/.local/share/wallpapers`, in folders at any depth: JPEG, PNG or WebP, and MP4, WebM, MKV, MOV or GIF |
+| Linked calendars | `~/.cache/impasto/calendars`, the last good copy of each link |
 | Virtual machines | `~/.local/share/impasto/machines`, one quickemu configuration and folder each |
 | Camera photos | `XDG_CAMERA_DIR`, else `Camera` in your pictures folder |
 | The camera's models | `~/.local/share/impasto/camera`, downloaded by `./setup camera` |

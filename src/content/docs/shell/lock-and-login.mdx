@@ -35,14 +35,17 @@ the lid.
 - Awake, the clock rises and steps back, and one black pill comes up with your
   picture, your name and "Enter your password" — "Face unlock or password"
   where [face unlock](#face-unlock) is set up.
-- From the first character, the pill stretches into the field.
+- From the first character, the pill stretches into the field. An eye beside
+  it shows what is typed, and hides it again whenever the field empties.
 - Restart and shut down are in the bottom-left corner while it is awake, each
   armed by the first click and run by the second.
 
 <Figure name="lock-awake" alt="The lock awake: the clock risen towards the top, a black pill at the bottom with a round picture, the name andreu and Face unlock or password, and restart and shut down in the bottom-left corner." caption="Awake: the pill, and the power buttons in their corner." />
 
 The password goes through PAM's `login` configuration, so hyprlock is not
-needed. A wrong one shakes the pill and says why under it. <kbd>Escape</kbd>
+needed. A wrong one shakes the pill and says why under it. While Caps Lock is
+on, the line under the pill says so first, in the warning colour; with more
+than one keyboard layout, the one in use is named under that. <kbd>Escape</kbd>
 clears the field and puts the screen back to its clock, and so do 30 seconds
 untouched, never while a password is being checked. Unlocking fades the type
 and relaxes the blur, so the desk is what is left when the lock falls; with two
@@ -55,7 +58,13 @@ card, and type the name. [Your picture](#your-picture) says where they go. Under
 a black card for each part of the time, split at a hinge, whose top folds down
 over the new figure as it turns. The login screen always draws it stacked.
 Under **Background**, the **Blur** is 8 to 64 px, previewed over the
-wallpaper.
+wallpaper, and **Behind it** chooses what the lock is drawn over:
+
+| Choice | Behind the lock |
+|---|---|
+| The cover | The playing track's cover, blurred into a wash of its colours, while music plays; otherwise the desktop. The default |
+| The desktop | The screen as it was, blurred |
+| The wallpaper | The wallpaper alone: no picture of the screen is taken, so nothing that was open shows |
 
 ### Music on the lock
 
@@ -70,7 +79,8 @@ Settings → Session → Lock screen → **Music** chooses what it shows:
 | Setting | Choices |
 |---|---|
 | Show | **Nothing**, **The player**, or **With lyrics**, the default |
-| Behind it | **The cover**, the default, blurred into a wash of its colours, or **The desktop**, as the lock draws it without music |
+
+What is behind the player is **Behind it**, under Background (above).
 
 The lyrics follow the **Look them up** switch under Settings → Modules →
 Lyrics ([Lyrics](/shell/island/#lyrics)). On a short screen the player is drawn
@@ -106,6 +116,8 @@ The screen comes back with the next key or movement, and
 Set the screen to go off after the lock, not before. The lock takes its picture
 of the desk as it goes up, and a screen that is already dark gives it a plain
 ground instead. The slider says "before the lock" when it is set that way.
+With the wallpaper behind the lock, no picture is taken and the order does not
+matter.
 </Aside>
 
 ## Face unlock
@@ -170,7 +182,8 @@ follow the palette, because it comes before there is a user to have chosen one.
   are in the bottom-left, both only while it is awake. The power buttons are
   armed by the first click and run by the second. There is no suspend.
 - The battery ring sits in the top right, read straight from the battery.
-- The line under the pill says when Caps Lock is on.
+- The line under the pill says when Caps Lock is on, and an eye beside the
+  field shows what is typed, as on the lock.
 
 The account and session lists take the pointer only; the keyboard stays in the
 field.

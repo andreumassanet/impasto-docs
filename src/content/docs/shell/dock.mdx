@@ -28,7 +28,7 @@ open.
 
 | Do | And |
 |---|---|
-| Click | Opens it if it is not running, raises it if it is, and steps to its next window if it is already in front |
+| Click | Opens it if it is not running, raises it if it is, and steps to its next window if it is already in front. With one window, already in front, it minimizes it; the next click brings it back |
 | Middle-click | Opens a new window of it |
 | Right-click | Opens its menu |
 | Drag a kept icon | Moves it along the kept ones |
@@ -36,10 +36,16 @@ open.
 
 The button at the start of the dock opens the launcher.
 
+**A minimized window keeps its icon**, with a hollow dot under it for that
+window. It comes back to the workspace in view, focused, from a click on the
+icon or from the dock's menu.
+
 ## The menu
 
 **Right-click an icon for its windows by name.** Each window is a row with its
 title and its workspace, and a dot marks the one in front; a click goes to it.
+A minimized window has a mark where its workspace would be, and a click brings
+it back.
 Under the windows:
 
 - **Open**, or **New window** while it is running.

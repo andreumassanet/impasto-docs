@@ -61,8 +61,32 @@ would install and every file it would write, and changes nothing.
 Run `./setup` with nothing after it and it asks instead, with the arrow keys:
 install, update, sync, uninstall, check or help. Install opens a second screen
 that turns the packages, the login screen, the plugins and the extras on or
-off, and picks yay or paru, starting on the one you have. It needs a terminal
-at least 76 columns wide and 20 rows tall; anywhere else it prints the help.
+off, and picks yay or paru, starting on the one you have. On a machine
+installed with `--shell-only` it opens with only the packages on, and turning
+on any of the other three installs everything. It needs a terminal at least 76
+columns wide and 20 rows tall; anywhere else it prints the help.
+
+### Only the shell
+
+**`--shell-only` installs the shell and Hyprland, and leaves the rest of your
+setup alone**, for someone who keeps their own terminal, editor and shell.
+
+```bash
+./setup install --shell-only
+```
+
+It copies `~/.config/quickshell/` and `~/.config/hypr/` (never its `custom/`
+folder), the shell's data and fonts, the wallpapers and the `impasto` command
+with its completion, and installs the packages: the full list, or none with
+`--skip-packages`. No user folders, no oh-my-zsh, no `/`, no plugins, no
+extras and no other program's configuration. The palette is written to no
+other program until you switch one on under
+[Settings → Appearance → Wallpaper → Applications](/theming/apps/#choosing-the-programs);
+a choice already made there is kept.
+
+The choice is remembered, so `update`, `sync` and **Update** in Settings keep
+to it and say so when they start. `./setup install --full` installs the rest
+and forgets it.
 
 ## What it does, in order
 
@@ -72,7 +96,7 @@ at least 76 columns wide and 20 rows tall; anywhere else it prints the help.
 | User folders | Runs `xdg-user-dirs-update`, which creates the folders captures and recordings land in. Existing folders are never renamed. |
 | oh-my-zsh | Clones oh-my-zsh into `~/.oh-my-zsh`, with the zsh-autosuggestions and zsh-syntax-highlighting plugins. It is cloned rather than installed with its own script, because that script replaces `~/.zshrc`. |
 | `home/` | Copies every file into `$HOME`. The first time, it also renders the terminal greeting's scenes (if ImageMagick is installed) and a minimal `impasto` icon theme. |
-| `system/` | Copies the login screen's theme, the boot splash's theme and its drop-ins, a few configuration fragments and the lock screen's PAM service for face unlock into `/`, with sudo, and creates `/var/lib/impasto/faces`. Where no display manager is enabled yet, it enables sddm for the next boot. With ddcutil installed, it loads `i2c-dev`, so the brightness of external monitors works without a reboot. |
+| `system/` | Copies the login screen's theme, the boot splash's theme and its drop-ins, a few configuration fragments and the lock screen's PAM service for face unlock into `/`, with sudo, and creates `/var/lib/impasto/faces`. Where no display manager is enabled yet, it enables sddm for the next boot. Once, it sets up printing: CUPS on its socket, Avahi to find printers on the network, and their `.local` names resolved. A printer is then added in Print Settings (system-config-printer), most of them without a driver. With ddcutil installed, it loads `i2c-dev`, so the brightness of external monitors works without a reboot. |
 | Plugins | Builds and enables hypr-dynamic-cursors (shake to find) and hyprglass (refraction on the windows) with hyprpm. From a console, it leaves them to the first session. |
 | Extras | Sets up what a copied file cannot hold: what opens which file, dark GTK windows, the vector cursor, Nautilus, VSCodium, Vesktop, Spotify, face unlock, camera effects and the boot splash. |
 
@@ -85,7 +109,9 @@ A file of yours that is already in the way is moved to
 | Flag | Effect |
 |---|---|
 | `--skip-packages` | Install nothing; copy and build only. |
-| `--skip-system` | Leave `/` alone: no login screen, and no password for it. |
+| `--shell-only` | Only the shell and Hyprland, with the packages; [remembered](#only-the-shell). |
+| `--full` | Everything again, and forget `--shell-only`. |
+| `--skip-system` | Leave `/` alone: no login screen, no printing, and no password for it. |
 | `--skip-plugins` | Do not build the plugins: no shake to find, no refraction. |
 | `--skip-extras` | Leave [the extras](#what-it-sets-up-once) alone: what opens which file, GTK, the cursor, Nautilus, VSCodium, Vesktop, Spotify, face unlock, camera effects and the boot splash. |
 | `--aur-helper yay` or `paru` | Which helper installs the AUR half. The one you have is used; if you have neither, this one is built from the AUR (yay if unset). |
