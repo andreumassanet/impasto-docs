@@ -27,12 +27,17 @@ export interface Wallpaper {
 	large: string;
 }
 
-export interface FixedPalette {
-	id: string;
+interface Variant {
 	name: string;
 	badge: string;
 	swatches: string[];
 	colors: Palette;
+}
+
+// The dark variant, with the light one beside it: Palettes.qml pairs them.
+export interface FixedPalette extends Variant {
+	id: string;
+	light?: Variant;
 }
 
 export const DEFAULT_WALLPAPER = 'pagoda-fuji-blossom';
@@ -42,14 +47,17 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 	{ eager: true },
 );
 
-// The `list` array in Palettes.qml is a JavaScript literal already.
+// The `list` array in Palettes.qml is a JavaScript literal already. An entry
+// is `{ id, dark, light }`; one from before the pairing is flat.
 function parsePalettes(source: string): FixedPalette[] {
 	const start = source.indexOf('[', source.indexOf('property var list'));
 	let depth = 0;
 	for (let i = start; i < source.length; i++) {
 		if (source[i] === '[') depth++;
 		else if (source[i] === ']' && --depth === 0) {
-			return new Function(`return ${source.slice(start, i + 1)}`)();
+			const list = new Function(`return ${source.slice(start, i + 1)}`)();
+			return list.map((entry: { id: string; dark?: Variant; light?: Variant } & Partial<Variant>) =>
+				entry.dark ? { id: entry.id, ...entry.dark, light: entry.light } : (entry as FixedPalette));
 		}
 	}
 	throw new Error('Palettes.qml: no `list` array');

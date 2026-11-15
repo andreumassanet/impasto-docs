@@ -28,10 +28,9 @@ column and a row, and the gap between two widgets is the gap between two
 windows. The grid fills the space under the bar with the same margin on all
 four sides, whatever the dock does: the dock is drawn over what is under it,
 so moving it, hiding it or letting it stay never moves a widget. Hiding the
-bar, in [zen](/shell/bar/#zen), moves none either: the grid stays below where
-the bar was. With Settings → Desktop → Look → **Grid in zen** on, the grid
-grows over the bar's band while the bar is away instead, its squares resized
-so the margins stay even on all four sides.
+bar, in [zen](/shell/bar/#zen), lets the grid grow over the bar's band while
+the bar is away, its squares resized so the margins stay even on all four
+sides.
 
 <kbd>SUPER</kbd> <kbd>CTRL</kbd> <kbd>W</kbd> takes every widget off the
 wallpaper until you press it again, and arranging shows them meanwhile.
@@ -66,6 +65,8 @@ card.
 front of the windows over a clear view of the wallpaper, the grid is drawn, and
 a card of every module opens at the bottom, each drawn as its real face at the
 smallest shape it offers.
+**Arrange the widgets**, in Settings → Keys, does the same from the keyboard and
+ends it again; it comes with no key, to be given one there.
 
 <Figure name="arrange" alt="The desk in arranging mode: widgets on a faint grid over the bare wallpaper, one widget selected with a card beside it for its shape, face, style and opacity, and a card holding every module's face at the bottom." caption="Arranging: the card of every module, and one widget's own card open." />
 
@@ -206,6 +207,7 @@ sticker moves: the record does not turn.
 | Photo | all four | an instant print, or a strip of film on the band | the picture cut out with a vinyl border |
 | Spectrum | card, band, large | its bars, the same in every theme | its bars |
 | Lyrics | all four | the words, the same in every theme | the words, on their capsule |
+| Devices | square, card | a ring for each device, the same in every theme | the rings |
 
 A widget switched to a theme with no face for its shape shrinks to the largest
 shape that fits inside the old one, so nothing grows into a neighbour.
@@ -311,6 +313,20 @@ and it comes in all four shapes.
 The words come from lrclib.net, and the widget looks up every track while it
 is on the desk, as long as Settings → Modules → Lyrics → **Look them up** is on. See
 [Lyrics](/shell/island/#lyrics).
+
+## Devices
+
+**The Devices widget is the battery of what is connected**: a mouse, a
+keyboard, earbuds, a game pad. Each is a ring that drains round its glyph,
+with its name and level under it, red under 20 %: two on a square, four on a
+card. With none it says *No device with a battery*. It is drawn the same in
+every theme.
+
+The devices are the Bluetooth ones that report a charge and what UPower knows,
+such as a mouse or a keyboard on a receiver and some headsets; one both
+report shows once, and two of the same model show as two. The machine's own
+battery is the Battery widget's. The bar's [Devices piece](/shell/bar/#the-module-catalogue)
+shows the same.
 
 ## Photos
 

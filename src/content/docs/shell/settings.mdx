@@ -32,23 +32,24 @@ the pages you visited.
 
 ## The pages
 
-Fourteen pages in three groups: **The shell**, **The desk** and **The
+Fifteen pages in three groups: **The shell**, **The desk** and **The
 session**. Every option has one home, on the page of the thing it changes. A
 long page is split into parts, drawn as a strip under its title.
 
 | Page | Parts | What it holds |
 |---|---|---|
-| [Bar](/shell/bar/) | Style, Layout, Workspaces | The style, rounded screen corners, the sides, which screens carry it, its height and margins, its ground and shadow; what the bar carries and how each piece reads; the workspace strip, how many workspaces, and [shared or per screen](/shell/screens/#ten-for-each-screen) |
-| [Island](/shell/island/#settings) | The island, Notifications | Floating or a notch, the glance, the sound panel's effects row, the clock and what runs beside the time; how long a notification stays, Do not disturb, the history |
-| [Control Centre](/shell/control-centre/) | | [Volume above 100 %](/shell/control-centre/#volume-and-brightness-past-their-ends), the grid's size and the way into arranging it, how a tile answers a click, and the time, the battery and the buttons on its top row |
+| [Bar](/shell/bar/) | Style, Layout, Workspaces | The style, rounded screen corners, the sides, which screens carry it, [hiding it until pointed at](/shell/bar/#hide-until-pointed-at), its height and margins, its ground and shadow; what the bar carries and how each piece reads; the workspace strip, how many workspaces, [shared or per screen](/shell/screens/#ten-for-each-screen) and how they are numbered |
+| [Island](/shell/island/#settings) | The island, Notifications | Floating or a notch, the glance, the music on the resting island, the clock and what runs beside the time; how long a notification stays, Do not disturb, the history, and [where changes of state are said](/shell/island/#changes-of-state) |
+| [Control Centre](/shell/control-centre/) | | [Volume above 100 %](/shell/control-centre/#volume-and-brightness-past-their-ends), the grid's size and the way into arranging it, and the buttons on its top row |
 | [Launcher](/shell/launcher/) | Results, Sigils, Clipboard | How results are ordered and how many, the first character for each mode, the clipboard history |
 | [Dock](/shell/dock/) | | The edge, the alignment, which screens it is on, the icon size and magnifying, its ground, background and shadow, how it behaves, and the applications kept on it |
 | [Desktop](/shell/desktop/) | | The way into arranging; the face, ground, background and shadow every widget follows; whether the edge notes and the spectrum make way for windows |
-| Modules | | What the modules know, wherever they are: the weather's location, whose GitHub contributions, the markets followed, the pet's style, [the lyrics](/shell/island/#lyrics), [the calendars linked](/shell/control-centre/#calendar-events), how a note is written |
+| Modules | | What the modules know, wherever they are: the weather's location and units, whose GitHub contributions, the markets followed, the pet's style, [the lyrics](/shell/island/#lyrics), [the calendars linked](/shell/control-centre/#calendar-events), how a note is written |
 | Appearance | Wallpaper, Terminal, Type, Motion | The theme and wallpaper, the transition and [which programs the palette is written to](/theming/apps/#choosing-the-programs); [the terminal's ground](/theming/terminal/#kitty) and its greeting scene; the interface and monospace fonts; [game mode](#game-mode) and the pace of the shell's animations |
 | Windows | | [The window layout](#window-layouts), window rounding, border and gaps; inactive opacity, blur, refraction and the windows' shadow; the animation preset |
+| Scratchpads | | [Named scratchpads](/shell/bar/#named-scratchpads), each with an icon, a label, a key and a command |
 | [Displays](/shell/displays/) | Arrangement, The screen, The lid | The screens, [dimming below the backlight](/shell/control-centre/#volume-and-brightness-past-their-ends) and the laptop lid |
-| Input | Keyboard, Pointer | Keyboard layouts and key repeat; sensitivity, the cursor's colour and size, shake to find |
+| Input | Keyboard, Pointer | Keyboard layouts, key repeat and [the on-screen keyboard](#the-on-screen-keyboard); sensitivity, the cursor's colour and size, shake to find |
 | [Keys](/shell/keys-and-packages/#changing-a-key) | The shell's own, The compositor's | Every key, for the profile in use |
 | [Session](/shell/lock-and-login/) | Lock screen, Face unlock, When you leave | Your account's name and picture, the lock's clock, [its music](/shell/lock-and-login/#music-on-the-lock) and its blur; [face unlock](/shell/lock-and-login/#face-unlock); the idle waits |
 | System | Profiles, Updates, This machine | Profiles and Reset; [checking for updates and running them](#updates) and [the files you changed](#changed-files); the language and the machine with the version installed |
@@ -122,6 +123,30 @@ Appearance → Motion → **Game mode**, or with the **Game mode** tile in
 [the control centre](/shell/control-centre/#the-toggles); the island says
 which way it went. It stays on across a profile switch.
 
+## The on-screen keyboard
+
+**A full keyboard along the bottom edge**, for a touch screen or a machine
+with no keyboard at hand. Switch it on under Input → Keyboard →
+**On-screen keyboard**, then give **On-screen keyboard** a key in
+[Keys](/shell/keys-and-packages/#changing-a-key): it comes with none. The key
+shows and hides it, and so does `qs ipc call osk toggle`.
+
+- **It never takes the focus**, so the window in front keeps it and the keys
+  land there. They are typed through ydotool as the keys of a real keyboard.
+- **Its keys follow the first keyboard layout** under Input → Keyboard: *ñ*
+  and *ç* on a Spanish keyboard, the extra key beside Shift on an ISO one, and
+  what AltGr types drawn small in a key's corner.
+- **Shift lasts one key**; tapped twice quickly, it stays down until tapped
+  again. Ctrl, Alt and AltGr hold for the next key, or let go on a second
+  press. Backspace, Space and the arrows repeat while held.
+- **The pin** keeps the keyboard's height free of windows, so nothing it
+  covers is out of reach; the cross closes it. It hides while the screen is locked.
+
+ydotool reaches the keys through `/dev/uinput`, which `./setup system` loads at
+boot and hands to the person at the seat, never to the whole `input` group.
+Both take effect from the next boot, so **restart once after the install**
+before using it.
+
 ## Profiles
 
 **A profile keeps a whole desk under a name**, and the one in use takes every
@@ -131,7 +156,7 @@ dock and how many widgets it has.
 
 | In a profile | Kept by the machine, whatever the profile | In no profile |
 |---|---|---|
-| The bar, the widgets, the dock, the launcher, the control centre, the look, **every key**, the wallpaper and its palette | The screens and the lid, workspaces shared or per screen, your name and picture, the language, the keyboard layouts, the weather's location, the GitHub user, the markets followed, Do not disturb, the night light, game mode, dimming below the backlight, the power tile's profile, the calendar links, the favourite wallpapers, which programs the palette is written to, the camera's effect and reactions | Notes, tasks, the clipboard, the pets, the game bests |
+| The bar, the widgets, the dock, the launcher, the control centre, the look, **every key**, the wallpaper and its palette | The screens and the lid, workspaces shared or per screen and how they are numbered, your name and picture, the language, the keyboard layouts, the weather's location, the GitHub user, the markets followed, Do not disturb, the night light, game mode, dimming below the backlight, the power tile's profile, the calendar links, the favourite wallpapers, which programs the palette is written to, the camera's effect and reactions | Notes, tasks, the clipboard, the pets, the game bests |
 
 ### The three that ship
 

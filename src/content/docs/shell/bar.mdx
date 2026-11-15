@@ -39,6 +39,18 @@ always cut in.
 like the windows. They take no clicks, and under the bezel they curve under
 its ends.
 
+### Hide until pointed at
+
+**Settings → Bar → Style → Hide until pointed at** keeps the bar above the
+screen until the pointer reaches the top edge. It comes down at once and goes
+back up a moment after the pointer leaves; a panel you open keeps it down until
+the panel closes. A notification or a
+passing reading still brings the island down on its own, as in
+[zen](#zen). The windows keep the bar's band, so the bar comes down onto its
+own strip and never over a window. While it is down only the capsules take
+clicks, and a click in a gap between them goes through to what is under it;
+the Bezel style is one band and takes them all. Off by default.
+
 ## Ground
 
 **Every layer is made of one of three grounds**, chosen per layer: the bar
@@ -184,7 +196,7 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
 
 | Module | On the bar | Its detail in the island | Needs |
 |---|---|---|---|
-| Media | The track's title, or *Nothing playing* | The player: artwork, title, artist, progress, previous, play or pause, next; once the track's lyrics are known, [the lyrics](/shell/island/#lyrics) beside it | A media player on the session bus (MPRIS) |
+| Media | The track's title, or *Nothing playing* | [The media panel](/shell/island/#the-media-panel): the cover, the track, a seek bar, the controls and the lyrics beside them | A media player on the session bus (MPRIS) |
 | Timer | A ring that drains, and the time left | Idle, set a countdown; running, hold, restart or stop it | — |
 | Claude | Claude's mark, and the session's percentage, or its tokens until the percentage is known | Tokens and messages for the five-hour session and the week, the account's own percentages, and when the session resets | Claude Code (below) |
 | Codex | Codex's mark, and the share used of the fullest limit still running | Each limit the plan sets, its share used and when it resets, and when it was read | Codex (below) |
@@ -193,7 +205,9 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
 | Brightness | The level of the screen you are on | A slider for each screen that can be dimmed | A backlight, or a monitor that answers DDC/CI |
 | Network | The network's name, or *Off* | The Wi-Fi list, the same as the control centre's | — |
 | Network speed | The download and upload speed | The speed now, the totals since boot, the interface the traffic leaves by and its address, and both speeds over the last minutes | — |
+| Keyboard layout | The layout in use, as its code: *US*, *ES* | Every layout the keyboard has, the one in use marked; a click switches to another | — |
 | Bluetooth | The connected device, a count, *No devices* or *Off* | The device list | A Bluetooth adapter |
+| Devices | A chip for each connected device that reports a battery, its ring the charge | Each device's charge, and whether it is charging | A device with a battery (below) |
 | Notifications | A bell and how many are kept; crossed out in do not disturb | The history, with Clear | — |
 | Weather | The conditions and the temperature | The place, feels-like, the reading's age and the next hours | A network connection (below) |
 | Markets | The first pair's price and the day's change | The first pair charted, and up to four more listed with their price and change | A network connection (below) |
@@ -216,10 +230,20 @@ at 20% and red at 10%, and the System piece steps to the same hues at 70% and
   shows no share until Codex runs again.
 - **Weather** comes from wttr.in, which guesses the place from your connection
   when none is set. Set it under Settings → Modules → Weather →
-  **Location**: a city, a postcode or an airport code. **Icons**, beside it,
-  draws the sky in the palette's colours or, with *In colour*, as Breeze's
-  full-colour pictures, the same in every palette; it is offered while
-  breeze-icons is installed.
+  **Location**: a city, a postcode or an airport code. **Units**, beside it,
+  is °C, the default, or °F; only the temperatures change, and a change shows
+  at once. The sky is drawn as Breeze's full-colour pictures, the same in
+  every palette, while breeze-icons is installed, and in the palette's
+  colours without it.
+- **Devices** is the battery of what is connected: Bluetooth earbuds and
+  mice, and what UPower knows, such as a mouse or a keyboard on a receiver
+  and some headsets. One device both report is drawn once, two of the same
+  model twice, and the machine's own battery is left to Battery. The piece
+  draws nothing while no such device is connected, and turns red under 20 %.
+  The [desktop](/shell/desktop/#devices) has a widget that shows the same.
+- **Keyboard layout** reads the main keyboard's layout from Hyprland and
+  follows it however it is switched. The layouts themselves are set under
+  Settings → Input → Keyboard.
 - **Media** draws the cover as a rounded rectangle or a circle, under
   Settings → Modules → Media cover → **Shape**, everywhere the shell shows it:
   the bar, the island, the lyrics and the control centre.
@@ -256,7 +280,8 @@ band to the windows. The island still comes down, on its own, for a
 notification, the volume or brightness, or a panel you open by its key, and
 goes back up when it is done. The desktop's widgets stay where they are.
 Press it again for the bar, or flip it from anything else with
-`qs ipc call bar toggle`.
+`qs ipc call bar toggle`. To keep the bar out of the way without giving up its
+band, [hide it until pointed at](#hide-until-pointed-at) instead.
 
 ## Size and workspaces
 
@@ -268,7 +293,10 @@ Under Settings → Bar → **Workspaces**: *Workspaces shown* are always
 drawn on the strip (five by default); the rest, up to *Workspaces available*
 (ten by default), appear only while they have windows. **With more screens**
 is whether every screen shares the same ten or each has
-[ten of its own](/shell/screens/#ten-for-each-screen).
+[ten of its own](/shell/screens/#ten-for-each-screen). With ten for each,
+**Workspace numbers** is whether a screen numbers its own ten from 1, the
+default, or every workspace shows its own number, so the second screen's 14
+reads as 14.
 
 **Applications**, on the same tab, puts the focused workspace's applications
 after its mark, an icon for each, up to four: inside the pill in the written
@@ -282,6 +310,27 @@ down. Both are off by default.
 the workspace under it. While it, or any other special workspace, is open over
 a screen, the strip ends in an accent pill with its name and its
 applications, in every style; a click on the pill hides it.
+
+### Named scratchpads
+
+**Settings → Scratchpads adds scratchpads of your own**, each a special
+workspace with a key that shows or hides it. **Add** makes one; each has:
+
+| Field | What it is |
+|---|---|
+| Icon | An application's icon name (`firefox`), the path of an image, or a glyph |
+| Label | What its tile in [the overview](/shell/island/#the-overview), its pill on the strip and the key sheet call it |
+| Workspace name | Letters, digits, `-` and `_`; the workspace is `special:name` |
+| Key | Written as `Super+Ctrl+M` or `Super+grave`; empty for none |
+| Command | An application or the path of a script, run through the shell so arguments work; empty for none |
+
+The key opens the scratchpad, or hides it when it is open, and when the
+scratchpad holds no window the command starts on it first: a terminal, a
+music player or notes, one key away and out of the way again with the same
+key. A key set here replaces any other bind on it, and the field says which.
+With no command it is a plain scratchpad to send windows to from the
+overview. **Toggle**, on its card, opens it now, and **Remove** takes it off.
+The scratchpad on <kbd>SUPER</kbd> <kbd>Z</kbd> is always there besides these.
 
 **The strip draws in one of seven styles**: Dots, the default, Bars or Rings,
 or the workspace's number written out: Numbers, Roman, Kanji or Greek. The

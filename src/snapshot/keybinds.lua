@@ -38,11 +38,28 @@ end
 
 local keys = profile_keys()
 
--- `hl.bind`, on the profile's combination for this description.
+-- A combination written the way any spelling of it compares.
+local function normal(combination)
+    return (combination:upper():gsub("%s", ""))
+end
+
+-- Combinations the profile has given to a bind of its own.
+local taken = {}
+for _, combination in pairs(keys) do
+    if combination ~= "" then
+        taken[normal(combination)] = true
+    end
+end
+
+-- `hl.bind`, on the profile's combination for this description. A bind the
+-- profile does not name keeps its fallback only while no named bind holds it.
 local function bind(combination, action, options)
     local chosen = keys[options.description]
     if chosen == nil then
         chosen = combination
+        if taken[normal(chosen)] then
+            chosen = ""
+        end
     end
     if chosen ~= "" then
         hl.bind(chosen, action, options)
@@ -118,8 +135,8 @@ end
 bind(mainMod .. " + Q",           hl.dsp.window.close(), { description = "Windows · Close the focused window" })
 bind(mainMod .. " + SHIFT + Q",   hl.dsp.window.kill(),  { description = "Windows · Kill the focused window" })
 bind(mainMod .. " + F",           hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }), { description = "Windows · Full screen" })
-bind(mainMod .. " + ALT + F",     hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }),  { description = "Windows · Maximise, keeping the bar" })
-bind(mainMod .. " + ALT + Space", float_centred,          { description = "Windows · Float or tile the window" })
+bind(mainMod .. " + SHIFT + F",   hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }),  { description = "Windows · Maximise, keeping the bar" })
+bind(mainMod .. " + SHIFT + Space", float_centred,        { description = "Windows · Float or tile the window" })
 bind(mainMod .. " + P",           hl.dsp.window.pseudo(), { description = "Windows · Toggle pseudo-tiling" })
 bind(mainMod .. " + J",           flip_split,             { description = "Windows · Flip the split direction" })
 bind(mainMod .. " + SHIFT + L",   hl.dsp.global("quickshell:layout"), { description = "Windows · Cycle the layout" })
@@ -230,7 +247,7 @@ local function move_to_workspace(index)
     end
 end
 
--- · SUPER + [1-9,0] switches; adding SHIFT moves the window there
+-- · SUPER + [1-9,0] switches; adding ALT sends the window there
 --
 -- Shared, a number brings its workspace to the screen you are on rather than
 -- taking you to the screen it is on: `on_current_monitor` swaps the two
@@ -239,7 +256,7 @@ for i = 1, 10 do
     local key = i % 10  -- 10 maps to the 0 key
     bind(mainMod .. " + " .. key,         to_workspace(i),
          { description = "Workspaces · Go to workspace " .. i })
-    bind(mainMod .. " + SHIFT + " .. key, move_to_workspace(i),
+    bind(mainMod .. " + ALT + " .. key,   move_to_workspace(i),
          { description = "Workspaces · Move the window to workspace " .. i })
 end
 
@@ -319,8 +336,10 @@ local function trade_workspace(direction)
     end
 end
 
-bind(mainMod .. " + ALT + left",          hl.dsp.focus({ monitor = "l" }), { description = "Screens · Focus the screen left" })
-bind(mainMod .. " + ALT + right",         hl.dsp.focus({ monitor = "r" }), { description = "Screens · Focus the screen right" })
+bind(mainMod .. " + CTRL + left",         hl.dsp.focus({ monitor = "l" }), { description = "Screens · Focus the screen left" })
+bind(mainMod .. " + CTRL + right",        hl.dsp.focus({ monitor = "r" }), { description = "Screens · Focus the screen right" })
+bind(mainMod .. " + ALT + left",          hl.dsp.window.move({ monitor = "l" }), { description = "Screens · Send the window to the screen left" })
+bind(mainMod .. " + ALT + right",         hl.dsp.window.move({ monitor = "r" }), { description = "Screens · Send the window to the screen right" })
 bind(mainMod .. " + ALT + SHIFT + left",  trade_workspace("l"), { description = "Screens · Take the workspace to the screen left" })
 bind(mainMod .. " + ALT + SHIFT + right", trade_workspace("r"), { description = "Screens · Take the workspace to the screen right" })
 
@@ -426,6 +445,7 @@ bind(mainMod .. " + SHIFT + H", hl.dsp.global("quickshell:cheatsheetWindow"), { 
 -- · zen: the bar away and its band to the windows; and the widgets away
 bind(mainMod .. " + CTRL + B",  hl.dsp.global("quickshell:zen"),        { description = "Shell · Hide or show the bar" })
 bind(mainMod .. " + CTRL + W",  hl.dsp.global("quickshell:widgets"),    { description = "Shell · Hide or show the desktop widgets" })
+bind("", hl.dsp.global("quickshell:osk"), { description = "Shell · Show or hide the on-screen keyboard" })
 bind(mainMod .. " + SHIFT + G", hl.dsp.global("quickshell:game"),       { description = "Shell · Turn game mode on or off" })
 
 -- · packages panel (pacman + AUR); installs run in a terminal
@@ -454,6 +474,52 @@ bind("", hl.dsp.global("quickshell:captureWindow"), { description = "Shell · Ca
 bind("", hl.dsp.global("quickshell:captureScreen"), { description = "Shell · Capture the whole screen" })
 bind("", hl.dsp.global("quickshell:captureEdit"),   { description = "Shell · Capture a region and annotate it" })
 bind("", hl.dsp.global("quickshell:captureText"),   { description = "Shell · Read a region as text" })
+bind("", hl.dsp.global("quickshell:widgetsEdit"), { description = "Shell · Arrange the desktop widgets" })
+bind("", hl.dsp.global("quickshell:media"), { description = "Shell · Open the media panel" })
+bind("", hl.dsp.global("quickshell:connectivity"), { description = "Shell · Open Wi-Fi, Bluetooth and Sound" })
+bind("", hl.dsp.global("quickshell:dismissNotification"), { description = "Shell · Dismiss the notification" })
+
+
+-- ── SCRATCHPADS ─────────────────────────────────────────────────────────────
+
+-- The scratchpads of Settings → Scratchpads, written by the shell to
+-- scratchpads.tsv (name, combination, label, command: tab-separated, the
+-- combination empty for none). Each is a special workspace: its key shows or
+-- hides it, and starts the command on it first when it holds no window. The
+-- key is the user's choice, so it replaces whatever else holds it.
+--
+-- Done here rather than by a script: a key press costs no process.
+do
+    -- The command as a shell word, started in its own systemd scope under
+    -- UWSM so it does not die with the compositor, and plainly without it.
+    local function start_line(command)
+        local quoted = "'" .. command:gsub("'", "'\\''") .. "'"
+        return "sh -c 'if command -v uwsm-app >/dev/null; then exec uwsm-app -- sh -c \"$1\"; "
+            .. "else exec sh -c \"$1\"; fi' _ " .. quoted
+    end
+
+    local function toggle_scratchpad(name, command)
+        local workspace = hl.get_workspace("special:" .. name)
+        if command ~= "" and (workspace == nil or workspace.windows == 0) then
+            hl.dispatch(hl.dsp.exec_cmd(start_line(command), { workspace = "special:" .. name }))
+        end
+        hl.dispatch(hl.dsp.workspace.toggle_special(name))
+    end
+
+    local state = os.getenv("XDG_STATE_HOME") or (os.getenv("HOME") .. "/.local/state")
+    local file  = io.open(state .. "/quickshell/scratchpads.tsv")
+    if file then
+        for line in file:lines() do
+            local name, combination, label, command = line:match("^([^#\t][^\t]*)\t([^\t]*)\t([^\t]*)\t?(.*)$")
+            if name and combination ~= "" then
+                hl.unbind(combination)
+                hl.bind(combination, function() toggle_scratchpad(name, command) end,
+                        { description = "Workspaces · Scratchpad " .. (label ~= "" and label or name) })
+            end
+        end
+        file:close()
+    end
+end
 
 
 -- ── LID ─────────────────────────────────────────────────────────────────────
